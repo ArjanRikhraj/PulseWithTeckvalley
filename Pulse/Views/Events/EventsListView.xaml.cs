@@ -1093,10 +1093,11 @@ namespace Pulse
                 listViewEvents.IsVisible = true;
                 stackMap.IsVisible = false;
                 entryVenue.Placeholder = "Search Upcoming Events";
+                SetInitial();
             }
             catch (Exception ex)
             {
-                throw ex;
+                return;
             }
         }
         //Map Button Tapped
@@ -1221,8 +1222,8 @@ namespace Pulse
 
         private void UploadImagetapped(object sender, EventArgs e)
         {
-            grdOverlayDialog.IsVisible = true;
-            stackPopUp.IsVisible = true;
+            //grdOverlayDialog.IsVisible = true;
+            //stackPopUp.IsVisible = true;
         }
 
         private void CrossIcon_Tapped(object sender, EventArgs e)

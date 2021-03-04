@@ -58,7 +58,7 @@
                                     <local:BorderlessEntry x:Name="editorVenue" Placeholder="+ VENUE" Style="{StaticResource eventEntryStyle}" FontFace="PoppinsRegular" Text="{Binding EventVenue}" MaxLength="200" TextChanged="Venue_TextChanged" />
                                 </StackLayout>
                             </yummy:PancakeView>
-                            <local:ExtendedListView x:Name="lstPlaces" HeightRequest="{Binding ListPlacesHeight}" IsVisible="{Binding IsAddressListVisible}" ItemTapped="lstPlacesItemTapped" ItemsSource="{Binding Places}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="Fill" SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
+                            <local:ExtendedListView x:Name="lstPlaces" Margin="0,-30,0,0" HeightRequest="{Binding ListPlacesHeight}" IsVisible="{Binding IsAddressListVisible}" ItemTapped="lstPlacesItemTapped" ItemsSource="{Binding Places}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="Fill" SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
                                 <local:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="40">

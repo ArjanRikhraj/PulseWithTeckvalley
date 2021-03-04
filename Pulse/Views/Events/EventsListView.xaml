@@ -3,7 +3,7 @@
     <ContentView.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
-                <Grid.RowDefinitions>`  ` 
+                <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -98,7 +98,7 @@
                                                             <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
                                                             <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
                                                         </StackLayout>
-                                                        <custom:CircleImage x:Name="imgUser" Source="iconUser.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="100" BorderColor="WhiteSmoke" BorderThickness="1">
+                                                        <custom:CircleImage x:Name="imgUser" Source="iconUserEvents.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
                                                             <custom:CircleImage.GestureRecognizers>
                                                                 <TapGestureRecognizer Tapped="UploadImagetapped"/>
                                                             </custom:CircleImage.GestureRecognizers>

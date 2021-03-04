@@ -1553,7 +1553,9 @@ namespace Pulse
             //{
             //    SessionManager.Email = string.Empty;
             //}
-            await Navigation.PushModalAsync(new PaymentDetailPage(transactionEmail));
+            //AddEventPage boost event without payment here for test purpose
+            await UpdateBoostedEvent();
+           // await Navigation.PushModalAsync(new PaymentDetailPage(transactionEmail));
 
         }
         async void NoThanksClick()
