@@ -1,0 +1,1166 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Plugin.Connectivity;
+using Xamarin.Forms;
+
+namespace Pulse
+{
+	public class FriendsViewModel : BaseViewModel
+	{
+
+		#region Private variables
+		MainServices mainService;
+		bool isAddFriendButtonVisible;
+		bool isFriendsButtonVisible;
+		bool isCancelRequestButtonVisible;
+		bool isConfirmRequestButtonVisible;
+		bool isNoFriendFoundVisible;
+		bool isListFriendVisible;
+		bool isNoUserFoundVisible;
+		bool isListUserVisible;
+		bool isPendingFriendVisible;
+		bool isPendingNoFriendFoundVisible;
+        string blockUnBlockText;
+        string selectedUsername;
+
+		string pendingText;
+		ObservableCollection<Friend> listUsers;
+		ObservableCollection<Friend> listMyFriends;
+		ObservableCollection<Friend> listPendingRequest;
+		ObservableCollection<MyEvents> listMyFriendsEvents;
+		List<UserResponse> FriendsList;
+		List<FriendResponseForUser> UsersList;
+		bool isFriendEventListVisible;
+		bool isNoEventVisible;
+		List<MyEventResponse> HostedEventsList;
+		#endregion
+		#region Public Properties
+		public int pageNoUser;
+		public int pageNoFriend;
+		public int pageNoFriendsEvent;
+		public int pageNoPending;
+		public bool isSearchedValue;
+        public bool isAdmin;
+
+		public string TappedFriendid;
+		public int totalPagesFriends;
+		public int totalPagesMyFriends;
+		public int totalPagesPendingRequest;
+		public int totalHostedEventPages;
+		public List<FriendProfileResponse> FriendProfileList;
+		public ICommand LoadMoreUsers { get; private set; }
+		public ICommand LoadMoreMyFriends { get; private set; }
+		public ICommand LoadMorePending { get; private set; }
+		public ICommand LoadMoreFriendEvents { get; private set; }
+		public ObservableCollection<Friend> tempUserList;
+		public ObservableCollection<Friend> tempFriendList;
+		public ObservableCollection<Friend> tempPendingList;
+		public ObservableCollection<MyEvents> tempFriendEventList;
+
+		public string searchvalue;
+
+		public string PendingText
+		{
+			get { return pendingText; }
+			set
+			{
+				pendingText = value;
+				OnPropertyChanged("PendingText");
+			}
+		}
+
+		public ObservableCollection<MyEvents> ListMyFriendsEvents
+		{
+			get { return listMyFriendsEvents; }
+			set
+			{
+				listMyFriendsEvents = value;
+				OnPropertyChanged("ListMyFriendsEvents");
+			}
+		}
+		public ObservableCollection<Friend> ListPendingRequest
+		{
+			get { return listPendingRequest; }
+			set
+			{
+				listPendingRequest = value;
+				OnPropertyChanged("ListPendingRequest");
+			}
+		}
+		public ObservableCollection<Friend> ListUsers
+		{
+			get { return listUsers; }
+			set
+			{
+				listUsers = value;
+				OnPropertyChanged("ListUsers");
+			}
+		}
+		public ObservableCollection<Friend> ListMyFriends
+		{
+			get { return listMyFriends; }
+			set
+			{
+				listMyFriends = value;
+				OnPropertyChanged("ListMyFriends");
+			}
+		}
+
+		public bool IsAddFriendButtonVisible
+		{
+			get { return isAddFriendButtonVisible; }
+			set
+			{
+				isAddFriendButtonVisible = value;
+				OnPropertyChanged("IsAddFriendButtonVisible");
+			}
+		}
+        public bool IsAdmin
+        {
+            get { return isAdmin; }
+            set
+            {
+                isAdmin = value;
+                OnPropertyChanged("IsAdmin");
+            }
+        }
+        public string SelectedUsername
+        {
+            get { return selectedUsername; }
+            set
+            {
+                selectedUsername = value;
+                OnPropertyChanged("SelectedUsername");
+            }
+        }
+		public bool IsFriendEventListVisible
+		{
+			get { return isFriendEventListVisible; }
+			set
+			{
+				isFriendEventListVisible = value;
+				OnPropertyChanged("IsFriendEventListVisible");
+			}
+		}
+		public bool IsNoEventVisible
+		{
+			get { return isNoEventVisible; }
+			set
+			{
+				isNoEventVisible = value;
+				OnPropertyChanged("IsNoEventVisible");
+			}
+		}
+		public bool IsCancelRequestButtonVisible
+		{
+			get { return isCancelRequestButtonVisible; }
+			set
+			{
+				isCancelRequestButtonVisible = value;
+				OnPropertyChanged("IsCancelRequestButtonVisible");
+			}
+		}
+		public bool IsFriendsButtonVisible
+		{
+			get { return isFriendsButtonVisible; }
+			set
+			{
+				isFriendsButtonVisible = value;
+				OnPropertyChanged("IsFriendsButtonVisible");
+			}
+		}
+		public bool IsConfirmRequestButtonVisible
+		{
+			get { return isConfirmRequestButtonVisible; }
+			set
+			{
+				isConfirmRequestButtonVisible = value;
+				OnPropertyChanged("IsConfirmRequestButtonVisible");
+			}
+		}
+		public bool IsNoFriendFoundVisible
+		{
+			get { return isNoFriendFoundVisible; }
+			set
+			{
+				isNoFriendFoundVisible = value;
+				OnPropertyChanged("IsNoFriendFoundVisible");
+			}
+		}
+		public bool IsListFriendVisible
+		{
+			get { return isListFriendVisible; }
+			set
+			{
+				isListFriendVisible = value;
+				OnPropertyChanged("IsListFriendVisible");
+			}
+		}
+
+		public bool IsNoUserFoundVisible
+		{
+			get { return isNoUserFoundVisible; }
+			set
+			{
+				isNoUserFoundVisible = value;
+				OnPropertyChanged("IsNoUserFoundVisible");
+			}
+		}
+		public bool IsListUserVisible
+		{
+			get { return isListUserVisible; }
+			set
+			{
+				isListUserVisible = value;
+				OnPropertyChanged("IsListUserVisible");
+			}
+		}
+		public bool IsPendingFriendVisible
+		{
+			get { return isPendingFriendVisible; }
+			set
+			{
+				isPendingFriendVisible = value;
+				OnPropertyChanged("IsPendingFriendVisible");
+			}
+		}
+		public bool IsPendingNoFriendFoundVisible
+		{
+			get { return isPendingNoFriendFoundVisible; }
+			set
+			{
+				isPendingNoFriendFoundVisible = value;
+				OnPropertyChanged("IsPendingNoFriendFoundVisible");
+			}
+		}
+        public string BlockUnBlockText
+        {
+            get { return blockUnBlockText; }
+            set
+            {
+                blockUnBlockText = value;
+                OnPropertyChanged("BlockUnBlockText");
+            }
+        }
+
+
+		#endregion
+		#region Constructor
+		public FriendsViewModel()
+		{
+			LoadMoreUsers = new Command(GetUsers);
+			LoadMoreMyFriends = new Command(GetMyFriendsList);
+			LoadMorePending = new Command(GetPendingFriendsList);
+			LoadMoreFriendEvents = new Command(GetFriendsHostedEventList);
+			UsersList = new List<FriendResponseForUser>();
+			tempUserList = new ObservableCollection<Friend>();
+			tempFriendList = new ObservableCollection<Friend>();
+			tempPendingList = new ObservableCollection<Friend>();
+			tempFriendEventList = new ObservableCollection<MyEvents>();
+			mainService = new MainServices();
+
+		}
+		#endregion
+
+		#region Methods
+		public async void GetUsers()
+		{
+			try
+			{
+				IsLoading = true;
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+				}
+				else
+				{
+					if (!string.IsNullOrEmpty(searchvalue))
+					{
+						bool isList = await GetSearchedUsers(searchvalue);
+						SetUserList(isList, UsersList);
+					}
+				}
+				IsLoading = false;
+			}
+
+			catch (Exception)
+			{
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+		public async Task<bool> GetSearchedUsers(string searchKeyword)
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+					return false;
+				}
+				else
+				{
+					if (SessionManager.AccessToken != null && (pageNoUser == 1 || pageNoUser <= totalPagesFriends))
+					{
+						UsersList = new List<FriendResponseForUser>();
+						var response = await mainService.Get<ResultWrapper<FriendResponseForUser>>(Constant.SearchUserUrl + pageNoUser + Constant.SearchString + searchKeyword);
+						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+						{
+							foreach (var item in response.response)
+							{
+								UsersList.Add(item);
+							}
+							totalPagesFriends = GetPageCount(response.response[response.response.Count - 1].total_users);
+							return true;
+						}
+						else if (response != null && response.status == Constant.Status401)
+						{
+							SignOut();
+							IsLoading = false;
+							return false;
+						}
+						else
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
+
+		void SetUserList(bool isList, List<FriendResponseForUser> list)
+		{
+            if (isList && pageNoUser < 2 && !string.IsNullOrEmpty(searchvalue))
+			{
+				IsListUserVisible = true;
+				IsNoUserFoundVisible = false;
+				foreach (var item in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					string mutual = item.mutual_user_count <= 0 ? "No" : Convert.ToString(item.mutual_user_count);
+					bool isAddFriendvisible = item.request_type == Constant.AddFriendText ? true : false;
+					bool isFriendsvisible = item.request_type == Constant.FriendText ? true : false;
+					bool iscancelRequestvisible = item.request_type == Constant.CancelRequestText ? true : false;
+					bool isconfirmRequestvisible = item.request_type == Constant.ConfirmRequestText ? true : false;
+					tempUserList.Add(new Friend { friendId = item.id, cornerRadius = cornerradius, friendUsername = item.username, friendFullname = item.fullname, friendPic = string.IsNullOrEmpty(item.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(item.profile_image), friendMutual = mutual + " Mutual Friends", IsAddFriendButtonVisible = isAddFriendvisible, IsFriendsButtonVisible = isFriendsvisible, IsCancelRequestButtonVisible = iscancelRequestvisible, IsConfirmRequestButtonVisible = isconfirmRequestvisible });
+				}
+				UsersList.Clear();
+				ListUsers = tempUserList;
+				pageNoUser++;
+				IsLoading = false;
+				isSearchedValue = false;
+			}
+            else if (isList && !string.IsNullOrEmpty(searchvalue))
+			{
+				IsListUserVisible = true;
+				IsNoUserFoundVisible = false;
+				foreach (var itemUser in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					string mutual = itemUser.mutual_user_count < 0 ? "No" : Convert.ToString(itemUser.mutual_user_count);
+					bool isAddFriendvisible = itemUser.request_type == Constant.AddFriendText ? true : false;
+					bool isFriendsvisible = itemUser.request_type == Constant.FriendText ? true : false;
+					bool iscancelRequestvisible = itemUser.request_type == Constant.CancelRequestText ? true : false;
+					bool isconfirmRequestvisible = itemUser.request_type == Constant.ConfirmRequestText ? true : false;
+					tempUserList.Add(new Friend { friendId = itemUser.id, cornerRadius = cornerradius, friendUsername = itemUser.username, friendFullname = itemUser.fullname, friendPic = string.IsNullOrEmpty(itemUser.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(itemUser.profile_image), friendMutual = mutual + " Mutual Friends", IsAddFriendButtonVisible = isAddFriendvisible, IsFriendsButtonVisible = isFriendsvisible, IsCancelRequestButtonVisible = iscancelRequestvisible, IsConfirmRequestButtonVisible = isconfirmRequestvisible });
+				}
+				UsersList.Clear();
+				ListUsers = tempUserList;
+				pageNoUser++;
+				IsLoading = false;
+				isSearchedValue = false;
+			}
+            else if (!isList && pageNoUser < 2 && !string.IsNullOrEmpty(searchvalue))
+			{
+				IsListUserVisible = false;
+				IsNoUserFoundVisible = true;
+				IsLoading = false;
+				isSearchedValue = false;
+			}
+			else
+			{
+
+				ListUsers = tempUserList;
+				IsLoading = false;
+				isSearchedValue = false;
+			}
+
+		}
+		public async Task AddFriend(int friendId, bool isProfileDetailPage)
+		{
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					if (TapCount < 1)
+					{
+						TapCount = 1;
+						IsLoading = true;
+						if (!string.IsNullOrEmpty(SessionManager.AccessToken))
+						{
+							FriendRequest friend = new FriendRequest();
+							friend.friend_id = friendId;
+							var result = await mainService.Post<ResultWrapperSingle<AddFriendResponse>>(Constant.AddFriendUrl, friend);
+							if (result != null && result.status == Constant.Status200)
+							{
+								if (isProfileDetailPage)
+								{
+									await FriendProfileDetail();
+
+								}
+								else
+								{
+									tempUserList.Clear();
+									pageNoUser = 1;
+									totalPagesFriends = 1;
+									GetUsers();
+								}
+								TapCount = 0;
+
+							}
+							else if (result != null && result.status == Constant.Status111 && result.message != null && result.message.friend_id != null && result.message.friend_id.Count > 0)
+							{
+								await App.Instance.Alert(result.message.friend_id[0], Constant.AlertTitle, Constant.Ok);
+								if (isProfileDetailPage)
+								{
+									await FriendProfileDetail();
+								}
+								else
+								{
+									tempUserList.Clear();
+									pageNoUser = 1;
+									totalPagesFriends = 1;
+									GetUsers();
+								}
+								TapCount = 0;
+								IsLoading = false;
+
+							}
+							else if (result != null && result.status == Constant.Status401)
+							{
+								SignOut();
+								IsLoading = false;
+							}
+							else
+							{
+								await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+								TapCount = 0;
+								IsLoading = false;
+							}
+						}
+						else
+						{
+							IsLoading = false;
+							TapCount = 0;
+						}
+
+					}
+					else
+					{
+						await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+						TapCount = 0;
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				TapCount = 0;
+				IsLoading = false;
+			}
+		}
+
+		public async Task ChangeRequestStatus(int friendId, FriendType friendType, string pageType, bool isProfileDetailPage)
+
+		{
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					if (TapCount < 1)
+					{
+						TapCount = 1;
+						IsLoading = true;
+						if (!string.IsNullOrEmpty(SessionManager.AccessToken))
+						{
+							FriendRequest friend = new FriendRequest();
+							friend.friend_request_status = friendType == FriendType.CancelRequest ? 2 : 1;
+							if (pageType == Constant.SearchText)
+							{
+								friend.friend_id = friendType == FriendType.CancelRequest ? friendId : SessionManager.UserId;
+								friend.user_id = friendType == FriendType.CancelRequest ? SessionManager.UserId : friendId;
+								if (friendType == FriendType.Friends)
+								{
+									friend.friend_id = friendId;
+									friend.user_id = SessionManager.UserId;
+									friend.friend_request_status = 3;
+								}
+							}
+							else
+							{
+								friend.friend_id = SessionManager.UserId;
+								friend.user_id = friendId;
+							}
+
+							var result = await mainService.Put<ResultWrapperSingle<AddFriendResponse>>(Constant.RequestChangeUrl, friend);
+							if (result != null && result.status == Constant.Status200)
+							{
+								if (isProfileDetailPage)
+								{
+									await FriendProfileDetail();
+								}
+								else
+								{
+									if (pageType == Constant.SearchText)
+									{
+										tempUserList.Clear();
+										pageNoUser = 1;
+										totalPagesFriends = 1;
+										GetUsers();
+									}
+									else
+									{
+										tempPendingList.Clear();
+										pageNoPending = 1;
+										totalPagesPendingRequest = 1;
+										GetPendingFriendsList();
+									}
+								}
+								TapCount = 0;
+							}
+							else if (result != null && result.status == Constant.Status111 && result.message != null && result.message.non_field_errors != null && result.message.non_field_errors.Count > 0)
+							{
+								await App.Instance.Alert(result.message.non_field_errors[0], Constant.AlertTitle, Constant.Ok);
+								if (isProfileDetailPage)
+								{
+									await FriendProfileDetail();
+								}
+								else
+								{
+									if (pageType == Constant.SearchText)
+									{
+										tempUserList.Clear();
+										pageNoUser = 1;
+										totalPagesFriends = 1;
+										GetUsers();
+									}
+									else
+									{
+										tempPendingList.Clear();
+										pageNoPending = 1;
+										totalPagesPendingRequest = 1;
+										GetPendingFriendsList();
+									}
+								}
+								IsLoading = false;
+
+							}
+							else if (result != null && result.status == Constant.Status401)
+							{
+								SignOut();
+								IsLoading = false;
+							}
+							else
+							{
+								await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+								TapCount = 0;
+								IsLoading = false;
+							}
+						}
+						else
+						{
+							IsLoading = false;
+							TapCount = 0;
+						}
+
+					}
+					else
+					{
+						await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+						TapCount = 0;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				TapCount = 0;
+				IsLoading = false;
+			}
+		}
+
+		public async void GetMyFriendsList()
+		{
+			try
+			{
+				IsLoading = true;
+				App.ShowMainPageLoader();
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				}
+				else
+				{
+					bool isList = await GetMyFriends();
+					SetFriendsList(isList, FriendsList);
+				}
+				App.HideMainPageLoader();
+				IsLoading = false;
+			}
+
+			catch (Exception)
+			{
+				IsLoading = false;
+				App.HideMainPageLoader();
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+        public async Task BlockUnblockFreind()
+        {
+            try
+            {
+                IsLoading = true;
+                App.ShowMainPageLoader();
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+                }
+                else
+                {
+                    var response = await mainService.Post<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.BlockUnBlockUserUrl, GetBlockUserData());
+                    if (response != null && response.status == Constant.Status200)
+                    {
+                        App.Instance.Alert(response.response.details, Constant.AlertTitle, Constant.Ok);
+                        BlockUnBlockText = BlockUnBlockText.Equals(Constant.UnBlockText) ? Constant.BlockText : Constant.UnBlockText;
+                       
+                        IsLoading = false;
+                    }
+                }
+                App.HideMainPageLoader();
+                IsLoading = false;
+            }
+
+            catch (Exception)
+            {
+                IsLoading = false;
+                App.HideMainPageLoader();
+                TapCount = 0;
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+
+        BlockUnBlockFriendData GetBlockUserData()
+        {
+            BlockUnBlockFriendData friendData = new BlockUnBlockFriendData();
+            friendData.block_to =Convert.ToInt32(TappedFriendid);
+            return friendData;
+        }
+
+        async Task<bool> GetMyFriends()
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+					return false;
+				}
+				else
+				{
+					if (SessionManager.AccessToken != null && (pageNoFriend == 1 || pageNoFriend <= totalPagesMyFriends))
+					{
+						FriendsList = new List<UserResponse>();
+						var response = await mainService.Get<UserDetailResponse>(Constant.MyFriendsListUrl + pageNoFriend);
+						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+						{
+							foreach (var item in response.response)
+							{
+								FriendsList.Add(item);
+							}
+							totalPagesMyFriends = GetPageCount(response.response[response.response.Count - 1].total_users);
+							return true;
+
+						}
+						else if (response != null && response.status == Constant.Status401)
+						{
+							SignOut();
+							App.HideMainPageLoader();
+							IsLoading = false;
+							return false;
+						}
+						else
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		void SetFriendsList(bool isList, List<UserResponse> list)
+		{
+			if (isList && pageNoFriend < 2)
+			{
+				IsListFriendVisible = true;
+				IsNoFriendFoundVisible = false;
+				foreach (var item in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					tempFriendList.Add(new Friend { friendId = item.id, cornerRadius = cornerradius, friendUsername = item.username, friendFullname = item.fullname, friendPic = string.IsNullOrEmpty(item.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(item.profile_image) });
+				}
+				FriendsList.Clear();
+				ListMyFriends = tempFriendList;
+				pageNoFriend++;
+				IsLoading = false;
+				App.HideMainPageLoader();
+			}
+			else if (isList)
+			{
+				IsListFriendVisible = true;
+				IsNoFriendFoundVisible = false;
+				foreach (var itemUser in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					tempFriendList.Add(new Friend { friendId = itemUser.id, cornerRadius = cornerradius, friendUsername = itemUser.username, friendFullname = itemUser.fullname, friendPic = string.IsNullOrEmpty(itemUser.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(itemUser.profile_image) });
+				}
+				FriendsList.Clear();
+				ListMyFriends = tempFriendList;
+				pageNoFriend++;
+				IsLoading = false;
+				App.HideMainPageLoader();
+			}
+			else if (!isList && pageNoFriend < 2)
+			{
+				IsListFriendVisible = false;
+				IsNoFriendFoundVisible = true;
+				IsLoading = false;
+				App.HideMainPageLoader();
+			}
+			else
+			{
+				ListMyFriends = tempFriendList;
+				IsLoading = false;
+				App.HideMainPageLoader();
+			}
+		}
+
+
+		public async void GetPendingFriendsList()
+		{
+			try
+			{
+				IsLoading = true;
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				}
+				else
+				{
+					bool isList = await GetPendingRequests();
+					SetPendingFriendsList(isList, FriendsList);
+				}
+				IsLoading = false;
+			}
+
+			catch (Exception)
+			{
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+		async Task<bool> GetPendingRequests()
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+					return false;
+				}
+				else
+				{
+					if (!string.IsNullOrEmpty(SessionManager.AccessToken) && (pageNoPending == 1 || pageNoPending <= totalPagesPendingRequest))
+					{
+						FriendsList = new List<UserResponse>();
+						var response = await mainService.Get<UserDetailResponse>(Constant.PendingFriendsListUrl + pageNoPending);
+						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+						{
+							foreach (var item in response.response)
+							{
+								FriendsList.Add(item);
+							}
+							totalPagesPendingRequest = GetPageCount(response.response[response.response.Count - 1].total_users);
+							return true;
+
+						}
+						else if (response != null && response.status == Constant.Status401)
+						{
+							SignOut();
+							IsLoading = false;
+							return false;
+						}
+						else
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		void SetPendingFriendsList(bool isList, List<UserResponse> list)
+		{
+			if (isList && pageNoPending < 2)
+			{
+				IsPendingFriendVisible = true;
+				IsPendingNoFriendFoundVisible = false;
+				foreach (var item in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					string mutual = item.mutual_user_count <= 0 ? "No" : Convert.ToString(item.mutual_user_count);
+					tempPendingList.Add(new Friend { friendId = item.id, friendMutual = mutual + " Mutual Friends", cornerRadius = cornerradius, friendUsername = item.username, friendFullname = item.fullname, friendPic = string.IsNullOrEmpty(item.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(item.profile_image) });
+				}
+				FriendsList.Clear();
+				ListPendingRequest = tempPendingList;
+				pageNoPending++;
+				IsLoading = false;
+			}
+			else if (isList)
+			{
+				IsPendingFriendVisible = true;
+				IsPendingNoFriendFoundVisible = false;
+				foreach (var itemUser in list)
+				{
+					float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 5;
+					string mutual = itemUser.mutual_user_count <= 0 ? "No" : Convert.ToString(itemUser.mutual_user_count);
+					tempPendingList.Add(new Friend { friendId = itemUser.id, friendMutual = mutual + " Mutual Friends", cornerRadius = cornerradius, friendUsername = itemUser.username, friendFullname = itemUser.fullname, friendPic = string.IsNullOrEmpty(itemUser.profile_image) ? Constant.ProfileIcon : PageHelper.GetUserImage(itemUser.profile_image) });
+				}
+				FriendsList.Clear();
+				ListPendingRequest = tempPendingList;
+				pageNoPending++;
+				IsLoading = false;
+			}
+			else if (!isList && pageNoPending < 2)
+			{
+				IsPendingFriendVisible = false;
+				IsPendingNoFriendFoundVisible = true;
+				IsLoading = false;
+			}
+			else
+			{
+				ListPendingRequest = tempPendingList;
+				IsLoading = false;
+			}
+		}
+		public async Task PendingRequestCount()
+		{
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					if (!string.IsNullOrEmpty(SessionManager.AccessToken))
+					{
+						var result = await mainService.Get<ResultWrapperSingle<PendingRequestCountResponse>>(Constant.PendingRequestCountUrl);
+						if (result != null && result.status == Constant.Status200)
+						{
+							PendingText = (result.response.request_count <= 0 ? "No" : Convert.ToString(result.response.request_count)) + " Pending Friend Request";
+						}
+						else if (result != null && result.status == Constant.Status401)
+						{
+							SignOut();
+							IsLoading = false;
+						}
+						else
+						{
+							await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+						}
+					}
+					else
+					{
+						await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					}
+				}
+			}
+			catch (Exception)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				TapCount = 0;
+				IsLoading = false;
+			}
+		}
+		public async Task<bool> FriendProfileDetail()
+		{
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					if (!string.IsNullOrEmpty(SessionManager.AccessToken))
+					{
+						FriendProfileList = new List<FriendProfileResponse>();
+						var result = await mainService.Get<ResultWrapper<FriendProfileResponse>>(Constant.ProfileDetailUrl + TappedFriendid + "/");
+						if (result != null && result.status == Constant.Status200)
+						{
+							foreach (var itemUser in result.response)
+							{
+                                SelectedUsername = !string.IsNullOrEmpty(itemUser.fullname) ? itemUser.fullname : string.Empty;
+								IsAddFriendButtonVisible = itemUser.request_type == Constant.AddFriendText ? true : false;
+								IsFriendsButtonVisible = itemUser.request_type == Constant.FriendText ? true : false;
+								IsCancelRequestButtonVisible = itemUser.request_type == Constant.CancelRequestText ? true : false;
+								IsConfirmRequestButtonVisible = itemUser.request_type == Constant.ConfirmRequestText ? true : false;
+                                BlockUnBlockText = itemUser.already_blocked ? Constant.UnBlockText : Constant.BlockText;
+                                FriendProfileList.Add(itemUser);
+								IsLoading = false;
+							}
+							return true;
+						}
+						else if (result != null && result.status == Constant.Status401)
+						{
+							SignOut();
+							IsLoading = false;
+							return false;
+						}
+						else
+						{
+							await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+							IsLoading = false;
+							return false;
+						}
+					}
+					else
+					{
+						IsLoading = false;
+						return false;
+					}
+				}
+				else
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					IsLoading = false;
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				TapCount = 0;
+				IsLoading = false;
+				return false;
+			}
+		}
+
+		public async void GetFriendsHostedEventList()
+		{
+			try
+			{
+				IsLoading = true;
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				}
+				else
+				{
+					bool isList = await GetFriendsHostedEvents();
+					SetFriendsEventsList(isList, HostedEventsList);
+				}
+				IsLoading = false;
+			}
+
+			catch (Exception)
+			{
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+		async Task<bool> GetFriendsHostedEvents()
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+					return false;
+				}
+				else
+				{
+					if (SessionManager.AccessToken != null && (pageNoFriendsEvent == 1 || pageNoFriendsEvent <= totalHostedEventPages))
+					{
+						HostedEventsList = new List<MyEventResponse>();
+						var response = await mainService.Get<ResultWrapper<MyEventResponse>>(Constant.FriendsPublicHostedEventUrl + TappedFriendid + "/?page=" + pageNoFriendsEvent);
+						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+						{
+							foreach (var item in response.response)
+							{
+								HostedEventsList.Add(item);
+							}
+							totalHostedEventPages = GetPageCount(response.response[response.response.Count - 1].total_events);
+							return true;
+
+						}
+						else if (response != null && response.status == Constant.Status401)
+						{
+							SignOut();
+							IsLoading = false;
+							return false;
+						}
+						else
+						{
+							return false;
+						}
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		void SetFriendsEventsList(bool isList, List<MyEventResponse> list)
+		{
+			if (isList && pageNoFriendsEvent < 2)
+			{
+				SetFriendsEvents(list);
+			}
+			else if (isList)
+			{
+				SetFriendsEvents(list);
+			}
+			else if (!isList && pageNoFriendsEvent < 2)
+			{
+				IsFriendEventListVisible = false;
+				IsNoEventVisible = true;
+				IsLoading = false;
+			}
+			else
+			{
+				ListMyFriendsEvents = tempFriendEventList;
+				IsLoading = false;
+			}
+		}
+		void SetFriendsEvents(List<MyEventResponse> list)
+		{
+			IsFriendEventListVisible = true;
+			IsNoEventVisible = false;
+			foreach (var item in list)
+			{
+				float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 4;
+				string loc = item.event_venue + "," + item.location_address;
+				string attendee;
+				string date = SetEventDate(item.start_date, item.start_time) + " " + item.time_zone_type;
+				bool isImageOneVisible;
+				bool isImageSecondVisible;
+				string imageOne;
+				string imageSecond;
+				if (item.event_attendees_count <= 0)
+				{
+					attendee = "No attendees yet!";
+					isImageOneVisible = false;
+					isImageSecondVisible = false;
+					imageOne = string.Empty;
+					imageSecond = string.Empty;
+				}
+				else
+				{
+					attendee = item.event_attendees_count > 2 ? "+" + Convert.ToString(item.event_attendees_count - 2) + " More attendees" : "No More attendees";
+					if (item.event_attendees_count >= 2)
+					{
+						isImageOneVisible = true;
+						isImageSecondVisible = true;
+						imageOne = !string.IsNullOrEmpty(item.attendees[0].profile_image) ? PageHelper.GetUserImage(item.attendees[0].profile_image) : Constant.UserDefaultSquareImage;
+						imageSecond = !string.IsNullOrEmpty(item.attendees[1].profile_image) ? PageHelper.GetUserImage(item.attendees[1].profile_image) : Constant.UserDefaultSquareImage;
+					}
+					else
+					{
+						isImageOneVisible = true;
+						isImageSecondVisible = false;
+						imageOne = !string.IsNullOrEmpty(item.attendees[0].profile_image) ? PageHelper.GetUserImage(item.attendees[0].profile_image) : Constant.UserDefaultSquareImage;
+						imageSecond = string.Empty;
+					}
+				}
+
+				tempFriendEventList.Add(new MyEvents
+				{
+					EventId = item.id,
+					EventName = item.name,
+					EventLikes = Convert.ToString(item.event_likes_count),
+					EventAddress = loc,
+					EventLitScore = Convert.ToString(item.event_lit_score) + Constant.LitScoreText,
+					AttendeeCount = attendee,
+					EventDateTime = date,
+					IsEditIconVisible = false,
+					IsFirstImageVisible = isImageOneVisible,
+					IsSecondImageVisible = isImageSecondVisible,
+					AttendeeImageFirst = imageOne,
+                    AttendeeImageSecond = imageSecond,
+                    IsBoostEvent = item.is_boosted_event,
+                    EventStatus = item.event_status_label,
+                    IsShowViewAll = item.event_attendees_count > 0,
+                    ListBackColor = item.is_boosted_event ? Color.FromHex(Constant.BoostListBackColor) : Color.White
+
+				});
+			}
+			HostedEventsList.Clear();
+			ListMyFriendsEvents = tempFriendEventList;
+			pageNoFriendsEvent++;
+			IsLoading = false;
+		}
+		string SetEventDate(string startDate, string startTime)
+		{
+			var dateStart = DateTime.Parse(startDate + " " + startTime);
+			return dateStart.Date.ToString("ddd,dd MMM").ToUpperInvariant() + ", " + dateStart.ToString("h:mm tt").Trim().ToUpperInvariant();
+		}
+		#endregion
+
+
+
+	}
+
+}
+
+
+
+

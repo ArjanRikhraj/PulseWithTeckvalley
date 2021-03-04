@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.NotificationView">
+    <ContentView.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+            <Grid x:Name="grdMain" Grid.Row="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:SettingsHeader Grid.Row="0" IsBackButtonVisible="false"  HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeadingText="Notifications" LogoutVisible="false" />
+                <local:ExtendedListView x:Name="lstNotifications" ItemSelected="lstNotificationTapped"   Grid.Row="1" IsVisible="{Binding IsNotificationListVisible}" ItemsSource="{Binding ListNotification}" LoadMoreCommand="{Binding LoadMoreNotifications}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="FillAndExpand" SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
+                    <local:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Frame HasShadow="false" CornerRadius="{Binding cornerRadius}" Margin="14,10,14,0" Padding="13,7,13,13" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+                                    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,0,0,7">
+                                        <StackLayout Orientation="Vertical" BackgroundColor="Transparent"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="7">
+                                            <local:ExtendedLabel Text="{Binding title}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="13"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">
+                                            </local:ExtendedLabel>
+                                            <local:ExtendedLabel Text="{Binding message}" LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="12"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">
+                                            </local:ExtendedLabel>
+                                            <local:ExtendedLabel Text="{Binding date}"   LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" HorizontalOptions="Start">
+                                            </local:ExtendedLabel>
+                                        </StackLayout>
+                                      </Grid>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </local:ExtendedListView.ItemTemplate>
+                </local:ExtendedListView>
+                <StackLayout Orientation="Vertical" Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsNoNotificationVisible}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Image Source="{x:Static local:Constant.NoNotificationActiveIcon}"  Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center">
+                    </Image>
+                     <local:ExtendedLabel Text="No Notifications"  FontFace="PoppinsRegular" FontSize="16" Opacity="0.7" HorizontalTextAlignment="Center" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand">
+                 </local:ExtendedLabel>
+                </StackLayout>
+               
+            </Grid>
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

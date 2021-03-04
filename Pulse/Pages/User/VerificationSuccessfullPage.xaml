@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.VerificationSuccessfullPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse">
+	<local:BaseContentPage.Content>
+		<Grid  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" Padding="0">
+			<Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" Padding="0">
+				<Image Source="{x:Static local:Constant.BackGroundImage}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				</Image>
+			</Grid>
+			<Grid Grid.Row="0">
+				<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+						<Image Source="{x:Static local:Constant.SuccessIcon}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" />
+						<local:ExtendedLabel Text="{x:Static local:Constant.VerifyMessage}" FontSize="18" FontFace="PoppinsSemiBold" Margin="0,15,0,0" TextColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="CenterAndExpand" />
+						<local:ExtendedLabel x:Name="labelAccount" Text="{x:Static local:Constant.AccountCreated}" FontSize="12" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.WhiteTextColor}" Margin="0" HorizontalOptions="CenterAndExpand" />
+					</StackLayout>
+				</StackLayout>
+			</Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

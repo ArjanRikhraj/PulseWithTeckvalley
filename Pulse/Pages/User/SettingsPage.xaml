@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.SettingsPage">
+    <local:BaseContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+            <Grid x:Name="grdMain" Grid.Row="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+              <local:SettingsHeader Grid.Row="0" IsBackButtonVisible="true" HorizontalOptions="FillAndExpand" LogoutVisible="true" VerticalOptions="FillAndExpand" HeadingText="Settings" />
+                <Grid x:Name="grdItems" Grid.Row="1" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.SettingScreenBackgroundColor}" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackLayout x:Name="stkChangePassword" BackgroundColor="White" Grid.Row="0" Spacing="15" Orientation="Horizontal" VerticalOptions="FillAndExpand"  Padding="20,16,20,15">
+                        <Image Source="{x:Static local:Constant.ChangePasswordIcon}"  Grid.Row="0" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
+                        <local:ExtendedLabel Text="Change Password" FontFace="PoppinsLight" Grid.Row="0" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                        <Image x:Name="btnArrowChangePassword" Grid.Row="0" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TapCommand}" CommandParameter="ChangePassword">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView Grid.Row="1" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" x:Name="boxChangePassword" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                    <StackLayout Grid.Row="2"  BackgroundColor="{x:Static local:Constant.SettingScreenBackgroundColor}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Padding="20,20,20,10">
+                        <Label Text="{x:Static local:Constant.AboutText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" />
+                    </StackLayout>
+                    <BoxView Grid.Row="3" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                    <ScrollView Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout x:Name="stkAboutPulse"  BackgroundColor="White"  Orientation="Horizontal" Spacing="15" Padding="20,15,20,15">
+                                <Image Source="{x:Static local:Constant.AboutPulseIcon}"  Grid.Row="0" VerticalOptions="CenterAndExpand"  Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.AboutPulseText}"  HorizontalTextAlignment="Start" FontFace="PoppinsLight" Grid.Row="0" VerticalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                                <Image x:Name="btnArrowAboutPulse" Grid.Row="0" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TapCommand}" CommandParameter="AboutPulse">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <BoxView BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                            <StackLayout x:Name="stkPrivacyPolicy"  BackgroundColor="White" Orientation="Horizontal" Spacing="15" Padding="20,15,20,15">
+                                <Image Source="{x:Static local:Constant.PrivacyPolicyIcon}"  Grid.Row="0" VerticalOptions="CenterAndExpand"  Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.PrivacyPolicyText}" FontFace="PoppinsLight" Grid.Row="0" VerticalOptions="CenterAndExpand"  HorizontalTextAlignment="Start" TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                                <Image x:Name="btnArrowPrivacypolicy" Grid.Row="0" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TapCommand}" CommandParameter="PrivacyPolicy">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <BoxView BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                            <StackLayout x:Name="stkFaqs"   BackgroundColor="White" Orientation="Horizontal" Spacing="15" Padding="20,15,20,15">
+                                <Image Source="{x:Static local:Constant.FAQsIcon}" Grid.Row="0" VerticalOptions="Center"  Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.FaqsText}" FontFace="PoppinsLight" Grid.Row="0" VerticalOptions="Center" HorizontalTextAlignment="Start" TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                                <Image x:Name="btnArrow" Grid.Row="0" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TapCommand}" CommandParameter="Faqs">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <BoxView BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                            <StackLayout x:Name="stkContactUs"   BackgroundColor="White" Orientation="Horizontal" Spacing="15" Padding="20,15,20,15">
+                                <Image Source="{x:Static local:Constant.EmailIcon}" Grid.Row="0" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.ContactUsText}" FontFace="PoppinsLight" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                                <Image x:Name="btnArrowContactUs" Grid.Row="0" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TapCommand}" CommandParameter="ContactUs">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <BoxView BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+			<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>
+        </Grid>
+    </local:BaseContentPage.Content>
+</local:BaseContentPage>

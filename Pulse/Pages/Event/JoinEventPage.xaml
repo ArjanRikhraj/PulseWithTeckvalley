@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.JoinEventPage">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
+			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" Grid.Row="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                 <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                     </local:GradientColorStack.Effects>
+                    <Grid VerticalOptions="FillAndExpand" x:Name="topStack" Margin="15,25,11,13" BackgroundColor="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="80*" />
+							<ColumnDefinition Width="20*" />
+						</Grid.ColumnDefinitions>
+						<local:ExtendedLabel Text="Join Event" FontFace="PoppinsMedium" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
+						<local:ExtendedLabel Text="Cancel" Grid.Column="1" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12">
+							<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer Tapped="Cancel_Tapped" NumberOfTapsRequired="1" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+					</Grid>
+				</local:GradientColorStack>
+				<ScrollView Grid.Row="1" BackgroundColor="White" HorizontalOptions="FillAndExpand">
+					<StackLayout Spacing="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" >
+						<local:ExtendedLabel x:Name="lblEventtitle" Text="{Binding EventTitle}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Margin="15,15,15,0" FontSize="14" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" />
+						<Grid Margin="15,15,15,0" RowSpacing="-4" ColumnSpacing="10">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="{x:Static local:Constant.TimeImage}" Grid.RowSpan="2" Grid.Column="0" />
+							<local:ExtendedLabel x:Name="lblEventDate" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventDate}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+							<local:ExtendedLabel x:Name="lblEventTime" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="1" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventTime}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+						</Grid>
+						<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Margin="15,20,15,5" Text="SUBJECT" FontSize="12" HorizontalOptions="FillAndExpand" />
+						<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" x:Name="stackCover" Orientation="Horizontal" Padding="15,12,15,12">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="Cover Fee" FontSize="14" HorizontalOptions="StartAndExpand" />
+							<local:ExtendedLabel x:Name="labelCoverFee" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="$200.00" FontSize="14" HorizontalOptions="End" />
+						</StackLayout>
+						<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" x:Name="stackBottle" Orientation="Horizontal" Padding="15,12,15,12">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="Add Bottle Service" FontSize="14" HorizontalOptions="StartAndExpand" />
+							<StackLayout HorizontalOptions="End">
+								<Image x:Name="imageActiveBottleService" Source="{x:Static local:Constant.ActiveSelectorIcon}" Aspect="AspectFit" />
+								<Image x:Name="imageInActiveBottleService" Source="{x:Static local:Constant.DeActiveSelectorIcon}" IsVisible="false" Aspect="AspectFit" />
+								<StackLayout.GestureRecognizers>
+									<TapGestureRecognizer Tapped="BottleStackTapped" NumberOfTapsRequired="1" />
+								</StackLayout.GestureRecognizers>
+							</StackLayout>
+						</StackLayout>
+						<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" x:Name="stackNoBottle" IsVisible="false" Orientation="Horizontal" Padding="15,12,15,12">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="No Bottle Service" FontSize="14" HorizontalOptions="StartAndExpand" />
+						</StackLayout>
+						<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" x:Name="boxBottle" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						<local:ExtendedLabel x:Name="labelBottleAmount" TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,10,15,35" FontFace="PoppinsLight" Text="$50 per bottle would be charged extra over cover fee" FontSize="10" HorizontalOptions="FillAndExpand" />
+						<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Orientation="Horizontal" Padding="15,12,15,12">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="Total Due" FontSize="14" HorizontalOptions="StartAndExpand" />
+							<local:ExtendedLabel x:Name="labelTotal" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Text="$250.00" FontSize="14" HorizontalOptions="End" />
+						</StackLayout>
+						<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						<StackLayout x:Name="stackNoEmail" Spacing="0" IsVisible="false">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,30,15,2" FontFace="PoppinsLight" Text="EMAIL" FontSize="11" HorizontalOptions="FillAndExpand" />
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+							<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Orientation="Horizontal" Padding="15,8,15,8">
+								<local:ExtendedEntry x:Name="txtEmail" BackgroundColor="Transparent" FontFace="PoppinsLight" TextChanged="Email_TextChanged" MaxLength="250" Margin="0" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" Placeholder="Enter Email Address" TextColor="{x:Static local:Constant.GrayTextColor}" Keyboard="Email" FontSize="14"
+									HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+							</StackLayout>
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+							<local:ExtendedButton x:Name="btnVerify" FontFace="PoppinsMedium" BorderColor="Transparent" Margin="0" BackgroundColor="Transparent" Clicked="VerifyEmailClicked" IsVisible="false" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" Text="VERIFY" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
+						</StackLayout>
+						<StackLayout x:Name="stackOtp" Spacing="0" IsVisible="false">
+							<local:ExtendedLabel x:Name="otpText" TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,30,15,2" FontFace="PoppinsLight" Text="OTP received on aahg@jhds.kdc" FontSize="11" HorizontalOptions="FillAndExpand" />
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+							<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Orientation="Horizontal" Padding="15,11,15,11">
+								<local:ExtendedEntry x:Name="txtOtp" BackgroundColor="Transparent" FontFace="PoppinsLight" MaxLength="4" Margin="0" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" Placeholder="OTP" TextColor="{x:Static local:Constant.GrayTextColor}" Keyboard="Numeric" FontSize="14" HorizontalOptions="FillAndExpand"
+									VerticalOptions="Center" />
+							</StackLayout>
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+							<StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+								<local:ExtendedButton FontFace="PoppinsRegular" BorderColor="Transparent" Margin="0,0,20,0" BackgroundColor="Transparent" Clicked="BackOtpClicked" FontSize="11" Text="BACK" TextColor="{x:Static local:Constant.GrayTextColor}" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
+								<local:ExtendedButton FontFace="PoppinsMedium" BorderColor="Transparent" Margin="0" BackgroundColor="Transparent" Clicked="VerifyOtpClicked" FontSize="11" Text="VERIFY" TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
+							</StackLayout>
+						</StackLayout>
+						<StackLayout x:Name="stackEmail" Spacing="0" IsVisible="true">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,30,15,2" FontFace="PoppinsLight" Text="EMAIL" FontSize="11" HorizontalOptions="FillAndExpand" />
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+							<StackLayout BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Orientation="Horizontal" Padding="15,11,15,11">
+								<local:ExtendedLabel x:Name="lblEmail" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Text="Email" FontSize="14" HorizontalOptions="StartAndExpand" />
+								<Image Source="{x:Static local:Constant.EditEmailIcon}" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="Center" />
+								<StackLayout.GestureRecognizers>
+									<TapGestureRecognizer Tapped="EditStackTapped" NumberOfTapsRequired="1" />
+								</StackLayout.GestureRecognizers>
+							</StackLayout>
+							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
+						</StackLayout>
+						<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,10,15,25" FontFace="PoppinsLight" Text="A payment receipt would be send to this email ID" FontSize="10" HorizontalOptions="Center" />
+						<local:ExtendedButton FontFace="PoppinsMedium" Margin="20,5,20,25" BorderRadius="23" BorderColor="Transparent" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" Clicked="ProceedPaymentClicked" FontSize="15" HeightRequest="45" Text="Proceed to Pay" TextColor="{x:Static local:Constant.WhiteTextColor}"
+							VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
+						<!--</StackLayout>-->
+					</StackLayout>
+				</ScrollView>
+			</Grid>
+			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+					<StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>-->
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

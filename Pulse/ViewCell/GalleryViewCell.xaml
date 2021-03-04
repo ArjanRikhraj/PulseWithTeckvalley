@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.GalleryViewCell">
+    <ViewCell.View>
+        <Grid Margin="0" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" Margin="0,0,0,15" Grid.Row="0" Padding="0">
+                <Grid x:Name="stackMedia" IsVisible="{Binding IsImage}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding FileName}" Grid.Row="0" HeightRequest="{Binding ImageHeight}" Aspect="AspectFill" WidthRequest="{Binding ImageWidth}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Image_tapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                 </Grid>
+                <Grid x:Name="stackVideoMedia" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsPlayIconVisible}" VerticalOptions="Start" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+<!--                 <local:VideoPlayer AutoPlay="false"   x:Name="videoFile"  BackgroundColor="Black" HeightRequest="{Binding ImageHeight}"  WidthRequest="{Binding ImageWidth}" HorizontalOptions="FillAndExpand"  Source="{Binding VideoFileName}" />
+--><!--                <ActivityIndicator x:Name="loader" IsVisible="false" Color="White" IsRunning="true" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+-->               <StackLayout x:Name="stack" HorizontalOptions="FillAndExpand" BackgroundColor="Black" VerticalOptions="FillAndExpand" ></StackLayout>
+                  <Grid HorizontalOptions="FillAndExpand" IsVisible="false" x:Name="videothumbnail" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Image x:Name="imgThumbnail" Source="{Binding VideoThumbnailFileName}"  Grid.Row="0" HeightRequest="{Binding ImageHeight}" Aspect="AspectFill" WidthRequest="{Binding ImageWidth}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        </Image>
+                        <Image x:Name="imgPlay" Source="{x:Static local:Constant.VideoIcon}"  Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+                        </Image>
+                 <ActivityIndicator x:Name="loader" IsVisible="false" Color="White" IsRunning="true" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+                      <!-- <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Handle_Tapped" />
+                        </Grid.GestureRecognizers>-->
+                    </Grid>
+
+                </Grid>
+                <StackLayout Orientation="Horizontal" Margin="15,0,15,5" VerticalOptions="End" IsVisible="{Binding IsVisibleUserName}">
+                    <local:ExtendedLabel TextColor="Black" x:Name="userName" Text="{Binding EventName}" FontFace="PoppinsRegular" VerticalOptions="Center" FontSize="10" HorizontalOptions="StartAndExpand" />
+                    <local:ExtendedLabel TextColor="Black" x:Name="mediaDate" Text="{Binding MediaDate}" LineBreakMode="NoWrap" FontFace="PoppinsRegular" VerticalOptions="Center" FontSize="10" HorizontalOptions="End" />
+                </StackLayout>
+            </StackLayout>
+            <BoxView HeightRequest=".5" Grid.Row="1" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

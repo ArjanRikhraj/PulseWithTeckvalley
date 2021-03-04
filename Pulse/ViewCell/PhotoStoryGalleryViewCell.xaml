@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.PhotoStoryGalleryViewCell">
+    <ViewCell.View>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Vertical" Grid.Row="0" Margin="0,0,0,15" Padding="0">
+                <Grid x:Name="stackMedia" IsVisible="{Binding IsImage}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="5" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding FileName}" Grid.Row="0" HeightRequest="{Binding ImageHeight}" Aspect="AspectFill" WidthRequest="{Binding ImageWidth}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                     <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Image_tapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <!--<Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.4">
+                    </Grid>-->
+                   <!-- <Frame HasShadow="false" BackgroundColor="Transparent" Grid.Row="0" Padding="5" VerticalOptions="Start" HorizontalOptions="End" ClassId="{Binding MediaId}">
+                        <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="DeleteTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>-->
+                </Grid>
+                <StackLayout Orientation="Horizontal" Grid.Row="0" Margin="15,0,7,5" VerticalOptions="End">
+                    <controls:CircleImage x:Name="imgUser" Source="{Binding UserImage}" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" Aspect="AspectFill" HorizontalOptions="Start">
+                    </controls:CircleImage>
+                    <local:ExtendedLabel TextColor="Black" x:Name="userName" Text="{Binding UserName}" FontFace="PoppinsRegular" VerticalOptions="Center" FontSize="10" HorizontalOptions="FillAndExpand" />
+
+                     <Frame HasShadow="false" x:Name="mediaDate" BackgroundColor="Transparent" Grid.Row="0" Padding="5" VerticalOptions="Center" HorizontalOptions="End" ClassId="{Binding MediaId}">
+                        <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="DeleteTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+<!--                    <local:ExtendedLabel TextColor="Black" x:Name="mediaDate" Text="{Binding MediaDate}" FontFace="PoppinsRegular" VerticalOptions="Center" FontSize="10" />
+-->                    <Frame HasShadow="false" BackgroundColor="Transparent" Grid.Row="0" IsVisible="{Binding IsReportIconVisible}" Padding="7" VerticalOptions="Center" HorizontalOptions="End" ClassId="{Binding MediaId}">
+                        <Image Source="{x:Static local:Constant.ReportAbuseIcon}" Aspect="AspectFill" HeightRequest="30" WidthRequest="30" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Inappropriate_Tapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <Grid x:Name="stackVideoMedia" Grid.Row="0" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsPlayIconVisible}" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                       <StackLayout x:Name="stack" HorizontalOptions="FillAndExpand" BackgroundColor="Black" VerticalOptions="FillAndExpand" ></StackLayout>
+
+<!--              <local:VideoPlayer x:Name="videoFile" Grid.Row="0" HeightRequest="{Binding ImageHeight}" BackgroundColor="Black" WidthRequest="{Binding ImageWidth}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AutoPlay="true" Source="{Binding VideoFileName}" />
+-->              <Grid HorizontalOptions="FillAndExpand" x:Name="videothumbnail" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ActivityIndicator x:Name="loader" IsVisible="false" Color="White" IsRunning="true" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+                    <!--   <Image Source="{Binding VideoThumbnailFileName}" Grid.Row="0" HeightRequest="{Binding ImageHeight}" Aspect="AspectFill" WidthRequest="{Binding ImageWidth}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        </Image>
+                        <Image Source="{x:Static local:Constant.VideoIcon}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+                        </Image>-->
+                      <!-- <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Handle_Tapped" />
+                        </Grid.GestureRecognizers>-->
+                    </Grid>
+                <StackLayout Orientation="Horizontal" Grid.Row="1" Margin="15,0,7,5" VerticalOptions="End">
+                    <controls:CircleImage  Source="{Binding UserImage}" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" Aspect="AspectFill" HorizontalOptions="Start">
+                    </controls:CircleImage>
+                    <local:ExtendedLabel TextColor="Black" Text="{Binding UserName}" FontFace="PoppinsRegular" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="10" HorizontalOptions="FillAndExpand" />
+<!--                    <local:ExtendedLabel TextColor="Black" Text="{Binding MediaDate}" FontFace="PoppinsRegular" VerticalOptions="Center" FontSize="10" />
+-->                  <Frame HasShadow="false" x:Name="mediaVideoDate" BackgroundColor="Transparent" Grid.Row="0" Padding="5" VerticalOptions="Center" HorizontalOptions="End" ClassId="{Binding MediaId}">
+                        <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="DeleteTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame> 
+                    <Frame HasShadow="false" BackgroundColor="Transparent" Grid.Row="0" IsVisible="{Binding IsReportIconVisible}" Padding="7" VerticalOptions="Center" HorizontalOptions="End" ClassId="{Binding MediaId}">
+                        <Image Source="{x:Static local:Constant.ReportAbuseIcon}" Aspect="AspectFill" HeightRequest="30" WidthRequest="30" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Inappropriate_Tapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+            <BoxView HeightRequest=".5" Grid.Row="1" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

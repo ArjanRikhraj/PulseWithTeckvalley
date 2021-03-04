@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.FAQPage">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+			<Grid x:Name="grdAboutPulse" Grid.Row="0" HorizontalOptions="FillAndExpand" RowSpacing="10" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<local:SettingsHeader Grid.Row="0" HorizontalOptions="FillAndExpand" LogoutVisible="false" VerticalOptions="FillAndExpand" HeadingText="{x:Static local:Constant.FaqsText}" />
+				<local:CustomWebView x:Name="faqsView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Navigated="WebOnEndNavigating" Margin="0" >
+				</local:CustomWebView>
+				<!--                <Grid x:Name="grdOverlay"  Grid.RowSpan="2" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+-->
+				<!-- <Frame x:Name="frmOverlay" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="40" WidthRequest="40" HasShadow="false">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="{x:Static local:Constant.OverlayColor}" IsRunning="{Binding IsLoading}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></ActivityIndicator>
+                 </StackLayout>
+                </Frame>-->
+				<!-- </Grid>-->
+			</Grid>
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+					<StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>-->
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

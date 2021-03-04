@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.BoostEventPopUpPage">
+    <local:BaseContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+            <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                 <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                     </local:GradientColorStack.Effects>
+                    <Grid VerticalOptions="FillAndExpand" x:Name="topStack" Margin="15,20,11,8" BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="85*" />
+                        </Grid.ColumnDefinitions>
+                        <local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="{x:Static local:Constant.CrossWhiteImage}" Clicked="Cross_Clicked" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                        <local:ExtendedLabel Text="Add New Event" FontFace="PoppinsMedium" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
+                    </Grid>
+                </local:GradientColorStack>
+            </Grid>
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            <Grid Grid.Row="0" IsVisible="true" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+            </Grid>
+            <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0" IsVisible="true" Padding="0" CornerRadius="20" Margin="35,10,35,10" VerticalOptions="Center" HasShadow="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" >
+                    <local:GradientColorFrame IsVisible="true"  StartColor="{x:Static local:Constant.LightPinkColor}" BorderRadius="20" IsBottomLeftNotRounded="true" IsBottomRightNotRounded="true" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                        <Grid VerticalOptions="FillAndExpand" Margin="0" Padding="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
+                            <local:ExtendedLabel Text="Your event was created successfully" Grid.Row="0" Margin="0"  TextColor="White"  FontFace="PoppinsRegular" FontSize="16" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                         </Grid>
+                    </local:GradientColorFrame>
+                    <Image Source="imgSuccess.png" Aspect="AspectFit" Margin="0,10,0,0" />
+                    <local:ExtendedLabel Text="Do you want to boost your event?" TextColor="Black" FontFace="PoppinsSemiBold" Margin="20,15,20,0" FontSize="16" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+                    <Frame BackgroundColor="#F5F5F5"  IsVisible="true" Padding="0" CornerRadius="10" Margin="35,5,35,10" VerticalOptions="Center" HasShadow="false">
+                        <StackLayout Spacing="0" Padding="0" Margin="0">
+                            <local:ExtendedLabel Text="Boosting Amount : $5" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="14" Margin="10,12,10,15" TextColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="Center">
+                            </local:ExtendedLabel>
+                        </StackLayout>
+                    </Frame>
+                    <Image Source="imgBoostTagPopup.png" HorizontalOptions="FillAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding BoostImageTapped}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <local:ExtendedLabel Text="No Thanks" Margin="0,10,0,15" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" Opacity="0.6" FontSize="12" TextColor="{x:Static local:Constant.FilterLightGreyColor}" HorizontalOptions="Center">
+                        <local:ExtendedLabel.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NoThanksTapped}" />
+                        </local:ExtendedLabel.GestureRecognizers>
+                    </local:ExtendedLabel>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </local:BaseContentPage.Content>
+</local:BaseContentPage>

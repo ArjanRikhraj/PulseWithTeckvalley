@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.CustomEntry">
+	<ContentView.Content>
+		<Grid ColumnSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="8*" />
+				<ColumnDefinition Width="92*" />
+			</Grid.ColumnDefinitions>
+			<Image x:Name="sideImage" Aspect="AspectFit"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" />
+<!--          <StackLayout x:Name="stackMain" Grid.Column="1" HeightRequest="32" Grid.Row="0" Spacing="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,2,13,2" Margin="0">
+-->
+          <StackLayout x:Name="stackMain" Grid.Column="1"  Grid.Row="0" Spacing="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,0,13,0" Margin="0">
+		<local:ExtendedLabel x:Name="lblSmall" FontFace="PoppinsRegular" TextColor="Transparent" Margin="0,0,0,-8" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+				<local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entry" TextChanged="Entry_TextChanged" PlaceholderColor="{x:Static local:Constant.AddEventEntriesColor}" TextColor="{x:Static local:Constant.AddEventEntriesColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                  <!--  <local:ExtendedEntry.Margin>
+                   <OnPlatform x:TypeArguments="Thickness">
+                   <On Platform="iOS" Value="0,0,0,0" />
+                   <On Platform="Android" Value="0,0,0,7" />
+                   </OnPlatform>
+              </local:ExtendedEntry.Margin>-->
+                </local:ExtendedEntry>
+			</StackLayout>
+			<BoxView Grid.Row="1" x:Name="box" Margin="15,15,0,0" Grid.Column="1" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
+			</BoxView>
+		</Grid>
+
+       <!-- <Grid ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="92*" />
+            </Grid.ColumnDefinitions>
+           <Image x:Name="sideImage" Aspect="AspectFit"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" />
+           <local:ExtendedLabel x:Name="lblSmall" FontFace="PoppinsRegular" TextColor="Transparent" Margin="0,0,0,-10" FontSize="11" Grid.Row="0" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+           <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entry" Margin="0" Grid.Row="1" Grid.Column="1" TextChanged="Entry_TextChanged" PlaceholderColor="{x:Static local:Constant.AddEventEntriesColor}" TextColor="{x:Static local:Constant.AddEventEntriesColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+
+           <StackLayout x:Name="stackMain" Grid.Column="1"  Grid.Row="0" Spacing="6" HorizontalOptions="FillAndExpand"  Padding="15,2,13,5" Margin="0">
+            </StackLayout>-->
+           <!-- <BoxView Grid.Row="2" x:Name="box" Margin="15,15,0,0" Grid.Column="1" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
+            </BoxView>
+        </Grid>-->
+	</ContentView.Content>
+</ContentView>

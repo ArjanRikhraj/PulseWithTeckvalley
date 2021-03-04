@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.DisabledCustomEntry">
+	<ContentView.Content>
+			<Grid ColumnSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="8*" />
+				<ColumnDefinition Width="92*" />
+			</Grid.ColumnDefinitions>
+			<Image x:Name="sideImage" Aspect="AspectFit"  Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Transparent" />
+			<StackLayout x:Name="stackMain" Grid.Column="1" HeightRequest="32" Grid.Row="0" Spacing="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,2,13,2" Margin="0">
+				<local:ExtendedLabel x:Name="lblSmall" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.DisabledEntryColor}" Margin="0,0,0,-10" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+				<local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entry" InputTransparent="true" Margin="0" PlaceholderColor="{x:Static local:Constant.DisabledEntryColor}" TextColor="{x:Static local:Constant.DisabledEntryColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+			</StackLayout>
+			<BoxView Grid.Row="1" x:Name="box" Margin="15,10,0,0" Grid.Column="1" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
+			</BoxView>
+		</Grid>
+	</ContentView.Content>
+</ContentView>

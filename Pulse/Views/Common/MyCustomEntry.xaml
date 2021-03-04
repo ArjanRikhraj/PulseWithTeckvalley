@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.MyCustomEntry">
+    <ContentView.Content>
+        <Grid ColumnSpacing="0" Margin="10,0,0,0">
+            <Grid.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0,0,0,0" />
+                    <On Platform="Android" Value="8,0,0,0" />
+                </OnPlatform>
+            </Grid.Margin>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout x:Name="stackMain" Grid.Column="0" Grid.Row="0" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0" Margin="0">
+                <local:ExtendedLabel x:Name="lblSmall" FontFace="PoppinsRegular" TextColor="Transparent" Margin="0,0,0,0" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0" Margin="0,0,0,0">
+                    <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entry" Margin="0" TextChanged="Entry_TextChanged" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" TextColor="{x:Static local:Constant.GrayTextColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+                    <StackLayout x:Name="stackPasswordEyeIcon" IsVisible="false" HorizontalOptions="End" VerticalOptions="Center">
+                        <Image Source="{x:Static local:Constant.HiddenPasswordImage}" x:Name="passwordHideImage" IsVisible="true" />
+                        <Image Source="{x:Static local:Constant.ShowPasswordImage}" x:Name="passwordShowImage" IsVisible="false" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Eye_Stack_Tapped" NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="stackCheckIcon" IsVisible="false" HorizontalOptions="End" VerticalOptions="Start">
+                        <Image Source="{x:Static local:Constant.CheckedIcon}" x:Name="checkImage" IsVisible="true" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <BoxView Grid.Row="1" x:Name="box" Margin="0,2,0,0" Grid.Column="0" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
+            </BoxView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

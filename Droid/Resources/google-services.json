@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1013571776110",
+    "firebase_url": "https://pulse-ed158.firebaseio.com",
+    "project_id": "pulse-ed158",
+    "storage_bucket": "pulse-ed158.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013571776110:android:5fe7e74b9d714679",
+        "android_client_info": {
+          "package_name": "com.netsol.pulse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013571776110-4b1katutofkuhoer5o9kfm2m4nb8pgh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.netsol.pulse",
+            "certificate_hash": "ad5624692e2917a35a9a9750d842681d83327e09"
+          }
+        },
+        {
+          "client_id": "1013571776110-k5sqjncd751i9c6ve3d0rdao0en2tol9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQx15hRmXYYVbwA04F8NBhqSYVhqYdTKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013571776110-k5sqjncd751i9c6ve3d0rdao0en2tol9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1013571776110-ermk917dck7q56ci7i9jdgho0j5re0tm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.pulse.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

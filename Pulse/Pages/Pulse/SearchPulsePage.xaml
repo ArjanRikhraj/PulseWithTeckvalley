@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.SearchPulsePage">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                 <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                     </local:GradientColorStack.Effects>
+                    <StackLayout HorizontalOptions="FillAndExpand" x:Name="topStack" Orientation="Horizontal" VerticalOptions="FillAndExpand" Margin="10,25,10,10" BackgroundColor="Transparent">
+						<Frame HasShadow="false" x:Name="searchFrame" CornerRadius="{Binding cornerRadius}" Padding="5" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="FillAndExpand">
+							<StackLayout Orientation="Horizontal">
+								<Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="Start" />
+								<local:ExtendedEntry FontFace="PoppinsMedium" Placeholder="Search Pulse" x:Name="entryUser" TextChanged="SearchEntry_TextChanged" PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}" TextColor="{x:Static local:Constant.SearchFriendTextColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+								<Image Source="{x:Static local:Constant.SearchCloseIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
+									<Image.GestureRecognizers>
+										<TapGestureRecognizer Tapped="CrossIcon_Tapped" NumberOfTapsRequired="1" />
+									</Image.GestureRecognizers>
+								</Image>
+							</StackLayout>
+						</Frame>
+						<local:ExtendedLabel Text="Cancel" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12">
+							<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer Tapped="Cancel_Tapped" NumberOfTapsRequired="1" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+					</StackLayout>
+				</local:GradientColorStack>
+				<StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<local:ExtendedListView x:Name="listSearchedPulse"  ItemSelected="lstSearchPulseTapped" BackgroundColor="Transparent" RowHeight="70" HasUnevenRows="false" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+						<local:ExtendedListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<ViewCell.View>
+										<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="0">
+												<StackLayout Margin="20,10,15,10" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+													<local:ExtendedButton BorderWidth="1" BackgroundColor="Transparent" HeightRequest="42" WidthRequest="42" BorderRadius="21" Text="{Binding ImageText}" TextColor="{x:Static local:Constant.GrayTextColor}" BorderColor="{Binding GroupIconBorderColor}" FontFace="PoppinsSemiBold" FontSize="12"
+														HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+													</local:ExtendedButton>
+													<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Spacing="0" Margin="5,0,0,0">
+														<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+															<local:ExtendedLabel Text="{Binding Subject}" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="13" Margin="0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand" VerticalOptions="End" />
+															<local:ExtendedLabel Text="{Binding Time}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="10" TextColor="{x:Static local:Constant.TimeColor}" HorizontalOptions="End" VerticalOptions="End" />
+														</StackLayout>
+<!--														<local:ExtendedLabel Text="{Binding LastMessage}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="11" Margin="0" TextColor="{x:Static local:Constant.FilterLightGreyColor}" />
+-->													</StackLayout>
+												</StackLayout>
+												<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="{x:Static local:Constant.PulseBoxColor}" />
+											</StackLayout>
+									</ViewCell.View>
+								</ViewCell>
+							</DataTemplate>
+						</local:ExtendedListView.ItemTemplate>
+					</local:ExtendedListView>
+					<local:ExtendedLabel x:Name="lblNoPulse" Text="No Pulse Found" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand">
+					</local:ExtendedLabel>
+				</StackLayout>
+			</Grid>
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

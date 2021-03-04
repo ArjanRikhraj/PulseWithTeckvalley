@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.ContactUsPage">
+	<local:BaseContentPage.Content>
+		<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0" RowSpacing="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+			<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0" RowSpacing="0" BackgroundColor="White">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<local:SettingsHeader Grid.Row="0" HorizontalOptions="FillAndExpand" LogoutVisible="false" VerticalOptions="FillAndExpand" HeadingText="Contact Us" />
+				<StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,30,15,20" Margin="0" Spacing="0" BackgroundColor="White">
+					<local:ExtendedLabel FontFace="PoppinsMedium" Text="Mail Us" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15" HorizontalOptions="StartAndExpand" Margin="0,0,0,10" />
+					<StackLayout HorizontalOptions="Start" x:Name="stackAddress">
+						<local:ExtendedLabel FontFace="PoppinsRegular" Text="{Binding Address}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="StartAndExpand" />
+					</StackLayout>
+					<local:ExtendedLabel FontFace="PoppinsMedium" Margin="0,25,0,10" Text="Customer Support Number" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15" HorizontalOptions="StartAndExpand" />
+					<Grid Margin="10,5,10,5" RowSpacing="2" ColumnSpacing="10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<Image Source="{x:Static local:Constant.MobileImage}" Grid.Row="0" Grid.Column="0" />
+						<local:ExtendedLabel x:Name="lblMobileNo" TextColor="{x:Static local:Constant.PinkButtonColor}" Text="{Binding MobileNo}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
+							<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Mobile_Tapped" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+						<StackLayout x:Name="stackInfo" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start">
+							<local:ExtendedLabel TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsRegular" Text="{Binding HelpText}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+						</StackLayout>
+						<local:ExtendedLabel FontFace="PoppinsLight" Margin="0,15,0,0" Text="or" Grid.Row="3" Grid.Column="1" TextColor="{x:Static local:Constant.Orcolor}" FontSize="12" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" />
+					</Grid>
+					<Grid Margin="10,5,10,5" RowSpacing="2" ColumnSpacing="10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<Image Source="{x:Static local:Constant.EmailIcon}" Grid.RowSpan="2" Grid.Column="0" />
+						<local:ExtendedLabel x:Name="lblEmail" Text="{Binding Email}" TextColor="{x:Static local:Constant.PinkButtonColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
+							<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Email_Tapped" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+					</Grid>
+					<StackLayout VerticalOptions="EndAndExpand" Spacing="10" Margin="15,0,15,20">
+						<local:ExtendedLabel x:Name="lblHaveQuery" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{x:Static local:Constant.HaveAQueryText}" />
+						<local:ExtendedButton FontFace="PoppinsMedium" Clicked="HaveQueryClicked" BorderRadius="23" BorderColor="Transparent" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" FontSize="15" HeightRequest="45" Text="Ask Us" TextColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="Fill"
+							HorizontalOptions="FillAndExpand" />
+					</StackLayout>
+				</StackLayout>
+			</Grid>
+			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+					<StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>-->
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

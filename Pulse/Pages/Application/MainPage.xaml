@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.MainPage">
+    <local:BaseContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Margin="0" Padding="0">
+            <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0" Margin="0" Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid x:Name="grdInnerView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0" Grid.Row="0" Margin="0">
+                </Grid>
+                <Grid HorizontalOptions="FillAndExpand" Grid.Row="1" RowSpacing="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" ColumnSpacing="0" Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <BoxView Grid.Column="0" x:Name="EventsBox" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="FillAndExpand" HeightRequest="2">
+                        </BoxView>
+                        <BoxView Grid.Column="1" x:Name="Notificationbox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        </BoxView>
+                        <BoxView Grid.Column="2" x:Name="PulseBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        </BoxView>
+                        <BoxView Grid.Column="3" x:Name="FriendsBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        </BoxView>
+                        <BoxView Grid.Column="4" x:Name="ProfileBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        </BoxView>
+                    </Grid>
+                    <Grid Grid.Row="1" Padding="0" Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <local:ExtendedStackLayout x:Name="stackEvents"  Padding="8,7,8,8" ActivePage="Event" BackgroundColor="{x:Static local:Constant.BoostListBackColor}" Spacing="3" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image x:Name="eventInActiveImage" Source="{x:Static local:Constant.EventInActiveIcon}" Aspect="AspectFit" IsVisible="false" />
+                            <Image x:Name="eventActiveImage" Source="{x:Static local:Constant.EventActiveIcon}" Aspect="AspectFit" IsVisible="true" />
+                            <Label FontFamily="London1960" x:Name="lblEvent" Text="{x:Static local:Constant.EventTabText}" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+                        <local:ExtendedStackLayout x:Name="stackNotifications"  Padding="8,7,8,8" ActivePage="Notification" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0">
+                                <Image x:Name="notificationInActiveImage" Grid.Row="0" Source="{x:Static local:Constant.NotificationInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
+                                <Image x:Name="notificationActiveImage" Grid.Row="0" Source="{x:Static local:Constant.NotificationActiveIcon}" Aspect="AspectFit" IsVisible="false" />
+                                <Image x:Name="stackUnReadNotification" HorizontalOptions="Center" Grid.Row="0" TranslationX="5"  TranslationY="-5" Source="{x:Static local:Constant.UnreadNotificationInActiveIcon}"  IsVisible="{Binding IsNotification}" />
+                            </Grid>
+                            <Label FontFamily="London1960" x:Name="lblNotification" Text="{x:Static local:Constant.NotificationTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+                        <!--    <local:ExtendedStackLayout  x:Name="" ActivePage="Notification" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label FontFamily="London1960" x:Name="lblUnreadNotification" Text="{x:Static local:Constant.NotificationTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                                <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                                </local:ExtendedStackLayout.GestureRecognizers>
+                            </local:ExtendedStackLayout>
+                        -->
+                        <local:ExtendedStackLayout x:Name="stackPulse"  Padding="8,7,8,8" ActivePage="Pulse" BackgroundColor="Transparent" Grid.Column="2" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image x:Name="pulseInActiveImage" Source="{x:Static local:Constant.PulseInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
+                            <Image x:Name="pulseActiveImage" Source="{x:Static local:Constant.PulseActiveIcon}" Aspect="AspectFit" IsVisible="false" />
+                            <Label FontFamily="London1960" x:Name="lblPulse" Text="{x:Static local:Constant.PulseTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+                        <local:ExtendedStackLayout x:Name="stackFriends"  Padding="8,7,8,8" ActivePage="Friends" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image x:Name="friendInActiveImage" Source="{x:Static local:Constant.FriendInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
+                            <Image x:Name="friendActiveImage" Source="{x:Static local:Constant.FriendActiveIcon}" Aspect="AspectFit" IsVisible="false" />
+                            <Label FontFamily="London1960" x:Name="lblFriends" Text="{x:Static local:Constant.FriendsTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+                        <local:ExtendedStackLayout Grid.Row="0"  Padding="8,7,8,8" x:Name="stackProfile" ActivePage="Profile" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image x:Name="profileInActiveImage" Source="{x:Static local:Constant.ProfileInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
+                            <Image x:Name="profileActiveImage" Source="{x:Static local:Constant.ProfileActiveIcon}" Aspect="AspectFit" IsVisible="false" />
+                            <Label FontFamily="London1960" x:Name="lblProfile" Text="{x:Static local:Constant.ProfileTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>-->
+          <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="true"  Color="White" IsRunning="true" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </local:BaseContentPage.Content>
+</local:BaseContentPage>

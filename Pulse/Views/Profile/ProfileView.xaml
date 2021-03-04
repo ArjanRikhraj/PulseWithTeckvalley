@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.ProfileView">
+	<ContentView.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
+			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="48*" />
+					<RowDefinition Height="52*" />
+				</Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" x:Name="gradientStack" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                  <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                 </local:GradientColorStack.Effects>
+                    <Grid HorizontalOptions="FillAndExpand" x:Name="topStack" Margin="10,15,10,8" BackgroundColor="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="80*" />
+							<ColumnDefinition Width="20*" />
+						</Grid.ColumnDefinitions>
+						<local:ExtendedLabel Text="My Profile" Grid.ColumnSpan="2" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
+						<local:ExtendedButton x:Name="btnEdit" Grid.Column="1" Text="Edit" FontFace="PoppinsMedium" FontSize="12" TextColor="{x:Static local:Constant.WhiteTextColor}" Clicked="EditTapped" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"
+							BorderColor="Transparent" BorderRadius="0" />
+					</Grid>
+					<controls:CircleImage x:Name="imgUser" HeightRequest="90" Margin="0,15,0,0" WidthRequest="90" BorderThickness="4" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{Binding ProfileIcon}" VerticalOptions="Start" Aspect="AspectFill" HorizontalOptions="CenterAndExpand">
+					</controls:CircleImage>
+					<local:ExtendedLabel x:Name="lblFullname" Text="{Binding FullName}" FontFace="PoppinsSemiBold" LineBreakMode="TailTruncation" Margin="0,10,0,0" HorizontalOptions="Center" VerticalOptions="Start" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="14" />
+					<local:ExtendedLabel x:Name="lblUser" Text="{Binding UserName}" FontFace="PoppinsRegular" LineBreakMode="TailTruncation" Margin="0,0,0,10" VerticalOptions="Start" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12" />
+				</local:GradientColorStack>
+				<StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Margin="0,70,0,0" Spacing="0">
+					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+						<Image Source="{x:Static local:Constant.EventTitleImage}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+						<local:ExtendedLabel Text="My Events" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+						<StackLayout.GestureRecognizers>
+							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MyEventsTapped" />
+						</StackLayout.GestureRecognizers>
+					</StackLayout>
+					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+						<Image Source="{x:Static local:Constant.SettingsIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+						<local:ExtendedLabel Text="Settings" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+						<StackLayout.GestureRecognizers>
+							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SettingsTapped" />
+						</StackLayout.GestureRecognizers>
+					</StackLayout>
+					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+						<Image Source="photo_album.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+						<local:ExtendedLabel Text="Photo Album" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+						<StackLayout.GestureRecognizers>
+							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PhotoAlbum_Tapped" />
+						</StackLayout.GestureRecognizers>
+					</StackLayout>
+					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+
+				</StackLayout>
+				<Frame HasShadow="false" Grid.RowSpan="2" VerticalOptions="Center" Grid.Row="0" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="1" Margin="15,0,15,5">
+					<Grid ColumnSpacing="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
+							<StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+								<local:ExtendedLabel x:Name="lblScore" Text="{Binding Score}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+								<local:ExtendedLabel Text="Score" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+							</StackLayout>
+							<BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
+						</StackLayout>
+						<StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="0">
+							<StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+								<local:ExtendedLabel x:Name="lblFriends" Text="{Binding FriendCount}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+								<local:ExtendedLabel Text="Friends" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+							</StackLayout>
+							<BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
+						</StackLayout>
+						<StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
+							<StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+								<local:ExtendedLabel x:Name="lblHosted" Text="{Binding HostedCount}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="17.6" />
+								<local:ExtendedLabel Text="Hosted" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+							</StackLayout>
+							<BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
+						</StackLayout>
+						<StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="0">
+							<StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+								<local:ExtendedLabel x:Name="lblAttended" Text="{Binding AttendeeCount}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="17.6" />
+								<local:ExtendedLabel Text="Attended" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+							</StackLayout>
+						</StackLayout>
+					</Grid>
+				</Frame>
+			</Grid>
+			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+					<StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>-->
+		</Grid>
+	</ContentView.Content>
+</ContentView>

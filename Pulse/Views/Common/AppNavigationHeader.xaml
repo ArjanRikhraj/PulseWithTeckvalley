@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.AppNavigationHeader">
+	<ContentView.Content>
+		<Grid Padding="14,20,8,10" Margin="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <Grid.Effects>
+                    <local:NotchEffect />
+                </Grid.Effects>
+            <Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="15*" />
+					<ColumnDefinition Width="65*" />
+					<ColumnDefinition Width="20*" />
+				</Grid.ColumnDefinitions>
+				<local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="{x:Static local:Constant.BackDarkImage}" Clicked="Back_Tapped" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+				<local:ExtendedLabel x:Name="backText" Grid.ColumnSpan="3" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.BlackColor}">
+					<local:ExtendedLabel.Margin>
+						<OnPlatform x:TypeArguments="Thickness">
+							<On Platform="iOS" Value="0,8,0,0" />
+							<On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+						</OnPlatform>
+					</local:ExtendedLabel.Margin>
+				</local:ExtendedLabel>
+				<local:ExtendedLabel x:Name="lblDoneTab" Grid.Column="2" FontFace="PoppinsMedium" HorizontalOptions="End" VerticalOptions="Center" IsVisible="false" FontSize="12" TextColor="{x:Static local:Constant.PinkTextColor}">
+					<local:ExtendedLabel.Margin>
+						<OnPlatform x:TypeArguments="Thickness">
+							<On Platform="iOS" Value="0,8,0,0" />
+							<On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+						</OnPlatform>
+					</local:ExtendedLabel.Margin>
+				</local:ExtendedLabel>
+			</Grid>
+		</Grid>
+	</ContentView.Content>
+</ContentView>

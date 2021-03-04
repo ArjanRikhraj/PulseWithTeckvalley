@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.EmailVerificationPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+		<ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+			<Grid x:Name="grdEmailVarification" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10*" />
+					<RowDefinition Height="90*" />
+				</Grid.RowDefinitions>
+				<local:AppNavigationHeader Grid.Row="0" x:Name="headerBar" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HeaderTitle="Register" IsBackButtonVisible="true" IsHeaderTitleVisible="true">
+				</local:AppNavigationHeader>
+				<StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20,0,20,0">
+					<Image Source="{x:Static local:Constant.OtpLock}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,30,0,0">
+					</Image>
+					<local:ExtendedLabel x:Name="lblVerifyEmail" FontSize="16" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.BlackSimilarColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Text="{x:Static local:Constant.VerifyEmailText}" Margin="0,20,0,0" />
+					<local:ExtendedLabel x:Name="lblVerifyEmailDescription1" FontFace="PoppinsLight" Text="{x:Static local:Constant.VerifyEmailDescription}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,10,0,0" />
+					<local:ExtendedLabel x:Name="lblEmail" FontSize="12" Text="{x:Static local:Constant.EmailForOTP}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,-5,0,0" />
+					<local:ExtendedLabel x:Name="lblVerifyEmailDescription3" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,20,0,0" Text="{x:Static local:Constant.EnterCodeText}" />
+					<Grid HorizontalOptions="Center" Margin="0,35,0,0">
+						<Grid.RowSpacing>
+							<OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0" />
+						</Grid.RowSpacing>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="1" />
+					
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="25" Grid.Row="0" Padding="0,0,0,5" Grid.Column="0">
+							<local:ExtendedEntry  x:Name="txtFirst" FontFace="PoppinsRegular" TextColor="{Binding OTPTextColor}" Keyboard="Numeric" MaxLength="1" WidthRequest="18" SetTextInCenter="true" FontSize="{x:Static local:Constant.OTPTextSize}" HorizontalTextAlignment="Center" BackgroundColor="Transparent"
+								PlaceholderColor="{x:Static local:Constant.BlackSimilarColor}" TextChanged="txtFirst_TextChanged" HorizontalOptions="FillAndExpand">
+								<local:ExtendedEntry.TranslationY>
+									<OnPlatform x:TypeArguments="x:Double" iOS="-1" Android="6" />
+								</local:ExtendedEntry.TranslationY>
+							</local:ExtendedEntry>
+							<local:ExtendedEntry  x:Name="txtSecond" FontFace="PoppinsRegular" TextColor="{Binding OTPTextColor}" Keyboard="Numeric" MaxLength="1" WidthRequest="18" SetTextInCenter="true" FontSize="{x:Static local:Constant.OTPTextSize}" HorizontalTextAlignment="Center" BackgroundColor="Transparent"
+								PlaceholderColor="{x:Static local:Constant.BlackSimilarColor}" TextChanged="txtSecond_TextChanged" Focused="TxtSecond_Focused" HorizontalOptions="FillAndExpand">
+								<local:ExtendedEntry.TranslationY>
+									<OnPlatform x:TypeArguments="x:Double" iOS="-1" Android="6" />
+								</local:ExtendedEntry.TranslationY>
+							</local:ExtendedEntry>
+							<local:ExtendedEntry  x:Name="txtThird" FontFace="PoppinsRegular" TextColor="{Binding OTPTextColor}" Keyboard="Numeric" MaxLength="1" WidthRequest="18" SetTextInCenter="true" FontSize="{x:Static local:Constant.OTPTextSize}" HorizontalTextAlignment="Center" BackgroundColor="Transparent"
+								PlaceholderColor="{x:Static local:Constant.BlackSimilarColor}" TextChanged="txtThird_TextChanged" Focused="TxtThird_Focused" HorizontalOptions="FillAndExpand">
+								<local:ExtendedEntry.TranslationY>
+									<OnPlatform x:TypeArguments="x:Double" iOS="-1" Android="6" />
+								</local:ExtendedEntry.TranslationY>
+							</local:ExtendedEntry>
+							<local:ExtendedEntry  x:Name="txtFourth" FontFace="PoppinsRegular" TextColor="{Binding OTPTextColor}" Keyboard="Numeric" MaxLength="1" WidthRequest="18" SetTextInCenter="true" FontSize="{x:Static local:Constant.OTPTextSize}" HorizontalTextAlignment="Center" BackgroundColor="Transparent"
+								PlaceholderColor="{x:Static local:Constant.BlackSimilarColor}" TextChanged="txtFourth_TextChanged" Focused="TxtFourth_Focused" HorizontalOptions="FillAndExpand">
+								<local:ExtendedEntry.TranslationY>
+									<OnPlatform x:TypeArguments="x:Double" iOS="-1" Android="6" />
+								</local:ExtendedEntry.TranslationY>
+							</local:ExtendedEntry>
+						</StackLayout>
+						<StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="25" Grid.Row="1" Padding="3,0,3,0" Grid.Column="0">
+							<BoxView x:Name="bvOTPFirst" HeightRequest="1" WidthRequest="18" BackgroundColor="{Binding OTPTextColor}" HorizontalOptions="FillAndExpand" />
+							<BoxView x:Name="bvOTPSecond" HeightRequest="1" WidthRequest="18" BackgroundColor="{Binding OTPTextColor}" HorizontalOptions="FillAndExpand" />
+							<BoxView x:Name="bvOTPThird" HeightRequest="1" WidthRequest="18" BackgroundColor="{Binding OTPTextColor}" HorizontalOptions="FillAndExpand" />
+							<BoxView x:Name="bvOTPFourth" HeightRequest="1" WidthRequest="18" BackgroundColor="{Binding OTPTextColor}" HorizontalOptions="FillAndExpand" />
+						</StackLayout>
+					</Grid>
+					<StackLayout Orientation="Horizontal" IsVisible="{Binding IsOTPErrorMessageVisible}" Margin="0,5,0,0" Spacing="5" HorizontalOptions="CenterAndExpand">
+						<Image Source="{x:Static local:Constant.WrongOtpCrossIcon}"  Aspect="AspectFit">
+						</Image>
+						<local:ExtendedLabel x:Name="lblErrorOTP" FontFace="PoppinsLight" FontSize="11" TextColor="{x:Static local:Constant.OTPValidationColor}" Text="The code you have entered is invalid" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="End" LineBreakMode="WordWrap" />
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,30,0,0" Padding="0">
+						<local:ExtendedLabel x:Name="lblNoOTPText" FontSize="11" FontFace="PoppinsLight" Text="{x:Static local:Constant.NoOTPText}" TextColor="{x:Static local:Constant.BlackColor}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0" />
+						<local:ExtendedLabel x:Name="lblSendOTPText" FontSize="11" FontFace="PoppinsMedium" Text="{x:Static local:Constant.SendOTPText}" TextColor="{x:Static local:Constant.BlueTextColor}" HorizontalOptions="Start" VerticalOptions="Start" Margin="-5,0,0,0" >
+						<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding SendOTPAgainClick}" NumberOfTapsRequired="1" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+					</StackLayout>
+				</StackLayout>
+			</Grid>
+				</ScrollView>
+			<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.HaveAQueryPage">
+	<local:BaseContentPage.Content>
+		<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0" RowSpacing="0" BackgroundColor="White">
+			<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0" RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<StackLayout HorizontalOptions="FillAndExpand" Grid.Row="0" HeightRequest="30">
+                  <StackLayout.Effects>
+                    <local:NotchEffect />
+                     </StackLayout.Effects>
+                    <StackLayout.Padding>
+						<OnPlatform x:TypeArguments="Thickness" iOS="10,30,10,0" Android="10,10,10,0" />
+					</StackLayout.Padding>
+					<Grid HorizontalOptions="FillAndExpand">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="85*" />
+							<ColumnDefinition Width="15*" />
+						</Grid.ColumnDefinitions>
+						<local:ExtendedLabel Text="{x:Static local:Constant.HaveAQueryText}" Grid.Column="0" BackgroundColor="Transparent" TextColor="{x:Static local:Constant.HaveAQueryHeadingColor}" FontSize="18" FontFace="PoppinsSemiBold" HorizontalTextAlignment="Center" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+						<local:ExtendedButton x:Name="btnBack" Grid.Column="1" Image="{x:Static local:Constant.CrossTagImage}" Clicked="Handle_Close_Tapped" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+
+					</Grid>
+				</StackLayout>
+				<ScrollView Grid.Row="1">
+					<StackLayout x:Name="stackContent" Margin="0,0,0,30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<local:ExtendedLabel HorizontalOptions="FillAndExpand" Margin="20,50,20,10" TextColor="{x:Static local:Constant.SettingLinksTextColor}" HorizontalTextAlignment="Start" FontFace="PoppinsLight" Text="{x:Static local:Constant.HaveAQueryMessage}" FontSize="16" />
+						<Grid HorizontalOptions="FillAndExpand" Padding="20,10,20,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="{x:Static local:Constant.EmailIcon}" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Aspect="AspectFill" />
+							<StackLayout x:Name="stackEmailContainer" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="Transparent" Spacing="0" Grid.Row="0" Grid.Column="1">
+								<local:ExtendedLabel x:Name="lblEmailError" Text="{Binding QueryEmailError}" FontSize="11" TextColor="{x:Static local:Constant.RedBackGroundColor}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="Start" />
+								<StackLayout x:Name="stackEmail" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="5,0,5,0" Spacing="0">
+									<StackLayout Spacing="0" HorizontalOptions="FillAndExpand" HeightRequest="12">
+										<local:ExtendedLabel x:Name="lblEmailHint" Opacity=".5" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="12" IsVisible="false" Text="{x:Static local:Constant.YourEmailAddress}" />
+									</StackLayout>
+									<local:BorderlessEntry x:Name="txtEmail" Keyboard="Email" Margin="0,5,0,5" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.SettingLinksTextColor}" Text="{Binding QueryRequest.Email}" PlaceholderColor="{x:Static local:Constant.SettingLinksTextColor}" Placeholder="{x:Static local:Constant.YourEmailAddress}" HorizontalOptions="FillAndExpand" VerticalOptions="End"
+										TextChanged="Handle_Email_TextChanged" />
+									<BoxView HorizontalOptions="FillAndExpand" Opacity=".5" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayTextColor}" />
+								</StackLayout>
+							</StackLayout>
+						</Grid>
+						<Grid HorizontalOptions="FillAndExpand" Padding="20,10,20,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="{x:Static local:Constant.DescribeYourQueryIcon}" Grid.Row="0" Grid.Column="0" Margin="0,35,10,5" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Aspect="AspectFill" />
+							<StackLayout x:Name="stackQueryContainer" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="Transparent" Spacing="0" Grid.Row="0" Grid.Column="1">
+								<local:ExtendedLabel x:Name="lblQueryError" Text="{Binding QueryMessageError}" FontSize="11" TextColor="{x:Static local:Constant.RedBackGroundColor}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="Start" />
+								<StackLayout x:Name="stackQuery" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="5,0,5,0" Spacing="0">
+									<StackLayout Spacing="0" HorizontalOptions="FillAndExpand" HeightRequest="12">
+										<local:ExtendedLabel x:Name="lblQueryHint" Opacity=".5" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" IsVisible="false" Text="{x:Static local:Constant.DescribeYourQuery}" />
+									</StackLayout>
+									<local:PlaceholderEditor x:Name="txtQuery" TextChanged="Handle_Query_TextChanged" Margin="0,5,0,5" FontFace="PoppinsLight" Text="{Binding QueryRequest.Message}" TextColor="{x:Static local:Constant.SettingLinksTextColor}" PlaceholderColor="{x:Static local:Constant.SettingLinksTextColor}" HeightRequest="150" Placeholder="{x:Static local:Constant.DescribeYourQuery}" HorizontalOptions="FillAndExpand"
+										VerticalOptions="End" />
+									<BoxView HorizontalOptions="FillAndExpand" Opacity=".5" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayTextColor}" />
+								</StackLayout>
+							</StackLayout>
+						</Grid>
+					</StackLayout>
+				</ScrollView>
+				<local:ExtendedButton x:Name="btnSubmit" Margin="0,25,0,0" Text="{x:Static local:Constant.SubmitRequestText}" FontFace="PoppinsSemiBold" Command="{Binding QuerySubmitClick}" HeightRequest="50" HorizontalOptions="FillAndExpand" BorderRadius="0" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="White"
+					Grid.Row="1" VerticalOptions="EndAndExpand" />
+			</Grid>
+			<StackLayout Grid.Row="0" x:Name="stackloader" IsVisible="{Binding IsLoading}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+			<ActivityIndicator Grid.Row="0" x:Name="loader" IsVisible="{Binding IsLoading}" Color="#000000" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.LoginPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10*" />
+					<RowDefinition Height="90*" />
+				</Grid.RowDefinitions>
+				<local:AppNavigationHeader Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" HeaderTitle="Log In" IsBackButtonVisible="false" IsHeaderTitleVisible="true"/>
+				<StackLayout Orientation="Vertical" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Margin="20,35,20,0">
+					<local:MyCustomEntry IsPasswordEyeImageVisible="false" EntryMaxLength="256" x:Name="txtEmail" KeyBoard="Email" EntryPlaceholder="{x:Static local:Constant.EmailText}" HorizontalOptions="FillAndExpand" Text="{Binding Email}" LabelText="{x:Static local:Constant.EmailText}" />
+					<local:MyCustomEntry IsPasswordEyeImageVisible="true" EntryMaxLength="16" Margin="0,10,0,0" x:Name="txtPassword" IsPassword="true" KeyBoard="Default" EntryPlaceholder="{x:Static local:Constant.PasswordText}" Text="{Binding Password}" HorizontalOptions="FillAndExpand" LabelText="{x:Static local:Constant.PasswordText}" />
+					<local:ExtendedLabel FontFace="PoppinsRegular" x:Name="btnForgetPwd" Margin="0,6,0,0" Text="{x:Static local:Constant.ForgetPasswordText}" FontSize="12" TextColor="{x:Static local:Constant.BlueTextColor}" VerticalOptions="End" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent">
+						<local:ExtendedLabel.GestureRecognizers>
+							<TapGestureRecognizer Tapped="ForgetPassword_Tapped" NumberOfTapsRequired="1" />
+						</local:ExtendedLabel.GestureRecognizers>
+					</local:ExtendedLabel>
+					<local:ExtendedButton x:Name="btnSignIn" FontSize="13" Margin="0,8,0,0" FontFace="PoppinsMedium" Command="{Binding LoginClick}" BorderRadius="23" FontAttributes="Bold"  HeightRequest="45" Text="{x:Static local:Constant.SignInText}" TextColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="Fill"
+						HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" />
+					<StackLayout Orientation="Horizontal" Margin="0,10,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+						<local:ExtendedLabel x:Name="lblNoAccount" FontFace="PoppinsRegular" Text="{x:Static local:Constant.NoAccount}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="12" TextColor="{x:Static local:Constant.BlackColor}" />
+						<local:ExtendedLabel x:Name="btnSignUp" FontFace="PoppinsRegular" Text="{x:Static local:Constant.SignUpSmallLetter}" HorizontalOptions="Start" FontSize="12" VerticalOptions="Start" TextColor="{x:Static local:Constant.BlueTextColor}">
+							<local:ExtendedLabel.GestureRecognizers>
+								<TapGestureRecognizer Tapped="SignUp_Tapped" NumberOfTapsRequired="1" />
+							</local:ExtendedLabel.GestureRecognizers>
+						</local:ExtendedLabel>
+					</StackLayout>
+					<Frame BackgroundColor="#3b5998" HasShadow="false" Padding="0" Opacity="1" CornerRadius="23" HeightRequest="45" Margin="0,30,0,0" HorizontalOptions="FillAndExpand">
+						<StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" BackgroundColor="Transparent" Orientation="Horizontal">
+							<Image Source="{x:Static local:Constant.FacebookIconImage}" Margin="0,0,10,0"  Aspect="AspectFit"></Image>
+							<local:ExtendedLabel FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand" Margin="0,0,5,0" VerticalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" Text="{x:Static local:Constant.SignInFacebookText}" FontSize="12" />
+							<local:ExtendedLabel FontFace="PoppinsSemiBold" HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" Text="{x:Static local:Constant.FacebookLoginText}" FontSize="13" />
+
+						</StackLayout>
+						<Frame.GestureRecognizers>
+								<TapGestureRecognizer Tapped="SignUpfacebook_Click" NumberOfTapsRequired="1" />
+							</Frame.GestureRecognizers>
+					</Frame>
+				</StackLayout>
+				<Grid Grid.Row="0" IsVisible="false">
+					<StackLayout Orientation="Vertical" Grid.Row="0" BackgroundColor="Teal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					</StackLayout>
+				</Grid>
+			</Grid>
+			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+					<StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+						<ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+						<Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+						</Label>
+					</StackLayout>
+				</Frame>
+			</Grid>-->
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

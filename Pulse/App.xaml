@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:local="clr-namespace:Pulse;assembly=Pulse"   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="eventFrameStyle" TargetType="yummy:PancakeView">
+                <Setter Property="Padding" Value="7,12,5,12" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+            <Style x:Key="eventEntryStyle" TargetType="local:BorderlessEntry">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="PlaceholderColor" Value="{x:Static local:Constant.ExtraDarkGrayColor}" />
+                <Setter Property="Margin" Value="30,0,0,0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="Keyboard" Value="Default" />
+            </Style>
+            <Style x:Key="eventEntryStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="20,3,0,3" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

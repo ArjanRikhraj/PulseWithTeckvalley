@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.EventDetailPage">
+    <local:BaseContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
+            <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" x:Name="stack" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                 <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                </local:GradientColorStack.Effects>
+                    <Grid VerticalOptions="FillAndExpand" x:Name="topStack" Margin="15,20,11,8" BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <local:ExtendedButton x:Name="btnBack" Clicked="Back_Button_Tapped" Grid.Column="0" Image="{x:Static local:Constant.CrossWhiteImage}" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                        <local:ExtendedLabel Text="Event Details" FontFace="PoppinsMedium" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
+                        <local:ExtendedButton x:Name="btnEdit" Grid.Column="2" Image="{x:Static local:Constant.OptionsWhiteIcon}"  Clicked="EventEditTapped" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                        <!--<local:ExtendedButton x:Name="btnShare" Grid.Column="3" Image="{x:Static local:Constant.ShareImage}" Clicked="Share_Button_Tapped" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+-->
+                    </Grid>
+                </local:GradientColorStack>
+                <ScrollView Orientation="Vertical" Grid.Row="1" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                    <StackLayout Spacing="0" Margin="0">
+                     <Grid IsVisible="{Binding IsCheckinButtonVisible}">
+                            <Image Source="party_story_header.png" Grid.Row="0" Aspect="AspectFill" />
+                            <StackLayout Grid.Row="0" VerticalOptions="CenterAndExpand" Spacing="0">
+                                <local:ExtendedLabel Text="The Party Begins Here!" FontFace="PoppinsSemiBold" HorizontalOptions="Center" TextColor="{x:Static local:Constant.LightBackGroungColor}" FontSize="20" />
+                                <local:ExtendedLabel Text="You are attending this event." FontFace="PoppinsRegular" HorizontalOptions="Center" TextColor="{x:Static local:Constant.LightBackGroungColor}" FontSize="12" />
+                                <local:ExtendedLabel Text="Discover what's happening around." FontFace="PoppinsRegular" HorizontalOptions="Center" TextColor="{x:Static local:Constant.LightBackGroungColor}" FontSize="12" />
+                                <!-- <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20*"/>
+                                        <ColumnDefinition Width="80*"/>
+                                        <ColumnDefinition Width="20*"/>
+                                         </Grid.ColumnDefinitions>
+                                <local:ExtendedButton FontFace="PoppinsMedium" Clicked="PartyStory_Clicked" Margin="95,30,95,10" BorderRadius="23" FontSize="Small" HeightRequest="45" Text="See Party Story" TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
+                                    </Grid>-->
+                                <Grid Margin="0,30,0,10" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20*" />
+                                        <ColumnDefinition Width="80*" />
+                                        <ColumnDefinition Width="20*" />
+                                    </Grid.ColumnDefinitions>
+                                    <local:ExtendedButton FontFace="PoppinsMedium" Clicked="PartyStory_Clicked" Grid.Column="1" BorderRadius="23" FontSize="Small" HeightRequest="45" Text="See Party Story" TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
+<!--                                    <local:ExtendedButton x:Name="btnReport" Grid.Column="2" Image="{x:Static local:Constant.ShareImage}" Clicked="Report_Button_Clicked" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+-->                                </Grid>
+                            </StackLayout>
+                        </Grid>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="10,20,10,10">
+                           <Image Source="imgBoostTag.png" HorizontalOptions="Start"  IsVisible="{Binding IsBoostEvent}" Margin="10,10,0,0"/>
+
+                            <local:ExtendedLabel x:Name="lblEventtitle" Text="{Binding EventTitle}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Margin="10,10,10,0" FontSize="14" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" />
+                            <Grid Margin="10,0,10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Grid.Column="0">
+                                    <Image Source="{x:Static local:Constant.LikeImage}" IsVisible="{Binding IsLikedIconVisible}" />
+                                    <Image Source="{x:Static local:Constant.UnlikeImage}" IsVisible="{Binding IsLikeIconVisible}" />
+                                    <local:ExtendedLabel x:Name="lblNoLikes" TextColor="{Binding LabelLikeColor}" FontFace="PoppinsRegular" Text="{Binding LikesCount}" FontSize="12" VerticalTextAlignment="Center" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding LikeEventClick}" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <local:ExtendedLabel x:Name="lblEventLitScore" Grid.Column="1" HorizontalOptions="End" TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsMedium" Margin="10,0,10,0" Text="{Binding EventLitScore}" FontSize="12" />
+                            </Grid>
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" BackgroundColor="White" Margin="10,0,10,7" IsVisible="{Binding IsCoverFreeAmountAvailable}">
+                                <Image Source="{x:Static local:Constant.StarImage}" Aspect="AspectFit" />
+                                <local:ExtendedLabel x:Name="lblPaidEvent" Margin="0,0,0,0" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CoverFreeAmountText}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                            </StackLayout>
+                            <local:ExtendedButton x:Name="btnCreateEvent" FontFace="PoppinsMedium" Clicked="Join_Clicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{x:Static local:Constant.JoinText}"
+                                TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsJoinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
+                            <Grid VerticalOptions="FillAndExpand" Margin="15,0,15,10" BackgroundColor="Transparent" ColumnSpacing="10" IsVisible="{Binding IsStackOptionVisible}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Grid.Column="0">
+                                    <Image Source="{x:Static local:Constant.InterestedDarkImage}" Aspect="AspectFit" IsVisible="{Binding IsInterestedImageVisible}" />
+                                    <Image Source="{x:Static local:Constant.InterestedLightImage}" Aspect="AspectFit" IsVisible="{Binding IsNotInterestedImageVisible}" />
+                                    <local:ExtendedLabel x:Name="labelOption" Margin="0,0,0,0" TextColor="{Binding InterestedTextColor}" FontFace="PoppinsRegular" Text="Interested" FontSize="Small" VerticalTextAlignment="Center" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="InterestedOption_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Grid.Column="1">
+                                    <Image Source="{x:Static local:Constant.NotInterestedDarkImage}" Aspect="AspectFit" IsVisible="{Binding IsInterestedIconVisible}" />
+                                    <Image Source="{x:Static local:Constant.NotInterestedLightImage}" Aspect="AspectFit" IsVisible="{Binding IsNotInterestedIconVisible}" />
+                                    <local:ExtendedLabel x:Name="labelOptiontwo" Margin="0,0,0,0" TextColor="{Binding NotInterestedTextColor}" FontFace="PoppinsRegular" Text="Not Interested" FontSize="Small" VerticalTextAlignment="Center" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="NotInterestedOption_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <Grid Margin="10,5,10,5" RowSpacing="-4" ColumnSpacing="7">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{x:Static local:Constant.TimeImage}" Grid.RowSpan="2" Grid.Column="0" />
+                                <local:ExtendedLabel x:Name="lblEventDate" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventDate}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                <local:ExtendedLabel x:Name="lblEventTime" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="1" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventTime}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <StackLayout Orientation="Horizontal" Margin="10,5,10,5">
+                                <local:RoundImage Source="{Binding HostImage}" Aspect="AspectFill" HeightRequest="23" WidthRequest="23" Margin="0" BorderRadius="16" />
+                                <local:ExtendedLabel Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" Text="Hosted by" FontSize="12" VerticalTextAlignment="Center" />
+                                <local:ExtendedLabel Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Text="{Binding HostedName}" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" FontSize="12" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <StackLayout x:Name="stackQr" HorizontalOptions="FillAndExpand" />
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <Grid Margin="10,5,10,20" RowSpacing="2" ColumnSpacing="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{x:Static local:Constant.LocationImage}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                                <local:ExtendedLabel x:Name="lblEvent" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding LocationEvent}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <Grid Margin="10,5,10,20" RowSpacing="2" ColumnSpacing="5" IsVisible="{Binding IsContactNumberAvailable}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{x:Static local:Constant.PhoneImage}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                                <local:ExtendedLabel x:Name="lblContactNumber" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding MobileNumber}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                            </Grid>
+                            <Grid x:Name="stackMap" HeightRequest="180">
+                                <local:CustomMap x:Name="customMap" Grid.Row="0" MapType="Street" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                                <Image Aspect="AspectFit" Grid.Row="0" Source="direction.png" VerticalOptions="End" HorizontalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Direction_Tapped" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" BackgroundColor="White" Margin="10">
+                                <local:ExtendedLabel x:Name="lblGuestcount" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontFace="PoppinsRegular" Text="{Binding AttendeeCountLabel}" FontSize="10" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                <local:ExtendedLabel x:Name="lblViewAll" TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsSemiBold" Text="View All" FontSize="10" HorizontalOptions="End" VerticalTextAlignment="Center" HorizontalTextAlignment="End">
+                                    <local:ExtendedLabel.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllTapped" />
+                                    </local:ExtendedLabel.GestureRecognizers>
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <Grid Margin="10,5,10,20" x:Name="gridGuests" ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Margin="10,10,10,5" Text="Event Description" FontSize="13" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" />
+                            <local:ExtendedLabel Margin="10,0,0,5" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" Text="{Binding Description}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <Grid Margin="0" x:Name="gridMedia">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="GridMedia_Tapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                            <Grid Margin="10,5,10,20" RowSpacing="2" ColumnSpacing="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <local:ExtendedEditor BackgroundColor="Transparent" Grid.Row="0" Grid.Column="0" TextChanged="Comment_TextChanged" Text="{Binding CommentToPost}" x:Name="editorComments" Margin="-5,0,0,0" Placeholder="Write a comment…" FontSize="14" HeightRequest="40"
+                                    HorizontalOptions="FillAndExpand" TextColor="{x:Static local:Constant.FilterLightGreyColor}" />
+                                <local:ExtendedButton x:Name="btnTag" Grid.Column="1" Grid.Row="0" Image="{x:Static local:Constant.TagIcon}" Clicked="TagFriends_Tapped" BackgroundColor="Transparent" VerticalOptions="Start" BorderColor="Transparent" BorderRadius="0" />
+                                <local:ExtendedButton x:Name="btnPost" Grid.Column="2" Grid.Row="0" Margin="0,0,0,0" Image="{x:Static local:Constant.SendImage}" Clicked="PostCommentTapped" VerticalOptions="Start" BackgroundColor="Transparent" BorderColor="Transparent" BorderRadius="0" />
+                            </Grid>
+                            <Grid x:Name="gridSelectedGuests" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <StackLayout Orientation="Vertical" Margin="0" IsVisible="{Binding IsStackCommentVisible}">
+                                <Grid Margin="10,5,10,20" RowSpacing="2" ColumnSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="30" />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <local:RoundImage Source="{Binding CommenteeImage}" HeightRequest="33" WidthRequest="33" BorderRadius="16" Grid.Row="0" Grid.Column="0" VerticalOptions="Start" Grid.RowSpan="3" />
+                                    <local:ExtendedLabel x:Name="lbltitle" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" Grid.Row="0" Grid.Column="1" Text="{Binding CommenteeName}" LineBreakMode="TailTruncation" FontSize="13" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" />
+                                    <local:ExtendedLabel Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" Grid.Row="1" Grid.Column="1" Text="{Binding CommentText}" FontSize="11" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                    <local:ExtendedLabel Margin="0,0,0,0" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontFace="PoppinsRegular" Grid.Row="2" Grid.Column="1" Text="{Binding CommentDate}" LineBreakMode="TailTruncation" FontSize="11" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Start" />
+                                 
+                                   <!--  <Image Source="{x:Static local:Constant.DeleteIcon}" ClassId="{Binding CommentId}" IsVisible="{Binding IsCommentDeleteIconVisible}" Grid.Column="2" Grid.Row="0">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Report_Comment_Button_Clicked" />
+                                        </Image.GestureRecognizers>
+                                    </Image>-->
+                                   <!-- <Image Source="{x:Static local:Constant.OptionsIcon}" ClassId="{Binding CommentId}" IsVisible="{Binding IsCommentDeleteIconVisible}" Grid.Column="3" Grid.Row="0">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Delete_Tapped" />
+                                        </Image.GestureRecognizers>
+                                    </Image>-->
+                                       <Image Source="{x:Static local:Constant.OptionsIcon}" ClassId="{Binding CommentId}"  Grid.Column="3" Grid.Row="0">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Option_Tapped" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </StackLayout>
+                            <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" IsVisible="{Binding IsStackCommentVisible}" HorizontalOptions="FillAndExpand" Margin="0" />
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,6,0,6">
+                                <local:ExtendedLabel Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" Text="View All Comments" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ViewCommentsTapped" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+            </Grid>
+            <StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <Frame x:Name="farmePopUp" CornerRadius="10" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal" IsVisible="{Binding IsEditIconOnDetailVisible}">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{x:Static local:Constant.EditIcon}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.EditText}" FontFace="PoppinsMedium" FontSize="14" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="EditTapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" IsVisible="{Binding IsEditIconOnDetailVisible}" HorizontalOptions="FillAndExpand">
+                        </BoxView>
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEditIconOnDetailVisible}">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.DeleteText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="DeleteTapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand"  IsVisible="{Binding IsEditIconOnDetailVisible}">
+                        </BoxView>
+                        <StackLayout x:Name="stackShare" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{x:Static local:Constant.ShareIcon}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.ShareText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Share_Button_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                           <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" >
+                        </BoxView>
+                        <StackLayout x:Name="stackRpt" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{x:Static local:Constant.ReportImage}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.ReportText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Report_Button_Clicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            </StackLayout>
+
+             <StackLayout x:Name="stackPopUpForComment" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <Frame x:Name="farmePopUpForComment" CornerRadius="10" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"  ClassId="{Binding CommentId}" IsVisible="{Binding IsCommentDeleteIconVisible}">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center" >
+                                <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.DeleteText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Delete_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand"  IsVisible="{Binding IsCommentDeleteIconVisible}">
+                        </BoxView>
+                       <StackLayout x:Name="stackRptComment" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"  ClassId="{Binding CommentId}">
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                <Image Source="{x:Static local:Constant.ReportImage}" Aspect="AspectFit" />
+                                <local:ExtendedLabel Text="{x:Static local:Constant.ReportText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                </local:ExtendedLabel>
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Report_Comment_Button_Clicked" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked_Commentpopup" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            </StackLayout>
+            <StackLayout Grid.Row="0" IsVisible="false" x:Name="stackReason" Margin="15" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" BackgroundColor="Transparent">
+                <Frame Padding="0,10,0,10" x:Name="frameEdit" CornerRadius="7" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Grid RowSpacing="0" Margin="10,0,10,0" ColumnSpacing="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0" Padding="0,3,0,5" Grid.ColumnSpan="2" CornerRadius="0" Margin="0,10,0,10" OutlineColor="{x:Static local:Constant.BoxViewColor}" HasShadow="false">
+                            <local:ExtendedEditor x:Name="editorReasonToCancel" Placeholder="Mention Reason To Cancel Event" Text="{Binding ReasonToCancel}" TextColor="{x:Static local:Constant.PinkButtonColor}" HeightRequest="100" TextChanged="ReasonEditor_TextChanged" FontSize="14" HorizontalOptions="FillAndExpand">
+                            </local:ExtendedEditor>
+                        </Frame>
+                        <local:ExtendedButton Margin="10,5,10,0" Grid.Column="0" Grid.Row="1" Text="Cancel Event" FontFace="PoppinsRegular" FontSize="15" Clicked="CancelEvent_Clicked" WidthRequest="60" BorderRadius="12" HeightRequest="50"
+                            HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="{x:Static local:Constant.WhiteTextColor}" />
+                    </Grid>
+                </Frame>
+                <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            </StackLayout>
+            <StackLayout Grid.Row="0" IsVisible="false" x:Name="stackReport" Margin="15" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" BackgroundColor="Transparent">
+                <Frame Padding="0,10,0,10" x:Name="frameReport" CornerRadius="7" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Grid RowSpacing="0" Margin="10,0,10,0" ColumnSpacing="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0" Padding="0,3,0,5" Grid.ColumnSpan="2" CornerRadius="0" Margin="0,10,0,10" OutlineColor="{x:Static local:Constant.GrayBoxViewColor}" HasShadow="false">
+                            <local:ExtendedEditor x:Name="editorReportComment" Placeholder="Write a comment..." TextColor="{x:Static local:Constant.PinkButtonColor}" HeightRequest="100" TextChanged="ReportEditor_TextChanged" FontSize="14" HorizontalOptions="FillAndExpand">
+                            </local:ExtendedEditor>
+                        </Frame>
+                        <local:ExtendedButton Margin="10,5,10,0" Grid.Column="0" Grid.Row="1" Text="Submit" FontFace="PoppinsRegular" FontSize="15" WidthRequest="60" BorderRadius="12" HeightRequest="50" Clicked="ReportEventCommentSubmit"
+                            HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="{x:Static local:Constant.WhiteTextColor}" />
+                        <local:ExtendedButton Margin="10,5,10,0" Grid.Column="1" Grid.Row="1" Text="Cancel" FontFace="PoppinsRegular" FontSize="15" Clicked="CancelComment_Clicked" WidthRequest="60" BorderRadius="12" HeightRequest="50"
+                            HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="{x:Static local:Constant.WhiteTextColor}" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </local:BaseContentPage.Content>
+</local:BaseContentPage>

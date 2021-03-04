@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.AddPulsePage" xmlns:local="clr-namespace:Pulse;assembly=Pulse">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+			<Grid x:Name="grdMain" Margin="0" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" EndColor="{x:Static local:Constant.DarkPinkColor}" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                 <local:GradientColorStack.Effects>
+                    <local:NotchEffect />
+                     </local:GradientColorStack.Effects>
+                    <Grid x:Name="grdTop" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,20,11,8">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="15*" />
+							<ColumnDefinition Width="65*" />
+							<ColumnDefinition Width="20*" />
+						</Grid.ColumnDefinitions>
+						<local:ExtendedButton Grid.Column="0" Clicked="Cross_Clicked" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" BorderColor="Transparent" Image="{x:Static local:Constant.CrossWhiteImage}" />
+						<local:ExtendedLabel Grid.ColumnSpan="3" Text="{x:Static local:Constant.NewPulseText}" TextColor="{x:Static local:Constant.WhiteTextColor}" FontFace="PoppinsMedium" FontSize="15" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+						<local:ExtendedButton Grid.Column="2" Text="Save" FontFace="PoppinsMedium" Clicked="Save_Clicked" FontSize="12" TextColor="{x:Static local:Constant.WhiteTextColor}" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderColor="Transparent"
+							BorderRadius="0" />
+						<!--<local:ExtendedLabel Grid.Column="2" Text="Save" TextColor="{x:Static local:Constant.WhiteTextColor}" FontFace="PoppinsMedium" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
+-->                 </Grid>
+				</local:GradientColorStack>
+				<Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<local:ExtendedStackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0,25,0,0" Spacing="0">
+						<local:ExtendedLabel Text="{x:Static local:Constant.UppercaseSubjectText}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" FontSize="11" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" Margin="20,0,15,5" />
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+						<local:ExtendedStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Padding="15,12,15,12" Spacing="0">
+							<local:ExtendedEntry x:Name="lblSubject" MaxLength="100" Placeholder="{x:Static local:Constant.SubjectPlaceholderText}" PlaceholderColor="{x:Static local:Constant.AddEventEntriesColor}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+						</local:ExtendedStackLayout>
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+					</local:ExtendedStackLayout>
+					<local:ExtendedStackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0,25,0,0" Spacing="0">
+						<local:ExtendedLabel Text="{x:Static local:Constant.UppercaseLinkedEventText}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" FontSize="11" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" Margin="20,0,15,5" />
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+						<local:ExtendedStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+							<local:ExtendedStackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Padding="15,12,15,12" Spacing="0">
+								<local:ExtendedLabel x:Name="lblLinkEvent" Text="{x:Static local:Constant.LinkAnEventText}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="14" FontFace="PoppinsRegular" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+								<local:ExtendedButton Image="{x:Static local:Constant.RightArrowIcon}" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center" HeightRequest="20" WidthRequest="20" />
+								<local:ExtendedStackLayout.GestureRecognizers>
+									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="LinkEventTapped" />
+								</local:ExtendedStackLayout.GestureRecognizers>
+							</local:ExtendedStackLayout>
+						</local:ExtendedStackLayout>
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+					</local:ExtendedStackLayout>
+					<local:ExtendedStackLayout Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0,25,0,30" Spacing="0">
+						<local:ExtendedLabel Text="{x:Static local:Constant.UppercaseParticipantsText}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsLight" FontSize="11" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" Margin="20,0,15,5" />
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+						<local:ExtendedStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+							<local:ExtendedStackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Padding="15,12,15,12">
+								<Image Source="add.png" Aspect="AspectFit" HorizontalOptions="Start" VerticalOptions="Center" />
+								<local:ExtendedLabel Text="{x:Static local:Constant.AddParticipantsText}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="14" FontFace="PoppinsRegular" VerticalOptions="Center" />
+								<local:ExtendedStackLayout.GestureRecognizers>
+									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AddParticipantsTapped" />
+								</local:ExtendedStackLayout.GestureRecognizers>
+							</local:ExtendedStackLayout>
+						</local:ExtendedStackLayout>
+						<BoxView HeightRequest=".5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Color="{x:Static local:Constant.OutLineColor}" />
+						<ScrollView>
+							<StackLayout x:Name="stackParticipants" Spacing="0">
+							</StackLayout>
+						</ScrollView>
+					</local:ExtendedStackLayout>
+				</Grid>
+			</Grid>
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.ProfilePage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.APP_BACKGROUND_COLOR}">
+			<ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+				<Grid x:Name="grdEmailVarification" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="10*" />
+						<RowDefinition Height="90*" />
+					</Grid.RowDefinitions>
+					<Grid Padding="14,20,10,10" x:Name="gridHeader" Margin="0" Grid.Row="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="80*" />
+								<ColumnDefinition Width="20*" />
+							</Grid.ColumnDefinitions>
+							<local:ExtendedLabel x:Name="backText" Text="Profile" Grid.ColumnSpan="2" FontSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.BlackColor}">
+								<local:ExtendedLabel.Margin>
+									<OnPlatform x:TypeArguments="Thickness">
+										<On Platform="iOS" Value="0,8,0,0" />
+										<On Platform="Android, WinPhone, Windows" Value="0,0,0,0" />
+									</OnPlatform>
+								</local:ExtendedLabel.Margin>
+							</local:ExtendedLabel>
+							<local:ExtendedButton x:Name="btnDone" Grid.Column="1" Text="Done" FontFace="PoppinsMedium" Command="{Binding SignUpDoneClick}" FontSize="12" TextColor="{x:Static local:Constant.PinkTextColor}" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+								BorderColor="Transparent" BorderRadius="0" />
+						</Grid>
+					</Grid>
+					<StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand" Margin="20,0,20,0">
+						<local:ExtendedLabel Text="{x:Static local:Constant.AllSetText}" FontFace="PoppinsMedium" FontSize="16" TextColor="{x:Static local:Constant.BlackSimilarColor}" HorizontalOptions="CenterAndExpand" Margin="0,25,0,0" />
+						<local:ExtendedLabel Text="{x:Static local:Constant.UploadPicText1}" FontFace="PoppinsLight" FontSize="12" TextColor="{x:Static local:Constant.GrayTextColor}" FontAttributes="None" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+						<local:ExtendedLabel Text="{x:Static local:Constant.UploadPicText2}" FontFace="PoppinsLight" FontSize="12" TextColor="{x:Static local:Constant.GrayTextColor}" FontAttributes="None" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" />
+						<Grid HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,0,0,0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<controls:CircleImage x:Name="imgProfile" Grid.Row="0" Source="{x:Static local:Constant.ProfileIcon}" HeightRequest="85" WidthRequest="85" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+							<Image Grid.Row="0" Margin="0,80,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Source="{x:Static local:Constant.UploadButtonIcon}" Aspect="AspectFit">
+								<Image.GestureRecognizers>
+									<TapGestureRecognizer Tapped="UploadPhoto_Tapped" NumberOfTapsRequired="1" />
+								</Image.GestureRecognizers>
+							</Image>
+						</Grid>
+						<Grid ColumnSpacing="0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<StackLayout x:Name="stackMain" Grid.Column="0" Grid.Row="0" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0" Margin="0">
+								<local:ExtendedLabel x:Name="lblSmall" FontFace="PoppinsRegular" TextColor="Transparent" Text="{x:Static local:Constant.UserNameText}" Margin="0,0,0,0" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+								<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0" Margin="0,0,0,0">
+									<local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entry" MaxLength="90" Text="{Binding UserName}" Margin="0" TextChanged="Username_TextChanged" Placeholder="{x:Static local:Constant.UserNameText}" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" TextColor="{x:Static local:Constant.GrayTextColor}" Keyboard="Default"
+										FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+									<StackLayout x:Name="stackCheckIcon" HorizontalOptions="End" VerticalOptions="Start">
+										<Image Source="{x:Static local:Constant.CheckedIcon}" x:Name="checkImage" IsVisible="{Binding IsUserValidVisible}" />
+										<Image Source="{x:Static local:Constant.OtpLock}" x:Name="uncheckImage" IsVisible="{Binding IsUserInValidVisible}" />
+									</StackLayout>
+								</StackLayout>
+							</StackLayout>
+							<BoxView Grid.Row="1" x:Name="box" Margin="0,2,0,0" Grid.Column="0" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
+							</BoxView>
+						</Grid>
+					</StackLayout>
+				</Grid>
+			</ScrollView>
+             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
+                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+			<Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+			</Grid>
+			<StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+				<Frame x:Name="farmePopUp" CornerRadius="5" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+						<StackLayout Padding="5,3,5,3" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+							<local:ExtendedLabel Text="{x:Static local:Constant.ChooseProfileText}" FontFace="PoppinsMedium" FontSize="10" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="{x:Static local:Constant.ChooseProfileColor}">
+							</local:ExtendedLabel>
+						</StackLayout>
+						<BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand">
+						</BoxView>
+						<StackLayout Padding="5,6,5,6" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+							<local:ExtendedLabel Text="{x:Static local:Constant.TakePhotoText}" FontFace="PoppinsMedium" FontSize="14" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="{x:Static local:Constant.PinkTextColor}">
+							</local:ExtendedLabel>
+							<StackLayout.GestureRecognizers>
+								<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Take_Photo_Tapped" />
+							</StackLayout.GestureRecognizers>
+						</StackLayout>
+						<BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand">
+						</BoxView>
+						<StackLayout Padding="5,6,5,6" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+							<local:ExtendedLabel Text="{x:Static local:Constant.ChoosePhotoText}" FontFace="PoppinsMedium" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+							</local:ExtendedLabel>
+							<StackLayout.GestureRecognizers>
+								<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Pick_Photo_Tapped" />
+							</StackLayout.GestureRecognizers>
+						</StackLayout>
+					</StackLayout>
+				</Frame>
+				<local:ExtendedButton FontFace="PoppinsMedium" Clicked="CameraCancel_Clicked" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+			</StackLayout>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>

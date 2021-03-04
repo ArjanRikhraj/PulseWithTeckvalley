@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.OnBoardPage">
+	<local:BaseContentPage.Content>
+		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0" Padding="0">
+			<Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Red" Padding="0">
+				<Image Source="{x:Static local:Constant.BackGroundImage}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				</Image>
+			</Grid>
+			<Grid Grid.Row="0" x:Name="grdMain" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" BackgroundColor="Transparent">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+				</Grid.RowDefinitions>
+				<StackLayout HorizontalOptions="FillAndExpand" Grid.Row="0" VerticalOptions="FillAndExpand" Padding="0,0,0,0" Margin="0" BackgroundColor="Transparent">
+					<cv:CarouselViewControl x:Name="crslOnBoard" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" ShowIndicators="true" IndicatorsTintColor="Silver" CurrentPageIndicatorTintColor="White" IndicatorsShape="Circle">
+						<cv:CarouselViewControl.ItemTemplate>
+							<DataTemplate>
+								<StackLayout HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand" >
+									<Image Source="{Binding OnBoardImgSrc}" Margin="0,60,0,0"  HorizontalOptions="Center" VerticalOptions="StartAndExpand"/>
+									<local:ExtendedLabel Text="{Binding OnBoardLabel1}" FontFace="PoppinsExtraLight" FontSize="18" TextColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="CenterAndExpand"  />
+									<local:ExtendedLabel Text="{Binding OnBoardLabel2}" FontFace="PoppinsExtraLight" FontSize="18" Margin="0,0,0,33" TextColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="CenterAndExpand" />
+								</StackLayout>
+							</DataTemplate>
+						</cv:CarouselViewControl.ItemTemplate>
+					</cv:CarouselViewControl>
+
+				</StackLayout>
+                <local:ExtendedButton x:Name="btnSkip" Margin="10,10,10,40" VerticalOptions="End" Grid.Row="1" FontSize="15" Text="Skip" FontFace="PoppinsMedium" Clicked="Skip_Clicked" BorderRadius="25" HeightRequest="50" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}"
+                        TextColor="{x:Static local:Constant.SkipTextColor}" />
+			</Grid>
+		</Grid>
+	</local:BaseContentPage.Content>
+</local:BaseContentPage>
