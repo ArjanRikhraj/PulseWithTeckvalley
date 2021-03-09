@@ -1019,7 +1019,8 @@ namespace Pulse
                 }
                 else
                 {
-                    await App.Instance.Alert("please turn your device Location on!", Constant.AlertTitle, Constant.Ok);
+                    await App.LocationOn();
+                    //await App.Instance.Alert("please turn your device Location on!", Constant.AlertTitle, Constant.Ok);
                     isPageFirstLoad = false;
                     App.HideMainPageLoader();
                 }
@@ -1056,8 +1057,9 @@ namespace Pulse
                 }
                 else if (status == PermissionStatus.Unknown)
                 {
-                    await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
-                    CrossPermissions.Current.OpenAppSettings();
+                   // await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.LocationWhenInUse>();
+                   // CrossPermissions.Current.OpenAppSettings();
                     App.HideMainPageLoader();
                 }
                 else if (status != PermissionStatus.Unknown)
@@ -1068,8 +1070,9 @@ namespace Pulse
                 }
                 else
                 {
-                    await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
-                    CrossPermissions.Current.OpenAppSettings();
+                   // await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.LocationWhenInUse>();
+                    //CrossPermissions.Current.OpenAppSettings();
                     App.HideMainPageLoader();
 
                 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
@@ -99,5 +100,5 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-	}
+    }
 }

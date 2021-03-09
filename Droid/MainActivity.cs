@@ -9,6 +9,8 @@ using ImageCircle.Forms.Plugin.Droid;
 using Android.Graphics;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Android.Gms.Common.Apis;
+using Android.Gms.Location;
 
 namespace Pulse.Droid
 {
@@ -38,7 +40,8 @@ namespace Pulse.Droid
 		{
             Current = this;
 			base.OnCreate(bundle);
-            APPLICATION_CONTEXT = this;
+			Xamarin.Essentials.Platform.Init(this, bundle);
+			APPLICATION_CONTEXT = this;
 			App.NotificationID = Intent.GetStringExtra("data") ?? string.Empty;
 			ServiceRegistrar.Startup();
 			global::Xamarin.Forms.Forms.Init(this, bundle);
@@ -77,6 +80,7 @@ namespace Pulse.Droid
 			App.ScreenWidth = Resources.Configuration.ScreenWidthDp;
 			CarouselViewRenderer.Init();
 			ImageCircleRenderer.Init();
+			OpenSettings();
 			ZXing.Net.Mobile.Forms.Android.Platform.Init();
 			MessagingCenter.Subscribe<string>(this, "Share", Share, null);
 			MessagingCenter.Subscribe<string>(this, "ShowToast", ShowToast, null);
@@ -173,10 +177,49 @@ namespace Pulse.Droid
 		}
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [Android.Runtime.GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-
-            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+		public async Task OpenSettings()
+		{
+			Int64
+	interval = 1000 * 60 * 1,
+	fastestInterval = 1000 * 50;
 
+			try
+			{
+				GoogleApiClient
+					googleApiClient = new GoogleApiClient.Builder(Forms.Context)
+						.AddApi(LocationServices.API)
+						.Build();
+
+				googleApiClient.Connect();
+
+				LocationRequest
+					locationRequest = LocationRequest.Create()
+						.SetPriority(LocationRequest.PriorityBalancedPowerAccuracy)
+						.SetInterval(interval)
+						.SetFastestInterval(fastestInterval);
+
+				LocationSettingsRequest.Builder
+					locationSettingsRequestBuilder = new LocationSettingsRequest.Builder()
+						.AddLocationRequest(locationRequest);
+
+				locationSettingsRequestBuilder.SetAlwaysShow(false);
+
+				LocationSettingsResult
+					locationSettingsResult = await LocationServices.SettingsApi.CheckLocationSettingsAsync(
+						googleApiClient, locationSettingsRequestBuilder.Build());
+				if (locationSettingsResult.Status.StatusCode == LocationSettingsStatusCodes.ResolutionRequired)
+				{
+					locationSettingsResult.Status.StartResolutionForResult((Activity)Forms.Context, 0);
+				}
+			}
+			catch (Exception exception)
+			{
+				return;
+			}
+		}
 	}
 }

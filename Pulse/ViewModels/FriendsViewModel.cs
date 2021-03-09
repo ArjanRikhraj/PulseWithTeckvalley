@@ -36,6 +36,7 @@ namespace Pulse
 		bool isFriendEventListVisible;
 		bool isNoEventVisible;
 		List<MyEventResponse> HostedEventsList;
+		Friend selectedFriend;
 		#endregion
 		#region Public Properties
 		public int pageNoUser;
@@ -245,11 +246,23 @@ namespace Pulse
                 OnPropertyChanged("BlockUnBlockText");
             }
         }
+		public Friend SelectedFriend
+		{
+			get { return selectedFriend; }
+			set
+			{
+				selectedFriend = value;
+				OnPropertyChanged("SelectedFriend");
+				CollectionViewSelectedFriend(selectedFriend);
+			}
+		}
+
+       
 
 
-		#endregion
-		#region Constructor
-		public FriendsViewModel()
+        #endregion
+        #region Constructor
+        public FriendsViewModel()
 		{
 			LoadMoreUsers = new Command(GetUsers);
 			LoadMoreMyFriends = new Command(GetMyFriendsList);
@@ -266,6 +279,31 @@ namespace Pulse
 		#endregion
 
 		#region Methods
+		private async void CollectionViewSelectedFriend(Friend SelectedFriend)
+		{
+			try
+			{
+				IsLoading = true;
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+				}
+                else
+                {
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", SelectedFriend.friendId.ToString()));
+					SelectedFriend = null;
+					App.HideMainPageLoader();
+				}
+				IsLoading = false;
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
 		public async void GetUsers()
 		{
 			try

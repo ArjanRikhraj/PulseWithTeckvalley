@@ -3,8 +3,11 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Pulse.Interfaces;
+
 namespace Pulse
 {
     public partial class App : Application
@@ -195,9 +198,8 @@ namespace Pulse
         {
             try
             {
-
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
+                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
@@ -215,15 +217,15 @@ namespace Pulse
                 }
                 else if (status == PermissionStatus.Unknown)
                 {
-                    await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
-                    CrossPermissions.Current.OpenAppSettings();
+                   // await App.Instance.Alert("Allow location permission access to view events happening around you", Constant.AlertTitle, Constant.Ok);
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.LocationWhenInUse>();
+                    //CrossPermissions.Current.OpenAppSettings();
                     App.HideMainPageLoader();
                 }
                 else if (status != PermissionStatus.Unknown)
                 {
                     await App.Instance.Alert("Location Denied! Can not continue, try again.", Constant.AlertTitle, Constant.Ok);
                     App.HideMainPageLoader();
-
                 }
                 else
                 {
@@ -262,7 +264,9 @@ namespace Pulse
                 else if (status == PermissionStatus.Unknown)
                 {
                     await App.Instance.Alert("Allow storage access to get photos and videos", Constant.AlertTitle, Constant.Ok);
-                    CrossPermissions.Current.OpenAppSettings();
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.StorageRead>();
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.StorageWrite>();
+                    // CrossPermissions.Current.OpenAppSettings();
                     App.HideMainPageLoader();
                 }
                 else if (status != PermissionStatus.Unknown)
@@ -280,7 +284,8 @@ namespace Pulse
             catch (Exception)
             {
                 await App.Instance.Alert("Allow storage access to get photos and videos", Constant.AlertTitle, Constant.Ok);
-                CrossPermissions.Current.OpenAppSettings();
+                await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.StorageRead>();
+                await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.StorageWrite>();
                 App.HideMainPageLoader();
             }
         }
@@ -306,8 +311,8 @@ namespace Pulse
                 }
                 else 
                 {
-                    await App.Instance.Alert("Allow Camera and storage permission access to take photos and videos", Constant.AlertTitle, Constant.Ok);
-                    CrossPermissions.Current.OpenAppSettings();
+                   // await App.Instance.Alert("Allow Camera and storage permission access to take photos and videos", Constant.AlertTitle, Constant.Ok);
+                    await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Camera>();
                     App.HideMainPageLoader();
                 }
                 //else if (status != PermissionStatus.Unknown)
@@ -325,8 +330,19 @@ namespace Pulse
             catch (Exception)
             {
                 await App.Instance.Alert("Allow Camera and storage permission access to take photos and videos", Constant.AlertTitle, Constant.Ok);
-                CrossPermissions.Current.OpenAppSettings();
+                await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Photos>();
                 App.HideMainPageLoader();
+            }
+        }
+        public static async Task LocationOn()
+        {
+            try
+            {
+                await DependencyService.Get<ILocSettings>().IsLocation();
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
     }
