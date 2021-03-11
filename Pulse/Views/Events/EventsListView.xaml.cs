@@ -600,11 +600,13 @@ namespace Pulse
             {
                 eventViewModel.IsAddressListVisible = false;
                 eventViewModel.IsSearchLocItemSelected = false;
+                imageCross.IsVisible = false;
                 ClearFields();
                 GetCurrentLoc();
             }
             else
             {
+                imageCross.IsVisible = true;
                 stackAddress.IsVisible = true;
                 isPageFirstLoad = false;
                 eventViewModel.Search(e);
