@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.BoostEventPopUpPage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" x:Class="Pulse.BoostEventPopUpPage">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
@@ -32,12 +32,12 @@
             </Grid>
             <Grid Grid.Row="0" IsVisible="true" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
             </Grid>
-            <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0" IsVisible="true" Padding="0" CornerRadius="20" Margin="35,10,35,10" VerticalOptions="Center" HasShadow="false">
+            <yummy:PancakeView BackgroundColor="White" Grid.Row="0" Grid.Column="0" IsVisible="true" Padding="0" CornerRadius="20" Margin="35,10,35,10" VerticalOptions="Center">
                 <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" >
-                    <local:GradientColorFrame IsVisible="true"  StartColor="{x:Static local:Constant.LightPinkColor}" BorderRadius="20" IsBottomLeftNotRounded="true" IsBottomRightNotRounded="true" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                    <local:GradientColorFrame IsVisible="true"  StartColor="{x:Static local:Constant.LightPinkColor}" BorderRadius="10" IsBottomLeftNotRounded="true" IsBottomRightNotRounded="true" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
                         <Grid VerticalOptions="FillAndExpand" Margin="0" Padding="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
                             <local:ExtendedLabel Text="Your event was created successfully" Grid.Row="0" Margin="0"  TextColor="White"  FontFace="PoppinsRegular" FontSize="16" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
-                         </Grid>
+                        </Grid>
                     </local:GradientColorFrame>
                     <Image Source="imgSuccess.png" Aspect="AspectFit" Margin="0,10,0,0" />
                     <local:ExtendedLabel Text="Do you want to boost your event?" TextColor="Black" FontFace="PoppinsSemiBold" Margin="20,15,20,0" FontSize="16" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
@@ -58,7 +58,7 @@
                         </local:ExtendedLabel.GestureRecognizers>
                     </local:ExtendedLabel>
                 </StackLayout>
-            </Frame>
+            </yummy:PancakeView>
         </Grid>
     </local:BaseContentPage.Content>
 </local:BaseContentPage>

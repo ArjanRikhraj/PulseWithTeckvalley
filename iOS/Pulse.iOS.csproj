@@ -13,6 +13,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,10 +45,14 @@
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchArch>ARM64</MtouchArch>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision>PulseDevelopmentProfile</CodesignProvision>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -84,6 +89,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision>PulseDevelopmentProfile</CodesignProvision>
     <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Syncfusion.Core.XForms, Version=18.4451.0.43, Culture=neutral, processorArchitecture=MSIL">

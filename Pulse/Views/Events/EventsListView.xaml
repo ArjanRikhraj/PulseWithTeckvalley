@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" x:Name="EventListViewPage" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:custom="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"   x:Class="Pulse.EventsListView" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" x:Name="EventListViewPage" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:custom="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"   x:Class="Pulse.EventsListView" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls="clr-namespace:Pulse.Controls">
     <ContentView.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
@@ -11,7 +11,7 @@
                 <StackLayout Grid.Row="0" BackgroundColor="Transparent" x:Name="stackMainMyevents">
                 </StackLayout>
                 <StackLayout x:Name="stackListNew" Padding="10" HorizontalOptions="FillAndExpand" Grid.Row="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
-                    <StackLayout Margin="5" HorizontalOptions="FillAndExpand" Spacing="15" Orientation="Horizontal" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <StackLayout Margin="5" HorizontalOptions="FillAndExpand" Spacing="10" Orientation="Horizontal" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
                         <yummy:PancakeView CornerRadius="5" x:Name="searchFrame" BackgroundColor="White" Padding="7,3,3,3" HorizontalOptions="Fill">
                             <yummy:PancakeView.Border>
                                 <yummy:Border Color="WhiteSmoke" x:Name="borderGradient" Thickness="1"/>
@@ -26,8 +26,11 @@
 								</Image>
                             </StackLayout>
                         </yummy:PancakeView>
-                        
-                        <StackLayout Orientation="Horizontal" x:Name="stackFilter" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                        <StackLayout Orientation="Horizontal" Spacing="5">
+                            <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center" />
+                            <controls:NoUnderlineDatePicker HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" x:Name="stackFilter" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False">
                             <Image Source="{x:Static local:Constant.FilterIcon}" Aspect="AspectFit" />
                             <local:ExtendedLabel FontFace="PoppinsMedium" x:Name="lblFilter" Text="Recent" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="10" />
                             <Image Source="{x:Static local:Constant.ArrowDownIcon}" Aspect="AspectFit" />
@@ -42,7 +45,7 @@
                                 <TapGestureRecognizer Tapped="MapIconTapped"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="14">
+                        <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="12">
                             <local:ExtendedLabel.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ListTapped"/>
                             </local:ExtendedLabel.GestureRecognizers>

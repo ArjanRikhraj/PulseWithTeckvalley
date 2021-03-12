@@ -79,8 +79,6 @@
 	<string>Allow location access to view events happening around you</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allow location access to view events happening around you</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>CFBundleIdentifier</key>

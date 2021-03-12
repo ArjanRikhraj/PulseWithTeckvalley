@@ -12,7 +12,7 @@ namespace Pulse
 	{
 		#region Private Variables
 		int _tapCount = 0;
-
+        bool IsFirstLoad;
 		string tappedEventId;
         bool isPastEvent;
 		readonly EventViewModel eventViewModel;
@@ -22,14 +22,16 @@ namespace Pulse
 		public MyEventsPage()
 		{
 			InitializeComponent();
+            IsFirstLoad = true;
 			eventViewModel = ServiceContainer.Resolve<EventViewModel>();
 			BindingContext = eventViewModel;
 			SetInitialValues();
 
 		}
-		#endregion
-		#region Methods
-		void ClearFields()
+        #endregion
+        #region Methods
+        
+        void ClearFields()
 		{
 			eventViewModel.tempEventList.Clear();
 			eventViewModel.totalEventPages = 1;
@@ -216,7 +218,8 @@ namespace Pulse
 				{
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
-					await Navigation.PopModalAsync();
+                    eventViewModel.GetAllUpComingEvents();
+                    await Navigation.PopModalAsync();
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}

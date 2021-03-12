@@ -1118,6 +1118,18 @@ namespace Pulse
                 return checkInCommand ?? (checkInCommand = new Command<MyEvents>((currentObject) => FetchEventDetail(currentObject.EventId.ToString(),false)));
             }
         }
+        private bool addressListLoading { get; set; } = false;
+
+        public bool AddressListLoading
+        {
+            get { return addressListLoading; }
+            set
+            {
+                addressListLoading = value;
+                OnPropertyChanged("AddressListLoading");
+            }
+
+        }
         #region Constructor
         public EventViewModel()
         {
@@ -1536,7 +1548,7 @@ namespace Pulse
 
             if (!string.IsNullOrEmpty(e.NewTextValue))
             {
-
+                AddressListLoading = true;
                 SearchLocation(e.NewTextValue);
             }
             else
@@ -1611,11 +1623,15 @@ namespace Pulse
                             Places = new ObservableCollection<SearchResultModel>(tempList);
                         }
                     }
-
+                    AddressListLoading = false;
                 }
                 catch (Exception)
                 {
                     await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+                }
+                finally
+                {
+                    AddressListLoading = false;
                 }
             }
         }

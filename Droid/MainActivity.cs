@@ -80,6 +80,7 @@ namespace Pulse.Droid
 			App.ScreenWidth = Resources.Configuration.ScreenWidthDp;
 			CarouselViewRenderer.Init();
 			ImageCircleRenderer.Init();
+			Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 			OpenSettings();
 			ZXing.Net.Mobile.Forms.Android.Platform.Init();
 			MessagingCenter.Subscribe<string>(this, "Share", Share, null);

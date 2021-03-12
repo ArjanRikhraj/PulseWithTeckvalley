@@ -271,7 +271,7 @@ namespace Pulse
             App.HideMainPageLoader();
             GetCurrentLoc();
         }
-
+       
         async void GetCurrentLoc()
         {
             //if (Device.RuntimePlatform == Device.iOS)
@@ -345,7 +345,7 @@ namespace Pulse
         }
         async void MapIconTapped(object sender, System.EventArgs e)
         {
-            imgCurrentLocation.IsVisible = true;
+            //imgCurrentLocation.IsVisible = true;
             lblList.IsVisible = true;
             imgMap.IsVisible = false;
             entryVenue.Placeholder = "Search Live Events";

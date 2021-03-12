@@ -147,7 +147,7 @@ namespace Pulse
 					var tapGestureRecognizer = new TapGestureRecognizer();
 					tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
 					Frame myView = CreateGuestList(item);
-					myView.GestureRecognizers.Add(tapGestureRecognizer);
+					//myView.GestureRecognizers.Add(tapGestureRecognizer);
 					if (column < 1)
 					{
 						gridSelectedGuests.Children.Add(myView, column, row);
@@ -185,7 +185,7 @@ namespace Pulse
 					var tapGestureRecognizer = new TapGestureRecognizer();
 					tapGestureRecognizer.Tapped += PhotosTapGestureRecognizer_Tapped;
 					StackLayout myView = CreatPhotosList(item);
-					myView.GestureRecognizers.Add(tapGestureRecognizer);
+					//myView.GestureRecognizers.Add(tapGestureRecognizer);
 					if (column < 2)
 					{
 						gridSelectedPhotos.Children.Add(myView, column, row);
@@ -249,8 +249,12 @@ namespace Pulse
 				Margin = new Thickness(12, -7, 0, 2),
 				Source = Constant.PhotosCrossIcon,
 				HorizontalOptions = LayoutOptions.End,
-				VerticalOptions = LayoutOptions.Start
+				VerticalOptions = LayoutOptions.Start,
+				ClassId = item.id.ToString(),
 			};
+			var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped1;
+			userCross.GestureRecognizers.Add(tapGestureRecognizer);
 			grid.Children.Add(userImage, 0, 0);
 			grid.Children.Add(userCross, 0, 0);
 			if (item.FileType == 1) grid.Children.Add(videoImage, 0, 0);
@@ -259,7 +263,19 @@ namespace Pulse
 
 		}
 
-		void PhotosTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_Tapped1(object sender, EventArgs e)
+        {
+			var selectedItem = (Image)sender;
+			var listitem = eventViewModel.SelectedMediaList.Where(i => i.id == Convert.ToInt32(selectedItem.ClassId)).FirstOrDefault();
+			if (listitem != null)
+			{
+				isVideoSelected = listitem.FileType == 1 ? false : isVideoSelected;
+				eventViewModel.SelectedMediaList.Remove(listitem);
+			}
+			CreatePhotosGrid();
+		}
+
+        void PhotosTapGestureRecognizer_Tapped(object sender, EventArgs e)
 		{
 			var selectedItem = (StackLayout)sender;
 			var listitem = eventViewModel.SelectedMediaList.Where(i => i.id == Convert.ToInt32(selectedItem.ClassId)).FirstOrDefault();
@@ -310,8 +326,8 @@ namespace Pulse
 			};
 			CircleImage userImage = new CircleImage
 			{
-				HeightRequest = 23,
-				WidthRequest = 23,
+				HeightRequest = 28,
+				WidthRequest = 28,
 				Margin = new Thickness(0, 0, 0, 0),
 				Aspect = Aspect.Fill,
 				Source = friend.friendPic
@@ -331,8 +347,12 @@ namespace Pulse
 				Aspect = Aspect.AspectFit,
 				Margin = new Thickness(0, 2, 0, 2),
 				Source = Constant.CrossTagImage,
-				VerticalOptions = LayoutOptions.CenterAndExpand
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				ClassId = friend.friendId.ToString(),
 			};
+			var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped2;
+			userCross.GestureRecognizers.Add(tapGestureRecognizer);
 			stackLayout.Children.Add(userImage);
 			stackLayout.Children.Add(userName);
 			stackLayout.Children.Add(userCross);
@@ -341,7 +361,21 @@ namespace Pulse
 
 		}
 
-		void CameraCancel_Clicked(object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped2(object sender, EventArgs e)
+        {
+			var selectedItem = (Image)sender;
+			if (eventViewModel.SelectedFriendsList != null && eventViewModel.SelectedFriendsList.Count > 0 && eventViewModel.SelectedFriendsList.Any(i => i.friendId == Convert.ToInt32(selectedItem.ClassId)))
+			{
+				var listItem = eventViewModel.SelectedFriendsList.Where(i => i.friendId == Convert.ToInt32(selectedItem.ClassId)).FirstOrDefault();
+				if (listItem != null)
+				{
+					eventViewModel.SelectedFriendsList.Remove(listItem);
+				}
+			}
+			CreateGuestGrid();
+		}
+
+        void CameraCancel_Clicked(object sender, System.EventArgs e)
 		{
 			stackPopUp.IsVisible = false;
 			stackInnerPopUp.IsVisible = false;
@@ -356,6 +390,9 @@ namespace Pulse
 			{
 				//lblSmallVenue.TextColor = Color.Transparent;
 				eventViewModel.IsAddressListVisible = false;
+				eventViewModel.AddressListLoading = false;
+				imageCross.IsVisible = false;
+				editorVenue.Unfocus();
 			}
 			else
 			{
@@ -368,6 +405,11 @@ namespace Pulse
 					editorVenue.Text = e.NewTextValue;
 				}
 				//lblSmallVenue.TextColor = Color.FromHex(Constant.AddEventEntriesColor);
+				if (editorVenue.Text.Length > 2)
+                {
+					editorVenue.Unfocus();
+					imageCross.IsVisible = true;
+				}
 				eventViewModel.Search(e);
 				eventViewModel.IsSearchItemSelected = false;
 			}
@@ -1008,6 +1050,12 @@ namespace Pulse
 			eventViewModel.IsLoading = false;
 			eventViewModel.BoostEventConfirmation = false;
 		}
-		#endregion
-	}
+        #endregion
+
+        private void CrossIcon_Tapped(object sender, EventArgs e)
+        {
+			editorVenue.Text = "";
+			editorVenue.Unfocus();
+		}
+    }
 }

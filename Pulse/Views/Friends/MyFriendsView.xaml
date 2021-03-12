@@ -54,7 +54,7 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                    <yummy:PancakeView BackgroundColor="HotPink" HorizontalOptions="CenterAndExpand" CornerRadius="20" Padding="10">
+                    <yummy:PancakeView IsVisible="False" BackgroundColor="HotPink" HorizontalOptions="CenterAndExpand" CornerRadius="20" Padding="10">
                         <StackLayout>
                             <Image/>
                             <local:ExtendedLabel Text="DISCOVER" TextColor="White" FontFace="PoppinsRegular" FontSize="12"/>

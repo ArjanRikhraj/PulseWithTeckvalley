@@ -39,7 +39,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <AndroidLinkTool>r8</AndroidLinkTool>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +56,10 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
