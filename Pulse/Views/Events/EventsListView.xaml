@@ -26,10 +26,16 @@
 								</Image>
                             </StackLayout>
                         </yummy:PancakeView>
-                        <StackLayout Orientation="Horizontal" Spacing="5">
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="EndAndExpand">
                             <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center" />
-                            <controls:NoUnderlineDatePicker HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro"/>
+                            <controls:NoUnderlineDatePicker Date="{Binding SelectedDate}" HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro"/>
+                            <Image Source="mapIcon.png" x:Name="imgMap" HeightRequest="30" WidthRequest="30">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="MapIconTapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                         </StackLayout>
+                       
                         <StackLayout Orientation="Horizontal" x:Name="stackFilter" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False">
                             <Image Source="{x:Static local:Constant.FilterIcon}" Aspect="AspectFit" />
                             <local:ExtendedLabel FontFace="PoppinsMedium" x:Name="lblFilter" Text="Recent" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="10" />
@@ -40,11 +46,7 @@
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="FilterItemTapped" />
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
-                        <Image Source="iconMap.png" x:Name="imgMap">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="MapIconTapped"/>
-                            </Image.GestureRecognizers>
-                        </Image>
+                       
                         <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="12">
                             <local:ExtendedLabel.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ListTapped"/>
@@ -157,7 +159,6 @@
                                                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInTapped" />
                                                             </yummy:PancakeView.GestureRecognizers>
                                                         </yummy:PancakeView>
-                                                            
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
@@ -168,6 +169,9 @@
                         </local:ExtendedListView.ItemTemplate>
                     </local:ExtendedListView>
                     <!--Current Func-->
+                </StackLayout>
+               
+                <StackLayout Grid.Row="2" x:Name="stackMap" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 </StackLayout>
                 <StackLayout Grid.Row="2" x:Name="stackList" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <local:ExtendedListView x:Name="listViewMyEvents"  ItemsSource="{Binding ListLocBasedEvents}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" LoadMoreCommand="{Binding LoadMoreLocBasedEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="Transparent" IsVisible="{Binding IsLocEventListVisible}" HasUnevenRows="false" RowHeight="244"
@@ -259,8 +263,6 @@
                     </local:ExtendedListView>
                     <local:ExtendedLabel Text="No Events Yet" IsVisible="{Binding IsLocNoEventVisible}" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand">
                     </local:ExtendedLabel>
-                </StackLayout>
-                <StackLayout Grid.Row="2" x:Name="stackMap" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 </StackLayout>
             </Grid>
             <StackLayout Grid.Row="0" Margin="0,0,15,25" HorizontalOptions="End" VerticalOptions="End">

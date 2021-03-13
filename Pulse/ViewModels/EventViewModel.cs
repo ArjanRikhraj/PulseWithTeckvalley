@@ -1130,6 +1130,19 @@ namespace Pulse
             }
 
         }
+        DateTime selectedDate = DateTime.Now.Date;
+        public DateTime SelectedDate
+        {
+            get { return selectedDate; }
+            set
+            {
+                selectedDate = value;
+                OnPropertyChanged("SelectedDate");
+                GetEventsByDate(selectedDate);
+            }
+        }
+
+        
         #region Constructor
         public EventViewModel()
         {
@@ -1170,6 +1183,35 @@ namespace Pulse
 
         #endregion
         #region Methods
+        private void GetEventsByDate(DateTime selectedDate)
+        {
+            try
+            {
+                if (AllUpcomingEvents == null)
+                    return;
+                var list = tempEventList.Where(x => x.StartDate.Date == selectedDate.Date);
+                AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
+               // AllUpcomingEvents = tempEventList;
+                if(AllUpcomingEvents.Count==0)
+                {
+                    Application.Current.MainPage.DisplayAlert("Alert", "No event found for selected date", "Ok");
+                    SelectedDate = DateTime.Now.Date;
+                    GetAllUpComingEvents();
+                }
+                //else
+                //{
+                //    string count = AllUpcomingEvents.Count().ToString();
+                //    string Event = " events";
+                //    if (AllUpcomingEvents.Count==1)
+                //         Event = " event";
+                //    Application.Current.MainPage.DisplayAlert("Events Found", count+ Event+" found for selected date", "Ok");
+                //}
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
         public async Task<bool> MarkInappropriate(string comentText, string mediaId)
         {
             try
@@ -2461,6 +2503,7 @@ namespace Pulse
                                 var myEvent = new MyEvents();
                                 myEvent.EventId = item.id;
                                 myEvent.EventName = item.name;
+                                myEvent.StartDate = DateTime.Parse(item.start_date).Date;
                                 myEvent.EventLikes = Convert.ToString(item.event_likes_count);
                                 myEvent.EventAddress = loc;
                                 myEvent.EventStatus = item.event_status_label;

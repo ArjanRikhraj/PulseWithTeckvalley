@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -42,6 +43,7 @@ namespace Pulse
 		public string EventAddress { get; set; }
 		public string EventLitScore { get; set; }
 		public string EventDateTime { get; set; }
+		public DateTime StartDate { get; set; }
 		public Color ListBackColor { get; set; }
 		public string EventLikes { get; set; }
 		public string AttendeeCount { get; set; }

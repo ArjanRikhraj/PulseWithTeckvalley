@@ -473,6 +473,7 @@ namespace Pulse
 				{
 					_tapCount = 1;
 					pulseViewModel.IsLoading = true;
+					btnPost.IsVisible = false;
 					bool isPulseMember = await pulseViewModel.PulsememberOrNot();
 					if (isPulseMember)
 					{
