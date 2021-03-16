@@ -89,6 +89,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision>PulseDevelopmentProfile</CodesignProvision>
     <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
+    <OptimizePNGs>true</OptimizePNGs>
+    <MtouchSdkVersion>
+    </MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />

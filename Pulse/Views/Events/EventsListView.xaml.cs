@@ -155,7 +155,7 @@ namespace Pulse
                             {
                                 PancakeView frame = new PancakeView
                                 {
-                                    HeightRequest=130,
+                                    HeightRequest=80,
                                     CornerRadius = 10,
                                     BackgroundColor = Color.FromHex(Constant.WhiteTextColor),
                                     Margin = new Thickness(15, 10, 0, 15),

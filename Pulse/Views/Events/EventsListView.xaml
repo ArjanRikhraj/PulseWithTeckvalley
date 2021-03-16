@@ -74,106 +74,106 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </yummy:PancakeView>
-                    <local:ExtendedListView x:Name="listViewEvents" RowHeight="300" ItemsSource="{Binding AllUpcomingEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="Transparent" HasUnevenRows="True"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
-                        <local:ExtendedListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
-                                        <yummy:PancakeView Padding="0,0,0,10" CornerRadius="10" Margin="0,0,0,20" BackgroundColor="{Binding ListBackColor}">
-                                            <yummy:PancakeView.Border>
-                                                <yummy:Border Color="LightGray" x:Name="borderGradient" Thickness="1"/>
-                                            </yummy:PancakeView.Border>
-                                            <StackLayout Spacing="0">
-                                                <Grid RowSpacing="0">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="100"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Image  Grid.Row="0" Grid.Column="0" Source="{Binding PartyImage}" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
-                                                    <local:GradientColorStack stackOrientation="Vertical" StartColor="#0dFFFFFF" EndColor="White" Grid.Row="0" Grid.Column="0" HeightRequest="100" HorizontalOptions="FillAndExpand"/>
-                                                </Grid>
-                                                <Grid RowSpacing="2" Padding="10,2,10,2">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="60" />
-                                                        <RowDefinition Height="Auto" />
-                                                        <RowDefinition Height="Auto" />
-                                                        <RowDefinition Height="40" />
-                                                    </Grid.RowDefinitions>
-                                                    <StackLayout Orientation="Horizontal" Grid.Row="0">
-                                                        <StackLayout VerticalOptions="CenterAndExpand">
-                                                            <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
-                                                            <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
-                                                        </StackLayout>
-                                                        <custom:CircleImage x:Name="imgUser" Source="iconUserEvents.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
-                                                            <custom:CircleImage.GestureRecognizers>
-                                                                <TapGestureRecognizer Tapped="UploadImagetapped"/>
-                                                            </custom:CircleImage.GestureRecognizers>
-                                                        </custom:CircleImage>
-                                                    </StackLayout>
-                                                    <local:ExtendedLabel Grid.Row="1" Text="{Binding EventAddress}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand">
-                                                    </local:ExtendedLabel>
-                                                    <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
-                                                        <Grid HorizontalOptions="StartAndExpand" ClassId="{Binding EventId}" VerticalOptions="Center">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="Auto" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="32" />
-                                                            </Grid.RowDefinitions>
-                                                            <local:RoundImage Source="{Binding AttendeeImageFirst}" Grid.Column="0" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsFirstImageVisible}" />
-                                                            <local:RoundImage Source="{Binding AttendeeImageSecond}" Grid.Column="1" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsSecondImageVisible}" />
-                                                            <local:ExtendedLabel Text="{Binding AttendeeCount}" Grid.Column="2" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" VerticalOptions="Center" />
-                                                            <Grid.GestureRecognizers>
-                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllGridTapped" />
-                                                            </Grid.GestureRecognizers>
-                                                        </Grid>
-                                                        <Grid HorizontalOptions="End">
-                                                            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="End" Padding="5" VerticalOptions="Center">
-                                                                <local:ExtendedLabel  x:Name="lblViewAll" IsVisible="{Binding IsShowViewAll}" VerticalOptions="Center"  ClassId="{Binding EventId}"  TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsSemiBold" Text="View All" FontSize="10" HorizontalOptions="End" VerticalTextAlignment="Center" HorizontalTextAlignment="End">
-                                                                    <local:ExtendedLabel.GestureRecognizers>
-                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllTapped" />
-                                                                    </local:ExtendedLabel.GestureRecognizers>
-                                                                </local:ExtendedLabel>
-                                                            </StackLayout>
-                                                        </Grid>
-                                                    </StackLayout>
-                                                    <StackLayout Orientation="Horizontal" Grid.Row="3">
-                                                        <StackLayout VerticalOptions="CenterAndExpand">
-                                                            <StackLayout Orientation="Horizontal">
-                                                                <Image Source="{x:Static local:Constant.TimeImage}" VerticalOptions="CenterAndExpand" HeightRequest="18"/>
-                                                                <local:ExtendedLabel Text="{Binding EventDateTime}" TextColor="#303030" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
-                                                                <local:ExtendedLabel Text="{Binding EventStatus}" TextColor="DarkOrange" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
-                                                            </StackLayout>
-                                                            <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
-                                                        </StackLayout>
-                                                        <yummy:PancakeView CornerRadius="20" Padding="10" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" HorizontalOptions="EndAndExpand">
-                                                            <yummy:PancakeView.Border>
-                                                                <yummy:Border Color="{x:Static local:Constant.PinkButtonColor}" Thickness="1"/>
-                                                            </yummy:PancakeView.Border>
-                                                            <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
-                                                                <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
-                                                                <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Check In" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
-                                                            </StackLayout>
-                                                            <yummy:PancakeView.GestureRecognizers>
-                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInTapped" />
-                                                            </yummy:PancakeView.GestureRecognizers>
-                                                        </yummy:PancakeView>
-                                                    </StackLayout>
-                                                </Grid>
-                                            </StackLayout>
-                                        </yummy:PancakeView>
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </local:ExtendedListView.ItemTemplate>
-                    </local:ExtendedListView>
+                   
                     <!--Current Func-->
                 </StackLayout>
-               
+                <local:ExtendedListView Grid.Row="2" x:Name="listViewEvents" RowHeight="300" ItemsSource="{Binding AllUpcomingEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HasUnevenRows="True"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                    <local:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <yummy:PancakeView Padding="0,0,0,10" CornerRadius="10" Margin="10,0,10,20" BackgroundColor="{Binding ListBackColor}">
+                                        <yummy:PancakeView.Border>
+                                            <yummy:Border Color="LightGray" x:Name="borderGradient" Thickness="1"/>
+                                        </yummy:PancakeView.Border>
+                                        <StackLayout Spacing="0">
+                                            <Grid RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="100"/>
+                                                </Grid.RowDefinitions>
+                                                <Image  Grid.Row="0" Grid.Column="0" Source="{Binding PartyImage}" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
+                                                <local:GradientColorStack stackOrientation="Vertical" StartColor="#0dFFFFFF" EndColor="White" Grid.Row="0" Grid.Column="0" HeightRequest="100" HorizontalOptions="FillAndExpand"/>
+                                            </Grid>
+                                            <Grid RowSpacing="2" Padding="10,2,10,2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="60" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="40" />
+                                                </Grid.RowDefinitions>
+                                                <StackLayout Orientation="Horizontal" Grid.Row="0">
+                                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                                        <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
+                                                        <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
+                                                    </StackLayout>
+                                                    <custom:CircleImage x:Name="imgUser" Source="iconUserEvents.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
+                                                        <custom:CircleImage.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="UploadImagetapped"/>
+                                                        </custom:CircleImage.GestureRecognizers>
+                                                    </custom:CircleImage>
+                                                </StackLayout>
+                                                <local:ExtendedLabel Grid.Row="1" Text="{Binding EventAddress}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand">
+                                                </local:ExtendedLabel>
+                                                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                    <Grid HorizontalOptions="StartAndExpand" ClassId="{Binding EventId}" VerticalOptions="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="32" />
+                                                        </Grid.RowDefinitions>
+                                                        <local:RoundImage Source="{Binding AttendeeImageFirst}" Grid.Column="0" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsFirstImageVisible}" />
+                                                        <local:RoundImage Source="{Binding AttendeeImageSecond}" Grid.Column="1" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsSecondImageVisible}" />
+                                                        <local:ExtendedLabel Text="{Binding AttendeeCount}" Grid.Column="2" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" VerticalOptions="Center" />
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllGridTapped" />
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <Grid HorizontalOptions="End">
+                                                        <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="End" Padding="5" VerticalOptions="Center">
+                                                            <local:ExtendedLabel  x:Name="lblViewAll" IsVisible="{Binding IsShowViewAll}" VerticalOptions="Center"  ClassId="{Binding EventId}"  TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsSemiBold" Text="View All" FontSize="10" HorizontalOptions="End" VerticalTextAlignment="Center" HorizontalTextAlignment="End">
+                                                                <local:ExtendedLabel.GestureRecognizers>
+                                                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllTapped" />
+                                                                </local:ExtendedLabel.GestureRecognizers>
+                                                            </local:ExtendedLabel>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" Grid.Row="3">
+                                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Image Source="{x:Static local:Constant.TimeImage}" VerticalOptions="CenterAndExpand" HeightRequest="18"/>
+                                                            <local:ExtendedLabel Text="{Binding EventDateTime}" TextColor="#303030" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
+                                                            <local:ExtendedLabel Text="{Binding EventStatus}" TextColor="DarkOrange" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
+                                                        </StackLayout>
+                                                        <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
+                                                    </StackLayout>
+                                                    <yummy:PancakeView CornerRadius="20" Padding="10" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" HorizontalOptions="EndAndExpand">
+                                                        <yummy:PancakeView.Border>
+                                                            <yummy:Border Color="{x:Static local:Constant.PinkButtonColor}" Thickness="1"/>
+                                                        </yummy:PancakeView.Border>
+                                                        <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
+                                                            <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
+                                                            <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Check In" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
+                                                        </StackLayout>
+                                                        <yummy:PancakeView.GestureRecognizers>
+                                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInTapped" />
+                                                        </yummy:PancakeView.GestureRecognizers>
+                                                    </yummy:PancakeView>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </yummy:PancakeView>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </local:ExtendedListView.ItemTemplate>
+                </local:ExtendedListView>
                 <StackLayout Grid.Row="2" x:Name="stackMap" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 </StackLayout>
-                <StackLayout Grid.Row="2" x:Name="stackList" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Grid.Row="2" x:Name="stackList" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
                     <local:ExtendedListView x:Name="listViewMyEvents"  ItemsSource="{Binding ListLocBasedEvents}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" LoadMoreCommand="{Binding LoadMoreLocBasedEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="Transparent" IsVisible="{Binding IsLocEventListVisible}" HasUnevenRows="false" RowHeight="244"
 						VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                         <local:ExtendedListView.ItemTemplate>
