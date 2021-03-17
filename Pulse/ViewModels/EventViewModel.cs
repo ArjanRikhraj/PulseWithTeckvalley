@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -1198,14 +1199,53 @@ namespace Pulse
                     SelectedDate = DateTime.Now.Date;
                     GetAllUpComingEvents();
                 }
-                //else
-                //{
-                //    string count = AllUpcomingEvents.Count().ToString();
-                //    string Event = " events";
-                //    if (AllUpcomingEvents.Count==1)
-                //         Event = " event";
-                //    Application.Current.MainPage.DisplayAlert("Events Found", count+ Event+" found for selected date", "Ok");
-                //}
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+        public void GetEventsByFilter(string item)
+        {
+            try
+            {
+                if (tempEventList == null)
+                    return;
+                if(item=="SOON")
+                {
+                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) && x.StartDateTime>DateTime.Now);
+                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
+                    if (AllUpcomingEvents.Count == 0)
+                    {
+                        Application.Current.MainPage.DisplayAlert("Alert", "No event starting soon", "Ok");
+                        SelectedDate = DateTime.Now.Date;
+                        GetAllUpComingEvents();
+                    }
+                }
+                else if(item== "LIVE")
+                {
+                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now);
+                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
+                    if (AllUpcomingEvents.Count == 0)
+                    {
+                        Application.Current.MainPage.DisplayAlert("Alert", "No live event found", "Ok");
+                        SelectedDate = DateTime.Now.Date;
+                        GetAllUpComingEvents();
+                    }
+                }
+                else if (item == "ALL")
+                {
+                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) || x.StartDateTime <= DateTime.Now);
+                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
+                    if (AllUpcomingEvents.Count == 0)
+                    {
+                        Application.Current.MainPage.DisplayAlert("Alert", "No event is happening", "Ok");
+                        SelectedDate = DateTime.Now.Date;
+                        GetAllUpComingEvents();
+                    }
+                }
+                else
+                    GetAllUpComingEvents();
             }
             catch (Exception ex)
             {
@@ -2510,6 +2550,7 @@ namespace Pulse
                                 myEvent.EventLitScore = Convert.ToString(item.event_lit_score) + Constant.LitScoreText;
                                 myEvent.AttendeeCount = attendee;
                                 myEvent.EventDateTime = date;
+                                myEvent.StartDateTime = DateTime.Parse(item.start_date + " " + item.start_time);
                                 myEvent.IsEditIconVisible = isEdit;
                                 myEvent.IsFirstImageVisible = isImageOneVisible;
                                 myEvent.IsSecondImageVisible = isImageSecondVisible;

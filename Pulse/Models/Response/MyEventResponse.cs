@@ -44,6 +44,7 @@ namespace Pulse
 		public string EventLitScore { get; set; }
 		public string EventDateTime { get; set; }
 		public DateTime StartDate { get; set; }
+		public DateTime StartDateTime { get; set; }
 		public Color ListBackColor { get; set; }
 		public string EventLikes { get; set; }
 		public string AttendeeCount { get; set; }

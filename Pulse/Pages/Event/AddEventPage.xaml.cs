@@ -598,6 +598,9 @@ namespace Pulse
 				isCoverFeeCheck.IsVisible = !isCoverFeeCheck.IsVisible;
 				gridCoverFee.IsVisible = isCoverFeeCheck.IsVisible;
 				eventViewModel.isCoverFeeChecked = isCoverFeeCheck.IsVisible;
+				//for Bottle Fee 
+				gridBottleFee.IsVisible = isCoverFeeCheck.IsVisible;
+				eventViewModel.isBottleFeeChecked = isCoverFeeCheck.IsVisible;
 				_tapCount = 0;
 			}
 		}

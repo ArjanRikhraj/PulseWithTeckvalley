@@ -27,8 +27,17 @@
                             </StackLayout>
                         </yummy:PancakeView>
                         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="EndAndExpand">
-                            <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center" />
-                            <controls:NoUnderlineDatePicker Date="{Binding SelectedDate}" HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro"/>
+                            <StackLayout Spacing="10" Orientation="Horizontal" x:Name="stackFilter" VerticalOptions="CenterAndExpand">
+                                <Image Source="{x:Static local:Constant.FilterIcon}" Aspect="AspectFit" />
+                                <local:ExtendedLabel FontFace="PoppinsMedium" x:Name="lblFilter" Text="All Events" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="10" />
+                                <Image Source="{x:Static local:Constant.ArrowDownIcon}" Aspect="AspectFit" />
+                                <local:ExtendedPicker x:Name="FilterPicker" TextSize="12" SelectedIndexChanged="Filter_SelectedIndexChanged" DoneClicked="Picker_DoneClicked"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="FilterItemTapped" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center" IsVisible="False"/>
+                            <controls:NoUnderlineDatePicker Date="{Binding SelectedDate}" HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro" IsVisible="False"/>
                             <Image Source="mapIcon.png" x:Name="imgMap" HeightRequest="30" WidthRequest="30">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="MapIconTapped"/>
@@ -36,16 +45,7 @@
                             </Image>
                         </StackLayout>
                        
-                        <StackLayout Orientation="Horizontal" x:Name="stackFilter" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False">
-                            <Image Source="{x:Static local:Constant.FilterIcon}" Aspect="AspectFit" />
-                            <local:ExtendedLabel FontFace="PoppinsMedium" x:Name="lblFilter" Text="Recent" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="10" />
-                            <Image Source="{x:Static local:Constant.ArrowDownIcon}" Aspect="AspectFit" />
-                            <local:ExtendedPicker x:Name="FilterPicker" TextSize="12" SelectedIndexChanged="Filter_SelectedIndexChanged" DoneClicked="Picker_DoneClicked" IsVisible="false">
-                            </local:ExtendedPicker>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="FilterItemTapped" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                       
                        
                         <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="12">
                             <local:ExtendedLabel.GestureRecognizers>

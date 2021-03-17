@@ -10,7 +10,7 @@
             <Style x:Key="eventEntryStyle" TargetType="local:BorderlessEntry">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="PlaceholderColor" Value="{x:Static local:Constant.ExtraDarkGrayColor}" />
-                <Setter Property="Margin" Value="30,0,0,0" />
+                <Setter Property="Margin" Value="20,0,0,0" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="Keyboard" Value="Default" />

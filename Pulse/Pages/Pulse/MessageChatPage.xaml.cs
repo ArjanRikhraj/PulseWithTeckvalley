@@ -329,10 +329,10 @@ namespace Pulse
 			{
 				BackgroundColor = Color.FromHex(Constant.WhiteTextColor),
 				RowSpacing = 0,
-				ColumnSpacing = 2
+				ColumnSpacing = 5
 			};
-			gridMessage.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(15, GridUnitType.Star) });
-			gridMessage.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(85, GridUnitType.Star) });
+			gridMessage.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(15, GridUnitType.Auto) });
+			gridMessage.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(85, GridUnitType.Auto) });
 			gridMessage.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
 			CircleImage profileImage = new CircleImage
 			{
@@ -371,7 +371,8 @@ namespace Pulse
 				FontFace = FontFace.PoppinsRegular,
 				FontSize = 10,
 				TextColor = Color.FromHex(Constant.TimeColor),
-				HorizontalOptions = LayoutOptions.EndAndExpand
+				HorizontalOptions = LayoutOptions.EndAndExpand,
+				IsVisible = false,
 			};
 			horizontalStack.Children.Add(username);
 			horizontalStack.Children.Add(messageTime);
@@ -451,7 +452,8 @@ namespace Pulse
 				FontFace = FontFace.PoppinsRegular,
 				FontSize = 10,
 				TextColor = Color.FromHex(Constant.TimeColor),
-				HorizontalOptions = LayoutOptions.EndAndExpand
+				HorizontalOptions = LayoutOptions.EndAndExpand,
+				IsVisible=false,
 			};
 			mainStack.Children.Add(frame);
 			mainStack.Children.Add(messageTime);

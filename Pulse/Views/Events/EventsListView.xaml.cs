@@ -446,8 +446,8 @@ namespace Pulse
             if (list != null && list.Count > 0)
             {
                 List<CustomPin> pinsList = new List<CustomPin>();
-                int itemIndex = 0;
-                List<MyEvents> SamePoistionCount = new List<MyEvents>();
+                //int itemIndex = 0;
+               // List<MyEvents> SamePoistionCount = new List<MyEvents>();
                 CustomPin locationPin = new CustomPin
                 {
                     IsCurrentLocation = true,
@@ -456,7 +456,9 @@ namespace Pulse
                     Id = "Xamarin",
                     Position = new Position(Convert.ToDouble(eventViewModel.eventLat), Convert.ToDouble(eventViewModel.eventLong))
                 };
-                customMap.Pins.Add(locationPin);
+                //need to comment this line coz two pins is showing for current location
+                //customMap.Pins.Add(locationPin);
+                //need to comment this line coz two pins is showing for current location
                 pinsList.Add(locationPin);
                 //foreach(var i in list)
                 //{
@@ -513,10 +515,11 @@ namespace Pulse
                     {
                         pinsList.Add(pin);
                     }
-                    customMap.Pins.Add(pin);
+                    //need to comment this line coz two pins is showing for current location
+                    //customMap.Pins.Add(pin);
                 }
-
-                customMap.CustomPins = pinsList;
+                //need to comment this line coz two pins is showing for current location
+                //customMap.CustomPins = pinsList;
                 customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(Convert.ToDouble(eventViewModel.eventLat), Convert.ToDouble(eventViewModel.eventLong)), Distance.FromMiles(2)));
             }
             else
@@ -540,18 +543,25 @@ namespace Pulse
             {
                 FilterPicker.Items.Clear();
             }
-            FilterPicker.Items.Add("Recent");
-            FilterPicker.Items.Add("Popular");
+            FilterPicker.Items.Add("LIVE");
+            FilterPicker.Items.Add("SOON");
+            FilterPicker.Items.Add("ALL");
         }
 
         void Filter_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (Device.RuntimePlatform == Device.Android)
+            try
             {
-                ApplyFilter();
+                var f = (Picker)sender;
+               eventViewModel.GetEventsByFilter(f.SelectedItem.ToString());
+                lblFilter.Text = f.SelectedItem.ToString();
+                //GetEventsByFilter(f.SelectedItem);
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
-
         void ApplyFilter()
         {
             if (FilterPicker.SelectedIndex >= 0)
@@ -701,8 +711,8 @@ namespace Pulse
                 if (_tapCount < 1)
                 {
                     _tapCount = 1;
-                    App.ShowMainPageLoader();
-                    await Navigation.PushModalAsync(new MyEventsPage());
+                   // App.ShowMainPageLoader();
+                    await Navigation.PushAsync(new MyEventsPage());
                     App.HideMainPageLoader();
                     _tapCount = 0;
                 }

@@ -219,7 +219,7 @@ namespace Pulse
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
                     eventViewModel.GetAllUpComingEvents();
-                    await Navigation.PopModalAsync();
+                    await Navigation.PopAsync();
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
