@@ -405,7 +405,7 @@ namespace Pulse
 					editorVenue.Text = e.NewTextValue;
 				}
 				//lblSmallVenue.TextColor = Color.FromHex(Constant.AddEventEntriesColor);
-				if (editorVenue.Text.Length > 2)
+				if (editorVenue.Text.Length > 8)
                 {
 					editorVenue.Unfocus();
 					imageCross.IsVisible = true;
