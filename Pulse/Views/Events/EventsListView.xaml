@@ -27,7 +27,7 @@
                             </StackLayout>
                         </yummy:PancakeView>
                         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="EndAndExpand">
-                            <StackLayout Spacing="10" Orientation="Horizontal" x:Name="stackFilter" VerticalOptions="CenterAndExpand">
+                            <StackLayout Spacing="10" Orientation="Horizontal" x:Name="stackFilter" VerticalOptions="CenterAndExpand" IsVisible="False">
                                 <Image Source="{x:Static local:Constant.FilterIcon}" Aspect="AspectFit" />
                                 <local:ExtendedLabel FontFace="PoppinsMedium" x:Name="lblFilter" Text="All Events" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="10" />
                                 <Image Source="{x:Static local:Constant.ArrowDownIcon}" Aspect="AspectFit" />
@@ -36,22 +36,21 @@
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="FilterItemTapped" />
                                 </StackLayout.GestureRecognizers>
                             </StackLayout>
-                            <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center" IsVisible="False"/>
-                            <controls:NoUnderlineDatePicker Date="{Binding SelectedDate}" HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro" IsVisible="False"/>
+                            <StackLayout x:Name="calendarFilter" Orientation="Horizontal">
+                            <Image Source="{x:Static local:Constant.EventDateIcon}" VerticalOptions="Center"/>
+                            <controls:NoUnderlineDatePicker Date="{Binding SelectedDate}" HorizontalOptions="FillAndExpand" TextColor="#707070" VerticalOptions="Center" FontSize="Micro"/>
+                            </StackLayout>
                             <Image Source="mapIcon.png" x:Name="imgMap" HeightRequest="30" WidthRequest="30">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="MapIconTapped"/>
                                 </Image.GestureRecognizers>
                             </Image>
+                            <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="12">
+                                <local:ExtendedLabel.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ListTapped"/>
+                                </local:ExtendedLabel.GestureRecognizers>
+                            </local:ExtendedLabel>
                         </StackLayout>
-                       
-                       
-                       
-                        <local:ExtendedLabel x:Name="lblList" IsVisible="False" VerticalOptions="CenterAndExpand" Text="List" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.FilterLightGreyColor}" FontSize="12">
-                            <local:ExtendedLabel.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ListTapped"/>
-                            </local:ExtendedLabel.GestureRecognizers>
-                        </local:ExtendedLabel>
                     </StackLayout>
                     <yummy:PancakeView  BackgroundColor="White" x:Name="stackAddress" Padding="0" IsVisible="{Binding IsAddressListVisible}" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="300">
 

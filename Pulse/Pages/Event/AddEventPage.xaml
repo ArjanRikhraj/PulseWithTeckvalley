@@ -86,7 +86,7 @@
                                 </yummy:PancakeView.Border>
                                 <StackLayout Style="{StaticResource eventEntryStack}">
                                     <Image Source="{x:Static local:Constant.GuestIcon}"/>
-                                    <local:BorderlessEntry Placeholder="+ Unit Number/Buzzer(Optional)" FontFace="PoppinsRegular" Keyboard="Default" Style="{StaticResource eventEntryStyle}"/>
+                                    <local:BorderlessEntry Placeholder="+ Unit Number/Buzzer(Optional)" FontFace="PoppinsRegular" Keyboard="Default" Style="{StaticResource eventEntryStyle}" FontSize="14"/>
                                 </StackLayout>
                             </yummy:PancakeView >
                             

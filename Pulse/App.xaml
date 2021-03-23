@@ -14,6 +14,7 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="Keyboard" Value="Default" />
+                <Setter Property="TextColor" Value="#303030" />
             </Style>
             <Style x:Key="eventEntryStack" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal" />

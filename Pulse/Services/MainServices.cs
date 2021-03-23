@@ -90,7 +90,6 @@ namespace Pulse
         {
             try
             {
-
                 var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, SessionManager.AccessToken);
                 var response = await client.GetAsync(uri);

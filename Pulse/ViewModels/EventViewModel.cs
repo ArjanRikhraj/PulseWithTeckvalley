@@ -1196,8 +1196,8 @@ namespace Pulse
                 if(AllUpcomingEvents.Count==0)
                 {
                     Application.Current.MainPage.DisplayAlert("Alert", "No event found for selected date", "Ok");
-                    SelectedDate = DateTime.Now.Date;
                     GetAllUpComingEvents();
+                    SelectedDate = DateTime.Now.Date;
                 }
             }
             catch (Exception ex)
@@ -2023,7 +2023,7 @@ namespace Pulse
             {
                 if (!CrossConnectivity.Current.IsConnected)
                 {
-                    await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+                      App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
                     TapCount = 0;
                 }
                 else
@@ -3316,7 +3316,8 @@ namespace Pulse
                             HostImage = !string.IsNullOrEmpty(response.response.host_profile_image) ? PageHelper.GetUserImage(response.response.host_profile_image) : Constant.UserDefaultSquareImage;
                             EventDate = eventDateOnMap;
                             EventTime = SetEventDate(response.response.end_date, response.response.end_time) + " " + response.response.time_zone_type;
-                            LocationEvent = EventVenue + ", " + EventLocation;
+                            //LocationEvent = EventVenue + ", " + EventLocation;
+                            LocationEvent = EventVenue;
                             SetLikeCount();
                             if (response.response.total_comments > 0)
                             {

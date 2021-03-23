@@ -27,6 +27,7 @@ namespace Pulse
 		public int total_events { get; set; }
 		public int lat_log_event_count { get; set; }
 		public int user { get; set; }
+		public string profile_image { get; set; }
 	}
 	public class Attendee
 	{

@@ -347,6 +347,8 @@ namespace Pulse
         {
             //imgCurrentLocation.IsVisible = true;
             lblList.IsVisible = true;
+            stackFilter.IsVisible = true;
+            calendarFilter.IsVisible = false;
             imgMap.IsVisible = false;
             entryVenue.Placeholder = "Search Live Events";
             eventViewModel.listURL = FilterPicker.SelectedIndex == 0 || FilterPicker.SelectedIndex == -1 ? Constant.MapLatLongBasedEventsUrl : Constant.MapPopularityBasedEventsUrl;
@@ -1103,6 +1105,8 @@ namespace Pulse
         {
             try
             {
+                stackFilter.IsVisible = false;
+                calendarFilter.IsVisible = true;
                 imgMap.IsVisible = true;
                 lblList.IsVisible = false;
                 listViewEvents.IsVisible = true;

@@ -13,7 +13,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ProvisioningType>manual</ProvisioningType>
+    <ProvisioningType>automatic</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,12 +79,12 @@
     <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
     <CodesignEntitlements>
     </CodesignEntitlements>
     <IOSDebuggerPort>31253</IOSDebuggerPort>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
@@ -93,6 +93,8 @@
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchSdkVersion>
     </MtouchSdkVersion>
+    <CodesignExtraArgs>
+    </CodesignExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -785,7 +787,7 @@
   <Import Project="..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
