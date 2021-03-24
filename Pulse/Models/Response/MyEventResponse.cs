@@ -42,6 +42,7 @@ namespace Pulse
 		public string EventName { get; set; }
 		public string EventStatus { get; set; }
 		public string EventAddress { get; set; }
+		public string profile_image { get; set; }
 		public string EventLitScore { get; set; }
 		public string EventDateTime { get; set; }
 		public DateTime StartDate { get; set; }

@@ -321,8 +321,6 @@ namespace Pulse
 				IsLoading = false;
 				TapCount = 0;
 			}
-
-
 		}
 
 		ProfileData GetUpdateUserData()

@@ -32,6 +32,7 @@ namespace Pulse
 		public string create_date { get; set; }
 		public bool group_member_or_not { get; set; }
 		public int total_groups { get; set; }
+		public string profile_image { get; set; }
 	}
 
 

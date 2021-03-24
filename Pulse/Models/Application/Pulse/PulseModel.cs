@@ -6,6 +6,7 @@ namespace Pulse
 	{
 		public string ImageText { get; set; }
 		public string LastMessage { get; set; }
+		public string profile_image { get; set; }
 		public int PulseId { get; set; }
 		public int LastMessageUserId { get; set; }
 		public string Subject { get; set; }

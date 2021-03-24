@@ -6,17 +6,20 @@ namespace Pulse
 {
 	public static class SessionManager
 	{
-		public static string AccessToken
-		{
-			get
-			{
-				return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
-			}
-			set
-			{
-				Application.Current.Properties["AccessToken"] = value;
-			}
-		}
+		//Temporary bases access token
+		public static string AccessToken { get; set; } = "OpEVdC8kgseOlgL0v8I98ojGMvIOia";
+
+		//public static string AccessToken
+		//{
+		//	get
+		//	{
+		//		return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
+		//	}
+		//	set
+		//	{
+		//		Application.Current.Properties["AccessToken"] = value;
+		//	}
+		//}
 
 		public static string UserName
 		{

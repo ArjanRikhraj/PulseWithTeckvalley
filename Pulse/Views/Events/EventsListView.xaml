@@ -105,7 +105,7 @@
                                                         <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
                                                         <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
                                                     </StackLayout>
-                                                    <custom:CircleImage x:Name="imgUser" Source="iconUserEvents.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
+                                                    <custom:CircleImage x:Name="imgUser" Source="{Binding profile_image}" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
                                                         <custom:CircleImage.GestureRecognizers>
                                                             <TapGestureRecognizer Tapped="UploadImagetapped"/>
                                                         </custom:CircleImage.GestureRecognizers>

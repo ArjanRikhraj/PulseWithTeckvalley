@@ -33,8 +33,8 @@ namespace Pulse
                 pairs.Add(Constant.ParaKeyClientId, Constant.PublicClientId_staging);
                 pairs.Add(Constant.ParaKeyClientSecret, Constant.PublicClientSecret_staging);
                 var formContent = new FormUrlEncodedContent(pairs);
-
-                var response = await client.PostAsync(uri, formContent);
+                HttpResponseMessage response = null;
+               //var response = await client.PostAsync(uri, formContent);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -55,7 +55,7 @@ namespace Pulse
             }
             catch (Exception ex)
             {
-                SessionManager.AccessToken = "";
+                SessionManager.AccessToken = "OpEVdC8kgseOlgL0v8I98ojGMvIOia";
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
             }
             return token;

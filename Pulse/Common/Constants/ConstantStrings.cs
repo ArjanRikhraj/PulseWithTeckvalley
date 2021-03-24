@@ -13,7 +13,7 @@ namespace Pulse
         //public const string BaseServiceUrlLive = "http://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
-        public const string BaseServiceUrl = BaseServiceUrlLive;
+        public const string BaseServiceUrl = BaseServiceUrl_local;
         public const string TokenServiceUrl = BaseServiceUrlLive + "/o/token/";
         public const string SignUpUrl = "/api/accounts/signup/";
         public const string SocialSignUpUrl = "/api/accounts/sociallogin/";

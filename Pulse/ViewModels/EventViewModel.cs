@@ -2542,6 +2542,7 @@ namespace Pulse
                                 }
                                 var myEvent = new MyEvents();
                                 myEvent.EventId = item.id;
+                                myEvent.profile_image = item.profile_image;
                                 myEvent.EventName = item.name;
                                 myEvent.StartDate = DateTime.Parse(item.start_date).Date;
                                 myEvent.EventLikes = Convert.ToString(item.event_likes_count);
