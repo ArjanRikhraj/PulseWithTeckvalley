@@ -404,12 +404,7 @@ namespace Pulse
 				{
 					editorVenue.Text = e.NewTextValue;
 				}
-				//lblSmallVenue.TextColor = Color.FromHex(Constant.AddEventEntriesColor);
-				if (editorVenue.Text.Length > 8)
-                {
-					editorVenue.Unfocus();
 					imageCross.IsVisible = true;
-				}
 				eventViewModel.Search(e);
 				eventViewModel.IsSearchItemSelected = false;
 			}

@@ -8,6 +8,7 @@ namespace Pulse
 		public string password { get; set; }
 		public string confirm_password { get; set; }
 		public string email { get; set; }
+		public string mobile { get; set; }
 		public string token { get; set; }
 		public string device_id { get; set; }
 		public string device_type { get; set; }

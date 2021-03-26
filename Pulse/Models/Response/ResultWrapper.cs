@@ -18,6 +18,7 @@ namespace Pulse
 
 	public class CheckEmailUserResponse
 	{
+		public int mobile { get; set; }
 		public string email { get; set; }
 	}
 	public class SendEmailOTPResponse

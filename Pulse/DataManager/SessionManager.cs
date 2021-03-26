@@ -43,6 +43,17 @@ namespace Pulse
 				Application.Current.Properties["Email"] = value;
 			}
 		}
+		public static string Mobile
+		{
+			get
+			{
+				return Application.Current.Properties.ContainsKey("Mobile") ? string.IsNullOrEmpty(Convert.ToString(Application.Current.Properties["Mobile"])) ? string.Empty : Convert.ToString(Application.Current.Properties["Mobile"]) : string.Empty;
+			}
+			set
+			{
+				Application.Current.Properties["Mobile"] = value;
+			}
+		}
 		public static int UserId { get; set; }
 		public static int RecordPerPage { get; set; }
         public static bool UnreadNotification { get; set; }

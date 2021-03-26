@@ -285,6 +285,7 @@ namespace Pulse
 
         #region Pulse new header values
         public const string EmailText = "Email";
+        public const string MobileText = "Mobile";
         public const string NameText = "Name";
         public const string UserNameText = "Your Username";
         public const string UsernameText = "Username";

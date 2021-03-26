@@ -20,6 +20,7 @@ namespace Pulse
 		string lastNameSocial;
 		string name;
 		string email;
+		string mobile;
 		string password;
 		string newPassword;
 		string confirmPassword;
@@ -78,6 +79,17 @@ namespace Pulse
 			{
 				email = value;
 				OnPropertyChanged("Email");
+
+			}
+
+		}
+		public string Mobile
+		{
+			get { return mobile; }
+			set
+			{
+				mobile = value;
+				OnPropertyChanged("Mobile");
 
 			}
 
@@ -280,6 +292,7 @@ namespace Pulse
 			user.fullname = Name;
 			user.password = Password;
 			user.username = UserName;
+			user.mobile = Mobile;
 			user.email = Email.Trim();
 			user.dob = DateTime.Now.AddYears(-15);
 			user.registration_platform = 0;
@@ -461,6 +474,7 @@ namespace Pulse
 										SessionManager.UserId = result.response.id;
 										SessionManager.AccessToken = result.response.access_token;
 										SessionManager.Email = result.response.email;
+										//SessionManager.Mobile = result.response.mobile;
 										Settings.AppSettings.AddOrUpdateValue("CustomUserAccessToken", SessionManager.AccessToken);
 										ClearFields();
 										ShowToast(Constant.AlertTitle, Constant.RegisteredSuccessfully);
@@ -637,6 +651,7 @@ namespace Pulse
 							{
 								UserData user = new UserData();
 								user.email = Email.Trim();
+								user.mobile = Mobile;
 								var result = await mainService.Post<ResultWrapperSingle<CheckEmailUserResponse>>(Constant.CheckEmailExistUrl, user);
 								if (result != null && result.status == Constant.Status200)
 								{
@@ -748,6 +763,7 @@ namespace Pulse
 					{
 						UserData user = new UserData();
 						user.email = Email.Trim();
+						user.mobile = Mobile;
 						string url = IsSignUpPage ? Constant.SendOtpOnEmailUrl : Constant.ForgotPasswordUrl;
 						var result = await mainService.Post<ResultWrapperSingle<SendEmailOTPResponse>>(url, user);
 						if (result != null && result.status == Constant.Status200)
