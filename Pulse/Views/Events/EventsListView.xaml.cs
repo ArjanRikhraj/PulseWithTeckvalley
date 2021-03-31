@@ -10,6 +10,7 @@ using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Plugin.Toasts;
+using Pulse.Helpers;
 using Pulse.Views.Events;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -1003,32 +1004,16 @@ namespace Pulse
         {
             try
             {
-                if (CrossGeolocator.Current.IsGeolocationEnabled == true)
+                App.ShowMainPageLoader();
+                var position = await Utils.GetCurrentLocation();
+                if (position.Latitude != 0)
                 {
-                    if (CrossGeolocator.Current != null)
-                    {
-                        App.ShowMainPageLoader();
-                        var locator = CrossGeolocator.Current;
-                        locator.DesiredAccuracy = 500;
-                        var position = await locator.GetPositionAsync(TimeSpan.FromMilliseconds(30000));
-                        eventViewModel.eventLat = position.Latitude.ToString();
-                        eventViewModel.eventLong = position.Longitude.ToString();
-                        eventViewModel.currenteventLat = position.Latitude.ToString();
-                        eventViewModel.currenteventLong = position.Longitude.ToString();
-                        ClearFields();
-
-                        //if (isPageFirstLoad)
-                        //{
-                        //	bool isLoaded = await eventViewModel.GetLocBasedEventsList();
-                        //	//isPageFirstLoad = false;
-                        //	SelectMap(eventViewModel.tempocBasedEventOnMaps);
-                        //}
-                        //else
-                        //{
-                        eventViewModel.GetLocBasedEvents();
-
-                        //}
-                    }
+                    eventViewModel.eventLat = position.Latitude.ToString();
+                    eventViewModel.eventLong = position.Longitude.ToString();
+                    eventViewModel.currenteventLat = position.Latitude.ToString();
+                    eventViewModel.currenteventLong = position.Longitude.ToString();
+                    ClearFields();
+                    eventViewModel.GetLocBasedEvents();
                     App.HideMainPageLoader();
                 }
                 else

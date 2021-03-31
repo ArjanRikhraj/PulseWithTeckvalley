@@ -20,6 +20,8 @@ namespace Pulse
 		public string fb_profileid { get; set; }
 		public string oldpassword { get; set; }
 		public string newpassword { get; set; }
+		public double latitude { get; set; }
+		public double longitude { get; set; }
 	}
 
 }

@@ -1,34 +1,32 @@
-﻿using System;
+﻿using Plugin.Connectivity;
+using Pulse.ViewModels;
+using System;
 using System.Collections.Generic;
-using Plugin.Connectivity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
+using Xamarin.Forms.Xaml;
 
-namespace Pulse
+namespace Pulse.Pages.Event
 {
-	public partial class MyFriendsView : ContentView
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AddFriendsPage : BaseContentPage
+    {
 		readonly EventViewModel eventViewModel;
-		List<MyEventResponse> list = new List<MyEventResponse>();
 		int _tapCount = 0;
-		readonly FriendsViewModel friendsViewModel;
 		MainServices mainService;
-		public MyFriendsView()
-		{
-			InitializeComponent();
-			eventViewModel = ServiceContainer.Resolve<EventViewModel>();
-			friendsViewModel = ServiceContainer.Resolve<FriendsViewModel>();
-			BindingContext = friendsViewModel;
-			App.ShowMainPageLoader();
-			mainService = new MainServices();
-			SetUi();
-			SetInitialValues();
-			friendsViewModel.PendingRequestCount();
-			friendsViewModel.tempFriendList.Clear();
-			friendsViewModel.pageNoFriend = 1;
-			friendsViewModel.totalPagesMyFriends = 1;
-			friendsViewModel.GetMyFriendsList();
-		}
+		List<MyEventResponse> list = new List<MyEventResponse>();
+		public AddFriendsPage()
+        {
+            InitializeComponent();
+			BindingContext = new AddFriendsViewModel();
+			//eventViewModel = ServiceContainer.Resolve<EventViewModel>();
+			//mainService = new MainServices();
+            //SetUi();
+        }
 		void SetUi()
 		{
 			var effect = Effect.Resolve($"NotchEffect.{nameof(NotchEffect)}");
@@ -52,6 +50,11 @@ namespace Pulse
 			{
 				stack.Margin = new Thickness(15, 15, 15, 8);
 			}
+			Image backImage = new Image()
+			{
+				HorizontalOptions = LayoutOptions.StartAndExpand,
+				Source = "back.png"
+			};
 			ExtendedLabel label = new ExtendedLabel()
 			{
 				Text = "My Events",
@@ -60,6 +63,7 @@ namespace Pulse
 				FontFace = FontFace.PoppinsMedium,
 				TextColor = Color.FromHex(Constant.WhiteTextColor)
 			};
+			
 			StackLayout stack1 = new StackLayout()
 			{
 				HorizontalOptions = LayoutOptions.End,
@@ -74,6 +78,7 @@ namespace Pulse
 				FontFace = FontFace.PoppinsMedium,
 				TextColor = Color.FromHex(Constant.WhiteTextColor)
 			};
+			stack1.Children.Add(backImage);
 			stack1.Children.Add(label1);
 			stack.Children.Add(label);
 			stack.Children.Add(stack1);
@@ -255,83 +260,17 @@ namespace Pulse
 			}
 		}
 
-		void SetInitialValues()
-		{
-			if (Device.RuntimePlatform == Device.Android)
-			{
-				stackPendingRequest.Padding = new Thickness(0, 13, 0, 13);
-				topStack.Padding = new Thickness(0, 10, 0, 10);
-				topStack.Margin = new Thickness(13, 0, 13, 0);
-			}
-            if (Device.RuntimePlatform == Device.iOS)
+        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            try
             {
-                
+				await Navigation.PopAsync();
             }
-		}
+            catch (Exception ex)
+            {
 
-
-		async void SearchIcon_Tapped(object sender, System.EventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					App.ShowMainPageLoader();
-					await Navigation.PushModalAsync(new SearchFriendPage());
-					App.HideMainPageLoader();
-					_tapCount = 0;
-				}
-			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
-		}
-
-		async void RightArrowIcon_Tapped(object sender, System.EventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					App.ShowMainPageLoader();
-					await Navigation.PushModalAsync(new PendingFriendRequestPage());
-					App.HideMainPageLoader();
-					_tapCount = 0;
-				}
-			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
-		}
-
-        async void lstFriendTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					App.ShowMainPageLoader();
-    					var selected = (Friend)e.SelectedItem;
-                       friendsViewModel.TappedFriendid = Convert.ToString(selected.friendId);
-                        listViewfriends.SelectedItem = null;
-                        await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friendsViewModel.TappedFriendid));
-                        App.HideMainPageLoader();
-                   
-					_tapCount = 0;
-				}
-			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
-		}
+                throw;
+            }
+        }
     }
 }

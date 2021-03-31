@@ -114,7 +114,12 @@
     <Compile Include="Controls\NoUnderlineDatePicker.cs" />
     <Compile Include="Controls\NoUnderlineTimePicker.cs" />
     <Compile Include="Controls\OFrame.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Interfaces\ILocSettings.cs" />
+    <Compile Include="Models\User\CurrentLocation.cs" />
+    <Compile Include="Pages\Event\AddFriendsPage.xaml.cs">
+      <DependentUpon>AddFriendsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PopupPages\SearchEventPage.xaml.cs">
       <DependentUpon>SearchEventPage.xaml</DependentUpon>
     </Compile>
@@ -230,6 +235,7 @@
     <Compile Include="Services\MainServices.cs" />
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\PlacesServices.cs" />
+    <Compile Include="ViewModels\AddFriendsViewModel.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CmsViewModel.cs" />
@@ -413,6 +419,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\PopupPages\SearchEventPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Event\AddFriendsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

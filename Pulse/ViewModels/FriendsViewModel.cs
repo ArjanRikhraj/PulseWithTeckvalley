@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Pulse.Pages.Event;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -53,9 +54,11 @@ namespace Pulse
 		public int totalHostedEventPages;
 		public List<FriendProfileResponse> FriendProfileList;
 		public ICommand LoadMoreUsers { get; private set; }
+		
 		public ICommand LoadMoreMyFriends { get; private set; }
 		public ICommand LoadMorePending { get; private set; }
 		public ICommand LoadMoreFriendEvents { get; private set; }
+		public ICommand AddFriendPageCommand { get; private set; }
 		public ObservableCollection<Friend> tempUserList;
 		public ObservableCollection<Friend> tempFriendList;
 		public ObservableCollection<Friend> tempPendingList;
@@ -268,6 +271,7 @@ namespace Pulse
 			LoadMoreMyFriends = new Command(GetMyFriendsList);
 			LoadMorePending = new Command(GetPendingFriendsList);
 			LoadMoreFriendEvents = new Command(GetFriendsHostedEventList);
+			AddFriendPageCommand = new Command(GetFriendPage);
 			UsersList = new List<FriendResponseForUser>();
 			tempUserList = new ObservableCollection<Friend>();
 			tempFriendList = new ObservableCollection<Friend>();
@@ -278,7 +282,22 @@ namespace Pulse
 		}
 		#endregion
 
+
 		#region Methods
+
+		private async void GetFriendPage(object obj)
+		{
+			try
+			{
+				await Navigation.PushAsync(new AddFriendsPage());
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
 		private async void CollectionViewSelectedFriend(Friend SelectedFriend)
 		{
 			try
