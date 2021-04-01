@@ -7,7 +7,7 @@ namespace Pulse
 	public static class SessionManager
 	{
 		//Temporary bases access token
-		public static string AccessToken { get; set; } = "OpEVdC8kgseOlgL0v8I98ojGMvIOia";
+		public static string AccessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
 
 		//public static string AccessToken
 		//{

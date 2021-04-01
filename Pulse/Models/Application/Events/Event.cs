@@ -49,6 +49,7 @@ namespace Pulse
     public class Response
     {
         public List<string> notification { get; set; }
+        public string details { get; set; }
     }
 
     public class MarkReadResponse

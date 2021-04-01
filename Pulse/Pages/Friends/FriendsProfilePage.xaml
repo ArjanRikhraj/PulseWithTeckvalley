@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.FriendsProfilePage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" x:Class="Pulse.FriendsProfilePage">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="48*" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="52*" />
                 </Grid.RowDefinitions>
                 <local:GradientColorStack stackOrientation="Horizontal" x:Name="gradientStack" Grid.Row="0" StartColor="{x:Static local:Constant.LightPinkColor}" Spacing="0" EndColor="{x:Static local:Constant.DarkPinkColor}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
@@ -23,7 +23,7 @@
                     </controls:CircleImage>
                     <local:ExtendedLabel x:Name="lblFullname" FontFace="PoppinsSemiBold" LineBreakMode="TailTruncation" Margin="0,15,0,0" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="14" />
                     <local:ExtendedLabel x:Name="lblUser" FontFace="PoppinsRegular" LineBreakMode="TailTruncation" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12" />
-                    <Grid Margin="0,8,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid Margin="0,8,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -81,11 +81,27 @@
                     </Grid>
                 </local:GradientColorStack>
 <!--               <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0">
--->            <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="true" Margin="0,50,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <local:ExtendedLabel Text="No Events Hosted Yet" IsVisible="true" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand" >
-                    </local:ExtendedLabel>
-                </StackLayout>
+-->            
                 <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <yummy:PancakeView BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Padding="0" Margin="0,-30,0,0" WidthRequest="200" CornerRadius="10" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
+                        <yummy:PancakeView.Border>
+                            <yummy:Border Color="Gray" Thickness="1"/>
+                        </yummy:PancakeView.Border>
+                        <StackLayout>
+                            <Grid RowDefinitions="25,25,25,25" ColumnDefinitions="Auto,*" RowSpacing="20" Padding="20">
+                                <Image Source="icBoostEventLocation.png" Grid.Column="0" Grid.Row="0"/>
+                                <local:ExtendedLabel x:Name="lblScore" Grid.Row="0" Grid.Column="1" VerticalOptions="CenterAndExpand" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15"/>
+                                <Image Source="event_date.png" Grid.Column="0" Grid.Row="1"/>
+                                <local:ExtendedLabel x:Name="lblHosted" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15"/>
+                                <Image Source="event_date.png" Grid.Column="0" Grid.Row="2"/>
+                                <local:ExtendedLabel x:Name="lblAttended" Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15"/>
+                                <Image Source="iconEmoji.png" Grid.Column="0" Grid.Row="3"/>
+                                <local:ExtendedLabel x:Name="lblFriends" Grid.Row="3" Grid.Column="1" VerticalOptions="CenterAndExpand" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="15"/>
+                            </Grid>
+                        </StackLayout>
+                    </yummy:PancakeView>
+                    <local:ExtendedLabel Text="No Events Hosted Yet" IsVisible="False" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand" >
+                    </local:ExtendedLabel>
                     <local:ExtendedLabel Text="Hosted Events" FontFace="PoppinsSemiBold" IsVisible="{Binding IsFriendEventListVisible}" FontSize="13" Margin="10,10,10,10" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand" />
                     <local:ExtendedListView x:Name="listViewfriendsEvents" ItemsSource="{Binding ListMyFriendsEvents}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" LoadMoreCommand="{Binding LoadMoreFriendEvents}" ItemTapped="FriendEventsList_ItemTapped"  IsVisible="{Binding IsFriendEventListVisible}" HasUnevenRows="true"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                         <local:ExtendedListView.ItemTemplate>
@@ -154,7 +170,7 @@
                     <local:ExtendedLabel Text="No Events Hosted Yet" IsVisible="{Binding IsNoEventVisible}" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand">
                     </local:ExtendedLabel>
                 </StackLayout>
-                <Frame HasShadow="false" Grid.RowSpan="2" VerticalOptions="Center" Grid.Row="0" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="1" Margin="15,0,15,5">
+                <!--<Frame HasShadow="false" Grid.RowSpan="2" VerticalOptions="Center" Grid.Row="0" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="1" Margin="15,0,15,5">
                     <Grid ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -190,16 +206,12 @@
                             </StackLayout>
                         </StackLayout>
                     </Grid>
-                </Frame>
+                </Frame>-->
             </Grid>
-            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
-                <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
-                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black">
-                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}"  Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
-                        <Label x:Name="lblLoaderMessage" Text="Please wait..." TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center">
-                        </Label>
-                    </StackLayout>
-                </Frame>
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="White">
+                <yummy:PancakeView x:Name="frmOverLay" BackgroundColor="#dc70b7" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="35" HeightRequest="50" WidthRequest="50" Padding="10">
+                    <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                </yummy:PancakeView>
             </Grid>
             <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
             </Grid>

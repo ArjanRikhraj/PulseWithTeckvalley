@@ -20,6 +20,10 @@ namespace Pulse
 			BindingContext = authenticationViewModel;
 			authenticationViewModel.IsSocialSignUp = true;
 			authenticationViewModel.ClearFields();
+#if DEBUG
+			txtEmail.Text = "admin@gmail.com";
+			txtPassword.Text = "admin@123";
+#endif
 		}
 		#endregion
 		#region Methods

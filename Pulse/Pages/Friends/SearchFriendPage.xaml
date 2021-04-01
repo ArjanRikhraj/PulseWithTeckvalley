@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.SearchFriendPage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.SearchFriendPage">
 	<local:BaseContentPage.Content>
 		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
 			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
@@ -11,19 +11,24 @@
                  <local:GradientColorStack.Effects>
                     <local:NotchEffect />
                      </local:GradientColorStack.Effects>
-                    <StackLayout HorizontalOptions="FillAndExpand" x:Name="topStack" Orientation="Horizontal" VerticalOptions="FillAndExpand" Margin="10,25,10,10" BackgroundColor="Transparent">
-						<Frame HasShadow="false" x:Name="searchFrame" CornerRadius="{Binding cornerRadius}" Padding="5" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="20" x:Name="topStack" Orientation="Horizontal" VerticalOptions="FillAndExpand" Margin="10,25,10,10" BackgroundColor="Transparent">
+                        <Image Source="back.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Cancel_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <yummy:PancakeView x:Name="searchFrame" CornerRadius="10" Padding="3,0,3,0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="FillAndExpand">
 							<StackLayout Orientation="Horizontal">
 								<Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="Start" />
 								<local:ExtendedEntry FontFace="PoppinsMedium" Placeholder="Search Friends" x:Name="entryUser" TextChanged="SearchEntry_TextChanged" PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}" TextColor="{x:Static local:Constant.SearchFriendTextColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
-								<Image Source="{x:Static local:Constant.SearchCloseIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
+								<Image x:Name="iconCross" Source="{x:Static local:Constant.SearchCloseIcon}" IsVisible="False" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
 									<Image.GestureRecognizers>
 										<TapGestureRecognizer Tapped="CrossIcon_Tapped" NumberOfTapsRequired="1" />
 									</Image.GestureRecognizers>
 								</Image>
 							</StackLayout>
-						</Frame>
-						<local:ExtendedLabel Text="Cancel" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12">
+						</yummy:PancakeView>
+						<local:ExtendedLabel IsVisible="False" Text="Cancel" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="End" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12">
 							<local:ExtendedLabel.GestureRecognizers>
 								<TapGestureRecognizer Tapped="Cancel_Tapped" NumberOfTapsRequired="1" />
 							</local:ExtendedLabel.GestureRecognizers>

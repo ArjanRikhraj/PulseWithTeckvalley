@@ -26,12 +26,17 @@ namespace Pulse
 			if (Device.RuntimePlatform == Device.Android)
 			{
 				topStack.Margin = new Thickness(15, 15, 15, 15);
-				searchFrame.CornerRadius = 2;
+				searchFrame.CornerRadius = 10;
 				entryUser.Margin = new Thickness(0, 8, 0, 0);
 			}
 			friendsViewModel.IsNoUserFoundVisible = false;
 			friendsViewModel.IsListUserVisible = false;
 			friendsViewModel.totalPagesFriends = 1;
+		}
+		protected void OnAppearing()
+        {
+			base.OnAppearing();
+			entryUser.Focus();
 		}
 		void SearchEntry_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
 		{
@@ -39,6 +44,7 @@ namespace Pulse
 			{
                 if (e.NewTextValue == string.Empty || string.IsNullOrEmpty(entryUser.Text))
 				{
+					iconCross.IsVisible = false;
 					friendsViewModel.IsNoUserFoundVisible = false;
                     friendsViewModel.searchvalue = string.Empty;
 					friendsViewModel.IsListUserVisible = false;
@@ -48,6 +54,7 @@ namespace Pulse
 				{
 					if (entryUser.Text.Length >= 1 && !friendsViewModel.isSearchedValue)
 					{
+						iconCross.IsVisible = true;
 						friendsViewModel.isSearchedValue = true;
 						friendsViewModel.tempUserList.Clear();
 						friendsViewModel.IsListUserVisible = true;
@@ -105,6 +112,7 @@ namespace Pulse
 			{
 				if (_tapCount < 1)
 				{
+					entryUser.Unfocus();
 					_tapCount = 1;
 					friendsViewModel.IsLoading = true;
 					friendsViewModel.PendingRequestCount();

@@ -1148,6 +1148,7 @@ namespace Pulse
         public EventViewModel()
         {
             mainService = new MainServices();
+            UpdateUserLocation();
             tempFriendList = new ObservableCollection<Friend>();
             tempGuestList = new ObservableCollection<Friend>();
             SelectedFriendsList = new ObservableCollection<Friend>();
@@ -4824,6 +4825,37 @@ namespace Pulse
                 IsLoading = false;
                 TapCount = 0;
                 return false;
+            }
+        }
+
+        public async Task UpdateUserLocation()
+        {
+            Device.StartTimer(new TimeSpan(0, 0, 60), () =>
+            {
+                // do something every 600 seconds
+                Device.BeginInvokeOnMainThread(async() => 
+                {
+                  await  PostUserLocation();
+                });
+                return true; // runs again, or false to stop
+            });
+        }
+        public async Task PostUserLocation()
+        {
+            try
+            {
+                UserLocationModel locationModel = new UserLocationModel();
+                if(!string.IsNullOrEmpty(SessionManager.Email))
+                {
+                    locationModel.email = SessionManager.Email;
+                    locationModel.latitude = double.Parse(eventLat);
+                    locationModel.longitude = double.Parse(eventLong);
+                    var res = await mainService.Put<PostUserLocationResponse>(Constant.PostUserLocationUrl, locationModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
         #endregion

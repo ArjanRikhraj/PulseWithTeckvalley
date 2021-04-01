@@ -109,6 +109,7 @@ namespace Pulse
         public const string MarkReadNotificationsUrl = "/api/notifications/markread/";
         public const string UnreadNotificationsUrl = "/api/notifications/unreadcount/";
         public const string LatLongMapEventsUrl = "/api/event/lat_long_base/?page={0}&lat={1}&long={2}&datetime={3}&filter='{4}'";
+        public const string PostUserLocationUrl = "/api/accounts/user/location/";
         #endregion
 
         public const string JsonContent = "application/json";

@@ -84,7 +84,8 @@ namespace Pulse
             {
                 return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
             }
-            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+           var r=  JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            return r;
         }
         public async Task<T> Get<T>(string methodName)
         {
@@ -103,8 +104,6 @@ namespace Pulse
             {
                 return JsonConvert.DeserializeObject<T>(string.Empty);
             }
-
-
         }
 
         #endregion

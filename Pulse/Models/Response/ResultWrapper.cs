@@ -25,7 +25,11 @@ namespace Pulse
 	{
 		public string details { get; set; }
 	}
-
+	public class PostUserLocationResponse
+    {
+		public int status { get; set; }
+		public Response response { get; set; }
+	}
 	public class MessageError
 	{
 		public List<string> non_field_errors { get; set; }

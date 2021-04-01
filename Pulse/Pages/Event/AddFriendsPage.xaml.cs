@@ -272,5 +272,33 @@ namespace Pulse.Pages.Event
                 throw;
             }
         }
+
+        private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            try
+            {
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				if (_tapCount < 1)
+				{
+					_tapCount = 1;
+					App.ShowMainPageLoader();
+					await Navigation.PushModalAsync(new SearchFriendPage());
+					App.HideMainPageLoader();
+					_tapCount = 0;
+				}
+			}
+			else
+			{
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
     }
 }

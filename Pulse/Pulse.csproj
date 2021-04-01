@@ -116,6 +116,7 @@
     <Compile Include="Controls\OFrame.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Interfaces\ILocSettings.cs" />
+    <Compile Include="Models\Friends\AddFriendModel.cs" />
     <Compile Include="Models\User\CurrentLocation.cs" />
     <Compile Include="Pages\Event\AddFriendsPage.xaml.cs">
       <DependentUpon>AddFriendsPage.xaml</DependentUpon>

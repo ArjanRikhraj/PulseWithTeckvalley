@@ -548,7 +548,6 @@ namespace Pulse
 
 						}
 						else if (response != null && response.status == Constant.Status401)
-
 						{
 							SignOut();
 							App.HideMainPageLoader();
