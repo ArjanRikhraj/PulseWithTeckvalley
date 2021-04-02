@@ -110,6 +110,7 @@ namespace Pulse
         public const string UnreadNotificationsUrl = "/api/notifications/unreadcount/";
         public const string LatLongMapEventsUrl = "/api/event/lat_long_base/?page={0}&lat={1}&long={2}&datetime={3}&filter='{4}'";
         public const string PostUserLocationUrl = "/api/accounts/user/location/";
+        public const string GetAllUsersUrl = "/api/accounts/allusers/";
         #endregion
 
         public const string JsonContent = "application/json";
@@ -174,6 +175,7 @@ namespace Pulse
         public const string ReqFieldCommonMessage = "This field is required";
         public const string ApiResponseError = "Not able to fetch data from server.";
         public const string ServerNotRunningMessage = "Some trouble while syncing! Please try again.";
+        public const string NoFriendsFound = "No friend found in your friendlist";
         public const string CommentPostedSuccessfully = "Comment posted successfully";
         public const string CommentRequiredMessage = "Please enter your comment first";
         public const string User_Exists = "User with this email already exists";

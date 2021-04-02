@@ -21,8 +21,8 @@ namespace Pulse
 			authenticationViewModel.IsSocialSignUp = true;
 			authenticationViewModel.ClearFields();
 #if DEBUG
-			txtEmail.Text = "admin@gmail.com";
-			txtPassword.Text = "admin@123";
+			txtEmail.Text = "ajaytyagi8787@gmail.com";
+			txtPassword.Text = "Ajay@1234";
 #endif
 		}
 		#endregion

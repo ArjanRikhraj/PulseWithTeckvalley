@@ -55,7 +55,7 @@ namespace Pulse
             }
             catch (Exception ex)
             {
-                SessionManager.AccessToken = "OpEVdC8kgseOlgL0v8I98ojGMvIOia";
+                SessionManager.AccessToken = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
             }
             return token;
@@ -71,7 +71,8 @@ namespace Pulse
             {
                 return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
             }
-            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+           var r=  JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            return r;
         }
         public async Task<T> Put<T>(string methodName, object postData)
         {
@@ -84,8 +85,7 @@ namespace Pulse
             {
                 return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
             }
-           var r=  JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-            return r;
+            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
         }
         public async Task<T> Get<T>(string methodName)
         {

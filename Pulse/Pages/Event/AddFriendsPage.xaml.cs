@@ -1,4 +1,5 @@
 ﻿using Plugin.Connectivity;
+using Pulse.Models.Friends;
 using Pulse.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -293,6 +294,108 @@ namespace Pulse.Pages.Event
 				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
 				_tapCount = 0;
 			}
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+        private async void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
+        {
+            try
+            {
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if(friends.firstFriendUserId!=0)
+				await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FirstFriendUserId.ToString()));
+			}
+            catch (Exception ex)
+            {
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+			
+        }
+
+        private async void TapGestureRecognizer_Tapped_4(object sender, EventArgs e)
+        {
+			try
+			{
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				 if (friends.secondFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.SecondFriendUserId.ToString()));
+				
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+        private async void TapGestureRecognizer_Tapped_5(object sender, EventArgs e)
+        {
+			try
+			{
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.thirdFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.ThirdFriendUserId.ToString()));
+
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+        private async void TapGestureRecognizer_Tapped_6(object sender, EventArgs e)
+        {
+			try
+			{
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.fourthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FourthFriendUserId.ToString()));
+
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+        private async void TapGestureRecognizer_Tapped_7(object sender, EventArgs e)
+        {
+			try
+			{
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.fifthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FifthFriendUserId.ToString()));
+
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+
+        private async void TapGestureRecognizer_Tapped_8(object sender, EventArgs e)
+        {
+			try
+			{
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.sixthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.sixthFriendUserId.ToString()));
+
 			}
 			catch (Exception ex)
 			{

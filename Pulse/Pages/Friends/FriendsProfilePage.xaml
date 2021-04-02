@@ -82,8 +82,8 @@
                 </local:GradientColorStack>
 <!--               <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0">
 -->            
-                <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <yummy:PancakeView BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Padding="0" Margin="0,-30,0,0" WidthRequest="200" CornerRadius="10" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
+                <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"  Margin="0,50,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <yummy:PancakeView BackgroundColor="{x:Static local:Constant.WhiteTextColor}" IsVisible="{Binding IsFriendsButtonVisible}" Padding="0" Margin="0,-30,0,0" WidthRequest="200" CornerRadius="10" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand">
                         <yummy:PancakeView.Border>
                             <yummy:Border Color="Gray" Thickness="1"/>
                         </yummy:PancakeView.Border>
