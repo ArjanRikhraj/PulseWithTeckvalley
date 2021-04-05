@@ -56,6 +56,7 @@ namespace Pulse
             catch (Exception ex)
             {
                 SessionManager.AccessToken = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
+                token.access_token = SessionManager.AccessToken;
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
             }
             return token;
@@ -92,6 +93,8 @@ namespace Pulse
             try
             {
                 var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));
+                
+                    //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX");
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, SessionManager.AccessToken);
                 var response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)

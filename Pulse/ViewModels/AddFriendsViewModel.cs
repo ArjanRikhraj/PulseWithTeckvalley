@@ -115,7 +115,7 @@ namespace Pulse.ViewModels
                     {
                         var nearByFriendLoc = new Xamarin.Essentials.Location(double.Parse(item.latitude), double.Parse(item.longitude));
                         var distance = userCurrentLoc.CalculateDistance(nearByFriendLoc, DistanceUnits.Kilometers);
-                        if (distance <= 25 )
+                        if (distance <= 25 && item.email!=SessionManager.Email)
                         {
                             userInfo.Add(item);
                         }

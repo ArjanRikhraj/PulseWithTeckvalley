@@ -245,6 +245,12 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-		#endregion
-	}
+        #endregion
+
+        private void btnEdit_Clicked(object sender, EventArgs e)
+        {
+			stackPopUp.IsVisible = true;
+			grdOverlayDialog.IsVisible = true;
+		}
+    }
 }

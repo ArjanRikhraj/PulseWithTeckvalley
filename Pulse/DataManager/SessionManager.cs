@@ -1,27 +1,41 @@
 ﻿using System;
-
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Pulse
 {
 	public static class SessionManager
 	{
+
 		//Temporary bases access token
-		public static string AccessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
+		public static string accessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
+        public static string AccessToken
+        {
+            get
+            {
+				return accessToken;
 
-		//public static string AccessToken
-		//{
-		//	get
-		//	{
-		//		return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
-		//	}
-		//	set
-		//	{
-		//		Application.Current.Properties["AccessToken"] = value;
-		//	}
-		//}
+			}
+            set
+            {
+				accessToken = value;
+            }
+        }
 
-		public static string UserName
+
+        //public static string AccessToken
+        //{
+        //	get
+        //	{
+        //		return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
+        //	}
+        //	set
+        //	{
+        //		Application.Current.Properties["AccessToken"] = value;
+        //	}
+        //}
+
+        public static string UserName
 		{
 			get
 			{
