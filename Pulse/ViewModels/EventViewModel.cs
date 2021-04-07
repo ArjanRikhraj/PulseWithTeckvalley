@@ -2919,7 +2919,8 @@ namespace Pulse
                     date = item.create_date.Date.ToString("ddd dd MMM, ") + item.create_date.ToString("h:mm tt").ToUpperInvariant(),
                     notification_unread_exist = item.notification_unread_exist,
                     title = item.title,
-                    extra_data = item.extra_data
+                    extra_data = item.extra_data,
+                    profile_image= item.profile_image
                 });
             }
             ListNotification = tmpNotificationList;
@@ -3041,7 +3042,8 @@ namespace Pulse
                 float cornerradius = Device.RuntimePlatform == Device.Android ? 1 : 4;
                 string loc = item.event_venue + "," + item.location_address;
                 string attendee;
-                string date = SetEventDate(item.start_date, item.start_time) + " " + item.time_zone_type;
+                //string date = SetEventDate(item.start_date, item.start_time) + " " + item.time_zone_type;
+                string date = SetEventDate(item.start_date, item.start_time);
                 bool isImageOneVisible;
                 bool isImageSecondVisible;
                 string imageOne;

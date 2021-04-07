@@ -32,17 +32,12 @@ namespace Pulse
 			BindingContext = eventViewModel;
             SetInitialValues();
             listViewMedia.ItemAppearing += ListViewMedia_ItemAppearing;
-           
-
 		}
 
         void ListViewMedia_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             
         }
-
-       
-
 
 		void SetInitialValues()
 		{
@@ -624,8 +619,6 @@ namespace Pulse
 								eventViewModel.IsLoading = false;
 							}
 						}
-
-
 					}
 					else
 					{

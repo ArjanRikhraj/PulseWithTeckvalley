@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ImageCircle.Forms.Plugin.Abstractions;
 using Plugin.Connectivity;
+using Plugin.Geolocator;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Pulse.Helpers;
+using Pulse.Pages.Event;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -15,6 +21,7 @@ namespace Pulse
 		int _tapCount = 0;
 		string selectedEventId;
         bool commentTapped;
+		bool isPastEvent;
 		#endregion
 		#region Constructor
 		public EventDetailPage(string id)
@@ -96,7 +103,6 @@ namespace Pulse
 						WidthRequest = App.ScreenWidth,
                         Aspect = Aspect.AspectFill,
 						Source = eventViewModel.EventMediaList[0].file_type == 1 ? PageHelper.GetEventVideoThumbnail(eventViewModel.EventMediaList[0].file_thumbnail) : PageHelper.GetEventImage(eventViewModel.EventMediaList[0].file_name)
-
 					};
 					gridMedia.Children.Add(image, 0, 0);
 					if (eventViewModel.EventMediaList[0].file_type == 1)
@@ -312,7 +318,209 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
+		async void CheckInClicked(object sender, System.EventArgs e)
+		{
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				if (_tapCount < 1)
+				{
+					_tapCount++;
+					eventViewModel.IsLoading = true;
+					isPastEvent = false;
+					stackPopUp.IsVisible = false;
+					if (eventViewModel.currentActiveEventType == MyEventType.Upcoming)
+					{
+						if (DateTimeValidate() && !isPastEvent)
+						{
+							bool isEnable = await GetCurrentLoc();
+							if (isEnable)
+							{
+								CheckIn();
+							}
+							else
+							{
+								checkInTitle.Text = Constant.CheckInNotProperTitleMessage;
+								checkInMessage.Text = Constant.CheckInNotProperMessage;
+								//grdOverlayDialog.IsVisible = true;
+								stackcheckInMessage.IsVisible = true;
+								_tapCount = 0;
+							}
+						}
+						else if (!DateTimeValidate() && isPastEvent)
+						{
+							await App.Instance.Alert("You can not check-in past event", Constant.AlertTitle, Constant.Ok);
+							eventViewModel.IsLoading = false;
+							_tapCount = 0;
+						}
+						else
+						{
+							checkInTitle.Text = Constant.CheckInEarlyTitleMessage;
+							checkInMessage.Text = Constant.CheckInEarlyMessage;
+							//grdOverlayDialog.IsVisible = true;
+							stackcheckInMessage.IsVisible = true;
+							_tapCount = 0;
+						}
 
+					}
+					else
+					{
+						await App.Instance.Alert("You can not check-in past event", Constant.AlertTitle, Constant.Ok);
+						eventViewModel.IsLoading = false;
+						_tapCount = 0;
+
+					}
+					eventViewModel.IsLoading = false;
+					_tapCount = 0;
+				}
+			}
+			else
+			{
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+		}
+		async void CheckIn()
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					_tapCount = 0;
+					eventViewModel.IsLoading = false;
+				}
+				else
+				{
+					eventViewModel.IsLoading = true;
+					UserCheckIn userCheckIn = new UserCheckIn();
+					userCheckIn.latitude = Convert.ToDouble(eventViewModel.currenteventLat);
+					userCheckIn.longitude = Convert.ToDouble(eventViewModel.currenteventLong);
+					var response = await new MainServices().Post<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.CheckInUrl + eventViewModel.TappedEventId + '/', userCheckIn);
+					if (response != null && response.status == Constant.Status200 && response.response != null)
+					{
+						eventViewModel.IsUserNotCheckedIn = false;
+						eventViewModel.IsUserCheckedIn = true;
+						ShowToast(Constant.AlertTitle, "Successfully checked in");
+						//await App.Instance.Alert("Successfully checked in", Constant.AlertTitle, Constant.Ok);
+						eventViewModel.IsLoading = false;
+						_tapCount = 0;
+
+					}
+					else if (response != null && response.status == Constant.Status111 && response.message.non_field_errors != null)
+					{
+						checkInTitle.Text = Constant.CheckInNotProperTitleMessage;
+						checkInMessage.Text = Constant.CheckInNotProperMessage;
+						//grdOverlayPopUp.IsVisible = true;
+						stackcheckInMessage.IsVisible = true;
+						eventViewModel.IsLoading = false;
+						_tapCount = 0;
+
+					}
+					else
+					{
+						eventViewModel.IsLoading = false;
+						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+						_tapCount = 0;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				eventViewModel.IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+
+			}
+		}
+		bool DateTimeValidate()
+		{
+			if (eventViewModel.EventFromDate.Date == DateTime.Now.Date && eventViewModel.EventFromTime > DateTime.Now.TimeOfDay)
+			{
+				return false;
+			}
+			else if (eventViewModel.EventToDate.Date == DateTime.Now.Date && eventViewModel.EventToTime < DateTime.Now.TimeOfDay)
+			{
+				isPastEvent = true;
+				return false;
+			}
+			else if (eventViewModel.EventFromDate.Date > DateTime.Now.Date)
+			{
+				return false;
+			}
+			else
+				return true;
+		}
+		async Task<bool> GetCurrentLoc()
+		{
+			
+			if (Device.RuntimePlatform == Device.iOS)
+				return (await GetPermission());
+			else
+				return (await GetCurrentLocation());
+		}
+		async Task<bool> GetPermission()
+		{
+			try
+			{
+				var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+				if (status != PermissionStatus.Granted)
+				{
+					if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+					{
+						eventViewModel.IsLoading = false;
+					}
+
+					var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+					status = results[Permission.Location];
+				}
+
+				if (status == PermissionStatus.Granted)
+				{
+					return (await GetCurrentLocation());
+				}
+				else if (status != PermissionStatus.Unknown)
+				{
+					eventViewModel.IsLoading = false;
+				}
+				return false;
+
+			}
+			catch (Exception)
+			{
+				eventViewModel.IsLoading = false;
+				return false;
+			}
+		}
+		async Task<bool> GetCurrentLocation()
+		{
+			try
+			{
+				if (CrossGeolocator.Current.IsGeolocationEnabled == true)
+				{
+					if (CrossGeolocator.Current != null)
+					{
+						var locator = CrossGeolocator.Current;
+						locator.DesiredAccuracy = 500;
+						var position = await locator.GetPositionAsync(System.TimeSpan.FromMilliseconds(30000));
+						eventViewModel.currenteventLat = position.Latitude.ToString();
+						eventViewModel.currenteventLong = position.Longitude.ToString();
+						return true;
+					}
+					return false;
+				}
+				else
+				{
+					eventViewModel.IsLoading = false;
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				eventViewModel.IsLoading = false;
+				return false;
+
+			}
+		}
 		async void Delete_Tapped(object sender, System.EventArgs e)
 		{
             stackPopUpForComment.IsVisible = false;
@@ -788,7 +996,7 @@ namespace Pulse
 				{
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
-					await Navigation.PushModalAsync(new PartyStoryPage());
+					await Navigation.PushModalAsync(new EventStoriesPage());
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
@@ -943,6 +1151,12 @@ namespace Pulse
 			{
 				eventViewModel.IsStackCommentVisible = false;
 			}
+		}
+		void OverLayTapped(object sender, System.EventArgs e)
+		{
+			//gridOverlayPopUp.IsVisible = false;
+			grdOverlayDialog.IsVisible = false;
+			stackcheckInMessage.IsVisible = false;
 		}
 		#endregion
 	}

@@ -293,7 +293,7 @@ namespace Pulse
         public const string UserNameText = "Your Username";
         public const string UsernameText = "Username";
         public const string DobText = "Date of Birth";
-        public const string SchoolText = "School";
+        public const string SchoolText = "School/Occuption";
         public const string PasswordText = "Password";
         public const string ForgetPasswordText = "Forgot Password?";
         public const string Register = "Register";
@@ -354,6 +354,9 @@ namespace Pulse
         public const string MobileRequired = "Please enter mobile number";
         public const string ConfimText = "Confirm";
         public const string DeleteText = "Delete";
+        public const string SaveStoryText = "Save Story";
+        public const string DeleteStoryText = "Delete Story";
+        public const string ReportStoryText = "Report Story";
         public const string PastDateCannotSelectMessage = "Past date cannnot be selected";
         public const string EndDateGreaterThenStartDateMessage = "End Date should be after start date or on same date";
         public const string PastTimeCannotSelectMessage = "Past time cannnot be selected";

@@ -40,7 +40,8 @@ namespace Pulse
         public DateTime create_date { get; set; }
         public string date { get; set; }
         public ExtraData extra_data { get; set; }
-       
+        public string profile_image { get; set; }
+
     }
     public class ExtraData
     {

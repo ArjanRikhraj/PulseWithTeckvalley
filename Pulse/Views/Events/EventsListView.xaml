@@ -95,15 +95,19 @@
                                             </Grid>
                                             <Grid RowSpacing="2" Padding="10,2,10,2">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="60" />
+                                                    <RowDefinition Height="90" />
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="40" />
                                                 </Grid.RowDefinitions>
                                                 <StackLayout Orientation="Horizontal" Grid.Row="0">
                                                     <StackLayout VerticalOptions="CenterAndExpand">
+                                                        <StackLayout Orientation="Horizontal">
                                                         <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
-                                                        <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
+                                                            <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
+                                                        </StackLayout>
+                                                            <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
+                                                            <local:ExtendedLabel Text="{Binding EventStatus}" TextColor="Black" FontFace="PoppinsRegular" FontSize="12"/>
                                                     </StackLayout>
                                                     <custom:CircleImage x:Name="imgUser" Source="{Binding profile_image}" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="80" BorderColor="LightGray" BorderThickness="0.5">
                                                         <custom:CircleImage.GestureRecognizers>
@@ -123,8 +127,8 @@
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="32" />
                                                         </Grid.RowDefinitions>
-                                                        <local:RoundImage Source="{Binding AttendeeImageFirst}" Grid.Column="0" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsFirstImageVisible}" />
-                                                        <local:RoundImage Source="{Binding AttendeeImageSecond}" Grid.Column="1" BorderRadius="14" HeightRequest="32" WidthRequest="32" Aspect="AspectFill" IsVisible="{Binding IsSecondImageVisible}" />
+                                                        <custom:CircleImage Source="{Binding AttendeeImageFirst}" Grid.Column="0" WidthRequest="22" Aspect="AspectFill" IsVisible="{Binding IsFirstImageVisible}" />
+                                                        <custom:CircleImage Source="{Binding AttendeeImageSecond}" Grid.Column="1" WidthRequest="22" Aspect="AspectFill" IsVisible="{Binding IsSecondImageVisible}" />
                                                         <local:ExtendedLabel Text="{Binding AttendeeCount}" Grid.Column="2" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" VerticalOptions="Center" />
                                                         <Grid.GestureRecognizers>
                                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllGridTapped" />
@@ -145,9 +149,9 @@
                                                         <StackLayout Orientation="Horizontal">
                                                             <Image Source="{x:Static local:Constant.TimeImage}" VerticalOptions="CenterAndExpand" HeightRequest="18"/>
                                                             <local:ExtendedLabel Text="{Binding EventDateTime}" TextColor="#303030" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
-                                                            <local:ExtendedLabel Text="{Binding EventStatus}" TextColor="DarkOrange" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
+                                                           
                                                         </StackLayout>
-                                                        <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
+                                                       
                                                     </StackLayout>
                                                     <yummy:PancakeView CornerRadius="20" Padding="10" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" HorizontalOptions="EndAndExpand">
                                                         <yummy:PancakeView.Border>
@@ -155,7 +159,7 @@
                                                         </yummy:PancakeView.Border>
                                                         <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
                                                             <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
-                                                            <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Check In" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
+                                                            <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Going" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
                                                         </StackLayout>
                                                         <yummy:PancakeView.GestureRecognizers>
                                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInTapped" />
