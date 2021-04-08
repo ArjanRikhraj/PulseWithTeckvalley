@@ -341,7 +341,7 @@ namespace Pulse
 							{
 								checkInTitle.Text = Constant.CheckInNotProperTitleMessage;
 								checkInMessage.Text = Constant.CheckInNotProperMessage;
-								//grdOverlayDialog.IsVisible = true;
+								grdOverlayDialog.IsVisible = true;
 								stackcheckInMessage.IsVisible = true;
 								_tapCount = 0;
 							}
@@ -356,7 +356,7 @@ namespace Pulse
 						{
 							checkInTitle.Text = Constant.CheckInEarlyTitleMessage;
 							checkInMessage.Text = Constant.CheckInEarlyMessage;
-							//grdOverlayDialog.IsVisible = true;
+							grdOverlayDialog.IsVisible = false;
 							stackcheckInMessage.IsVisible = true;
 							_tapCount = 0;
 						}
@@ -371,6 +371,7 @@ namespace Pulse
 					}
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
+					grdOverlayDialog.IsVisible = false;
 				}
 			}
 			else

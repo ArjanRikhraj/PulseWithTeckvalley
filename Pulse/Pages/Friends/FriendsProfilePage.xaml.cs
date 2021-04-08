@@ -40,6 +40,7 @@ namespace Pulse
 				imgUser.Source = !string.IsNullOrEmpty(friendsViewModel.FriendProfileList[0].profile_image) ? PageHelper.GetUserImage(friendsViewModel.FriendProfileList[0].profile_image) : Constant.ProfileIcon;
 				lblUsername.Text = lblUser.Text = friendsViewModel.FriendProfileList[0].username;
 				lblFullname.Text = lblFullName.Text = friendsViewModel.FriendProfileList[0].fullname;
+				lblSchool.Text = friendsViewModel.FriendProfileList[0].school;
 				lblScore.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].scores) +" Lit Score";
 				lblHosted.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].hosted_events) +" Hosted";
 				lblAttended.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].attended_events) + " Attended";

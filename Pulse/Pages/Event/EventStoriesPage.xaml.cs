@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Threading;
 using Xamarin.Forms.Xaml;
 
 namespace Pulse.Pages.Event
@@ -13,12 +15,14 @@ namespace Pulse.Pages.Event
             InitializeComponent();
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             BindingContext = eventViewModel;
-            //SetInitialValues();
+            SetInitialValues();
         }
 
-        private void SetInitialValues()
+        private async void SetInitialValues()
         {
-            
+            progressBar.IsVisible = true;
+            await progressBar.ProgressTo(1, 5000, Easing.Linear);
+            progressBar.IsVisible = false;
         }
 
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)

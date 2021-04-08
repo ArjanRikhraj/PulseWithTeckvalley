@@ -180,7 +180,7 @@
                                 </Image>
                             </Grid>
                            
-                            <Grid Margin="0" x:Name="gridMedia" IsVisible="False">
+                            <Grid Margin="0" x:Name="gridMedia" >
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="GridMedia_Tapped" />
                                 </Grid.GestureRecognizers>

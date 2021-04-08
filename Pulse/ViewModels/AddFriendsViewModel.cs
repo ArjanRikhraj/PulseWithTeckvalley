@@ -82,6 +82,19 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("FriendModel");
             }
         }
+        private string userLocation;
+        public string UserLocation
+        {
+            get
+            {
+                return userLocation;
+            }
+            set
+            {
+                userLocation = value;
+                OnPropertyChanged("UserLocation");
+            }
+        }
         MainServices mainService;
         public AddFriendsViewModel()
         {
@@ -221,7 +234,25 @@ namespace Pulse.ViewModels
                     loc.Latitude = currentLocation.Latitude;
                     loc.Longitude = currentLocation.Longitude;
                     if(loc!=null)
-                   await GetNearByFriends();
+                    {
+                        await GetNearByFriends();
+                        var placemarks = await Geocoding.GetPlacemarksAsync(loc.Latitude, loc.Longitude);
+                        var placemark = placemarks?.FirstOrDefault();
+                        if (placemark != null)
+                        {
+                            var AdminArea = placemark.AdminArea;
+                            var CountryCode = placemark.CountryCode;
+                            var CountryName = placemark.CountryName;
+                            var FeatureName = placemark.FeatureName;
+                            var Locality = placemark.Locality;
+                            var PostalCode = placemark.PostalCode;
+                            var SubAdminArea = placemark.SubAdminArea;
+                            var SubLocality = placemark.SubLocality;
+                            var SubThoroughfare = placemark.SubThoroughfare;
+                            var Thoroughfare = placemark.Thoroughfare;
+                            UserLocation = Thoroughfare + " " + SubLocality + " " + SubAdminArea;
+                        }
+                    }
                 }
                 else
                     await App.LocationOn();
