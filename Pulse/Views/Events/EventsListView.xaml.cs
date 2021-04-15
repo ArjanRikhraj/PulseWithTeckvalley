@@ -156,7 +156,7 @@ namespace Pulse
                             {
                                 PancakeView frame = new PancakeView
                                 {
-                                    HeightRequest=80,
+                                    HeightRequest=70,
                                     CornerRadius = 10,
                                     BackgroundColor = Color.FromHex(Constant.WhiteTextColor),
                                     Margin = new Thickness(15, 10, 0, 15),
@@ -519,10 +519,10 @@ namespace Pulse
                         pinsList.Add(pin);
                     }
                     //need to comment this line coz two pins is showing for current location
-                    //customMap.Pins.Add(pin);
+                    customMap.Pins.Add(pin);
                 }
                 //need to comment this line coz two pins is showing for current location
-                //customMap.CustomPins = pinsList;
+                customMap.CustomPins = pinsList;
                 customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(Convert.ToDouble(eventViewModel.eventLat), Convert.ToDouble(eventViewModel.eventLong)), Distance.FromMiles(2)));
             }
             else
@@ -551,13 +551,18 @@ namespace Pulse
             FilterPicker.Items.Add("ALL");
         }
 
-        void Filter_SelectedIndexChanged(object sender, System.EventArgs e)
+      async  void Filter_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             try
             {
                 var f = (Picker)sender;
-               eventViewModel.GetEventsByFilter(f.SelectedItem.ToString());
+                eventViewModel.listURL = FilterPicker.SelectedIndex == 0 || FilterPicker.SelectedIndex == -1 ? Constant.MapLatLongBasedEventsUrl : Constant.MapPopularityBasedEventsUrl;
+                eventViewModel.pageNoLocBasedEvents = 1;
+                eventViewModel.tempLocBasedEventList.Clear();
+                await eventViewModel.GetMapLocBasedEvents();
+                eventViewModel.GetEventsByFilter(f.SelectedItem.ToString());
                 lblFilter.Text = f.SelectedItem.ToString();
+                SelectMap(eventViewModel.tempLocBasedEventList);
                 //GetEventsByFilter(f.SelectedItem);
             }
             catch (Exception ex)

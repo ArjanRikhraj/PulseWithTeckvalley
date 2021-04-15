@@ -8,7 +8,7 @@ namespace Pulse.Models.Friends
 {
    public class AddFriendModel:BaseViewModel
     {
-        public bool firstFriendIsVisible { get; set; }
+        public bool firstFriendIsVisible { get; set; } = false;
         public bool FirstFriendIsVisible
         {
             get
@@ -60,7 +60,7 @@ namespace Pulse.Models.Friends
                 OnPropertyChanged("FirstFriendUserId");
             }
         }
-        public bool secondFriendIsVisible { get; set; }
+        public bool secondFriendIsVisible { get; set; } = false;
         public bool SecondFriendIsVisible
         {
             get
@@ -112,7 +112,7 @@ namespace Pulse.Models.Friends
                 OnPropertyChanged("SecondFriendUserId");
             }
         }
-        public bool thirdFriendIsVisible { get; set; }
+        public bool thirdFriendIsVisible { get; set; } = false;
         public bool ThirdFriendIsVisible
         {
             get
@@ -164,7 +164,7 @@ namespace Pulse.Models.Friends
                 OnPropertyChanged("ThirdFriendUserId");
             }
         }
-        public bool fourthFriendIsVisible { get; set; }
+        public bool fourthFriendIsVisible { get; set; } = false;
         public bool FourthFriendIsVisible
         {
             get
@@ -216,7 +216,7 @@ namespace Pulse.Models.Friends
                 OnPropertyChanged("FourthFriendUserId");
             }
         }
-        public bool fifthFriendIsVisible { get; set; }
+        public bool fifthFriendIsVisible { get; set; } = false;
         public bool FifthFriendIsVisible
         {
             get
@@ -268,7 +268,7 @@ namespace Pulse.Models.Friends
                 OnPropertyChanged("FifthFriendUserId");
             }
         }
-        public bool sixththFriendIsVisible { get; set; }
+        public bool sixththFriendIsVisible { get; set; } = false;
         public bool SixthFriendIsVisible
         {
             get

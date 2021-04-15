@@ -138,10 +138,10 @@ namespace Pulse.ViewModels
                         FriendsCount = "No";
                     else if (topSixUser.Count()> 0)
                         FriendsCount = topSixUser.Count().ToString();
+                    FriendModel = new AddFriendModel();
                     if (topSixUser.Count() >= 1)
                     {
                         var firstUser = userInfo[0];
-                        FriendModel = new AddFriendModel();
                         FriendModel.FirstFriendName = firstUser.username;
                         FriendModel.FirstFriendImage = firstUser.profile_image_url;
                         FriendModel.FirstFriendUserId = firstUser.id;

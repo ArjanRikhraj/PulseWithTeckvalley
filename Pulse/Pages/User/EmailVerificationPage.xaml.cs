@@ -24,7 +24,7 @@ namespace Pulse
 		#region Methods
 		void SetInitialValues()
 		{
-			lblEmail.Text = authenticationViewModel.Email;
+			lblMobile.Text = authenticationViewModel.Mobile;
 			headerBar.HeaderTitle = (pageType == Constant.SignUpText) ? Constant.Register : Constant.ForgotPassword;
 			authenticationViewModel.OTPTextColor = Color.FromHex(Constant.BlackSimilarColor);
 			authenticationViewModel.IsOTPErrorMessageVisible = false;

@@ -289,7 +289,7 @@ namespace Pulse
 		{
 			try
 			{
-				await Navigation.PushAsync(new AddFriendsPage());
+				await Navigation.PushModalAsync(new AddFriendsPage());
 			}
 			catch (Exception ex)
 			{

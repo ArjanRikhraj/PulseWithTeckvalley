@@ -32,7 +32,7 @@ namespace Pulse
 			bool isDetail = await friendsViewModel.FriendProfileDetail();
 			if (Device.RuntimePlatform == Device.Android)
 			{
-				topStack.Margin = new Thickness(10, 10, 10, 10);
+				//topStack.Margin = new Thickness(10, 10, 10, 10);
 			}
 
 			if (isDetail && friendsViewModel.FriendProfileList != null && friendsViewModel.FriendProfileList.Count > 0)
@@ -41,10 +41,10 @@ namespace Pulse
 				lblUsername.Text = lblUser.Text = friendsViewModel.FriendProfileList[0].username;
 				lblFullname.Text = lblFullName.Text = friendsViewModel.FriendProfileList[0].fullname;
 				lblSchool.Text = friendsViewModel.FriendProfileList[0].school;
-				lblScore.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].scores) +" Lit Score";
-				lblHosted.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].hosted_events) +" Hosted";
-				lblAttended.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].attended_events) + " Attended";
-				lblFriends.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].friends) + " Friends";
+				lblScore.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].scores);
+				lblHosted.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].hosted_events);
+				lblAttended.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].attended_events) ;
+				lblFriends.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].friends);
 			}
 			if (friendsViewModel.IsFriendsButtonVisible)
 			{

@@ -15,9 +15,9 @@
                                 <ViewCell.View>
                                     <Frame HasShadow="false" CornerRadius="{Binding cornerRadius}" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
                                         <StackLayout Padding="0" Spacing="0">
-                                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" Padding="5">
-                                                <custom:CircleImage x:Name="imgUser" Grid.Column="0" Source="{Binding profile_image}" WidthRequest="100" Aspect="AspectFill" BorderColor="LightGray" BorderThickness="0.5"/>
-                                                <StackLayout Orientation="Vertical" Grid.Column="1" BackgroundColor="Transparent"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="7">
+                                            <Grid VerticalOptions="FillAndExpand" ColumnSpacing="10" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" Padding="5">
+                                                <custom:CircleImage x:Name="imgUser" Grid.Column="0" Source="{Binding profile_image}" WidthRequest="50" Aspect="AspectFill" BorderColor="LightGray" BorderThickness="0.5" VerticalOptions="CenterAndExpand"/>
+                                                <StackLayout Spacing="0" Grid.Column="1" BackgroundColor="Transparent"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                                     <local:ExtendedLabel Text="{Binding title}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="13"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">
                                                     </local:ExtendedLabel>
                                                     <local:ExtendedLabel Text="{Binding message}" LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="12"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">

@@ -265,13 +265,13 @@ namespace Pulse.Pages.Event
         {
             try
             {
-				await Navigation.PopAsync();
+				await Navigation.PopModalAsync();
             }
             catch (Exception ex)
             {
-
-                throw;
-            }
+				App.HideMainPageLoader();
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
         }
 
         private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)

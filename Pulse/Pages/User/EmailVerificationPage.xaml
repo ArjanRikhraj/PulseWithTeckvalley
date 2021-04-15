@@ -13,9 +13,9 @@
 				<StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20,0,20,0">
 					<Image Source="{x:Static local:Constant.OtpLock}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,30,0,0">
 					</Image>
-					<local:ExtendedLabel x:Name="lblVerifyEmail" FontSize="16" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.BlackSimilarColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Text="{x:Static local:Constant.VerifyEmailText}" Margin="0,20,0,0" />
-					<local:ExtendedLabel x:Name="lblVerifyEmailDescription1" FontFace="PoppinsLight" Text="{x:Static local:Constant.VerifyEmailDescription}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,10,0,0" />
-					<local:ExtendedLabel x:Name="lblEmail" FontSize="12" Text="{x:Static local:Constant.EmailForOTP}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,-5,0,0" />
+                        <local:ExtendedLabel x:Name="lblVerifyEmail" FontSize="16" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.BlackSimilarColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Text="{x:Static local:Constant.VerifyMobileText}" Margin="0,20,0,0" />
+                        <local:ExtendedLabel x:Name="lblVerifyEmailDescription1" FontFace="PoppinsLight" Text="{x:Static local:Constant.VerifyMobileDescription}" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,10,0,0" />
+                        <local:ExtendedLabel x:Name="lblMobile" FontSize="12" Text="{x:Static local:Constant.EmailForOTP}" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,-5,0,0" />
 					<local:ExtendedLabel x:Name="lblVerifyEmailDescription3" FontFace="PoppinsLight" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" Margin="0,20,0,0" Text="{x:Static local:Constant.EnterCodeText}" />
 					<Grid HorizontalOptions="Center" Margin="0,35,0,0">
 						<Grid.RowSpacing>

@@ -35,7 +35,7 @@
                     <CollectionView ItemsSource="{Binding ListMyFriends}" IsVisible="{Binding IsListFriendVisible}" SelectedItem="{Binding SelectedFriend}" SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
-                        Span="4"
+                        Span="5"
                         VerticalItemSpacing="30"
                         HorizontalItemSpacing="0" />
                         </CollectionView.ItemsLayout>
@@ -46,7 +46,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="35"/>
                                     </Grid.RowDefinitions>
-                                    <controls:CircleImage HeightRequest="90" WidthRequest="90" Source="{Binding friendPic}" VerticalOptions="CenterAndExpand" Aspect="AspectFill" HorizontalOptions="Start">
+                                    <controls:CircleImage HeightRequest="80" WidthRequest="80" Source="{Binding friendPic}" VerticalOptions="CenterAndExpand" Aspect="AspectFill" HorizontalOptions="Start">
                                     </controls:CircleImage>
                                     <StackLayout Spacing="0" Grid.Row="1">
                                         <local:ExtendedLabel Text="{Binding friendFullname}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="14" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
@@ -84,7 +84,7 @@
                     </local:ExtendedLabel>
                     <yummy:PancakeView BackgroundColor="#dc70b7" VerticalOptions="EndAndExpand" WidthRequest="120" HorizontalOptions="CenterAndExpand" CornerRadius="25" Padding="0">
                         <StackLayout Spacing="1" Padding="2">
-                            <Image Source="DiscoverIcon32.png"/>
+                            <Image Source="iconScan.png" HeightRequest="20" WidthRequest="20"/>
                             <local:ExtendedLabel Text="DISCOVER" TextColor="White" FontFace="PoppinsRegular" FontSize="12" HorizontalTextAlignment="Center"/>
                         </StackLayout>
                         <yummy:PancakeView.GestureRecognizers>

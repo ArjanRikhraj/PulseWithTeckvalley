@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
 using Xamarin.Auth;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -710,6 +711,7 @@ namespace Pulse
 						UserData user = new UserData();
 						user.email = Email.Trim();
 						user.token = token;
+						user.mobile = mobile;
 						var result = await mainService.Put<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.VerifyTokenUrl, user);
 						if (result != null && result.status == Constant.Status200)
 						{
@@ -764,7 +766,7 @@ namespace Pulse
 						UserData user = new UserData();
 						user.email = Email.Trim();
 						user.mobile = Mobile;
-						string url = IsSignUpPage ? Constant.SendOtpOnEmailUrl : Constant.ForgotPasswordUrl;
+						string url = IsSignUpPage ? Constant.SendOtpOnMobileUrl : Constant.ForgotPasswordUrl;
 						var result = await mainService.Post<ResultWrapperSingle<SendEmailOTPResponse>>(url, user);
 						if (result != null && result.status == Constant.Status200)
 						{
@@ -1024,6 +1026,7 @@ namespace Pulse
 			ConfirmPassword = string.Empty;
 			Name = string.Empty;
 			UserName = string.Empty;
+			Mobile = string.Empty;
 			OldPassword = string.Empty;
 			NewChangePassword = string.Empty;
 			ConfirmNewPassword = string.Empty;

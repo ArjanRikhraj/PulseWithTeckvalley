@@ -21,6 +21,7 @@ namespace Pulse
         public const string SignOutUrl = "/api/accounts/signout/";
         public const string CheckEmailExistUrl = "/api/accounts/checkemail/";
         public const string SendOtpOnEmailUrl = "/api/accounts/verifyemail/";
+        public const string SendOtpOnMobileUrl = "/api/accounts/verifymobile/";
         public const string VerifyTokenUrl = "/api/accounts/verifytoken/";
         public const string ForgotPasswordUrl = "/api/accounts/forgotpassword/";
         public const string ResetPasswordUrl = "/api/accounts/resetpassword/";
@@ -288,12 +289,12 @@ namespace Pulse
 
         #region Pulse new header values
         public const string EmailText = "Email";
-        public const string MobileText = "Mobile";
+        public const string MobileText = "Mobile(with country code)";
         public const string NameText = "Name";
         public const string UserNameText = "Your Username";
         public const string UsernameText = "Username";
         public const string DobText = "Date of Birth";
-        public const string SchoolText = "School/Occuption";
+        public const string SchoolText = "School/Occupation";
         public const string PasswordText = "Password";
         public const string ForgetPasswordText = "Forgot Password?";
         public const string Register = "Register";
@@ -312,7 +313,8 @@ namespace Pulse
         public const string PrivacyPolicyQuoteText = "'Privacy Policy'";
         //public const string TermsConditionText = "By checking this box I agree that I have read and accept 'Terms & Condition' & 'Privacy Policy'";
         public const string VerifyEmailText = "Verify Email Address";
-        public const string VerifyEmailDescription = "We have sent an OTP to your email address";
+        public const string VerifyMobileText = "Verify Mobile Number";
+        public const string VerifyMobileDescription = "We have sent an OTP to your mobile number";
         public const string EmailForOTP = "Jason@netsolutions.com";
         public const string EnterCodeText = "Please enter the code here to validate";
         public const string NoOTPText = "Didn't receive an OTP?";

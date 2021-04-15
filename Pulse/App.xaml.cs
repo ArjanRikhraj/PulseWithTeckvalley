@@ -40,11 +40,11 @@ namespace Pulse
 
         public static string NotificationID { get; set; }
         public static string NotificationTitle { get; set; }
-
         public App()
         {
             InitializeComponent();
             SetCultureToUSEnglish();
+            Device.SetFlags(new[] { "MediaElement_Experimental" });
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk0NDM2QDMxMzgyZTMyMmUzMGpHRjhicm1GVS8zUEJMdkNLak1pM1pTMi84eWZSTHZuZVYwcU91dno3cjQ9");
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             MainPage = Settings.IsOnBoardingShown ? new NavigationPage(new LoginPage()) : new NavigationPage(new OnBoardPage());

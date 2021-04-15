@@ -7,32 +7,32 @@ namespace Pulse
 	public static class SessionManager
 	{
 
-		//Temporary bases access token
-		public static string accessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
+        //Temporary bases access token
+        public static string accessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
         public static string AccessToken
         {
             get
             {
-				return accessToken;
+                return accessToken;
 
-			}
+            }
             set
             {
-				accessToken = value;
+                accessToken = value;
             }
         }
 
 
         //public static string AccessToken
         //{
-        //	get
-        //	{
-        //		return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
-        //	}
-        //	set
-        //	{
-        //		Application.Current.Properties["AccessToken"] = value;
-        //	}
+        //    get
+        //    {
+        //        return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
+        //    }
+        //    set
+        //    {
+        //        Application.Current.Properties["AccessToken"] = value;
+        //    }
         //}
 
         public static string UserName

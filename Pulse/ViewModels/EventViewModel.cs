@@ -1206,7 +1206,7 @@ namespace Pulse
                 return;
             }
         }
-        public void GetEventsByFilter(string item)
+        public async void GetEventsByFilter(string item)
         {
             try
             {
@@ -1214,35 +1214,35 @@ namespace Pulse
                     return;
                 if(item=="SOON")
                 {
-                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) && x.StartDateTime>DateTime.Now);
-                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
-                    if (AllUpcomingEvents.Count == 0)
+                    var list = ListLocBasedEvents.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) && x.StartDateTime>DateTime.Now);
+                    tempLocBasedEventList = new ObservableCollection<MyEvents>(list);
+                    if (tempLocBasedEventList.Count == 0)
                     {
-                        Application.Current.MainPage.DisplayAlert("Alert", "No event starting soon", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Alert", "No event starting soon", "Ok");
                         SelectedDate = DateTime.Now.Date;
-                        GetAllUpComingEvents();
+                       await GetMapLocBasedEvents();
                     }
                 }
                 else if(item== "LIVE")
                 {
-                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now);
-                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
-                    if (AllUpcomingEvents.Count == 0)
+                    var list = ListLocBasedEvents.Where(x => x.EventStatus=="Hosting");
+                    tempLocBasedEventList = new ObservableCollection<MyEvents>(list);
+                    if (tempLocBasedEventList.Count == 0)
                     {
-                        Application.Current.MainPage.DisplayAlert("Alert", "No live event found", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Alert", "No live event found", "Ok");
                         SelectedDate = DateTime.Now.Date;
-                        GetAllUpComingEvents();
+                        await GetMapLocBasedEvents();
                     }
                 }
                 else if (item == "ALL")
                 {
-                    var list = tempEventList.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) || x.StartDateTime <= DateTime.Now);
-                    AllUpcomingEvents = new ObservableCollection<MyEvents>(list);
-                    if (AllUpcomingEvents.Count == 0)
+                    var list = ListLocBasedEvents.Where(x => x.StartDateTime <= DateTime.Now.AddMinutes(180) || x.StartDateTime <= DateTime.Now);
+                    tempLocBasedEventList = new ObservableCollection<MyEvents>(list);
+                    if (tempLocBasedEventList.Count == 0)
                     {
-                        Application.Current.MainPage.DisplayAlert("Alert", "No event is happening", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Alert", "No event is happening", "Ok");
                         SelectedDate = DateTime.Now.Date;
-                        GetAllUpComingEvents();
+                        await GetMapLocBasedEvents();
                     }
                 }
                 else
@@ -2553,6 +2553,7 @@ namespace Pulse
                                 myEvent.AttendeeCount = attendee;
                                 myEvent.EventDateTime = date;
                                 myEvent.StartDateTime = DateTime.Parse(item.start_date + " " + item.start_time);
+                                myEvent.EndDateTime = DateTime.Parse(item.end_date + " " + item.end_time);
                                 myEvent.IsEditIconVisible = isEdit;
                                 myEvent.IsFirstImageVisible = isImageOneVisible;
                                 myEvent.IsSecondImageVisible = isImageSecondVisible;
@@ -3023,7 +3024,7 @@ namespace Pulse
                 count++;
                 tempLocBasedEventList.Add(item);
             }
-            AllUpcomingEvents= tempLocBasedEventList;
+            //AllUpcomingEvents= tempLocBasedEventList;
             if (AllUpcomingEvents.Count != 0)
                 IsLocNoEventVisible = false;
             else
