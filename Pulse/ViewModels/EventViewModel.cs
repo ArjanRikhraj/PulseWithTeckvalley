@@ -1210,7 +1210,7 @@ namespace Pulse
         {
             try
             {
-                if (tempEventList == null)
+                if (ListLocBasedEvents == null)
                     return;
                 if(item=="SOON")
                 {

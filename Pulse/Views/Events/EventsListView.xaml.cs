@@ -347,6 +347,7 @@ namespace Pulse
         async void MapIconTapped(object sender, System.EventArgs e)
         {
             //imgCurrentLocation.IsVisible = true;
+            stackMapFilter.IsVisible = false;
             lblList.IsVisible = true;
             stackFilter.IsVisible = true;
             calendarFilter.IsVisible = false;
@@ -1095,6 +1096,7 @@ namespace Pulse
         {
             try
             {
+                stackMapFilter.IsVisible = true;
                 stackFilter.IsVisible = false;
                 calendarFilter.IsVisible = true;
                 imgMap.IsVisible = true;
@@ -1238,6 +1240,11 @@ namespace Pulse
         private void CrossIcon_Tapped(object sender, EventArgs e)
         {
             entryVenue.Text = "";
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            stackEntryMap.IsVisible = !stackEntryMap.IsVisible;
         }
     }
 }

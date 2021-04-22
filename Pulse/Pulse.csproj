@@ -110,6 +110,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomFrame.cs" />
     <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\NoUnderlineDatePicker.cs" />
     <Compile Include="Controls\NoUnderlineTimePicker.cs" />

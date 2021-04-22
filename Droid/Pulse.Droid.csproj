@@ -543,6 +543,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CustomFrameRenderer.cs" />
     <Compile Include="Renderers\NoUnderLineDatePickerRenderer.cs" />
     <Compile Include="Renderers\NoUnderlineTimePickerRenderer.cs" />
     <Compile Include="Renderers\OFrameRenderer.cs" />

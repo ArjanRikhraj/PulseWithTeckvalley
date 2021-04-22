@@ -15,7 +15,7 @@
                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Text="Find Friends" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold"/>
+                    <Label Text="Find Friends" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold"/>
                 </local:GradientColorStack>
                 <StackLayout IsVisible="False" Grid.Row="0" BackgroundColor="Transparent" x:Name="stackMainMyevents">
                 </StackLayout>
