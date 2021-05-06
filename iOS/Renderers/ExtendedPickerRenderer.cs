@@ -23,7 +23,10 @@ namespace Pulse.iOS
 		protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
 		{
 			base.OnElementChanged(e);
-
+			if (Control == null)
+			{
+				return;
+			}
 			ExtendedPicker picker = (ExtendedPicker)Element;
 			if (picker != null)
 			{

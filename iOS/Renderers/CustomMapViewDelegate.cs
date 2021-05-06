@@ -37,76 +37,79 @@ namespace Pulse.iOS
                 anno = annotation as MKPointAnnotation;
             }
             var customPin = GetCustomPin(annotation as MKPointAnnotation);
-            if (customPin == null)
+            //if (customPin == null)
+            //{
+            //    //throw new Exception("Custom pin not found");
+            //}
+            if (customPin != null)
             {
-                throw new Exception("Custom pin not found");
-            }
-            annotationView = mapView.DequeueReusableAnnotation(customPin.Id);
-            if (annotationView == null)
-            {
-                annotationView = new CustomMKPinAnnotationView(annotation, customPin.Id);
-                UILabel label = new UILabel(new CGRect(2, -20, 25, 25))
+                annotationView = mapView.DequeueReusableAnnotation(customPin.Id);
+                if (annotationView == null)
                 {
-                    Text = customPin.SameLocationPinCount,
-                    TextAlignment = UITextAlignment.Center,
-                    TextColor = UIColor.White
-                };
-                label.Layer.CornerRadius = 12;
-                label.Layer.MasksToBounds = true;
+                    annotationView = new CustomMKPinAnnotationView(annotation, customPin.Id);
+                    UILabel label = new UILabel(new CGRect(2, -20, 25, 25))
+                    {
+                        Text = customPin.SameLocationPinCount,
+                        TextAlignment = UITextAlignment.Center,
+                        TextColor = UIColor.White
+                    };
+                    label.Layer.CornerRadius = 12;
+                    label.Layer.MasksToBounds = true;
+                    if (customPin.IsCurrentLocation)
+                    {
+                        annotationView.Image = UIImage.FromFile("icUserCurrentLocation.png");
+                        label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
+
+                    }
+                    else if (customPin.IsBoostEvent)
+                    {
+                        annotationView.Image = UIImage.FromFile("icBoostEvent.png");
+                        label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
+                    }
+                    else
+                    {
+                        annotationView.Image = UIImage.FromFile("map_pin.png");
+                        label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
+                    }
+
+                    if (Convert.ToInt32(customPin.SameLocationPinCount) > 0)
+                    {
+                        annotationView.AddSubview(label);
+                    }
+
+                }
+            //This removes the bubble that pops up with the title and everything
+            ((CustomMKPinAnnotationView)annotationView).FormsIdentifier = customPin.Id;
+                ((CustomMKPinAnnotationView)annotationView).IsBoostEvent = customPin.IsBoostEvent;
+                ((CustomMKPinAnnotationView)annotationView).IsCurrentLocation = customPin.IsCurrentLocation;
+                ((CustomMKPinAnnotationView)annotationView).EventName = customPin.EventName;
+                ((CustomMKPinAnnotationView)annotationView).EventDate = customPin.EventDateTime;
+                ((CustomMKPinAnnotationView)annotationView).Id = customPin.Id;
+                ((CustomMKPinAnnotationView)annotationView).IsMoreThanOneLocation = customPin.IsMoreThanOneLocation;
+                ((CustomMKPinAnnotationView)annotationView).Latitude = customPin.Latitude;
+                ((CustomMKPinAnnotationView)annotationView).Lognitude = customPin.Lognitude;
                 if (customPin.IsCurrentLocation)
                 {
                     annotationView.Image = UIImage.FromFile("icUserCurrentLocation.png");
-                    label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
-
                 }
                 else if (customPin.IsBoostEvent)
                 {
                     annotationView.Image = UIImage.FromFile("icBoostEvent.png");
-                    label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
                 }
                 else
                 {
                     annotationView.Image = UIImage.FromFile("map_pin.png");
-                    label.BackgroundColor = UIColor.FromRGB(255, 149, 105);
                 }
-
-                if (Convert.ToInt32(customPin.SameLocationPinCount) > 0)
-                {
-                    annotationView.AddSubview(label);
-                }
-
-            }
-            //This removes the bubble that pops up with the title and everything
-            ((CustomMKPinAnnotationView)annotationView).FormsIdentifier = customPin.Id;
-            ((CustomMKPinAnnotationView)annotationView).IsBoostEvent = customPin.IsBoostEvent;
-            ((CustomMKPinAnnotationView)annotationView).IsCurrentLocation = customPin.IsCurrentLocation;
-            ((CustomMKPinAnnotationView)annotationView).EventName = customPin.EventName;
-            ((CustomMKPinAnnotationView)annotationView).EventDate = customPin.EventDateTime;
-            ((CustomMKPinAnnotationView)annotationView).Id = customPin.Id;
-            ((CustomMKPinAnnotationView)annotationView).IsMoreThanOneLocation = customPin.IsMoreThanOneLocation;
-            ((CustomMKPinAnnotationView)annotationView).Latitude = customPin.Latitude;
-            ((CustomMKPinAnnotationView)annotationView).Lognitude = customPin.Lognitude;
-            if (customPin.IsCurrentLocation)
-            {
-                annotationView.Image = UIImage.FromFile("icUserCurrentLocation.png");
-            }
-            else if (customPin.IsBoostEvent)
-            {
-                annotationView.Image = UIImage.FromFile("icBoostEvent.png");
-            }
-            else
-            {
-                annotationView.Image = UIImage.FromFile("map_pin.png");
-            }
-            if (customPin.IsBoostEvent)
-            {
-                annotationView.CanShowCallout = false;
-            }
-            else
-            {
-                if (!customPin.IsMoreThanOneLocation)
+                if (customPin.IsBoostEvent)
                 {
                     annotationView.CanShowCallout = false;
+                }
+                else
+                {
+                    if (!customPin.IsMoreThanOneLocation)
+                    {
+                        annotationView.CanShowCallout = false;
+                    }
                 }
             }
             return annotationView;
@@ -264,17 +267,18 @@ namespace Pulse.iOS
 
         CustomPin GetCustomPin(MKPointAnnotation annotation)
         {
-            var position = new Position(annotation.Coordinate.Latitude, annotation.Coordinate.Longitude);
-            foreach (var pin in customPins)
+            if(annotation!=null)
             {
-                if (pin.Position == position)
+                var position = new Position(annotation.Coordinate.Latitude, annotation.Coordinate.Longitude);
+                foreach (var pin in customPins)
                 {
-                    return pin;
+                    if (pin.Position == position)
+                    {
+                        return pin;
+                    }
                 }
             }
             return null;
         }
     }
-
-
 }

@@ -145,7 +145,7 @@
                                                         </Frame>
                                                     </Grid>
                                                 </StackLayout>
-                                                <Frame CornerRadius="15" Padding="8,2,8,2" HasShadow="false" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" OutlineColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="Start">
+                                                <Frame CornerRadius="15" Padding="8,2,8,2" HasShadow="false" BackgroundColor="White" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" OutlineColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="Start">
                                                     <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="0">
                                                         <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
                                                         <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Check In" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />

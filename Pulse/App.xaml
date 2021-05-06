@@ -5,11 +5,11 @@
         <ResourceDictionary>
             <Style x:Key="eventFrameStyle" TargetType="yummy:PancakeView">
                 <Setter Property="Padding" Value="7,12,5,12" />
-                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="CornerRadius" Value="30" />
             </Style>
             <Style x:Key="eventEntryStyle" TargetType="local:BorderlessEntry">
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="PlaceholderColor" Value="{x:Static local:Constant.ExtraDarkGrayColor}" />
+                <Setter Property="PlaceholderColor" Value="{x:Static local:Constant.ExtraDarkGrayColor}"/>
                 <Setter Property="Margin" Value="20,0,0,0" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />

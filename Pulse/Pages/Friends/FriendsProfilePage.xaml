@@ -17,7 +17,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <controls:CircleImage Grid.Column="0" x:Name="imgUser" HeightRequest="90" WidthRequest="90" BorderThickness="4" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{x:Static local:Constant.ProfileIcon}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand">
+                        <controls:CircleImage Grid.Column="0" x:Name="imgUser" HeightRequest="90" WidthRequest="90" BorderThickness="4" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{x:Static local:Constant.ProfileIcon}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
                         </controls:CircleImage>
                         <StackLayout Grid.Column="1">
                             <local:ExtendedLabel x:Name="lblUsername"  LineBreakMode="TailTruncation" FontFace="PoppinsMedium"  HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
@@ -67,8 +67,16 @@
                                     </local:ExtendedButton>
                                 </StackLayout>
                                 <StackLayout BackgroundColor="Transparent" Margin="0,15,0,10"  Grid.Column="1" >
-
-                                    <local:ExtendedButton x:Name="btnBlock" Clicked="Block_Unblock_Clicked"  FontSize="10" WidthRequest="94"  HorizontalOptions="Start" VerticalOptions="Center" FontFace="PoppinsMedium"  Text="{Binding BlockUnBlockText}" BackgroundColor="Transparent" BorderWidth="2" BorderColor="{x:Static local:Constant.WhiteTextColor}"
+                                    <local:ExtendedButton x:Name="btnMessage" Clicked="btnMessage_Clicked"  FontSize="10" WidthRequest="94"  HorizontalOptions="Start" VerticalOptions="Center" FontFace="PoppinsMedium"  Text="Message" BackgroundColor="Transparent" BorderWidth="2" BorderColor="{x:Static local:Constant.WhiteTextColor}"
+                            TextColor="{x:Static local:Constant.WhiteTextColor}">
+                                        <local:ExtendedButton.HeightRequest>
+                                            <OnPlatform x:TypeArguments="x:Double" iOS="27" Android="29" />
+                                        </local:ExtendedButton.HeightRequest>
+                                        <local:ExtendedButton.BorderRadius>
+                                            <OnPlatform x:TypeArguments="x:Int32" iOS="14" Android="16" />
+                                        </local:ExtendedButton.BorderRadius>
+                                    </local:ExtendedButton>
+                                    <local:ExtendedButton IsVisible="False" x:Name="btnBlock" Clicked="Block_Unblock_Clicked"  FontSize="10" WidthRequest="94"  HorizontalOptions="Start" VerticalOptions="Center" FontFace="PoppinsMedium"  Text="{Binding BlockUnBlockText}" BackgroundColor="Transparent" BorderWidth="2" BorderColor="{x:Static local:Constant.WhiteTextColor}"
                             TextColor="{x:Static local:Constant.WhiteTextColor}">
                                         <local:ExtendedButton.HeightRequest>
                                             <OnPlatform x:TypeArguments="x:Double" iOS="27" Android="29" />
@@ -132,7 +140,7 @@
                                     <ViewCell.View>
                                         <pancakeview:PancakeView CornerRadius="10" Padding="10" BackgroundColor="{Binding ListBackColor}" Margin="0,0,0,8">
                                             <pancakeview:PancakeView.Border>
-                                                <pancakeview:Border Color="HotPink" x:Name="borderGradient" Thickness="1"/>
+                                                <pancakeview:Border Color="#707070" x:Name="borderGradient" Thickness="1"/>
                                             </pancakeview:PancakeView.Border>
                                             <StackLayout Orientation="Vertical" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                                     <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand" />
@@ -223,6 +231,15 @@
                             </local:ExtendedLabel>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Unfriend_Tapped" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand">
+                        </BoxView>
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                            <local:ExtendedLabel Text="{Binding BlockUnBlockText}" FontFace="PoppinsMedium" FontSize="14" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="{x:Static local:Constant.PinkTextColor}">
+                            </local:ExtendedLabel>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Block_Unblock_Clicked" />
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </StackLayout>

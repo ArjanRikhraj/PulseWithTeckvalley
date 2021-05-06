@@ -198,8 +198,11 @@ namespace Pulse
 					gridGuests.Children.Add(userImage, i, 0);
 					if (i == 6)
 						return;
+					gridGuests.IsVisible = true;
 				}
 			}
+			else
+				gridGuests.IsVisible = false;
 		}
 		void CreateGuestGrid()
 		{

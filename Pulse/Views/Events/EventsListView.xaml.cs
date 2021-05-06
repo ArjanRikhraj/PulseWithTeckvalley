@@ -346,13 +346,11 @@ namespace Pulse
         }
         async void MapIconTapped(object sender, System.EventArgs e)
         {
-            //imgCurrentLocation.IsVisible = true;
-            stackMapFilter.IsVisible = false;
+            
             lblList.IsVisible = true;
-            stackFilter.IsVisible = true;
-            calendarFilter.IsVisible = false;
-            imgMap.IsVisible = false;
-            entryVenue.Placeholder = "Search Live Events";
+            mapFilter.IsVisible = true;
+            listFilter.IsVisible = false;
+            entryVenue.Placeholder = "Live Events";
             eventViewModel.listURL = FilterPicker.SelectedIndex == 0 || FilterPicker.SelectedIndex == -1 ? Constant.MapLatLongBasedEventsUrl : Constant.MapPopularityBasedEventsUrl;
             eventViewModel.pageNoLocBasedEvents = 1;
             eventViewModel.tempLocBasedEventList.Clear();
@@ -693,23 +691,30 @@ namespace Pulse
 
         async void CreateEvent_Tapped(object sender, System.EventArgs e)
         {
-            if (CrossConnectivity.Current.IsConnected)
+            try
             {
-                if (_tapCount < 1)
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    _tapCount = 1;
-                    App.ShowMainPageLoader();
-                    await Task.Delay(500);
-                    eventViewModel.IsBoostEvent = false;
-                    eventViewModel.BoostEventConfirmation = true;
-                    Navigation.PushModalAsync(new AddEventPage());
+                    if (_tapCount < 1)
+                    {
+                        _tapCount = 1;
+                        App.ShowMainPageLoader();
+                        //await Task.Delay(500);
+                        eventViewModel.IsBoostEvent = false;
+                        eventViewModel.BoostEventConfirmation = true;
+                       await Navigation.PushModalAsync(new AddEventPage());
+                        _tapCount = 0;
+                    }
+                }
+                else
+                {
+                    await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
                     _tapCount = 0;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-                _tapCount = 0;
+                await App.Instance.Alert("Can not create event right now", Constant.AlertTitle, Constant.Ok);
             }
         }
 
@@ -1096,11 +1101,8 @@ namespace Pulse
         {
             try
             {
-                stackMapFilter.IsVisible = true;
-                stackFilter.IsVisible = false;
-                calendarFilter.IsVisible = true;
-                imgMap.IsVisible = true;
-                lblList.IsVisible = false;
+                mapFilter.IsVisible = false;
+                listFilter.IsVisible = true;
                 listViewEvents.IsVisible = true;
                 stackMap.IsVisible = false;
                 entryVenue.Placeholder = "Search Upcoming Events";
@@ -1240,11 +1242,6 @@ namespace Pulse
         private void CrossIcon_Tapped(object sender, EventArgs e)
         {
             entryVenue.Text = "";
-        }
-
-        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
-        {
-            stackEntryMap.IsVisible = !stackEntryMap.IsVisible;
         }
     }
 }

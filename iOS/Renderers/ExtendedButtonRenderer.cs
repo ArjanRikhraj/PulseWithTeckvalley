@@ -12,7 +12,9 @@ namespace Pulse.iOS
 		protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
 		{
 			base.OnElementChanged(e);
-			var view = e.NewElement as ExtendedButton;
+			if (e.NewElement == null)
+				return;
+				var view = e.NewElement as ExtendedButton;
 			if (view != null)
 			{
 				SetFont(view);

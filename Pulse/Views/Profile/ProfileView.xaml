@@ -37,25 +37,24 @@
 						</StackLayout.GestureRecognizers>
 					</StackLayout>
 					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
-						<Image Source="{x:Static local:Constant.SettingsIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
-						<local:ExtendedLabel Text="Settings" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
-						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
-						<StackLayout.GestureRecognizers>
-							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SettingsTapped" />
-						</StackLayout.GestureRecognizers>
-					</StackLayout>
-					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
-						<Image Source="photo_album.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
-						<local:ExtendedLabel Text="Photo Album" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
-						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
-						<StackLayout.GestureRecognizers>
-							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PhotoAlbum_Tapped" />
-						</StackLayout.GestureRecognizers>
-					</StackLayout>
-					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-
+                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+                        <Image Source="photo_album.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+                        <local:ExtendedLabel Text="Photo Album" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+                        <Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PhotoAlbum_Tapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+                        <Image Source="{x:Static local:Constant.SettingsIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+                        <local:ExtendedLabel Text="Settings" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+                        <Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SettingsTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
 				</StackLayout>
 				<Frame HasShadow="false" Grid.RowSpan="2" VerticalOptions="Center" Grid.Row="0" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="1" Margin="15,0,15,5">
 					<Grid ColumnSpacing="0">

@@ -579,7 +579,7 @@ namespace Pulse
 			{
 				_tapCount = 1;
 				stackMore.IsVisible = !stackMore.IsVisible;
-				lblMore.Text = lblMore.Text.Equals(Constant.MoreText) ? Constant.LessText : Constant.MoreText;
+				//lblMore.Text = lblMore.Text.Equals(Constant.MoreText) ? Constant.LessText : Constant.MoreText;
 				_tapCount = 0;
 			}
 		}
@@ -919,7 +919,7 @@ namespace Pulse
 								CustomPhotoSize = 50,
 								CompressionQuality = 60,
 								AllowCropping = true,
-								SaveMetaData = false
+								SaveMetaData = false, 
 							});
 
 							if (profileFile == null)

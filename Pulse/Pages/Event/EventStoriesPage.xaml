@@ -6,27 +6,31 @@
         <Grid>
             <Grid RowDefinitions="*">
                 <StackLayout BackgroundColor="Black" Grid.Row="0">
-                </StackLayout>
-                <MediaElement IsVisible="False" x:Name="mediaElement" Grid.Row="0" HeightRequest="500" HorizontalOptions="FillAndExpand" Source="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" ShowsPlaybackControls="False" VerticalOptions="CenterAndExpand"/>
-                <StackLayout Grid.Row="0" VerticalOptions="StartAndExpand" Spacing="10" Padding="10" HeightRequest="100">
-                    <ProgressBar ProgressColor="LightGray" x:Name="progressBar"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Image Source="back.png" VerticalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                        <custom:CircleImage x:Name="imgUser" Source="{Binding HostImage}" Aspect="AspectFill" WidthRequest="40" BorderColor="LightGray" BorderThickness="0.5" VerticalOptions="Center">
-                            <custom:CircleImage.GestureRecognizers>
-                                <TapGestureRecognizer/>
-                            </custom:CircleImage.GestureRecognizers>
-                        </custom:CircleImage>
-                        <local:ExtendedButton Image="{x:Static local:Constant.OptionsWhiteIcon}" Clicked="MenuButton_Clicked" BackgroundColor="Transparent" WidthRequest="40" Margin="10,0,0,0" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                    <StackLayout VerticalOptions="StartAndExpand" Spacing="10" Padding="10" HeightRequest="100" BackgroundColor="Transparent">
+                        <ProgressBar ProgressColor="LightGray" x:Name="progressBar"/>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+                            <Image Source="back.png" VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <custom:CircleImage x:Name="imgUser" Source="{Binding HostImage}" Aspect="AspectFill" WidthRequest="40" BorderColor="LightGray" BorderThickness="0.5" VerticalOptions="Center">
+                                <custom:CircleImage.GestureRecognizers>
+                                    <TapGestureRecognizer/>
+                                </custom:CircleImage.GestureRecognizers>
+                            </custom:CircleImage>
+                                <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Padding="0" Spacing="0">
+                                <Image Source="add_pulse.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                            <local:ExtendedButton IsVisible="False" Image="{x:Static local:Constant.OptionsWhiteIcon}" Clicked="MenuButton_Clicked" BackgroundColor="Transparent" WidthRequest="40" Margin="10,0,0,0" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
+            </Grid>
+            <local:ExtendedLabel Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="There is no party story at the moment" TextColor="White" FontFace="PoppinsRegular"/>
 
-
-                <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+            <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
                 </Grid>
                 <StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
                     <Frame x:Name="farmePopUp" CornerRadius="10" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -60,7 +64,7 @@
                     </Frame>
                     <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                 </StackLayout>
-            </Grid>
+          
         </Grid>
     </local:BaseContentPage.Content>
 </local:BaseContentPage>

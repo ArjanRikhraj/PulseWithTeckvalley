@@ -12,13 +12,23 @@ namespace Pulse.iOS
 		protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
 		{
 			base.OnElementChanged(e);
-			var view = e.NewElement as ExtendedEntry;
-			Control.BorderStyle = UITextBorderStyle.None;
-			if (view != null)
-			{
-				SetFont(view);
-				SetMaxLength(view);
+            try
+            {
+				if(e.NewElement!=null)
+                {
+					var view = e.NewElement as ExtendedEntry;
+					Control.BorderStyle = UITextBorderStyle.None;
+					if (view != null)
+					{
+						SetFont(view);
+						SetMaxLength(view);
+					}
+				}
 			}
+            catch (System.Exception ex)
+            {
+				return;
+            }
 		}
 
 		void SetMaxLength(ExtendedEntry view)

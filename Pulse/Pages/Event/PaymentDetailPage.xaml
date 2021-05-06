@@ -52,7 +52,7 @@
                                     <StackLayout x:Name="stackMainCard" Grid.Column="0" Grid.Row="0" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0" Margin="0">
                                         <local:ExtendedLabel x:Name="lblSmallcard" FontFace="PoppinsRegular" Text="{x:Static local:Constant.CreditCardText}" TextColor="Transparent" Margin="0,0,0,0" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0" Margin="0,0,0,0">
-                                            <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entCardNo" Margin="0" MaxLength="19" TextChanged="EntryCard_TextChanged" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CardNumber}" Placeholder="{x:Static local:Constant.CreditCardText}" Keyboard="Numeric"
+                                            <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entCardNo" Margin="0" MaxLength="20" TextChanged="EntryCard_TextChanged" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CardNumber}" Placeholder="{x:Static local:Constant.CreditCardText}" Keyboard="Numeric"
                                                 FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
                                         </StackLayout>
                                     </StackLayout>

@@ -7,6 +7,7 @@ namespace Pulse
 	public partial class FriendsProfilePage : BaseContentPage
 	{
 		#region variables
+		string friendId;
 		int _tapCount = 0;
 		readonly FriendsViewModel friendsViewModel;
 		readonly EventViewModel eventViewModel;
@@ -17,6 +18,7 @@ namespace Pulse
 		public FriendsProfilePage(string page, string id)
 		{
 			InitializeComponent();
+			friendId = id;
 			friendsViewModel = ServiceContainer.Resolve<FriendsViewModel>();
 			eventViewModel = ServiceContainer.Resolve<EventViewModel>();
 			BindingContext = friendsViewModel;
@@ -207,43 +209,51 @@ namespace Pulse
 
 		async void BackIcon_Tapped(object sender, System.EventArgs e)
 		{
-			if (CrossConnectivity.Current.IsConnected)
+			try
 			{
-				if (_tapCount < 1)
+				if (CrossConnectivity.Current.IsConnected)
 				{
-					_tapCount = 1;
-					friendsViewModel.IsLoading = true;
-					if (pageType.Equals("My Friends"))
+					if (_tapCount < 1)
 					{
-						friendsViewModel.PendingRequestCount();
-						friendsViewModel.pageNoUser = 1;
-						friendsViewModel.tempUserList.Clear();
-						friendsViewModel.tempFriendList.Clear();
-						friendsViewModel.pageNoFriend = 1;
-						friendsViewModel.totalPagesMyFriends = 1;
-						friendsViewModel.GetMyFriendsList();
+						_tapCount = 1;
+                        friendsViewModel.IsLoading = true;
+                        if (pageType.Equals("My Friends"))
+                        {
+                            friendsViewModel.PendingRequestCount();
+                            friendsViewModel.pageNoUser = 1;
+                            friendsViewModel.tempUserList.Clear();
+                            friendsViewModel.tempFriendList.Clear();
+                            friendsViewModel.pageNoFriend = 1;
+                            friendsViewModel.totalPagesMyFriends = 1;
+                            friendsViewModel.GetMyFriendsList();
+                        }
+                        else if (pageType.Equals("Pending"))
+                        {
+                            friendsViewModel.pageNoPending = 1;
+                            friendsViewModel.tempPendingList.Clear();
+                            friendsViewModel.GetPendingFriendsList();
+                        }
+                        else
+                        {
+                            friendsViewModel.tempUserList.Clear();
+                            friendsViewModel.pageNoUser = 1;
+                            friendsViewModel.GetUsers();
+                        }
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+						//await Navigation.PopModalAsync();
+						friendsViewModel.IsLoading = false;
+						_tapCount = 0;
 					}
-					else if (pageType.Equals("Pending"))
-					{
-						friendsViewModel.pageNoPending = 1;
-						friendsViewModel.tempPendingList.Clear();
-						friendsViewModel.GetPendingFriendsList();
-					}
-					else
-					{
-						friendsViewModel.tempUserList.Clear();
-						friendsViewModel.pageNoUser = 1;
-						friendsViewModel.GetUsers();
-					}
-					await Navigation.PopModalAsync();
-					friendsViewModel.IsLoading = false;
+				}
+				else
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
 					_tapCount = 0;
 				}
 			}
-			else
+			catch (Exception)
 			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
+				return;
 			}
 		}
         #endregion
@@ -253,5 +263,17 @@ namespace Pulse
 			stackPopUp.IsVisible = true;
 			grdOverlayDialog.IsVisible = true;
 		}
+
+        private async void btnMessage_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+				await Navigation.PushModalAsync(new MessageChatPage(int.Parse(friendId), true, false));
+			}
+            catch (Exception ex)
+            {
+				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
+			}
+        }
     }
 }

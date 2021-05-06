@@ -2498,7 +2498,7 @@ namespace Pulse
                                 string loc = item.event_venue + "," + item.location_address;
                                 string attendee;
                                 isEdit = false;
-                                string date = SetEventDate(item.start_date, item.start_time) + " " + item.time_zone_type;
+                                string date = SetEventDate(item.start_date, item.start_time);// + " " + item.time_zone_type;
                                 bool isImageOneVisible;
                                 bool isImageSecondVisible;
                                 string imageOne;
@@ -2571,14 +2571,12 @@ namespace Pulse
                             foreach (var item in tempEventList)
                             {
                                 if (count == 1)
-                                    item.PartyImage = "iconParty.jpg";
+                                    item.PartyImage = "rebelnightclubcover.jpg";
                                 else if (count == 2)
-                                    item.PartyImage = "iconparty2.png";
+                                    item.PartyImage = "AplhaCoverpic.jpg";
                                 else if (count == 3)
-                                    item.PartyImage = "iconParty3.png";
-                                else if (count == 4)
                                 {
-                                    item.PartyImage = "iconParty4.png";
+                                    item.PartyImage = "toyboxmediaCover.jpg";
                                     count = 0;
                                 }
                                 count++;
@@ -3011,14 +3009,12 @@ namespace Pulse
             foreach (var item in filteredList)
             {
                 if (count == 1)
-                    item.PartyImage = "iconParty.jpg";
+                    item.PartyImage = "rebelnightclubcover.jpg";
                 else if (count == 2)
-                    item.PartyImage = "iconparty2.png";
+                    item.PartyImage = "AplhaCoverpic.jpg";
                 else if (count == 3)
-                    item.PartyImage = "iconParty3.png";
-                else if (count == 4)
                 {
-                    item.PartyImage = "iconParty4.png";
+                    item.PartyImage = "toyboxmediaCover.jpg";
                     count = 0;
                 }
                 count++;
@@ -3291,7 +3287,7 @@ namespace Pulse
                             MobileNumber = response.response.contact_number;
                             IsReportedSpam = response.response.reported_spam;
                             TimeZoneType = response.response.time_zone_type;
-                            eventDateOnMap = SetEventDate(response.response.start_date, response.response.start_time) + " " + response.response.time_zone_type;
+                            eventDateOnMap = SetEventDate(response.response.start_date, response.response.start_time);// + " " + response.response.time_zone_type;
                             eventLogitude = response.response.longitude;
                             eventLattitude = response.response.latitude;
                             EventLitScore = Convert.ToString(response.response.event_lit_score) + Constant.LitScoreText;
@@ -3320,7 +3316,7 @@ namespace Pulse
                             HostedName = response.response.host_name;
                             HostImage = !string.IsNullOrEmpty(response.response.host_profile_image) ? PageHelper.GetUserImage(response.response.host_profile_image) : Constant.UserDefaultSquareImage;
                             EventDate = eventDateOnMap;
-                            EventTime = SetEventDate(response.response.end_date, response.response.end_time) + " " + response.response.time_zone_type;
+                            EventTime = SetEventDate(response.response.end_date, response.response.end_time);// + " " + response.response.time_zone_type;
                             //LocationEvent = EventVenue + ", " + EventLocation;
                             LocationEvent = EventVenue;
                             SetLikeCount();
@@ -4661,7 +4657,7 @@ namespace Pulse
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
                 TapCount = 0;
