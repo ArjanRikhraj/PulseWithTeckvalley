@@ -29,4 +29,26 @@
 		public bool is_live { get; set; }
 		public string file_thumbnail { get; set; }
 	}
+	public class Media
+	{
+		public string file_name { get; set; }
+		public int file_type { get; set; }
+		public string file_thumbnail { get; set; }
+	}
+
+	public class CoverImageRequest
+	{
+		public int event_id { get; set; }
+		public Media media { get; set; }
+	}
+	public class CoverImageResponse
+	{
+		public string msg { get; set; }
+	}
+	public class PullStoryRequest
+    {
+		public long user_id { get; set; }
+		public long event_id { get; set; }
+		public Media media { get; set; }
+	}
 }

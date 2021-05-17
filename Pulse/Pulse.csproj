@@ -117,6 +117,7 @@
     <Compile Include="Controls\OFrame.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Interfaces\ILocSettings.cs" />
+    <Compile Include="Models\Application\Events\Stories.cs" />
     <Compile Include="Models\Friends\AddFriendModel.cs" />
     <Compile Include="Models\User\CurrentLocation.cs" />
     <Compile Include="Pages\Event\AddFriendsPage.xaml.cs">
@@ -244,6 +245,7 @@
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CmsViewModel.cs" />
+    <Compile Include="ViewModels\EventStoryViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\FriendsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />

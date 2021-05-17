@@ -65,4 +65,14 @@ namespace Pulse
 		public string start_time { get; set; }
 		public string end_time { get; set; }
 	}
+	public partial class StarEventRequest
+    {
+		public long event_id { get; set; }
+		public long user_id { get; set; }
+    }
+	public partial class StarEventResponse
+    {
+		public bool is_star { get; set; }
+		public string msg { get; set; }
+	}
 }

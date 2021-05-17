@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ImageCircle.Forms.Plugin.Abstractions;
 using Plugin.Connectivity;
 using Plugin.Geolocator;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Pulse.Helpers;
@@ -22,6 +25,8 @@ namespace Pulse
 		string selectedEventId;
         bool commentTapped;
 		bool isPastEvent;
+		string fileGotFrom;
+		int fileId;
 		#endregion
 		#region Constructor
 		public EventDetailPage(string id)
@@ -1158,10 +1163,229 @@ namespace Pulse
 		}
 		void OverLayTapped(object sender, System.EventArgs e)
 		{
-			//gridOverlayPopUp.IsVisible = false;
+			grdOverlayPopUp.IsVisible = false;
 			grdOverlayDialog.IsVisible = false;
-			stackcheckInMessage.IsVisible = false;
+			stackUploadImagePopUp.IsVisible = false;
+			stackInnerPopUp.IsVisible = false;
 		}
-		#endregion
-	}
+       
+
+        private void Camera_Tapped(object sender, EventArgs e)
+        {
+			grdOverlayDialog.IsVisible = false;
+			stackUploadImagePopUp.IsVisible = false;
+			stackInnerPopUp.IsVisible = true;
+			grdOverlayPopUp.IsVisible = true;
+			fileGotFrom = "Take Photo";
+		}
+
+        private void Gallery_Tapped(object sender, EventArgs e)
+        {
+			grdOverlayDialog.IsVisible = false;
+			stackUploadImagePopUp.IsVisible = false;
+			stackInnerPopUp.IsVisible = true;
+			grdOverlayPopUp.IsVisible = true;
+			fileGotFrom = "Choose Photo";
+		}
+
+        private async void Photo_Tapped(object sender, EventArgs e)
+        {
+			stackInnerPopUp.IsVisible = false;
+			grdOverlayPopUp.IsVisible = false;
+			if (fileGotFrom.Equals("Take Photo"))
+			{
+				await TakePhoto();
+			}
+			else
+			{
+				await PickPhoto();
+			}
+		}
+		async Task TakePhoto()
+		{
+			try
+			{
+				if (_tapCount < 1)
+				{
+					if (!CrossConnectivity.Current.IsConnected)
+					{
+						await DisplayAlert(Constant.AlertTitle, Constant.NetworkNotificationHeader, Constant.Ok);
+						_tapCount = 0;
+					}
+					else
+					{
+						eventViewModel.IsLoading = true;
+						if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+						{
+							await DisplayAlert(Constant.NoCameraText, Constant.CameraNotAvalaibleMessage, Constant.Ok);
+							eventViewModel.IsLoading = false;
+							_tapCount = 0;
+						}
+						else
+						{
+							grdOverlayDialog.IsVisible = false;
+							stackPopUp.IsVisible = false;
+							eventViewModel.IsLoading = true;
+							await App.GetCameraPermission();
+							await App.GetStoragePermission();
+							var profileFile = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+							{
+								PhotoSize = PhotoSize.Medium,
+								AllowCropping = true,
+								SaveMetaData = false
+							});
+
+							if (profileFile == null)
+							{
+								eventViewModel.IsLoading = false;
+								_tapCount = 0;
+							}
+							ImageSource imgSource = ImageSource.FromStream(() =>
+							{
+								var stream = profileFile.GetStream();
+								return stream;
+							});
+							fileId++;
+							string fileName = Guid.NewGuid() + Path.GetExtension(profileFile.Path);
+							UploadImage(fileName, profileFile.GetStream());
+						}
+					}
+				}
+				else
+				{
+					eventViewModel.IsLoading = false;
+				}
+			}
+			catch (Exception)
+			{
+				// await App.Instance.Alert("Allow Camera and storage permission access to take photos and videos", Constant.AlertTitle, Constant.Ok);
+				// CrossPermissions.Current.OpenAppSettings();
+				eventViewModel.IsLoading = false;
+			}
+		}
+		async Task PickPhoto()
+		{
+			try
+			{
+				if (_tapCount < 1)
+				{
+					if (!CrossConnectivity.Current.IsConnected)
+					{
+						await DisplayAlert(Constant.AlertTitle, Constant.NetworkNotificationHeader, Constant.Ok);
+						_tapCount = 0;
+					}
+					else
+					{
+						grdOverlayDialog.IsVisible = false;
+						stackPopUp.IsVisible = false;
+						eventViewModel.IsLoading = true;
+						if (!CrossMedia.Current.IsPickPhotoSupported)
+						{
+							await DisplayAlert(Constant.NotAllowedText, Constant.GalleryAccessMessage, Constant.Ok);
+							eventViewModel.IsLoading = false;
+							_tapCount = 0;
+						}
+						else
+						{
+							await App.GetStoragePermission();
+							var storyPickedFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions()
+							{
+								PhotoSize = PhotoSize.Medium
+
+							});
+
+							if (storyPickedFile == null)
+							{
+								eventViewModel.IsLoading = false;
+								_tapCount = 0;
+							}
+							ImageSource imgSource = ImageSource.FromStream(() =>
+							{
+								var stream = storyPickedFile.GetStream();
+								return stream;
+							});
+							fileId++;
+							string fileName = Guid.NewGuid() + Path.GetExtension(storyPickedFile.Path);
+							UploadImage(fileName, storyPickedFile.GetStream());
+						}
+					}
+				}
+				else
+				{
+					eventViewModel.IsLoading = false;
+				}
+			}
+			catch (Exception)
+			{
+				// await App.Instance.Alert("Allow Camera and storage permission access to get photos and videos", Constant.AlertTitle, Constant.Ok);
+				// CrossPermissions.Current.OpenAppSettings();
+				eventViewModel.IsLoading = false;
+			}
+		}
+		async void UploadImage(string fileName, Stream stream)
+		{
+			bool isUploaded = await new AWSServices().UploadAWSFile(stream, App.AWSCurrentDetails.response.images_path.event_images, fileName);
+			if (isUploaded)
+			{
+				AddPhotoVideo(fileName, 0);
+			}
+		}
+		async void AddPhotoVideo(string fileName, int fileType)
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				}
+				else
+				{
+					eventViewModel.IsLoading = true;
+					CoverImageRequest request = new CoverImageRequest();
+					request.event_id = eventViewModel.TappedEventId;
+					Media media = new Media();
+					media.file_name = fileName;
+					request.media = media;
+					if (fileType == 1)
+					{
+						//livemedia.file_thumbnail = thumbNailName;
+					}
+					var response = await new MainServices().Post<ResultWrapperSingle<CoverImageResponse>>(Constant.UploadEventCoverImage + '/', request);
+					if (response != null && response.status == Constant.Status200 && response.response != null)
+					{
+						ShowToast(Constant.AlertTitle, "Successfully Uploaded");
+						_tapCount = 0;
+						eventViewModel.IsLoading = false;
+					}
+					else if (response != null && response.status == Constant.Status111 && response.message.non_field_errors != null)
+					{
+						grdOverlayPopUp.IsVisible = true;
+						eventViewModel.IsLoading = false;
+						_tapCount = 0;
+
+					}
+					else   
+					{
+						eventViewModel.IsLoading = false;
+						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+						_tapCount = 0;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				eventViewModel.IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+
+			}
+		}
+        #endregion
+
+        private void ExtendedButton_Clicked(object sender, EventArgs e)
+        {
+			grdOverlayDialog.IsVisible = true;
+			stackUploadImagePopUp.IsVisible = true;
+		}
+    }
 }

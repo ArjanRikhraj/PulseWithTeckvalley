@@ -89,51 +89,74 @@
                             </Grid>
                         </StackLayout>
                     </Grid>
-                   
-                  <controls1:CustomFrame Margin="0,10,0,0" VerticalOptions="FillAndExpand" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="20,20,0,0">
-                        <Grid ColumnSpacing="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
-                                    <local:ExtendedLabel x:Name="lblScore" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
-                                    <local:ExtendedLabel Text="Score" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                    <StackLayout BackgroundColor="White">
+                        
+                        <controls1:CustomFrame Margin="0,10,0,0" VerticalOptions="FillAndExpand" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="20,20,0,0">
+                            <Grid ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+                                        <local:ExtendedLabel x:Name="lblScore" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+                                        <local:ExtendedLabel Text="Score" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                    </StackLayout>
+                                    <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
                                 </StackLayout>
-                                <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
-                            </StackLayout>
-                            <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
-                                    <local:ExtendedLabel x:Name="lblFriends" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
-                                    <local:ExtendedLabel Text="Friends" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="0">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+                                        <local:ExtendedLabel x:Name="lblFriends" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+                                        <local:ExtendedLabel Text="Friends" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                    </StackLayout>
+                                    <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
                                 </StackLayout>
-                                <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
-                            </StackLayout>
-                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
-                                    <local:ExtendedLabel x:Name="lblHosted" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
-                                    <local:ExtendedLabel Text="Hosted" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+                                        <local:ExtendedLabel x:Name="lblHosted" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+                                        <local:ExtendedLabel Text="Hosted" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                    </StackLayout>
+                                    <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
                                 </StackLayout>
-                                <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" />
-                            </StackLayout>
-                            <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
-                                    <local:ExtendedLabel x:Name="lblAttended" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
-                                    <local:ExtendedLabel Text="Attended" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="0">
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" VerticalOptions="Center" Margin="0,8,0,8">
+                                        <local:ExtendedLabel x:Name="lblAttended" FontFace="PoppinsMedium" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Center" FontSize="15" />
+                                        <local:ExtendedLabel Text="Attended" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayBoxViewColor}" HorizontalOptions="Center" FontSize="11" />
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                        </Grid>
-                    </controls1:CustomFrame>
+                            </Grid>
+                        </controls1:CustomFrame>
+                        <StackLayout Orientation="Horizontal" Margin="20,10,20,10">
+                            <!--<local:ExtendedLabel Text="Events" FontFace="PoppinsSemiBold" IsVisible="{Binding IsFriendEventListVisible}" FontSize="13" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand" />-->
+                            <local:ExtendedLabel x:Name="lblEvent" Text="Events" FontFace="PoppinsSemiBold" FontSize="13" TextColor="#4a4a4a" HorizontalOptions="StartAndExpand">
+                                <local:ExtendedLabel.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </local:ExtendedLabel.GestureRecognizers>
+                            </local:ExtendedLabel>
+                            <local:ExtendedLabel x:Name="lblMedia" Text="Photo Album" FontFace="PoppinsSemiBold" FontSize="13" TextColor="#909090" HorizontalOptions="EndAndExpand">
+                                <local:ExtendedLabel.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                                </local:ExtendedLabel.GestureRecognizers>
+                            </local:ExtendedLabel>
+                        </StackLayout>
+                    </StackLayout>
+                
                 </local:GradientColorStack>
                 <!--               <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0">
 -->
-                <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                   
-                    <local:ExtendedLabel Text="Hosted Events" FontFace="PoppinsSemiBold" IsVisible="{Binding IsFriendEventListVisible}" FontSize="13" Margin="10,10,10,10" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand" />
-                    <local:ExtendedListView x:Name="listViewfriendsEvents" ItemsSource="{Binding ListMyFriendsEvents}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" LoadMoreCommand="{Binding LoadMoreFriendEvents}" ItemTapped="FriendEventsList_ItemTapped"  IsVisible="{Binding IsFriendEventListVisible}" HasUnevenRows="true"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                <StackLayout Grid.Row="1" Spacing="0" IsVisible="{Binding IsNoMediaVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <StackLayout Margin="10,50,0,0">
+                    <Image Source="NoMedia.png" HeightRequest="100" WidthRequest="100" />
+                    <local:ExtendedLabel Text="No Media Uploaded Yet"  FontFace="PoppinsSemiBold" FontSize="14" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="1" IsVisible="{Binding IsNoEventVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <local:ExtendedLabel Text="No Events Hosted Yet" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendEventListVisible}" Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                    <local:ExtendedListView x:Name="listViewfriendsEvents" ItemsSource="{Binding ListMyFriendsEvents}"  BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" LoadMoreCommand="{Binding LoadMoreFriendEvents}" ItemTapped="FriendEventsList_ItemTapped"   HasUnevenRows="true"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -143,11 +166,11 @@
                                                 <pancakeview:Border Color="#707070" x:Name="borderGradient" Thickness="1"/>
                                             </pancakeview:PancakeView.Border>
                                             <StackLayout Orientation="Vertical" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                    <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand" />
-                                                   
+                                                <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand" />
+
                                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                                <local:ExtendedLabel Text="{Binding EventName}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="13" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand">
-                                                </local:ExtendedLabel>
+                                                    <local:ExtendedLabel Text="{Binding EventName}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="13" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand">
+                                                    </local:ExtendedLabel>
                                                     <local:ExtendedLabel TextColor="#FC6D5C" FontFace="PoppinsSemiBold" Text="{Binding EventStatus}" FontSize="11" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="End">
                                                     </local:ExtendedLabel>
                                                 </StackLayout>
@@ -201,10 +224,8 @@
                             </DataTemplate>
                         </local:ExtendedListView.ItemTemplate>
                     </local:ExtendedListView>
-                    <local:ExtendedLabel Text="No Events Hosted Yet" IsVisible="{Binding IsNoEventVisible}" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand">
-                    </local:ExtendedLabel>
                 </StackLayout>
-               
+                   
             </Grid>
             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
                 <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">

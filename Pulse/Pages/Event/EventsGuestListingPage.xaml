@@ -32,32 +32,35 @@
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="*" />
+								<!--<ColumnDefinition Width="*" />-->
 							</Grid.ColumnDefinitions>
-							<local:ExtendedStackLayout x:Name="stackAttending" EventGuestType="Attending" BackgroundColor="Transparent" Spacing="3" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-								<local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblAttending" FontSize="13" Text="{x:Static local:Constant.AttendingText}" TextColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-								<local:ExtendedStackLayout.GestureRecognizers>
-									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
-								</local:ExtendedStackLayout.GestureRecognizers>
-							</local:ExtendedStackLayout>
-							<local:ExtendedStackLayout x:Name="stackInterested" EventGuestType="Interested" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-								<local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblInterested" FontSize="13" Text="{x:Static local:Constant.InterestedText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-								<local:ExtendedStackLayout.GestureRecognizers>
-									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
-								</local:ExtendedStackLayout.GestureRecognizers>
-							</local:ExtendedStackLayout>
-							<local:ExtendedStackLayout x:Name="stackNotInterested" EventGuestType="NotInterested" BackgroundColor="Transparent" Spacing="3" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <local:ExtendedStackLayout x:Name="stackAttending" EventGuestType="Attending" BackgroundColor="Transparent" Spacing="3" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblAttending" FontSize="13" Text="{x:Static local:Constant.AttendingText}" TextColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                <local:ExtendedStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
+                                </local:ExtendedStackLayout.GestureRecognizers>
+                            </local:ExtendedStackLayout>
+                            <local:ExtendedStackLayout x:Name="stackInterested" EventGuestType="Interested" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblInterested" FontSize="13" Text="{x:Static local:Constant.CheckedInText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                <local:ExtendedStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
+                                </local:ExtendedStackLayout.GestureRecognizers>
+                            </local:ExtendedStackLayout>
+                            <local:ExtendedStackLayout x:Name="stackInvited" EventGuestType="Invited" BackgroundColor="Transparent" Grid.Column="2" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblInvited" FontSize="13" Text="{x:Static local:Constant.InvitedText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                <local:ExtendedStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
+                                </local:ExtendedStackLayout.GestureRecognizers>
+                            </local:ExtendedStackLayout>
+						
+                            
+                            <local:ExtendedStackLayout IsVisible="False" x:Name="stackNotInterested" EventGuestType="NotInterested" BackgroundColor="Transparent" Spacing="3" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 								<local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblNotInterested" FontSize="13" Text="{x:Static local:Constant.NotInterestedText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 								<local:ExtendedStackLayout.GestureRecognizers>
-									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
+									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
 								</local:ExtendedStackLayout.GestureRecognizers>
 							</local:ExtendedStackLayout>
-							<local:ExtendedStackLayout x:Name="stackInvited" EventGuestType="Invited" BackgroundColor="Transparent" Grid.Column="3" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-								<local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblInvited" FontSize="13" Text="{x:Static local:Constant.InvitedText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-								<local:ExtendedStackLayout.GestureRecognizers>
-									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
-								</local:ExtendedStackLayout.GestureRecognizers>
-							</local:ExtendedStackLayout>
+							
 						</Grid>
 						<Grid Grid.Row="1" ColumnSpacing="0" Margin="0">
 							<Grid.ColumnDefinitions>

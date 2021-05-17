@@ -35,7 +35,11 @@ namespace Pulse
 		List<UserResponse> FriendsList;
 		List<FriendResponseForUser> UsersList;
 		bool isFriendEventListVisible;
+		bool isMediaListVisible;
+		
 		bool isNoEventVisible;
+		bool isNoMediaVisible = false;
+		
 		List<MyEventResponse> HostedEventsList;
 		Friend selectedFriend;
 		#endregion
@@ -149,6 +153,15 @@ namespace Pulse
 				OnPropertyChanged("IsFriendEventListVisible");
 			}
 		}
+		public bool IsMediaListVisible
+		{
+			get { return isMediaListVisible; }
+			set
+			{
+				isMediaListVisible = value;
+				OnPropertyChanged("IsMediaListVisible");
+			}
+		}
 		public bool IsNoEventVisible
 		{
 			get { return isNoEventVisible; }
@@ -156,6 +169,15 @@ namespace Pulse
 			{
 				isNoEventVisible = value;
 				OnPropertyChanged("IsNoEventVisible");
+			}
+		}
+		public bool IsNoMediaVisible
+		{
+			get { return isNoMediaVisible; }
+			set
+			{
+				isNoMediaVisible = value;
+				OnPropertyChanged("IsNoMediaVisible");
 			}
 		}
 		public bool IsCancelRequestButtonVisible
@@ -1042,7 +1064,26 @@ namespace Pulse
 				return false;
 			}
 		}
-
+		public async void GetMedia()
+        {
+            try
+            {
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				}
+				else
+				{
+					
+				}
+			}
+            catch (Exception ex)
+            {
+				IsLoading = false;
+				TapCount = 0;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+        }
 		public async void GetFriendsHostedEventList()
 		{
 			try

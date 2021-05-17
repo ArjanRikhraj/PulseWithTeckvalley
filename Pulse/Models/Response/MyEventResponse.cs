@@ -28,6 +28,8 @@ namespace Pulse
 		public int lat_log_event_count { get; set; }
 		public int user { get; set; }
 		public string profile_image { get; set; }
+		public bool is_star { get; set; }
+		public string cover_photo { get; set; }
 	}
 	public class Attendee
 	{
@@ -60,6 +62,8 @@ namespace Pulse
 		public bool IsCurrentLocation { get; set; }
 		public bool IsCheckInButtonVisible { get; set; }
 		public bool IsShowViewAll { get; set; }
+		public bool is_star { get; set; }
+		public string cover_photo { get; set; }
 		Color frameBorderColor;
 		int frameBorderWidth;
 		bool isFirstImageVisible;
@@ -139,6 +143,16 @@ namespace Pulse
 			{
 				partyImage = value;
 				OnPropertyChanged("PartyImage");
+			}
+		}
+		private string iconStar { get; set; }
+		public string IconStar
+		{
+			get { return iconStar; }
+			set
+			{
+				iconStar = value;
+				OnPropertyChanged("IconStar");
 			}
 		}
 	}

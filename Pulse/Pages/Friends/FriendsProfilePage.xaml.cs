@@ -275,5 +275,37 @@ namespace Pulse
 				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
 			}
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            try
+            {
+				friendsViewModel.IsFriendEventListVisible = true;
+				friendsViewModel.IsMediaListVisible = false;
+				friendsViewModel.IsNoMediaVisible = true;
+				lblEvent.TextColor = Color.FromHex("#4a4a4a");
+				lblMedia.TextColor = Color.FromHex("#909090");
+			}
+            catch (Exception ex)
+            {
+				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
+			}
+        }
+
+        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+			try
+			{
+				friendsViewModel.IsFriendEventListVisible = false;
+				friendsViewModel.IsMediaListVisible = true;
+				friendsViewModel.IsNoMediaVisible = true;
+				lblEvent.TextColor = Color.FromHex("#909090");
+				lblMedia.TextColor = Color.FromHex("#4a4a4a");
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
+			}
+		}
     }
 }

@@ -13,7 +13,7 @@ namespace Pulse
         //public const string BaseServiceUrlLive = "http://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
-        public const string BaseServiceUrl = BaseServiceUrlLive;
+        public const string BaseServiceUrl = BaseServiceUrl_local;
         public const string TokenServiceUrl = BaseServiceUrlLive + "/o/token/";
         public const string SignUpUrl = "/api/accounts/signup/";
         public const string SocialSignUpUrl = "/api/accounts/sociallogin/";
@@ -40,6 +40,7 @@ namespace Pulse
         public const string TimeZoneUrl = "/api/accounts/time-zones/";
         public const string PendingRequestCountUrl = "/api/accounts/pendingrequestcount/";
         public const string CreateEventUrl = "/api/event/event/";
+        public const string StarEventUrl = "/api/event/starevent/";
         public const string AllUpcomingUrl = "/api/event/allupcomingevents/?page=";
         public const string AllPastUrl = "/api/event/allpastevents/?page=";
         public const string InterestedUpcomingUrl = "/api/event/interestedupcomingevents/?page=";
@@ -84,6 +85,9 @@ namespace Pulse
         public const string TransactionEmailVerifyUrl = "/api/event/verifyemail/";
         public const string CheckInUrl = "/api/event/checkin/";
         public const string UploadLiveMedia = "/api/event/uploadmedia/";
+        public const string AddEventStories = "/api/event/addeventstory/";
+        public const string GetEventStories = "/api/event/geteventstory/";
+        public const string UploadEventCoverImage = "/api/event/addeventcoverphoto/";
         public const string ShareEventUrl = "/api/event/share/";
         public const string MediaDeleteUrl = "/api/event/mediadelete/";
         public const string CreatePulseUrl = "/api/group/pulse/";
@@ -448,7 +452,7 @@ namespace Pulse
         public const string FilterText = "Filter";
         public const string AllText = "All";
         public const string HostingText = "Hosting";
-        public const string AttendingText = "Attending";
+        public const string AttendingText = "Guest list";
         public const string HostedText = "Hosted";
         public const string AttendedText = "Attended";
 

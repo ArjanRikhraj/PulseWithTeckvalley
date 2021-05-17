@@ -7,7 +7,9 @@
 		public string event_videos { get; set; }
 		public string event_videos_thumbnails { get; set; }
 		public string event_transcoded_videos { get; set; }
-	}
+        public string story_images { get; set; }
+        public string story_videos { get; set; }
+    }
 
 	public class AwsDetailResponse
 	{

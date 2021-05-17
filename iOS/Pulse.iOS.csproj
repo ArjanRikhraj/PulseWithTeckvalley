@@ -831,6 +831,12 @@
   <ItemGroup>
     <BundleResource Include="Resources\rebelnightclubcover.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\NoMedia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconStarred.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets')" />
@@ -848,7 +854,7 @@
   <Import Project="..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

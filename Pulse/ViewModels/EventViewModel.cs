@@ -1143,6 +1143,15 @@ namespace Pulse
             }
         }
 
+        private ICommand starEventCommand { get; set; }
+        public ICommand StarEventCommand
+        {
+            get
+            {
+                return starEventCommand ?? (starEventCommand = new Command<object>((currentObject) => UpdateStarEvent(currentObject)));
+            }
+        }
+
         
         #region Constructor
         public EventViewModel()
@@ -1185,6 +1194,28 @@ namespace Pulse
 
         #endregion
         #region Methods
+        private async void UpdateStarEvent(object Sender)
+        {
+            try
+            {
+                
+                var currentObject = (MyEvents)Sender;
+                StarEventRequest starEventRequest = new StarEventRequest();
+                starEventRequest.user_id= SessionManager.UserId;
+                starEventRequest.event_id = currentObject.EventId;
+                if (starEventRequest == null)
+                    return;
+                var response = await mainService.Post<ResultWrapperSingle<StarEventResponse>>(Constant.StarEventUrl, starEventRequest);
+                if (response != null && response.status == Constant.Status200 && response.response != null)
+                {
+                    GetAllUpComingEvents();
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         private void GetEventsByDate(DateTime selectedDate)
         {
             try
@@ -1356,7 +1387,6 @@ namespace Pulse
                 return false;
             }
         }
-
         void SetLikeCount()
         {
             if (numberLikes > 0)
@@ -1387,7 +1417,6 @@ namespace Pulse
                 IsLikedIconVisible = false;
             }
         }
-
         public async Task GetTimeZones()
         {
             try
@@ -1593,7 +1622,6 @@ namespace Pulse
                     return true;
             }
         }
-
         bool CheckDecimal(string data)
         {
             bool isDecimal = false;
@@ -1625,7 +1653,6 @@ namespace Pulse
             }
             return isDecimal ? isValidDecimal && isValidNumeric : isValidNumeric;
         }
-
         public void Search(TextChangedEventArgs e)
         {
 
@@ -1718,7 +1745,6 @@ namespace Pulse
                 }
             }
         }
-
         public async Task GetlatLong(string place_id)
         {
             try
@@ -1769,7 +1795,6 @@ namespace Pulse
                 TapCount = 0;
             }
         }
-
         async void PreviousScreen()
         {
             try
@@ -1790,7 +1815,6 @@ namespace Pulse
                 TapCount = 0;
             }
         }
-
         async void CreateEvent()
         {
             try
@@ -2543,7 +2567,10 @@ namespace Pulse
                                 }
                                 var myEvent = new MyEvents();
                                 myEvent.EventId = item.id;
-                                myEvent.profile_image = item.profile_image;
+                                if (!string.IsNullOrEmpty(item.profile_image))
+                                    myEvent.profile_image = item.profile_image;
+                                else
+                                    myEvent.profile_image = Constant.ProfileIcon;
                                 myEvent.EventName = item.name;
                                 myEvent.StartDate = DateTime.Parse(item.start_date).Date;
                                 myEvent.EventLikes = Convert.ToString(item.event_likes_count);
@@ -2562,6 +2589,8 @@ namespace Pulse
                                 myEvent.IsBoostEvent = item.is_boosted_event;
                                 myEvent.IsCheckInButtonVisible = IsCheckinButtonVisible;
                                 myEvent.IsShowViewAll = item.event_attendees_count > 0;
+                                myEvent.is_star = item.is_star;
+                                myEvent.cover_photo = item.cover_photo;
                                 myEvent.ListBackColor = item.is_boosted_event ? Color.FromHex(Constant.BoostListBackColor) : Color.White;
                                 tempEventList.Add(myEvent);
                             }
@@ -2570,16 +2599,25 @@ namespace Pulse
                             int count = 1;
                             foreach (var item in tempEventList)
                             {
-                                if (count == 1)
-                                    item.PartyImage = "rebelnightclubcover.jpg";
-                                else if (count == 2)
-                                    item.PartyImage = "AplhaCoverpic.jpg";
-                                else if (count == 3)
+                                if (string.IsNullOrEmpty(item.cover_photo))
                                 {
-                                    item.PartyImage = "toyboxmediaCover.jpg";
-                                    count = 0;
+                                    if (count == 1)
+                                        item.PartyImage = "rebelnightclubcover.jpg";
+                                    else if (count == 2)
+                                        item.PartyImage = "AplhaCoverpic.jpg";
+                                    else if (count == 3)
+                                    {
+                                        item.PartyImage = "toyboxmediaCover.jpg";
+                                        count = 0;
+                                    }
+                                    count++;
                                 }
-                                count++;
+                                else
+                                    item.PartyImage = item.cover_photo;
+                                if (item.is_star)
+                                    item.IconStar = "iconStarred.png";
+                                else
+                                    item.IconStar = "iconStar.png";
                             }
                            // ListMyEvents = tempEventList;
                             AllUpcomingEvents = tempEventList;
@@ -3018,6 +3056,10 @@ namespace Pulse
                     count = 0;
                 }
                 count++;
+                if (item.is_star)
+                    item.IconStar = "iconStarred.png";
+                else
+                    item.IconStar = "iconStar.png";
                 tempLocBasedEventList.Add(item);
             }
             //AllUpcomingEvents= tempLocBasedEventList;
@@ -3157,7 +3199,6 @@ namespace Pulse
             }
             catch (Exception)
             {
-
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
                 return false;
             }
