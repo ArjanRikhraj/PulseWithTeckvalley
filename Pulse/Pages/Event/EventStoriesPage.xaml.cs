@@ -441,8 +441,9 @@ namespace Pulse.Pages.Event
 					if (response != null && response.status == Constant.Status200 && response.response != null)
 					{
 						ShowToast(Constant.AlertTitle, "Successfully Uploaded");
+						eventViewModel.IsLoading = false;
+						
 						_tapCount = 0;
-
 					}
 					else if (response != null && response.status == Constant.Status111 && response.message.non_field_errors != null)
 					{
@@ -457,6 +458,7 @@ namespace Pulse.Pages.Event
 						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 						_tapCount = 0;
 					}
+					await Navigation.PopModalAsync();
 				}
 			}
 			catch (Exception)
@@ -464,7 +466,7 @@ namespace Pulse.Pages.Event
 				eventViewModel.IsLoading = false;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 				_tapCount = 0;
-
+				await Navigation.PopModalAsync();
 			}
 		}
 		async Task<bool> UploadThumbnail(byte[] byteThumbnail)

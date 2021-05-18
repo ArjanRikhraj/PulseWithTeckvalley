@@ -32,12 +32,12 @@ namespace Pulse
 		public bool is_free_time_event { get; set; }
 		public string cover_fee_amount { get; set; }
 		public bool is_bottle_service { get; set; }
-        public bool is_boosted_event { get; set; }
+		public bool is_boosted_event { get; set; }
 		public string bottle_service_amount { get; set; }
 		public bool is_owner { get; set; }
 		public bool is_public { get; set; }
-        public int event_likes_count { get; set; }
-        public string contact_number { get; set; }
+		public int event_likes_count { get; set; }
+		public string contact_number { get; set; }
 		public int event_lit_score { get; set; }
 		public bool is_like { get; set; }
 		public List<Attendee> attendees { get; set; }
@@ -48,7 +48,7 @@ namespace Pulse
 		public string end_date { get; set; }
 		public string start_time { get; set; }
 		public string end_time { get; set; }
-        public bool reported_spam { get; set; }
+		public bool reported_spam { get; set; }
 		public string host_name { get; set; }
 		public string host_profile_image { get; set; }
 		public double latitude { get; set; }
@@ -56,6 +56,8 @@ namespace Pulse
 		public bool is_checkin { get; set; }
 		public string transaction_email { get; set; }
 		public int total_comments { get; set; }
+		public string cover_photo{get; set;}
+		public bool is_star { get; set; }
 	}
 
 	public class CancelEvent

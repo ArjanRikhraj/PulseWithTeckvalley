@@ -61,7 +61,7 @@ namespace Pulse.ViewModels
                     {
                         Story story = new Story();
                         story.event_id = item.event_id;
-                        story.file_url = item.file_url= "https://s3.us-west-2.amazonaws.com/pli-socialma-prod/Event_Images/6bab6284-5265-4970-a23a-cefb1e6823ff.jpg";
+                        story.file_url = item.file_url;
                         story.profile_url = item.profile_url;
                         story.user_id = item.user_id;
                         story.create_date = item.create_date;
@@ -71,38 +71,37 @@ namespace Pulse.ViewModels
                         {
                             story.IsVideoVisible = true;
                             story.IsImageVisible = false;
-                            Device.StartTimer(TimeSpan.FromSeconds(3), (Func<bool>)(() =>
-                            {
-                                Pos = (Pos + 1) % EventStories.Count;
-                                if(Pos== storyCount)
-                                {
-                                    App.Navigation.PopAsync();
-                                    return false;
-                                }
-                                return true;
-                            }));
                         }
                         else
                         {
                             story.IsVideoVisible = false;
                             story.IsImageVisible = true;
-                            Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-                            {
-                                Pos = (Pos + 1) % EventStories.Count;
-                                if (Pos == storyCount-1)
-                                {
-                                   // Navigation.PopModalAsync();
-                                    return false;
-                                }
-                                return true;
-                            }));
                         }
                         eventStories.Add(story);
                     }
                     EventStories = eventStories;
                     if (EventStories.Count > 1)
                     {
-                       
+                        int count=0;
+                        Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
+                        {
+                            if(count== storyCount-1)
+                            {
+                                Navigation.PopModalAsync();
+                                return false;
+                            }
+                            Pos = (Pos + 1) % EventStories.Count;
+                            count++;
+                            return true;
+                        }));
+                    }
+                    if (EventStories.Count == 1)
+                    {
+                        Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
+                        {
+                            Navigation.PopModalAsync();
+                            return false;
+                        }));
                     }
                 }
             }

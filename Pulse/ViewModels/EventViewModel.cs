@@ -46,6 +46,8 @@ namespace Pulse
         bool isEmailVerified;
         bool isUpdateBoostEvent;
         bool isNotAlreadyBoosted;
+        string iconStar;
+        string coverPhoto;
         string eventTitle;
         string city;
         string uniqueThumbName;
@@ -158,6 +160,7 @@ namespace Pulse
         public List<MyEventResponse> EventsList;
         public List<GuestResponse> GuestList;
         public List<NotificationResponse> NotificationList;
+        public ICommand UpdateStarEventCommand { get; private set; }
         public ICommand NextButtonClick { get; private set; }
         public ICommand PreviousButtonClick { get; private set; }
         public ICommand CreateEventClick { get; private set; }
@@ -949,6 +952,26 @@ namespace Pulse
 
             }
         }
+        public string IconStar
+        {
+            get { return iconStar; }
+            set
+            {
+                iconStar = value;
+                OnPropertyChanged("IconStar");
+
+            }
+        }
+        public string CoverPhoto
+        {
+            get { return coverPhoto; }
+            set
+            {
+                coverPhoto = value;
+                OnPropertyChanged("CoverPhoto");
+
+            }
+        }
         public string EventInviteeStatus
         {
             get { return eventInviteeStatus; }
@@ -1148,7 +1171,7 @@ namespace Pulse
         {
             get
             {
-                return starEventCommand ?? (starEventCommand = new Command<object>((currentObject) => UpdateStarEvent(currentObject)));
+                return starEventCommand ?? (starEventCommand = new Command<object>((currentObject) => CreateStarredEvent(currentObject)));
             }
         }
 
@@ -1191,24 +1214,24 @@ namespace Pulse
             EventMediaList = new List<EventMedia>();
             NotificationList = new List<NotificationResponse>();
         }
-
         #endregion
         #region Methods
-        private async void UpdateStarEvent(object Sender)
+        private async void CreateStarredEvent(object Sender)
         {
             try
             {
-                
                 var currentObject = (MyEvents)Sender;
                 StarEventRequest starEventRequest = new StarEventRequest();
                 starEventRequest.user_id= SessionManager.UserId;
-                starEventRequest.event_id = currentObject.EventId;
+                starEventRequest.event_id = currentObject != null ? currentObject.EventId : TappedEventId;
                 if (starEventRequest == null)
                     return;
                 var response = await mainService.Post<ResultWrapperSingle<StarEventResponse>>(Constant.StarEventUrl, starEventRequest);
                 if (response != null && response.status == Constant.Status200 && response.response != null)
                 {
                     GetAllUpComingEvents();
+                    if (currentObject == null)
+                        IconStar = response.response.is_star? "iconStarred.png" : "iconStar.png";
                 }
             }
             catch (Exception ex)
@@ -2596,24 +2619,9 @@ namespace Pulse
                             }
                             if(EventsList!=null)
                             EventsList.Clear();
-                            int count = 1;
                             foreach (var item in tempEventList)
                             {
-                                if (string.IsNullOrEmpty(item.cover_photo))
-                                {
-                                    if (count == 1)
-                                        item.PartyImage = "rebelnightclubcover.jpg";
-                                    else if (count == 2)
-                                        item.PartyImage = "AplhaCoverpic.jpg";
-                                    else if (count == 3)
-                                    {
-                                        item.PartyImage = "toyboxmediaCover.jpg";
-                                        count = 0;
-                                    }
-                                    count++;
-                                }
-                                else
-                                    item.PartyImage = item.cover_photo;
+                                item.PartyImage = string.IsNullOrEmpty(item.cover_photo) ? "party_story_header.png" : item.cover_photo;
                                 if (item.is_star)
                                     item.IconStar = "iconStarred.png";
                                 else
@@ -2628,9 +2636,6 @@ namespace Pulse
                         {
                             SignOut();
                             IsLoading = false;
-                        }
-                        else
-                        {
                         }
                     }
                 }
@@ -3046,16 +3051,7 @@ namespace Pulse
             int count = 1;
             foreach (var item in filteredList)
             {
-                if (count == 1)
-                    item.PartyImage = "rebelnightclubcover.jpg";
-                else if (count == 2)
-                    item.PartyImage = "AplhaCoverpic.jpg";
-                else if (count == 3)
-                {
-                    item.PartyImage = "toyboxmediaCover.jpg";
-                    count = 0;
-                }
-                count++;
+                item.PartyImage = string.IsNullOrEmpty(item.cover_photo) ? "party_story_header.png" : item.cover_photo;
                 if (item.is_star)
                     item.IconStar = "iconStarred.png";
                 else
@@ -3318,6 +3314,8 @@ namespace Pulse
                         {
                             TappedEventId = response.response.id;
                             EventTitle = response.response.name;
+                            IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
+                            CoverPhoto= string.IsNullOrEmpty(response.response.cover_photo)? "party_story_header.png": response.response.cover_photo;
                             EventLocation = response.response.location_address;
                             EventVenue = response.response.event_venue;
                             Description = response.response.description;
@@ -3374,6 +3372,7 @@ namespace Pulse
                             FetchEventAttendees(response.response.attendees);
                             FetchMedia(response.response.event_media);
                             FetchComment(response.response.comments);
+
                             IsCheckinButtonVisible = response.response.is_owner ? true : false;
                             IsCheckinDisableButtonVisible = false;
                             IsAddressListVisible = false;

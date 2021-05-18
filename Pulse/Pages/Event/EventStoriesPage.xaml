@@ -9,38 +9,32 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <MediaElement AutoPlay="True" Source="{Binding file_url}" IsVisible="{Binding IsVideoVisible}" ShowsPlaybackControls="False" VerticalOptions="FillAndExpand" />
+                                <local:VideoPlayer AutoPlay="True" Source="{Binding file_url}" IsVisible="{Binding IsVideoVisible}" VerticalOptions="FillAndExpand" />
                                 <Image Source="{Binding file_url}" IsVisible="{Binding IsImageVisible}" Aspect="Fill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-                                <StackLayout Grid.Row="0">
-                                    <StackLayout VerticalOptions="StartAndExpand" Spacing="10" Padding="10" HeightRequest="100" BackgroundColor="Transparent">
-                                        <ProgressBar ProgressColor="LightGray" x:Name="progressBar" Progress="{Binding ProgressTime}"/>                                                                                                                                                                                                                                                                                                                                             
-                                        <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                            <Image Source="back.png" VerticalOptions="Center">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                            <custom:CircleImage x:Name="imgUser" Source="{Binding profile_url}" Aspect="AspectFill" WidthRequest="40" BorderColor="LightGray" BorderThickness="0.5" VerticalOptions="Center">
-                                                <custom:CircleImage.GestureRecognizers>
-                                                    <TapGestureRecognizer/>
-                                                </custom:CircleImage.GestureRecognizers>
-                                            </custom:CircleImage>
-                                            <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Padding="0" Spacing="0">
-                                                <Image Source="add_pulse.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                                <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
-                                                <StackLayout.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                                </StackLayout.GestureRecognizers>
-                                            </StackLayout>
-                                            <local:ExtendedButton IsVisible="False" Image="{x:Static local:Constant.OptionsWhiteIcon}" Clicked="MenuButton_Clicked" BackgroundColor="Transparent" WidthRequest="40" Margin="10,0,0,0" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
-                                        </StackLayout>
-                                    </StackLayout>
-                                </StackLayout>
+                                <custom:CircleImage VerticalOptions="StartAndExpand" Margin="25,0,0,0" HorizontalOptions="StartAndExpand" Grid.Row="0" x:Name="imgUser" Source="{Binding profile_url}" Aspect="AspectFill" WidthRequest="40" BorderColor="LightGray" BorderThickness="0.5">
+                                    <custom:CircleImage.GestureRecognizers>
+                                        <TapGestureRecognizer/>
+                                    </custom:CircleImage.GestureRecognizers>
+                                </custom:CircleImage>
+                                <local:ExtendedButton IsVisible="False" Image="{x:Static local:Constant.OptionsWhiteIcon}" Clicked="MenuButton_Clicked" BackgroundColor="Transparent" WidthRequest="40" Margin="10,0,0,0" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
                             </Grid>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-               
+                <StackLayout Orientation="Horizontal" Grid.Row="0" VerticalOptions="StartAndExpand">
+                    <Image Source="back.png" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Padding="0" Spacing="0">
+                        <Image Source="add_pulse.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </StackLayout>
             </Grid>
             <local:ExtendedLabel Grid.Row="0" IsVisible="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="There is no party story at the moment" TextColor="White" FontFace="PoppinsRegular"/>
 

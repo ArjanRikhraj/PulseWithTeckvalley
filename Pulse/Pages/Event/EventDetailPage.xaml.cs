@@ -278,10 +278,11 @@ namespace Pulse
 			};
 			CircleImage userImage = new CircleImage
 			{
-				HeightRequest = 23,
-				WidthRequest = 23,
+				HeightRequest = 26,
+				WidthRequest = 26,
+				BorderThickness=2,
 				Margin = new Thickness(0, 0, 0, 0),
-				Aspect = Aspect.Fill,
+				Aspect = Aspect.AspectFill,
 				Source = friend.friendPic
 			};
 			Label userName = new Label
@@ -1353,6 +1354,7 @@ namespace Pulse
 					var response = await new MainServices().Post<ResultWrapperSingle<CoverImageResponse>>(Constant.UploadEventCoverImage + '/', request);
 					if (response != null && response.status == Constant.Status200 && response.response != null)
 					{
+					    await eventViewModel.FetchEventDetail(eventViewModel.TappedEventId.ToString(), false);
 						ShowToast(Constant.AlertTitle, "Successfully Uploaded");
 						_tapCount = 0;
 						eventViewModel.IsLoading = false;
