@@ -191,14 +191,14 @@ namespace Pulse
 			{
 				for (int i = 0; i < eventViewModel.EventAttendeeList.Count; i++)
 				{
-					RoundImage userImage = new RoundImage
+					CircleImage userImage = new CircleImage
 					{
 						HeightRequest = 36,
 						WidthRequest = 36,
 						Margin = new Thickness(0, 0, 0, 0),
 						Aspect = Aspect.AspectFill,
 						Source = !string.IsNullOrEmpty(eventViewModel.EventAttendeeList[i].profile_image) ? PageHelper.GetUserImage(eventViewModel.EventAttendeeList[i].profile_image) : Constant.UserDefaultSquareImage,
-						BorderRadius = 17
+						BorderThickness = 2
 					};
 					gridGuests.Children.Add(userImage, i, 0);
 					if (i == 6)
@@ -278,8 +278,8 @@ namespace Pulse
 			};
 			CircleImage userImage = new CircleImage
 			{
-				HeightRequest = 26,
-				WidthRequest = 26,
+				HeightRequest = 30,
+				WidthRequest = 30,
 				BorderThickness=2,
 				Margin = new Thickness(0, 0, 0, 0),
 				Aspect = Aspect.AspectFill,
@@ -1167,6 +1167,7 @@ namespace Pulse
 			grdOverlayPopUp.IsVisible = false;
 			grdOverlayDialog.IsVisible = false;
 			stackUploadImagePopUp.IsVisible = false;
+			stackcheckInMessage.IsVisible = false;
 			stackInnerPopUp.IsVisible = false;
 		}
        

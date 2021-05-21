@@ -39,6 +39,20 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("Pos");
             }
         }
+        bool isNoStoryVisible;
+        public bool IsNoStoryVisible
+        {
+            get
+            {
+                return this.isNoStoryVisible;
+            }
+
+            set
+            {
+                this.isNoStoryVisible = value;
+                OnPropertyChanged("IsNoStoryVisible");
+            }
+        }
         public EventStoryViewModel(int eventId)
         {
             mainService = new MainServices();
@@ -54,55 +68,63 @@ namespace Pulse.ViewModels
                 var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.GetEventStories, request);
                 if (response != null && response.status == Constant.Status200 && response.response != null)
                 {
-                    eventStories = new ObservableCollection<Story>();
-                    var allStories = response.response.story;
-                    var storyCount = response.response.StoryCount;
-                    foreach (var item in allStories)
+                    if (response.response.story.Count() > 0)
                     {
-                        Story story = new Story();
-                        story.event_id = item.event_id;
-                        story.file_url = item.file_url;
-                        story.profile_url = item.profile_url;
-                        story.user_id = item.user_id;
-                        story.create_date = item.create_date;
-                        story.create_time = item.create_time;
-                        story.ProgressTime = 3000;
-                        if(item.file_url.Contains("mp4"))
+                        IsNoStoryVisible = false;
+                        eventStories = new ObservableCollection<Story>();
+                        var allStories = response.response.story;
+                        var storyCount = response.response.StoryCount;
+                        foreach (var item in allStories)
                         {
-                            story.IsVideoVisible = true;
-                            story.IsImageVisible = false;
-                        }
-                        else
-                        {
-                            story.IsVideoVisible = false;
-                            story.IsImageVisible = true;
-                        }
-                        eventStories.Add(story);
-                    }
-                    EventStories = eventStories;
-                    if (EventStories.Count > 1)
-                    {
-                        int count=0;
-                        Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-                        {
-                            if(count== storyCount-1)
+                            Story story = new Story();
+                            story.id = item.id;
+                            story.event_id = item.event_id;
+                            story.file_url = item.file_url;
+                            story.profile_url = item.profile_url;
+                            story.user_id = item.user_id;
+                            story.create_date = item.create_date;
+                            story.create_time = item.create_time;
+                            story.ProgressTime = 3000;
+                            if (item.file_url.Contains("mp4"))
                             {
-                                Navigation.PopModalAsync();
-                                return false;
+                                story.IsVideoVisible = true;
+                                story.IsImageVisible = false;
                             }
-                            Pos = (Pos + 1) % EventStories.Count;
-                            count++;
-                            return true;
-                        }));
+                            else
+                            {
+                                story.IsVideoVisible = false;
+                                story.IsImageVisible = true;
+                            }
+                            eventStories.Add(story);
+                        }
+                        EventStories = eventStories;
+                        //if (EventStories.Count > 1)
+                        //{
+                        //    int count=0;
+                        //    Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
+                        //    {
+                        //        if(count== storyCount-1)
+                        //        {
+                        //            Navigation.PopModalAsync();
+                        //            return false;
+                        //        }
+                        //        Pos = (Pos + 1) % EventStories.Count;
+                        //        count++;
+                        //        return true;
+                        //    }));
+                        //}
+                        //if (EventStories.Count == 1)
+                        //{
+                        //    Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
+                        //    {
+                        //        Navigation.PopModalAsync();
+                        //        return false;
+                        //    }));
+                        //}
+
                     }
-                    if (EventStories.Count == 1)
-                    {
-                        Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-                        {
-                            Navigation.PopModalAsync();
-                            return false;
-                        }));
-                    }
+                    else
+                        IsNoStoryVisible = true;
                 }
             }
             catch (Exception ex)

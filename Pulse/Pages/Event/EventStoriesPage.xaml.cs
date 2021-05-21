@@ -475,7 +475,7 @@ namespace Pulse.Pages.Event
 			{
 				var stream = new MemoryStream(byteThumbnail);
 				thumbNailName = Guid.NewGuid().ToString().Substring(0, 7) + "_thumb" + Constant.AWS_File_Ext;
-				return await new AWSServices().UploadAWSFile(stream, App.AWSCurrentDetails.response.images_path.event_videos_thumbnails, thumbNailName);
+				return await new AWSServices().UploadAWSFile(stream, App.AWSCurrentDetails.response.images_path.story_videos_thumbnails, thumbNailName);
 			}
 			return false;
 		}

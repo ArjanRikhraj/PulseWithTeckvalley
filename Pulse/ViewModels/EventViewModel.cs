@@ -78,6 +78,8 @@ namespace Pulse
         string eventLitScore;
         string coverFreeAmountText;
         bool isCoverFreeAmountAvailable;
+        bool isUploadCoverImageVisible;
+        bool isPartyTextVisible;
         bool isNotInterestedImageVisible;
         bool isInterestedImageVisible;
         bool isNotInterestedIconVisible;
@@ -841,7 +843,24 @@ namespace Pulse
                 OnPropertyChanged("IsStackOptionVisible");
             }
         }
-
+        public bool IsUploadCoverImageVisible
+        {
+            get { return isUploadCoverImageVisible; }
+            set
+            {
+                isUploadCoverImageVisible = value;
+                OnPropertyChanged("IsUploadCoverImageVisible");
+            }
+        }
+        public bool IsPartyTextVisible
+        {
+            get { return isPartyTextVisible; }
+            set
+            {
+                isPartyTextVisible = value;
+                OnPropertyChanged("IsPartyTextVisible");
+            }
+        }
 
         public bool IsCoverFreeAmountAvailable
         {
@@ -3316,6 +3335,7 @@ namespace Pulse
                             EventTitle = response.response.name;
                             IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
                             CoverPhoto= string.IsNullOrEmpty(response.response.cover_photo)? "party_story_header.png": response.response.cover_photo;
+                            IsPartyTextVisible = CoverPhoto == "party_story_header.png" ? true : false;
                             EventLocation = response.response.location_address;
                             EventVenue = response.response.event_venue;
                             Description = response.response.description;
@@ -3331,9 +3351,11 @@ namespace Pulse
                             eventLattitude = response.response.latitude;
                             EventLitScore = Convert.ToString(response.response.event_lit_score) + Constant.LitScoreText;
                             IsCoverFreeAmountAvailable = Convert.ToDouble(response.response.cover_fee_amount) > 0.0 ? true : false;
+
                             IsCoverAmount = response.response.is_free_time_event;
                             EventCoverAmount = string.Empty;
                             EventBottleAmount = string.Empty;
+                            IsUploadCoverImageVisible = SessionManager.UserId == response.response.user ? true : false;
                             IsUserCheckedIn = response.response.is_checkin;
                             IsBoostEvent = response.response.is_boosted_event;
                             IsNotAlreadyBoosted = !IsBoostEvent;
@@ -3384,7 +3406,7 @@ namespace Pulse
                                 {
                                     IsJoinButtonVisible = false;
                                     IsStackOptionVisible = false;
-                                    IsCheckinButtonVisible = true;
+                                    IsCheckinButtonVisible = true; 
                                 }
                                 else
                                 {
@@ -4777,7 +4799,7 @@ namespace Pulse
                 transactions = transactionsList,
             };
             return paymentDetail;
-        }
+         }
 
         public string CheckCardType()
         {

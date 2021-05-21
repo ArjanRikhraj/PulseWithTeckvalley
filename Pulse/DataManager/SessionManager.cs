@@ -8,7 +8,7 @@ namespace Pulse
 	{
 
         //Temporary bases access token
-        public static string accessToken { get; set; } = "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX";
+        public static string accessToken { get; set; } = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
         public static string AccessToken
         {
             get

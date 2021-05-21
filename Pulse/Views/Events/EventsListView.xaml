@@ -94,7 +94,7 @@
                                                 </Grid.RowDefinitions>
                                                 <Image  Grid.Row="0" Grid.Column="0" Source="{Binding PartyImage}" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
                                                 <local:GradientColorStack IsVisible="False" stackOrientation="Vertical" StartColor="#0dFFFFFF" EndColor="#0dFFFFFF" Grid.Row="0" Grid.Column="0" HeightRequest="120" HorizontalOptions="FillAndExpand"/>
-                                                <Image Source="{Binding IconStar}" HeightRequest="30" WidthRequest="30" Margin="0,5,5,0" Grid.Row="0" Grid.Column="0" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand">
+                                                <Image Source="{Binding IconStar}" HeightRequest="30" WidthRequest="30" Margin="0,10,15,0" Grid.Row="0" Grid.Column="0" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand">
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding  Source={x:Reference EventListViewPage}, Path=BindingContext.StarEventCommand}" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
                                                     </Image.GestureRecognizers>
@@ -108,15 +108,13 @@
                                                 </Grid.RowDefinitions>
                                                 <StackLayout Orientation="Horizontal" Grid.Row="0">
                                                     <StackLayout VerticalOptions="CenterAndExpand" Spacing="0">
-                                                        <StackLayout Orientation="Horizontal">
-                                                            <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
-                                                            <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}"/>
-                                                        </StackLayout>
+                                                            <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand"/>
                                                             <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
-                                                            <local:ExtendedLabel Text="{Binding EventStatus}" IsVisible="False" TextColor="Black" FontFace="PoppinsRegular" FontSize="12"/>
+                                                        <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
+                                                        <local:ExtendedLabel Text="{Binding EventStatus}" IsVisible="False" TextColor="Black" FontFace="PoppinsRegular" FontSize="12"/>
                                                         <local:ExtendedLabel Text="{Binding EventAddress}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand"/>
                                                     </StackLayout>
-                                                    <custom:CircleImage x:Name="imgUser" HeightRequest="60" WidthRequest="60" BorderThickness="2" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{Binding profile_image}" VerticalOptions="Start" Aspect="AspectFill" HorizontalOptions="EndAndExpand"/>
+                                                    <custom:CircleImage x:Name="imgUser" Margin="0,-20,0,0" HeightRequest="60" WidthRequest="60" BorderThickness="2" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{Binding profile_image}" VerticalOptions="Start" Aspect="AspectFill" HorizontalOptions="EndAndExpand"/>
                                                 </StackLayout>
                                                
                                                 <StackLayout IsVisible="False" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">

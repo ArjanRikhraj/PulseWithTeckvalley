@@ -13,6 +13,7 @@ namespace Pulse.Models.Application.Events
     }
     public partial class Story:BaseViewModel
     {
+        public long id { get; set; }
         public long event_id { get; set; }
         public long user_id { get; set; }
         public string file_url { get; set; }

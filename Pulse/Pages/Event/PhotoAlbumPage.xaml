@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pulse.PhotoAlbumPage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" x:Class="Pulse.PhotoAlbumPage">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" Margin="0" Padding="0">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="White">
@@ -20,7 +20,28 @@
                         <local:ExtendedLabel Text="Photo Album" Grid.ColumnSpan="2" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
                     </Grid>
                 </local:GradientColorStack>
-                <local:ExtendedListView Grid.Row="1" x:Name="listViewMedia" HorizontalOptions="FillAndExpand" ItemTapped="lstMediaTapped" BackgroundColor="White" HasUnevenRows="true" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                <StackLayout Grid.Row="1" BackgroundColor="White" Padding="0">
+                    <CollectionView x:Name="mediaCollectionView" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                        Span="4"
+                        VerticalItemSpacing="0"
+                        HorizontalItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto" HorizontalOptions="FillAndExpand" Padding="0">
+                                    <Frame Grid.Row="0" IsClippedToBounds="True" HeightRequest="100" WidthRequest="100" Padding="0">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                                            <Image Source="{Binding FileName}" Aspect="AspectFill"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <local:ExtendedListView IsVisible="False" Grid.Row="1" x:Name="listViewMedia" HorizontalOptions="FillAndExpand" ItemTapped="lstMediaTapped" BackgroundColor="White" HasUnevenRows="true" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                     <local:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                           <local:GalleryViewCell BindingContext="{Binding .}" />

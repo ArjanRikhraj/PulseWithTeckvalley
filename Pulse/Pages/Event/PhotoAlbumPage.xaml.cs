@@ -176,7 +176,8 @@ namespace Pulse
 
 		void SetMedia(List<EventMedia> list)
 		{
-			listViewMedia.IsVisible = true;
+			mediaCollectionView.IsVisible = true;
+			//listViewMedia.IsVisible = true;
 			lblNoMedia.IsVisible = false;
 			foreach (var item in list)
 			{
@@ -198,7 +199,8 @@ namespace Pulse
 
             }
 			eventViewModel.MediaList.Clear();
-			listViewMedia.ItemsSource = tempMediaList;
+			mediaCollectionView.ItemsSource = tempMediaList;
+			//listViewMedia.ItemsSource = tempMediaList;
 			eventViewModel.pageNoMedia++;
 			eventViewModel.IsLoading = false;
 		}

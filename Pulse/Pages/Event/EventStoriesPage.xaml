@@ -9,8 +9,9 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <local:VideoPlayer AutoPlay="True" Source="{Binding file_url}" IsVisible="{Binding IsVideoVisible}" VerticalOptions="FillAndExpand" />
-                                <Image Source="{Binding file_url}" IsVisible="{Binding IsImageVisible}" Aspect="Fill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <local:CustomWebView Source="{Binding file_url}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                <!--<local:VideoPlayer AutoPlay="True" Source="{Binding file_url}" IsVisible="{Binding IsVideoVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Image Source="{Binding file_url}" IsVisible="{Binding IsImageVisible}" Aspect="Fill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>-->
                                 <custom:CircleImage VerticalOptions="StartAndExpand" Margin="25,0,0,0" HorizontalOptions="StartAndExpand" Grid.Row="0" x:Name="imgUser" Source="{Binding profile_url}" Aspect="AspectFill" WidthRequest="40" BorderColor="LightGray" BorderThickness="0.5">
                                     <custom:CircleImage.GestureRecognizers>
                                         <TapGestureRecognizer/>
@@ -21,6 +22,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
+                <IndicatorView x:Name="indicatorView" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" IndicatorColor="LightGray" IndicatorSize="4" IndicatorsShape="Square" SelectedIndicatorColor="DodgerBlue"/>
                 <StackLayout Orientation="Horizontal" Grid.Row="0" VerticalOptions="StartAndExpand">
                     <Image Source="back.png" VerticalOptions="Center">
                         <Image.GestureRecognizers>
@@ -36,7 +38,7 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <local:ExtendedLabel Grid.Row="0" IsVisible="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="There is no party story at the moment" TextColor="White" FontFace="PoppinsRegular"/>
+            <local:ExtendedLabel Grid.Row="0" IsVisible="{Binding IsNoStoryVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="There is no party story at the moment" TextColor="White" FontFace="PoppinsRegular"/>
 
             <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7"/>
             <StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
