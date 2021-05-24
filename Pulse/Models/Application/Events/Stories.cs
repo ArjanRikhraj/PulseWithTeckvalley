@@ -59,9 +59,28 @@ namespace Pulse.Models.Application.Events
                 OnPropertyChanged("IsImageVisible");
             }
         }
+        public bool isMenuOptionVisible { get; set; }
+        public bool IsMenuOptionVisible
+        {
+            get
+            {
+                return isMenuOptionVisible;
+            }
+            set
+            {
+                isMenuOptionVisible = value;
+                OnPropertyChanged("IsMenuOptionVisible");
+            }
+        }
     }
     public partial class EventStoryRequest
     {
          public long event_id { get; set; }
+    }
+    public partial class SaveStoryRequest
+    {
+        public long event_id { get; set; }
+        public long id { get; set; }
+        public long user_id { get; set; }
     }
 }

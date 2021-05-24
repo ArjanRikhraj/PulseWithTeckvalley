@@ -56,6 +56,7 @@ namespace Pulse
 				friendsViewModel.GetFriendsHostedEventList();
 			}
 
+			await friendsViewModel.GetFriendMediaList();
 		}
         async void View_AllTapped(object sender, System.EventArgs e)
 
@@ -282,7 +283,7 @@ namespace Pulse
             {
 				friendsViewModel.IsFriendEventListVisible = true;
 				friendsViewModel.IsMediaListVisible = false;
-				friendsViewModel.IsNoMediaVisible = true;
+				//friendsViewModel.IsNoMediaVisible = true;
 				lblEvent.TextColor = Color.FromHex("#4a4a4a");
 				lblMedia.TextColor = Color.FromHex("#909090");
 			}
@@ -297,8 +298,17 @@ namespace Pulse
 			try
 			{
 				friendsViewModel.IsFriendEventListVisible = false;
-				friendsViewModel.IsMediaListVisible = true;
-				friendsViewModel.IsNoMediaVisible = true;
+				if (friendsViewModel.FriendsMediaList.Count > 0)
+				{
+					friendsViewModel.IsMediaListVisible = true;
+					friendsViewModel.IsNoMediaVisible = false;
+				}
+				else
+				{
+					friendsViewModel.IsMediaListVisible = false;
+					friendsViewModel.IsNoMediaVisible = true;
+				}
+				//friendsViewModel.IsNoMediaVisible = true;
 				lblEvent.TextColor = Color.FromHex("#909090");
 				lblMedia.TextColor = Color.FromHex("#4a4a4a");
 			}

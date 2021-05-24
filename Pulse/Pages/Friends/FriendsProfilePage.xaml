@@ -146,11 +146,31 @@
                 </local:GradientColorStack>
                 <!--               <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0">
 -->
-                <StackLayout Grid.Row="1" Spacing="0" IsVisible="{Binding IsNoMediaVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-                    <StackLayout Margin="10,50,0,0">
-                    <Image Source="NoMedia.png" HeightRequest="100" WidthRequest="100" />
+                <StackLayout Grid.Row="1" Spacing="0" IsVisible="{Binding IsMediaListVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <CollectionView x:Name="mediaCollectionView" ItemsSource="{Binding FriendsMediaList}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                        Span="4"
+                        VerticalItemSpacing="0"
+                        HorizontalItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto" HorizontalOptions="FillAndExpand" Padding="0">
+                                    <Frame Grid.Row="0" IsClippedToBounds="True" HeightRequest="100" WidthRequest="100" Padding="0">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                                            <Image Source="{Binding FileName}" Aspect="AspectFill"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                   
+                </StackLayout>
+                <StackLayout Grid.Row="1" IsVisible="{Binding IsNoMediaVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <Image Source="NoMedia.png" HeightRequest="100" WidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     <local:ExtendedLabel Text="No Media Uploaded Yet"  FontFace="PoppinsSemiBold" FontSize="14" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                    </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Row="1" IsVisible="{Binding IsNoEventVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
                     <local:ExtendedLabel Text="No Events Hosted Yet" FontFace="PoppinsSemiBold" FontSize="14" Margin="15,10,15,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="FillAndExpand"/>

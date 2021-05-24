@@ -87,6 +87,7 @@ namespace Pulse
         public const string UploadLiveMedia = "/api/event/uploadmedia/";
         public const string AddEventStories = "/api/event/addeventstory/";
         public const string GetEventStories = "/api/event/geteventstory/";
+        public const string SaveEventStories = "/api/event/savestorymedia/";
         public const string UploadEventCoverImage = "/api/event/addeventcoverphoto/";
         public const string ShareEventUrl = "/api/event/share/";
         public const string MediaDeleteUrl = "/api/event/mediadelete/";
@@ -95,6 +96,7 @@ namespace Pulse
         public const string SearchEventForPulseUrl = "/api/event/searchevent/?page=";
         public const string MessageListUrl = "/api/group/messagelist/";
         public const string UserMediaListingUrl = "/api/accounts/medialisting/?page=";
+        public const string GetFriendMediaList = "/api/event/getfriendmedia/?user_id={0}&page={1}";
         public const string SearchPulseUrl = "/api/group/groupsbysearch/?page=";
         public const string PulseDetailUrl = "/api/group/pulsedetail/";
         public const string PulseUpdateUrl = "/api/group/pulseupdate/";

@@ -67,6 +67,7 @@ namespace Pulse
 		public ObservableCollection<Friend> tempFriendList;
 		public ObservableCollection<Friend> tempPendingList;
 		public ObservableCollection<MyEvents> tempFriendEventList;
+		ObservableCollection<EventGallery> friendsMediaList;
 
 		public string searchvalue;
 
@@ -116,7 +117,15 @@ namespace Pulse
 				OnPropertyChanged("ListMyFriends");
 			}
 		}
-
+		public ObservableCollection<EventGallery> FriendsMediaList
+		{
+			get { return friendsMediaList; }
+			set
+			{
+				friendsMediaList = value;
+				OnPropertyChanged("FriendsMediaList");
+			}
+		}
 		public bool IsAddFriendButtonVisible
 		{
 			get { return isAddFriendButtonVisible; }
@@ -299,6 +308,7 @@ namespace Pulse
 			tempFriendList = new ObservableCollection<Friend>();
 			tempPendingList = new ObservableCollection<Friend>();
 			tempFriendEventList = new ObservableCollection<MyEvents>();
+			friendsMediaList = new ObservableCollection<EventGallery>();
 			mainService = new MainServices();
 
 		}
@@ -422,8 +432,82 @@ namespace Pulse
 			}
 		}
 
-
-
+		public async Task GetFriendMediaList()
+		{
+			try
+			{
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					TapCount = 0;
+					return;
+				}
+				else
+				{
+					if (SessionManager.AccessToken != null)
+					{
+						List<EventMedia> MediaList = new List<EventMedia>();
+						var url = string.Format(Constant.GetFriendMediaList, TappedFriendid, pageNoFriend);
+						var response = await mainService.Get<ResultWrapper<EventMedia>>(url);
+						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+						{
+							foreach (var item in response.response)
+							{
+								friendsMediaList.Add(new EventGallery
+								{
+									ImageWidth = App.ScreenWidth,
+									ImageHeight = App.ScreenHeight / 1.2,
+									FileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : PageHelper.GetEventImage(item.file_name),
+									IsPlayIconVisible = item.file_type == 1 ? true : false,
+									EventName = item.event_name,
+									VideoFileName = item.file_type == 1 ? PageHelper.GetEventTranscodedVideo(item.file_name) : "",
+									MediaDate = SetEventDate(item.create_date),
+									IsVisibleUserName = true,
+									UserImage = !string.IsNullOrEmpty(item.profile_image) ? item.profile_image : string.Empty,
+									UserName = !string.IsNullOrEmpty(item.user_name) ? item.user_name : string.Empty,
+									IsImage = item.file_type == 1 ? false : true,
+									VideoThumbnailFileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : string.Empty
+								});
+								
+							}
+							FriendsMediaList = friendsMediaList;
+							if (friendsMediaList.Count > 0)
+                            {
+								IsMediaListVisible = true;
+								isNoMediaVisible = false;
+							}
+                            else
+                            {
+								IsMediaListVisible = false;
+								isNoMediaVisible = true;
+							}
+								
+						}
+						else
+						{
+							IsMediaListVisible = false;
+							isNoMediaVisible = true;
+						}
+					}
+					else
+					{
+						IsMediaListVisible = false;
+						isNoMediaVisible = true;
+					}
+				}
+			}
+			catch (Exception)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+				IsMediaListVisible = false;
+				isNoMediaVisible = true;
+			}
+		}
+		string SetEventDate(string createDate)
+		{
+			var dateStart = DateTime.Parse(createDate);
+			return dateStart.Date.ToString("ddd,dd MMM").ToUpperInvariant() + ", " + dateStart.ToString("h:mm tt").Trim().ToUpperInvariant();
+		}
 		void SetUserList(bool isList, List<FriendResponseForUser> list)
 		{
             if (isList && pageNoUser < 2 && !string.IsNullOrEmpty(searchvalue))

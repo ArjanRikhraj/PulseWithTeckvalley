@@ -49,12 +49,6 @@ namespace Pulse.Pages.Event
             }
         }
 
-        private void MenuButton_Clicked(object sender, EventArgs e)
-        {
-            stackPopUp.IsVisible = true;
-            grdOverlayDialog.IsVisible = true;
-        }
-
         private void Cancel_Clicked(object sender, EventArgs e)
         {
             stackPopUp.IsVisible = false;
@@ -389,8 +383,8 @@ namespace Pulse.Pages.Event
 		async void UploadVideo(Stream stream, string fileName)
 		{
 			bool isUploaded = await new AWSServices().UploadAWSFile(stream, App.AWSCurrentDetails.response.images_path.story_videos, fileName);
-			//byte[] thumbnail = Device.RuntimePlatform == Device.Android ? App.DroidThumbnail : App.iOSImageThumbnail;
-			//bool isThumbnailUploaded = await UploadThumbnail(thumbnail);
+			byte[] thumbnail = Device.RuntimePlatform == Device.Android ? App.DroidThumbnail : App.iOSImageThumbnail;
+			bool isThumbnailUploaded = await UploadThumbnail(thumbnail);
 			if (isUploaded)
 			{
 				AddPhotoVideo(fileName, 1);

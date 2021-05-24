@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Pulse.ViewModels
@@ -53,6 +54,64 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("IsNoStoryVisible");
             }
         }
+        private ICommand storyMenuCommand { get; set; }
+        public ICommand StoryMenuCommand
+        {
+            get
+            {
+                return storyMenuCommand ?? (storyMenuCommand = new Command<object>((currentObject) => StoryOptions(currentObject)));
+            }
+        }
+        private ICommand saveStoryCommand { get; set; }
+        public ICommand SaveStoryCommand
+        {
+            get
+            {
+                return saveStoryCommand ?? (saveStoryCommand = new Command<object>((currentObject) => SaveStory(currentObject)));
+            }
+        }
+
+        private async void SaveStory(object sender)
+        {
+            try
+            {
+                var currentObject = (Story)sender;
+                if (currentObject != null)
+                {
+                    SaveStoryRequest request = new SaveStoryRequest();
+                    request.event_id = currentObject.event_id;
+                    request.id = currentObject.id;
+                    request.user_id = SessionManager.UserId;
+                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.SaveEventStories, request);
+                    if (response != null && response.status == Constant.Status200 && response.response != null)
+                    {
+                        ShowToast(Constant.AlertTitle, "Story Successfully Saved");
+                        currentObject.IsMenuOptionVisible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+
+        private async void StoryOptions(object sender)
+        {
+            try
+            {
+                var currentObject = (Story)sender;
+                if(currentObject!=null)
+                {
+                    currentObject.IsMenuOptionVisible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+
         public EventStoryViewModel(int eventId)
         {
             mainService = new MainServices();
