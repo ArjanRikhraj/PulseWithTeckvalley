@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse"
+             x:Class="Pulse.Pages.User.ShowMedia">
+    <local:BaseContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0" Padding="0">
+            <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="0" Padding="20,5,20,5" BackgroundColor="#303030" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Image x:Name="btnBack" Source="cross_add_event.png" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Cross_Clicked"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image x:Name="btnPin" Source="iconPin.png" HeightRequest="25" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="btnPin_Clicked"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <StackLayout Grid.Row="1" BackgroundColor="#303030" Padding="0" Spacing="0">
+                    <local:CustomWebView x:Name="mediaWebview" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="400"/>
+                    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Start" Margin="10,0,0,0" Spacing="5">
+                    <Label x:Name="lblEventName" TextColor="White"/>
+                    <Label x:Name="lblCreateDate" TextColor="White"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </local:BaseContentPage.Content>
+</local:BaseContentPage>

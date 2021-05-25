@@ -147,7 +147,7 @@
                 <!--               <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendsButtonVisible}" Margin="0,50,0,0">
 -->
                 <StackLayout Grid.Row="1" Spacing="0" IsVisible="{Binding IsMediaListVisible}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-                    <CollectionView x:Name="mediaCollectionView" ItemsSource="{Binding FriendsMediaList}">
+                    <CollectionView x:Name="mediaCollectionView" ItemsSource="{Binding FriendsMediaList}" SelectedItem="{Binding MediaSelectedItem}" SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                         Span="4"

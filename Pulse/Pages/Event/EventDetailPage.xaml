@@ -44,7 +44,7 @@
                                     <local:ExtendedLabel Text="You are attending this event." FontFace="PoppinsRegular" HorizontalOptions="Center" TextColor="{x:Static local:Constant.LightBackGroungColor}" FontSize="12" />
                                     <local:ExtendedLabel Text="Discover what's happening around." FontFace="PoppinsRegular" HorizontalOptions="Center" TextColor="{x:Static local:Constant.LightBackGroungColor}" FontSize="12" />
                                 </StackLayout>
-                                <local:ExtendedButton FontFace="PoppinsMedium"  Clicked="PartyStory_Clicked" Margin="30,0,30,10" BorderRadius="23" FontSize="Small" HeightRequest="45" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" Text="Party Story" TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"
+                                <local:ExtendedButton FontFace="PoppinsMedium"  Clicked="PartyStory_Clicked" Margin="80,0,80,10" BorderRadius="23" FontSize="Small" HeightRequest="45" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" Text="Party Story" TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"
                                         BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
                             </StackLayout>
                         </Grid>

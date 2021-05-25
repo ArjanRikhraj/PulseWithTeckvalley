@@ -88,7 +88,7 @@ namespace Pulse
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<App>(this, "getPhotoAlbumMedia", (obj) => {
+			MessagingCenter.Subscribe<object>(this, "getPhotoAlbumMedia", (obj) => {
                 eventViewModel.pageNoMedia = 1;
                 eventViewModel.totalMediaPages = 1;
                 lblNoMedia.IsVisible = false;
@@ -179,24 +179,30 @@ namespace Pulse
 			mediaCollectionView.IsVisible = true;
 			//listViewMedia.IsVisible = true;
 			lblNoMedia.IsVisible = false;
+			tempMediaList.Clear();
 			foreach (var item in list)
 			{
 				tempMediaList.Add(new EventGallery
 				{
+					FileUrl=item.file_name,
+					MediaId = item.id,
+					IsPrivate=item.is_private,
+					UserId= item.user_id,
+					EventId= item.event_id,
 					ImageWidth = App.ScreenWidth,
-                    ImageHeight = App.ScreenHeight / 1.2,
+					ImageHeight = App.ScreenHeight / 1.2,
 					FileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : PageHelper.GetEventImage(item.file_name),
 					IsPlayIconVisible = item.file_type == 1 ? true : false,
+					PinIcon = item.is_private == true ? "iconPin.png" : "iconPinned.png",
 					EventName = item.event_name,
-                    VideoFileName = item.file_type == 1 ? PageHelper.GetEventTranscodedVideo(item.file_name) : "",
+					VideoFileName = item.file_type == 1 ? PageHelper.GetEventTranscodedVideo(item.file_name) : "",
 					MediaDate = SetEventDate(item.create_date),
-                    IsVisibleUserName = true,
-                    UserImage =!string.IsNullOrEmpty(item.profile_image)? item.profile_image :string.Empty,
-                    UserName = !string.IsNullOrEmpty(item.user_name)? item.user_name :string.Empty,
-                    IsImage = item.file_type == 1 ? false : true,
-                    VideoThumbnailFileName = item.file_type == 1? PageHelper.GetEventVideoThumbnail(item.file_thumbnail):string.Empty
-				});
-
+					IsVisibleUserName = true,
+					UserImage = !string.IsNullOrEmpty(item.profile_image) ? item.profile_image : string.Empty,
+					UserName = !string.IsNullOrEmpty(item.user_name) ? item.user_name : string.Empty,
+					IsImage = item.file_type == 1 ? false : true,
+					VideoThumbnailFileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : string.Empty
+				}) ;
             }
 			eventViewModel.MediaList.Clear();
 			mediaCollectionView.ItemsSource = tempMediaList;
@@ -241,5 +247,6 @@ namespace Pulse
 		{
 			stckVideo.IsVisible = false;
 		}
-	}
+
+    }
 }

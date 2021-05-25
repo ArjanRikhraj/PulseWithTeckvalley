@@ -70,7 +70,11 @@ namespace Pulse.ViewModels
                 return saveStoryCommand ?? (saveStoryCommand = new Command<object>((currentObject) => SaveStory(currentObject)));
             }
         }
-
+        public EventStoryViewModel(int eventId)
+        {
+            mainService = new MainServices();
+            GetAllStories(eventId);
+        }
         private async void SaveStory(object sender)
         {
             try
@@ -112,11 +116,7 @@ namespace Pulse.ViewModels
             }
         }
 
-        public EventStoryViewModel(int eventId)
-        {
-            mainService = new MainServices();
-            GetAllStories(eventId);
-        }
+       
 
         private async void GetAllStories(int eventId)
         {
@@ -146,6 +146,7 @@ namespace Pulse.ViewModels
                             story.ProgressTime = 3000;
                             if (item.file_url.Contains("mp4"))
                             {
+                                story.videofile_url = VideoSource.FromUri(item.file_url);
                                 story.IsVideoVisible = true;
                                 story.IsImageVisible = false;
                             }

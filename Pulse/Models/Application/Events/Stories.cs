@@ -17,6 +17,8 @@ namespace Pulse.Models.Application.Events
         public long event_id { get; set; }
         public long user_id { get; set; }
         public string file_url { get; set; }
+        public VideoSource videofile_url { get; set; }
+        
         public string create_time { get; set; }
         public string create_date { get; set; }
         public string profile_url { get; set; }

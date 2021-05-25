@@ -41,6 +41,7 @@ namespace Pulse
         public const string PendingRequestCountUrl = "/api/accounts/pendingrequestcount/";
         public const string CreateEventUrl = "/api/event/event/";
         public const string StarEventUrl = "/api/event/starevent/";
+        public const string PinStoryUrl = "/api/event/pinstory/";
         public const string AllUpcomingUrl = "/api/event/allupcomingevents/?page=";
         public const string AllPastUrl = "/api/event/allpastevents/?page=";
         public const string InterestedUpcomingUrl = "/api/event/interestedupcomingevents/?page=";
@@ -96,6 +97,7 @@ namespace Pulse
         public const string SearchEventForPulseUrl = "/api/event/searchevent/?page=";
         public const string MessageListUrl = "/api/group/messagelist/";
         public const string UserMediaListingUrl = "/api/accounts/medialisting/?page=";
+        public const string UserMediaUrl = "/api/accounts/usermedia/?page=";
         public const string GetFriendMediaList = "/api/event/getfriendmedia/?user_id={0}&page={1}";
         public const string SearchPulseUrl = "/api/group/groupsbysearch/?page=";
         public const string PulseDetailUrl = "/api/group/pulsedetail/";

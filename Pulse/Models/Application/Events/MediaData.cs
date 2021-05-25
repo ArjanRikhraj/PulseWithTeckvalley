@@ -77,7 +77,11 @@ namespace Pulse
 		double imageWidth;
 		bool isDeleteIconVisible;
 		bool isReportIconVisible;
+		bool isPrivate;
+		string pinIcon;
 		public int MediaId { get; set; }
+		public int EventId { get; set; }
+		public int UserId { get; set; }
 		public bool IsPlayIconVisible
 		{
 			get { return isPlayIconVisible; }
@@ -124,6 +128,24 @@ namespace Pulse
 				OnPropertyChanged("IsReportIconVisible");
 			}
 		}
+		public bool IsPrivate
+		{
+			get { return isPrivate; }
+			set
+			{
+				isPrivate = value;
+				OnPropertyChanged("IsPrivate");
+			}
+		}
+		public string PinIcon
+		{
+			get { return pinIcon; }
+			set
+			{
+				pinIcon = value;
+				OnPropertyChanged("PinIcon");
+			}
+		}
 		public string VideoFileName
 		{
 			get; set;
@@ -133,6 +155,10 @@ namespace Pulse
 			get; set;
 		}
 		public string FileName
+		{
+			get; set;
+		}
+		public string FileUrl
 		{
 			get; set;
 		}

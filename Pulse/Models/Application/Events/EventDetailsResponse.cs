@@ -18,6 +18,7 @@ namespace Pulse
 		public string event_name { get; set; }
 		public int user_id { get; set; }
 		public int total_media { get; set; }
+		public bool is_private { get; set; }
 	}
 
 	public class EventDetailsResponse
@@ -68,5 +69,16 @@ namespace Pulse
 	public class EventAttend
 	{
 		public int invitee_status { get; set; }
+	}
+	public class PinMediaRequest
+	{
+		public int story_id { get; set; }
+		public int user_id { get; set; }
+	}
+	public class PinMediaResponse
+	{
+		public string msg { get; set; }
+		public int pinned_media_count { get; set; }
+		public bool is_private { get; set; }
 	}
 }

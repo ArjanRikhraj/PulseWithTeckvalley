@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Pulse.Pages.User;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -1193,8 +1194,23 @@ namespace Pulse
                 return starEventCommand ?? (starEventCommand = new Command<object>((currentObject) => CreateStarredEvent(currentObject)));
             }
         }
+        private EventGallery mediaSelectedItem;
+        public EventGallery MediaSelectedItem
+        {
+            get
+            {
+                return mediaSelectedItem;
+            }
+            set
+            {
+                mediaSelectedItem = value;
+                OnPropertyChanged("MediaSelectedItem");
+                if(mediaSelectedItem!=null)
+                ShowMedia(MediaSelectedItem);
+            }
+        }
 
-        
+       
         #region Constructor
         public EventViewModel()
         {
@@ -1258,6 +1274,42 @@ namespace Pulse
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
+        private async void ShowMedia(EventGallery selectedItem)
+        {
+            try
+            {
+               await Navigation.PushModalAsync(new ShowMedia(selectedItem));
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        //private async void PinMedia(object sender)
+        //{
+        //    try
+        //    {
+        //        var obj= (EventGallery)sender;
+        //        if(obj!=null)
+        //        {
+        //            PinMediaRequest request = new PinMediaRequest();
+        //            request.story_id = obj.MediaId;
+        //            request.user_id = SessionManager.UserId;
+        //            if (request == null)
+        //                return;
+        //            var response = await mainService.Post<ResultWrapperSingle<StarEventResponse>>(Constant.PinStoryUrl, request);
+        //            if (response != null && response.status == Constant.Status200 && response.response != null)
+        //            {
+        //                if (currentObject == null)
+        //                    IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+        //    }
+        //}
         private void GetEventsByDate(DateTime selectedDate)
         {
             try
@@ -4353,7 +4405,7 @@ namespace Pulse
                     if (SessionManager.AccessToken != null && (pageNoMedia == 1 || pageNoMedia <= totalMediaPages))
                     {
                         MediaList = new List<EventMedia>();
-                        var response = await mainService.Get<ResultWrapper<EventMedia>>(Constant.UserMediaListingUrl + pageNoMedia);
+                        var response = await mainService.Get<ResultWrapper<EventMedia>>(Constant.UserMediaUrl + pageNoMedia);
                         if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
                         {
                             foreach (var item in response.response)
@@ -4366,7 +4418,6 @@ namespace Pulse
                         }
                         else if (response != null && response.status == Constant.Status401)
                         {
-                            SignOut();
                             IsLoading = false;
                             return false;
                         }

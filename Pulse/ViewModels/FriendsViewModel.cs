@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
 using Pulse.Pages.Event;
+using Pulse.Pages.User;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -290,13 +291,27 @@ namespace Pulse
 				CollectionViewSelectedFriend(selectedFriend);
 			}
 		}
+		private EventGallery mediaSelectedItem;
+		public EventGallery MediaSelectedItem
+		{
+			get
+			{
+				return mediaSelectedItem;
+			}
+			set
+			{
+				mediaSelectedItem = value;
+				OnPropertyChanged("MediaSelectedItem");
+				if (mediaSelectedItem != null)
+					ShowMedia(MediaSelectedItem);
+			}
+		}
 
-       
 
 
-        #endregion
-        #region Constructor
-        public FriendsViewModel()
+		#endregion
+		#region Constructor
+		public FriendsViewModel()
 		{
 			LoadMoreUsers = new Command(GetUsers);
 			LoadMoreMyFriends = new Command(GetMyFriendsList);
@@ -431,7 +446,18 @@ namespace Pulse
 				return false;
 			}
 		}
-
+		private async void ShowMedia(EventGallery selectedItem)
+		{
+			try
+			{
+				bool isFromFriend;
+				await Navigation.PushModalAsync(new ShowMedia(selectedItem, isFromFriend=true));
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
 		public async Task GetFriendMediaList()
 		{
 			try
@@ -447,7 +473,7 @@ namespace Pulse
 					if (SessionManager.AccessToken != null)
 					{
 						List<EventMedia> MediaList = new List<EventMedia>();
-						var url = string.Format(Constant.GetFriendMediaList, TappedFriendid, pageNoFriend);
+						var url = string.Format(Constant.GetFriendMediaList, TappedFriendid, 1);
 						var response = await mainService.Get<ResultWrapper<EventMedia>>(url);
 						if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
 						{
@@ -455,6 +481,11 @@ namespace Pulse
 							{
 								friendsMediaList.Add(new EventGallery
 								{
+									FileUrl = item.file_name,
+									MediaId = item.id,
+									IsPrivate = item.is_private,
+									UserId = item.user_id,
+									EventId = item.event_id,
 									ImageWidth = App.ScreenWidth,
 									ImageHeight = App.ScreenHeight / 1.2,
 									FileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : PageHelper.GetEventImage(item.file_name),
