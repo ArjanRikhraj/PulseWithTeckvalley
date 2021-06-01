@@ -1120,9 +1120,9 @@ namespace Pulse
 				try
 				{
 					IsLoading = true;
-					if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault<string>("CustomUserAccessToken", string.Empty)))
+					if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault("CustomUserAccessToken", string.Empty)))
 					{
-						string userToken = Settings.AppSettings.GetValueOrDefault<string>("CustomUserAccessToken", string.Empty);
+						string userToken = Settings.AppSettings.GetValueOrDefault("CustomUserAccessToken", string.Empty);
 						SessionManager.AccessToken = userToken;
 						var result = await mainService.Get<UserDetailResponse>(Constant.GetUserDetail);
 						if (result != null && result.status == Constant.Status200 && result.response.Count > 0)

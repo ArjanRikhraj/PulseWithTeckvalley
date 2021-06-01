@@ -1,33 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse"
-             x:Class="Pulse.Pages.User.ShowMedia">
+                    xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  xmlns:local="clr-namespace:Pulse"
+                       x:Class="Pulse.Pages.User.ShowMedia">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0" Padding="0">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="White">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="0" Padding="20,5,20,5" BackgroundColor="#303030" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <Image x:Name="btnBack" Source="cross_add_event.png" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Cross_Clicked"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Image x:Name="btnPin" Source="iconPin.png" HeightRequest="25" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="btnPin_Clicked"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+               
+                <StackLayout x:Name="mainView" Grid.Row="0" BackgroundColor="#303030" Padding="0" Spacing="0">
+                    <!--<mm:VideoView x:Name="mediaView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ShowControls="False" Repeat="All" AutoPlay="True"/>-->
+                    <!--<Image x:Name="imageStory" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>-->
+                    <!--<local:customwebview x:name="mediawebview" horizontaloptions="fillandexpand" verticaloptions="centerandexpand" heightrequest="400"/>-->
                 </StackLayout>
-                <StackLayout Grid.Row="1" BackgroundColor="#303030" Padding="0" Spacing="0">
-                    <local:CustomWebView x:Name="mediaWebview" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="400"/>
-                    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Start" Margin="10,0,0,0" Spacing="5">
-                    <Label x:Name="lblEventName" TextColor="White"/>
-                    <Label x:Name="lblCreateDate" TextColor="White"/>
+                
+            </Grid>
+            <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="0" Margin="20,30,20,10" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Image x:Name="btnBack" Source="cross_add_event.png" HeightRequest="25" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Cross_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="btnPin" Source="iconPin.png" HeightRequest="25" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnPin_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand" Grid.Row="0" HorizontalOptions="Start" Margin="10,0,0,10" Spacing="5" >
+                <Label x:Name="lblEventName" TextColor="White"/>
+                <Label x:Name="lblCreateDate" TextColor="White"/>
+            </StackLayout>
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="loader" Color="White" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
                     </StackLayout>
-                </StackLayout>
+                </Frame>
             </Grid>
         </Grid>
     </local:BaseContentPage.Content>

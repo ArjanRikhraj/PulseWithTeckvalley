@@ -79,6 +79,6 @@ namespace Pulse
 	{
 		public string msg { get; set; }
 		public int pinned_media_count { get; set; }
-		public bool is_private { get; set; }
+		public bool maximumpinnedcount { get; set; }
 	}
 }

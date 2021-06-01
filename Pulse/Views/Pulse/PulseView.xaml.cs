@@ -100,9 +100,9 @@ namespace Pulse
 						lst.SelectedItem = null;
 						/// Manage New Message Alerts
 						List<PulseModel> SavedList = new List<PulseModel>();
-						if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty)))
+						if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty)))
 						{
-							SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty));
+							SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty));
 							var matchedPulse = SavedList.Where(x => x.PulseId == item.PulseId).FirstOrDefault();
 							if (matchedPulse != null)
 							{
@@ -112,12 +112,12 @@ namespace Pulse
 							{
 								SavedList.Add(item);
 							}
-							Settings.AppSettings.AddOrUpdateValue<string>("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
+							Settings.AppSettings.AddOrUpdateValue("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
 						}
 						else
 						{
 							SavedList.Add(item);
-							Settings.AppSettings.AddOrUpdateValue<string>("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
+							Settings.AppSettings.AddOrUpdateValue("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
 						}
 						///
 						await Navigation.PushModalAsync(new MessageChatPage(pulseOnwerId, isPulseMember, false));

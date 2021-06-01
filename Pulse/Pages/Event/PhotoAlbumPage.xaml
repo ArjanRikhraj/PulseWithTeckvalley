@@ -24,23 +24,18 @@
                     <CollectionView x:Name="mediaCollectionView" SelectedItem="{Binding MediaSelectedItem}" SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
-                        Span="4"
+                        Span="3"
                         VerticalItemSpacing="0"
-                        HorizontalItemSpacing="0" />
+                        HorizontalItemSpacing="0.5" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid RowDefinitions="Auto" ColumnDefinitions="Auto" HorizontalOptions="FillAndExpand" Padding="0">
-                                    <Frame Grid.Row="0" IsClippedToBounds="True" HeightRequest="100" WidthRequest="100" Padding="0">
+                                    <Frame Grid.Row="0" IsClippedToBounds="True" HeightRequest="150" WidthRequest="150" Padding="0">
                                         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                             <Image Source="{Binding FileName}" Aspect="AspectFill"/>
                                             <Image Source="{x:Static local:Constant.VideoIcon}" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsPlayIconVisible}" Aspect="AspectFit" HorizontalOptions="Start" VerticalOptions="Start"/>
-                                            <Image Source="{Binding PinIcon}" HeightRequest="20" WidthRequest="20" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,5,5">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                                    <!--<TapGestureRecognizer Command="{Binding  Source={x:Reference UserMediaPage}, Path=BindingContext.PinCommand}" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>-->
-                                                </Image.GestureRecognizers>
-                                            </Image>
+                                            <Image Source="{Binding PinIcon}" HeightRequest="20" WidthRequest="20" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,5,5"/>
                                         </Grid>
                                     </Frame>
                                 </Grid>

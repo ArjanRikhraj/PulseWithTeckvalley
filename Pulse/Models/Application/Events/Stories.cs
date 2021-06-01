@@ -61,6 +61,19 @@ namespace Pulse.Models.Application.Events
                 OnPropertyChanged("IsImageVisible");
             }
         }
+        public string btnBack { get; set; }
+        public string BtnBack
+        {
+            get
+            {
+                return btnBack;
+            }
+            set
+            {
+                btnBack = value;
+                OnPropertyChanged("BtnBack");
+            }
+        }
         public bool isMenuOptionVisible { get; set; }
         public bool IsMenuOptionVisible
         {
@@ -72,6 +85,19 @@ namespace Pulse.Models.Application.Events
             {
                 isMenuOptionVisible = value;
                 OnPropertyChanged("IsMenuOptionVisible");
+            }
+        }
+        public double videoHeight { get; set; }
+        public double VideoHeight
+        {
+            get
+            {
+                return videoHeight;
+            }
+            set
+            {
+                videoHeight = value;
+                OnPropertyChanged("VideoHeight");
             }
         }
     }

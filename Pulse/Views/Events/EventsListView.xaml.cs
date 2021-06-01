@@ -145,7 +145,8 @@ namespace Pulse
                         {
                             ScrollView scroll = new ScrollView()
                             {
-                                Orientation = ScrollOrientation.Horizontal
+                                Orientation = ScrollOrientation.Horizontal,
+                                
                             };
                             StackLayout stack = new StackLayout()
                             {

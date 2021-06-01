@@ -259,6 +259,12 @@ namespace Pulse.ViewModels
             }
             catch (Exception ex)
             {
+                FriendModel.FirstFriendIsVisible = false;
+                FriendModel.SecondFriendIsVisible = false;
+                FriendModel.ThirdFriendIsVisible = false;
+                FriendModel.FourthFriendIsVisible = false;
+                FriendModel.FifthFriendIsVisible = false;
+                FriendModel.SixthFriendIsVisible = false;
                 App.HideMainPageLoader();
                 IsLoading = false;
                 await App.Instance.Alert("Problem in fetching location!", Constant.AlertTitle, Constant.Ok);

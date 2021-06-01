@@ -8,9 +8,9 @@ using Pulse;
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
 namespace Pulse.iOS
 {
-	public class CustomWebViewRenderer : WebViewRenderer
-	{
-        protected override void OnElementChanged(VisualElementChangedEventArgs e)
+	public class CustomWebViewRenderer : ViewRenderer<CustomWebView, UIWebView>
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<CustomWebView> e)
         {
             base.OnElementChanged(e);
 

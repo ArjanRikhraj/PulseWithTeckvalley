@@ -11,6 +11,7 @@ using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Pulse.Helpers;
+using Pulse.Pages;
 using Pulse.Pages.Event;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -1007,6 +1008,7 @@ namespace Pulse
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
 					await Navigation.PushModalAsync(new EventStoriesPage());
+					//await Navigation.PushModalAsync(new StoriesPage());
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}

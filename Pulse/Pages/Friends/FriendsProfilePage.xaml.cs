@@ -284,8 +284,8 @@ namespace Pulse
 				friendsViewModel.IsFriendEventListVisible = true;
 				friendsViewModel.IsMediaListVisible = false;
 				//friendsViewModel.IsNoMediaVisible = true;
-				lblEvent.TextColor = Color.FromHex("#4a4a4a");
-				lblMedia.TextColor = Color.FromHex("#909090");
+				lblEvent.TextDecorations = TextDecorations.Underline;
+				lblMedia.TextDecorations = TextDecorations.None;
 			}
             catch (Exception ex)
             {
@@ -309,8 +309,8 @@ namespace Pulse
 					friendsViewModel.IsNoMediaVisible = true;
 				}
 				//friendsViewModel.IsNoMediaVisible = true;
-				lblEvent.TextColor = Color.FromHex("#909090");
-				lblMedia.TextColor = Color.FromHex("#4a4a4a");
+				lblEvent.TextDecorations = TextDecorations.None;
+				lblMedia.TextDecorations = TextDecorations.Underline;
 			}
 			catch (Exception ex)
 			{

@@ -28,36 +28,27 @@ namespace Pulse
 
 
     public static string GeneralSettings
-    {
-      get
-      {
-        return AppSettings.GetValueOrDefault<string>(SettingsKey, SettingsDefault);
-      }
-      set
-      {
-        AppSettings.AddOrUpdateValue<string>(SettingsKey, value);
-      }
-    }
-        public static string AccessToken
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault<string>(AccessTokenKey, AccessTokenDefault);
-            }
+            get => AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
             set
             {
-                AppSettings.AddOrUpdateValue<string>(AccessTokenKey, value);
+                AppSettings.AddOrUpdateValue(SettingsKey, value);
+            }
+        }
+        public static string AccessToken
+        {
+            get => AppSettings.GetValueOrDefault(AccessTokenKey, AccessTokenDefault);
+            set
+            {
+                AppSettings.AddOrUpdateValue(AccessTokenKey, value);
             }
         }
         public static bool IsOnBoardingShown
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault<bool>(OnBoardingKey, false);
-            }
+            get => AppSettings.GetValueOrDefault(OnBoardingKey, false);
             set
             {
-                AppSettings.AddOrUpdateValue<bool>(OnBoardingKey, value);
+                AppSettings.AddOrUpdateValue(OnBoardingKey, value);
             }
         }
 

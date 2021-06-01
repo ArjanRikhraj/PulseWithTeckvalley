@@ -77,7 +77,7 @@
                                 </yummy:PancakeView.Border>
                                 <StackLayout Style="{StaticResource eventEntryStack}">
                                     <Image Source="{x:Static local:Constant.DetailIcon}"/>
-                                    <local:ExtendedEditor MaxLength="200" Style="{StaticResource eventEntryStyle}" Placeholder="+ Description" Text="{Binding Description}" AutoSize="TextChanges"/>
+                                    <local:BorderlessEntry MaxLength="200" Style="{StaticResource eventEntryStyle}" Placeholder="+ Description" Text="{Binding Description}" AutoSize="TextChanges"/>
                                 </StackLayout>
                             </yummy:PancakeView>
                             <!--Unit-->

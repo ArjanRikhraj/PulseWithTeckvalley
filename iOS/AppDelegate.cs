@@ -9,6 +9,7 @@ using UIKit;
 using UserNotifications;
 using Xamarin.Forms;
 using Pulse;
+using MediaManager;
 
 namespace Pulse.iOS
 {
@@ -29,6 +30,7 @@ namespace Pulse.iOS
             DependencyService.Register<ToastNotification>(); // Register your dependency
             ToastNotification.Init();
             CarouselViewRenderer.Init();
+            CrossMediaManager.Current.Init();
             CrossMedia.Current.Initialize();
             ImageCircleRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
@@ -63,7 +65,7 @@ namespace Pulse.iOS
                 if (!string.IsNullOrEmpty(newToken))
                 {
                     var refreshedToken = newToken.Replace('"', ' ').Trim();
-                    Settings.AppSettings.AddOrUpdateValue<string>(Constant.FcmToken, refreshedToken);
+                    Settings.AppSettings.AddOrUpdateValue(Constant.FcmToken, refreshedToken);
                 }
             });
             return base.FinishedLaunching(app, options);

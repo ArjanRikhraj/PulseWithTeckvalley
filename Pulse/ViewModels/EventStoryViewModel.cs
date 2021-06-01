@@ -1,9 +1,11 @@
 ﻿using Pulse.Models.Application.Events;
+using Pulse.Pages.Event;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -62,6 +64,17 @@ namespace Pulse.ViewModels
                 return storyMenuCommand ?? (storyMenuCommand = new Command<object>((currentObject) => StoryOptions(currentObject)));
             }
         }
+        private ICommand cancelCommand { get; set; }
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return cancelCommand ?? (cancelCommand = new Command<object>((currentObject) => CancelStory(currentObject)));
+            }
+        }
+
+        
+
         private ICommand saveStoryCommand { get; set; }
         public ICommand SaveStoryCommand
         {
@@ -70,10 +83,12 @@ namespace Pulse.ViewModels
                 return saveStoryCommand ?? (saveStoryCommand = new Command<object>((currentObject) => SaveStory(currentObject)));
             }
         }
+        private CancellationTokenSource cancellation;
         public EventStoryViewModel(int eventId)
         {
             mainService = new MainServices();
             GetAllStories(eventId);
+            this.cancellation = new CancellationTokenSource();
         }
         private async void SaveStory(object sender)
         {
@@ -99,7 +114,21 @@ namespace Pulse.ViewModels
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-
+        private async void CancelStory(object sender)
+        {
+            try
+            {
+                var currentObject = (Story)sender;
+                if (currentObject != null)
+                {
+                    currentObject.IsMenuOptionVisible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         private async void StoryOptions(object sender)
         {
             try
@@ -115,10 +144,7 @@ namespace Pulse.ViewModels
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-
-       
-
-        private async void GetAllStories(int eventId)
+         private async void GetAllStories(int eventId)
         {
             try
             {
@@ -143,12 +169,15 @@ namespace Pulse.ViewModels
                             story.user_id = item.user_id;
                             story.create_date = item.create_date;
                             story.create_time = item.create_time;
-                            story.ProgressTime = 3000;
+                            story.VideoHeight = Application.Current.MainPage.Height;
+                            story.BtnBack = "back.png";
+                            story.ProgressTime = 4000;
                             if (item.file_url.Contains("mp4"))
                             {
+                                story.file_url = "https://s3.us-west-2.amazonaws.com/pli-socialma-prod/Users_Images/169a9ec.png";
                                 story.videofile_url = VideoSource.FromUri(item.file_url);
                                 story.IsVideoVisible = true;
-                                story.IsImageVisible = false;
+                                story.IsImageVisible = true;
                             }
                             else
                             {
@@ -158,30 +187,21 @@ namespace Pulse.ViewModels
                             eventStories.Add(story);
                         }
                         EventStories = eventStories;
-                        //if (EventStories.Count > 1)
-                        //{
-                        //    int count=0;
-                        //    Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-                        //    {
-                        //        if(count== storyCount-1)
-                        //        {
-                        //            Navigation.PopModalAsync();
-                        //            return false;
-                        //        }
-                        //        Pos = (Pos + 1) % EventStories.Count;
-                        //        count++;
-                        //        return true;
-                        //    }));
-                        //}
-                        //if (EventStories.Count == 1)
-                        //{
-                        //    Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-                        //    {
-                        //        Navigation.PopModalAsync();
-                        //        return false;
-                        //    }));
-                        //}
-
+                        if (EventStories.Count > 1)
+                        {
+                            int count = 0;
+                            CancellationTokenSource cts = this.cancellation; // safe copy
+                            Device.StartTimer(TimeSpan.FromSeconds(4), (Func<bool>)(() =>
+                            {
+                                if (count == storyCount - 1)
+                                {
+                                    return false;
+                                }
+                                Pos = (Pos + 1) % EventStories.Count;
+                                count++;
+                                return true;
+                            }));
+                        }
                     }
                     else
                         IsNoStoryVisible = true;

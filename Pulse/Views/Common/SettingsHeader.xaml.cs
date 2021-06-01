@@ -82,7 +82,7 @@ namespace Pulse
 						baseviewModelObj.IsLoading = true;
 						await new MainServices().Put<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.SignOutUrl, null);
 						await App.Instance.Alert("User has been logged out successfully.", Constant.AlertTitle, Constant.Ok);
-						Settings.AppSettings.AddOrUpdateValue<string>("SavedPulseListing", string.Empty);
+						Settings.AppSettings.AddOrUpdateValue("SavedPulseListing", string.Empty);
 						SessionManager.AccessToken = string.Empty;
 						SessionManager.Email = string.Empty;
 						Settings.AppSettings.AddOrUpdateValue("CustomUserAccessToken", string.Empty);

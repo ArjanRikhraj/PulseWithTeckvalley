@@ -663,9 +663,9 @@ namespace Pulse
 		void GetMessageNotifyCount()
 		{
 			List<PulseModel> SavedList = new List<PulseModel>();
-			if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty)))
+			if (!string.IsNullOrEmpty(Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty)))
 			{
-				SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty));
+				SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty));
 				foreach (var pulse in tempPulseList)
 				{
 					var matchedPulse = SavedList.Where(x => x.PulseId == pulse.PulseId).FirstOrDefault();
@@ -812,9 +812,9 @@ namespace Pulse
 							List<PulseModel> SavedList = new List<PulseModel>();
 							if (!string.IsNullOrEmpty(
 
-								Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty)))
+								Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty)))
 							{
-								SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault<string>("SavedPulseListing", string.Empty));
+								SavedList = JsonConvert.DeserializeObject<List<PulseModel>>(Settings.AppSettings.GetValueOrDefault("SavedPulseListing", string.Empty));
 
 								var matchedPulse = SavedList.Where(x => x.PulseId == TappedPulseId).FirstOrDefault();
 								if (matchedPulse != null)
@@ -822,7 +822,7 @@ namespace Pulse
 									int messageCount = response.response[response.response.Count - 1].message_count;
 									SavedList.Where(w => w.PulseId == TappedPulseId).ToList().ForEach(s => s.TotalMessagesCount = messageCount);
 								}
-								Settings.AppSettings.AddOrUpdateValue<string>("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
+								Settings.AppSettings.AddOrUpdateValue("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
 							}
 							///
 

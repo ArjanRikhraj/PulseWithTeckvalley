@@ -1,470 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CF0649C-AFA0-4136-AF98-7603DB6AE888}</ProjectGuid>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <UseMSBuildEngine>true</UseMSBuildEngine>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Pulse</RootNamespace>
-    <AssemblyName>Pulse</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="PulsePage.xaml" />
-    <EmbeddedResource Include="Pages\Application\MainPage.xaml" />
-    <EmbeddedResource Include="Pages\CMS\AboutPulsePage.xaml" />
-    <EmbeddedResource Include="Pages\CMS\ContactUsPage.xaml" />
-    <EmbeddedResource Include="Pages\CMS\FAQPage.xaml" />
-    <EmbeddedResource Include="Pages\CMS\HaveAQueryPage.xaml" />
-    <EmbeddedResource Include="Pages\CMS\PrivacyPolicyPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\AddEventPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\CommentListingPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\EditEventPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\EventDetailPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\EventGalleryPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\EventsGuestListingPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\GalleryImageViewPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\JoinEventPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\MyEventsPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\PartyStoryPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\PaymentDetailPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\PhotoAlbumPage.xaml" />
-    <EmbeddedResource Include="Pages\Event\SearchFriendForEventPage.xaml" />
-    <EmbeddedResource Include="Pages\Friends\FriendsProfilePage.xaml" />
-    <EmbeddedResource Include="Pages\Friends\PendingFriendRequestPage.xaml" />
-    <EmbeddedResource Include="Pages\Friends\SearchFriendPage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\AddParticipantPage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\AddPulsePage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\LinkEventPage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\MessageChatPage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\PulseDetailPage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\SearchPulsePage.xaml" />
-    <EmbeddedResource Include="Pages\Pulse\UpdatePulsePage.xaml" />
-    <EmbeddedResource Include="Pages\User\ChangePasswordPage.xaml" />
-    <EmbeddedResource Include="Pages\User\EditProfilePage.xaml" />
-    <EmbeddedResource Include="Pages\User\EmailVerificationPage.xaml" />
-    <EmbeddedResource Include="Pages\User\ForgotPasswordPage.xaml" />
-    <EmbeddedResource Include="Pages\User\LoginPage.xaml" />
-    <EmbeddedResource Include="Pages\User\OnBoardPage.xaml" />
-    <EmbeddedResource Include="Pages\User\ProfilePage.xaml" />
-    <EmbeddedResource Include="Pages\User\ResetPasswordPage.xaml" />
-    <EmbeddedResource Include="Pages\User\SettingsPage.xaml" />
-    <EmbeddedResource Include="Pages\User\SignUpPage.xaml" />
-    <EmbeddedResource Include="Pages\User\TermsConditionsPage.xaml" />
-    <EmbeddedResource Include="Pages\User\VerificationSuccessfullPage.xaml" />
-    <EmbeddedResource Include="Views\Common\AppNavigationHeader.xaml" />
-    <EmbeddedResource Include="Views\Common\CustomEntry.xaml" />
-    <EmbeddedResource Include="Views\Common\DisabledCustomEntry.xaml" />
-    <EmbeddedResource Include="Views\Common\MyCustomEntry.xaml" />
-    <EmbeddedResource Include="Views\Common\SettingsHeader.xaml" />
-    <EmbeddedResource Include="Views\Events\EventsListView.xaml" />
-    <EmbeddedResource Include="Views\Friends\MyFriendsView.xaml" />
-    <EmbeddedResource Include="Views\Profile\ProfileView.xaml" />
-    <EmbeddedResource Include="Views\Pulse\PulseView.xaml" />
-    <EmbeddedResource Include="Controls\BorderlessEntry.xaml" />
-    <EmbeddedResource Include="Views\Notification\NotificationView.xaml" />
-    <EmbeddedResource Include="ViewCell\GalleryViewCell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewCell\PhotoStoryGalleryViewCell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Event\BoostEventPopUpPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Event\MapEventListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Application\SocialLoginPage.xaml">
-      <SubType>Designer</SubType>
+    <PackageReference Include="AWSSDK.Core" Version="3.3.101" />
+	  <PackageReference Include="AWSSDK.S3" Version="3.3.101.7" />
+	  <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
+	  <PackageReference Include="Microsoft.AppCenter" Version="4.2.0" />
+	  <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.2.0" />
+	  <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
+	  <PackageReference Include="Microsoft.Bcl.Build" Version="1.0.21" />
+	  <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+	  <PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.2" />
+	  <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+	  <PackageReference Include="modernhttpclient" Version="2.4.2" />
+	  <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="PCLCrypto" Version="1.0.2.15130" />
+	  <PackageReference Include="PCLStorage" Version="1.0.2" />
+	  <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.8" />
+	  <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+	  <PackageReference Include="runtime.native.System" Version="4.3.0" />
+	  <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.43" />
+	  <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.43" />
+	  <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.2.0.47" />
+	  <PackageReference Include="System.Collections" Version="4.3.0" />
+	  <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
+	  <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+	  <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+	  <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />
+	  <PackageReference Include="System.Diagnostics.Tracing" Version="4.3.0" />
+	  <PackageReference Include="System.Globalization" Version="4.3.0" />
+	  <PackageReference Include="System.IO" Version="4.3.0" />
+	  <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+	  <PackageReference Include="System.Linq" Version="4.3.0" />
+	  <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
+	  <PackageReference Include="System.Net.Http" Version="4.3.0" />
+	  <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
+	  <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+	  <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+	  <PackageReference Include="System.Reflection" Version="4.3.0" />
+	  <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+	  <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+	  <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+	  <PackageReference Include="System.Reflection.Primitives" Version="4.3.0" />
+	  <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+	  <PackageReference Include="System.Runtime" Version="4.3.0" />
+	  <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
+	  <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+	  <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+	  <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+	  <PackageReference Include="System.Runtime.Numerics" Version="4.3.0" />
+	  <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
+	  <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
+	  <PackageReference Include="System.Text.RegularExpressions" Version="4.3.0" />
+	  <PackageReference Include="System.Threading" Version="4.3.0" />
+	  <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+	  <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+	  <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+	  <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.0" />
+	  <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+	  <PackageReference Include="Toasts.Forms.Plugin" Version="3.3.2" />
+	  <PackageReference Include="Toasts.Forms.Plugin-PCL" Version="3.3.0" />
+	  <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+	  <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
+	  <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+	  <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+	  <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="2.0.2" />
+	  <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+	  <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
+	  <PackageReference Include="Xamarin.Auth.XamarinForms" Version="1.6.0.4" />
+	  <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
+	  <PackageReference Include="Xamarin.CommunityToolkit.Markup" Version="1.1.0" />
+	  <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+	  <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+	  <PackageReference Include="Xamarin.Forms.Maps" Version="2.5.0.121934" />
+	  <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+	  <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
+	  <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\StoriesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomFrame.cs" />
-    <Compile Include="Controls\DateTimePicker.cs" />
-    <Compile Include="Controls\NoUnderlineDatePicker.cs" />
-    <Compile Include="Controls\NoUnderlineTimePicker.cs" />
-    <Compile Include="Controls\OFrame.cs" />
-    <Compile Include="Helpers\Utils.cs" />
-    <Compile Include="Interfaces\ILocSettings.cs" />
-    <Compile Include="Models\Application\Events\Stories.cs" />
-    <Compile Include="Models\Friends\AddFriendModel.cs" />
-    <Compile Include="Models\User\CurrentLocation.cs" />
-    <Compile Include="Pages\Event\AddFriendsPage.xaml.cs">
-      <DependentUpon>AddFriendsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Event\EventStoriesPage.xaml.cs">
-      <DependentUpon>EventStoriesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PopupPages\SearchEventPage.xaml.cs">
-      <DependentUpon>SearchEventPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\User\ShowMedia.xaml.cs">
-      <DependentUpon>ShowMedia.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PulsePage.xaml.cs">
-      <DependentUpon>PulsePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Constants\ConstantColors.cs" />
-    <Compile Include="Common\Constants\ConstantImages.cs" />
-    <Compile Include="Common\Constants\ConstantSecurity.cs" />
-    <Compile Include="Common\Constants\ConstantStrings.cs" />
-    <Compile Include="Common\Enums\ActivePage.cs" />
-    <Compile Include="Common\Enums\EventStatusType.cs" />
-    <Compile Include="Common\Enums\FontFace.cs" />
-    <Compile Include="Common\Enums\FriendType.cs" />
-    <Compile Include="Common\Enums\GuestType.cs" />
-    <Compile Include="Common\Enums\Months.cs" />
-    <Compile Include="Common\Enums\MyEventType.cs" />
-    <Compile Include="Controls\BorderlessEntry.xaml.cs" />
-    <Compile Include="Controls\CustomMap.cs" />
-    <Compile Include="Controls\CustomWebView.cs" />
-    <Compile Include="Controls\ExtendedButton.cs" />
-    <Compile Include="Controls\ExtendedEditor.cs" />
-    <Compile Include="Controls\ExtendedEntry.cs" />
-    <Compile Include="Controls\ExtendedFrame.cs" />
-    <Compile Include="Controls\ExtendedLabel.cs" />
-    <Compile Include="Controls\ExtendedListView.cs" />
-    <Compile Include="Controls\ExtendedPicker.cs" />
-    <Compile Include="Controls\ExtendedStackLayout.cs" />
-    <Compile Include="Controls\ExtendedWebView.cs" />
-    <Compile Include="Controls\GradientColorFrame.cs" />
-    <Compile Include="Controls\GradientColorStack.cs" />
-    <Compile Include="Controls\PlaceholderEditor.cs" />
-    <Compile Include="Controls\RoundImage.cs" />
-    <Compile Include="DataManager\JsonManager.cs" />
-    <Compile Include="DataManager\PlacesManager.cs" />
-    <Compile Include="DataManager\SessionManager.cs" />
-    <Compile Include="Helpers\PageHelper.cs" />
-    <Compile Include="Interfaces\IKeyboardHelper.cs" />
-    <Compile Include="Interfaces\IPlacesService.cs" />
-    <Compile Include="Interfaces\IQRCode.cs" />
-    <Compile Include="Interfaces\ISharedService.cs" />
-    <Compile Include="Interfaces\IVideoPlayer.cs" />
-    <Compile Include="Interfaces\IVideoService.cs" />
-    <Compile Include="Models\Application\CMS\ContactUsResponse.cs" />
-    <Compile Include="Models\Application\CMS\QueryRequest.cs" />
-    <Compile Include="Models\Application\Events\Comments.cs" />
-    <Compile Include="Models\Application\Events\Event.cs" />
-    <Compile Include="Models\Application\Events\EventDetailsResponse.cs" />
-    <Compile Include="Models\Application\Events\InapprorpriateMedia.cs" />
-    <Compile Include="Models\Application\Events\MediaData.cs" />
-    <Compile Include="Models\Application\Events\MyTransaction.cs" />
-    <Compile Include="Models\Application\Events\PaymentDetail.cs" />
-    <Compile Include="Models\Application\Pulse\PulseData.cs" />
-    <Compile Include="Models\Application\Pulse\PulseModel.cs" />
-    <Compile Include="Models\Application\User\Events.cs" />
-    <Compile Include="Models\Application\User\Friend.cs" />
-    <Compile Include="Models\Application\User\UserData.cs" />
-    <Compile Include="Models\Application\AWSDetails.cs" />
-    <Compile Include="Models\Application\CustomPin.cs" />
-    <Compile Include="Models\Facebook\ResultCustom.cs" />
-    <Compile Include="Models\Facebook\SocialUserDetails.cs" />
-    <Compile Include="Models\GooglePlaces\PlacesModel.cs" />
-    <Compile Include="Models\Response\MyEventResponse.cs" />
-    <Compile Include="Models\Response\ResultWrapper.cs" />
-    <Compile Include="Models\Response\Token.cs" />
-    <Compile Include="Models\User\UserData.cs" />
-    <Compile Include="Pages\Application\MainPage.xaml.cs" />
-    <Compile Include="Pages\CMS\AboutPulsePage.xaml.cs" />
-    <Compile Include="Pages\CMS\ContactUsPage.xaml.cs" />
-    <Compile Include="Pages\CMS\FAQPage.xaml.cs" />
-    <Compile Include="Pages\CMS\HaveAQueryPage.xaml.cs" />
-    <Compile Include="Pages\CMS\PrivacyPolicyPage.xaml.cs" />
-    <Compile Include="Pages\Event\AddEventPage.xaml.cs" />
-    <Compile Include="Pages\Event\CommentListingPage.xaml.cs" />
-    <Compile Include="Pages\Event\EditEventPage.xaml.cs" />
-    <Compile Include="Pages\Event\EventDetailPage.xaml.cs" />
-    <Compile Include="Pages\Event\EventGalleryPage.xaml.cs" />
-    <Compile Include="Pages\Event\EventsGuestListingPage.xaml.cs" />
-    <Compile Include="Pages\Event\GalleryImageViewPage.xaml.cs" />
-    <Compile Include="Pages\Event\JoinEventPage.xaml.cs" />
-    <Compile Include="Pages\Event\MyEventsPage.xaml.cs" />
-    <Compile Include="Pages\Event\PartyStoryPage.xaml.cs" />
-    <Compile Include="Pages\Event\PaymentDetailPage.xaml.cs" />
-    <Compile Include="Pages\Event\PhotoAlbumPage.xaml.cs" />
-    <Compile Include="Pages\Event\SearchFriendForEventPage.xaml.cs" />
-    <Compile Include="Pages\Friends\FriendsProfilePage.xaml.cs" />
-    <Compile Include="Pages\Friends\PendingFriendRequestPage.xaml.cs" />
-    <Compile Include="Pages\Friends\SearchFriendPage.xaml.cs" />
-    <Compile Include="Pages\Pulse\AddParticipantPage.xaml.cs" />
-    <Compile Include="Pages\Pulse\AddPulsePage.xaml.cs" />
-    <Compile Include="Pages\Pulse\LinkEventPage.xaml.cs" />
-    <Compile Include="Pages\Pulse\MessageChatPage.xaml.cs" />
-    <Compile Include="Pages\Pulse\PulseDetailPage.xaml.cs" />
-    <Compile Include="Pages\Pulse\SearchPulsePage.xaml.cs" />
-    <Compile Include="Pages\Pulse\UpdatePulsePage.xaml.cs" />
-    <Compile Include="Pages\User\ChangePasswordPage.xaml.cs" />
-    <Compile Include="Pages\User\EditProfilePage.xaml.cs" />
-    <Compile Include="Pages\User\EmailVerificationPage.xaml.cs" />
-    <Compile Include="Pages\User\ForgotPasswordPage.xaml.cs" />
-    <Compile Include="Pages\User\LoginPage.xaml.cs" />
-    <Compile Include="Pages\User\OnBoardPage.xaml.cs" />
-    <Compile Include="Pages\User\ProfilePage.xaml.cs" />
-    <Compile Include="Pages\User\ResetPasswordPage.xaml.cs" />
-    <Compile Include="Pages\User\SettingsPage.xaml.cs" />
-    <Compile Include="Pages\User\SignUpPage.xaml.cs" />
-    <Compile Include="Pages\User\TermsConditionsPage.xaml.cs" />
-    <Compile Include="Pages\User\VerificationSuccessfullPage.xaml.cs" />
-    <Compile Include="Pages\BaseContentPage.cs" />
-    <Compile Include="ServiceContainer\ServiceContainer.cs" />
-    <Compile Include="ServiceContainer\ServiceRegistrar.cs" />
-    <Compile Include="Services\AWSServices.cs" />
-    <Compile Include="Services\MainServices.cs" />
-    <Compile Include="Services\PaymentService.cs" />
-    <Compile Include="Services\PlacesServices.cs" />
-    <Compile Include="ViewModels\AddFriendsViewModel.cs" />
-    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\CmsViewModel.cs" />
-    <Compile Include="ViewModels\EventStoryViewModel.cs" />
-    <Compile Include="ViewModels\EventViewModel.cs" />
-    <Compile Include="ViewModels\FriendsViewModel.cs" />
-    <Compile Include="ViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\PulseViewModel.cs" />
-    <Compile Include="Views\Common\AppNavigationHeader.xaml.cs" />
-    <Compile Include="Views\Common\CustomEntry.xaml.cs" />
-    <Compile Include="Views\Common\DisabledCustomEntry.xaml.cs" />
-    <Compile Include="Views\Common\MyCustomEntry.xaml.cs" />
-    <Compile Include="Views\Common\SettingsHeader.xaml.cs" />
-    <Compile Include="Views\Events\EventsListView.xaml.cs" />
-    <Compile Include="Views\Events\Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Friends\MyFriendsView.xaml.cs" />
-    <Compile Include="Views\Profile\ProfileView.xaml.cs" />
-    <Compile Include="Views\Pulse\PulseView.xaml.cs" />
-    <Compile Include="Xamarin.Auth\AuthenticationState.cs" />
-    <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="Views\Notification\NotificationView.xaml.cs" />
-    <Compile Include="FormsVideoLibrary\FileVideoSource.cs" />
-    <Compile Include="FormsVideoLibrary\IVideoPicker.cs" />
-    <Compile Include="FormsVideoLibrary\IVideoPlayerController.cs" />
-    <Compile Include="FormsVideoLibrary\PositionSlider.cs" />
-    <Compile Include="FormsVideoLibrary\ResourceVideoSource.cs" />
-    <Compile Include="FormsVideoLibrary\UriVideoSource.cs" />
-    <Compile Include="FormsVideoLibrary\VideoInfo.cs" />
-    <Compile Include="FormsVideoLibrary\VideoPlayer.cs" />
-    <Compile Include="FormsVideoLibrary\VideoSource.cs" />
-    <Compile Include="FormsVideoLibrary\VideoSourceConverter.cs" />
-    <Compile Include="FormsVideoLibrary\VideoStatus.cs" />
-    <Compile Include="ViewCell\GalleryViewCell.xaml.cs">
-      <DependentUpon>GalleryViewCell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewCell\PhotoStoryGalleryViewCell.xaml.cs">
-      <DependentUpon>PhotoStoryGalleryViewCell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Event\BoostEventPopUpPage.xaml.cs">
-      <DependentUpon>BoostEventPopUpPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\IiOSImageRotationService.cs" />
-    <Compile Include="Pages\Event\MapEventListPage.xaml.cs">
-      <DependentUpon>MapEventListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Application\SocialLoginPage.xaml.cs">
-      <DependentUpon>SocialLoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\OAuthProviderSetting.cs" />
-    <Compile Include="Helpers\NotchEffect.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.AppCenter, Version=0.0.0.0, Culture=neutral, PublicKeyToken=8a600e2fee7ba272, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AppCenter.4.2.0\lib\netstandard1.0\Microsoft.AppCenter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.Analytics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=8a600e2fee7ba272, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AppCenter.Analytics.4.2.0\lib\netstandard1.0\Microsoft.AppCenter.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=18.4451.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.Core.18.4.0.43\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.Core.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=18.4.0.43, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.18.4.0.43\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPicker.XForms, Version=18.2451.0.47, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfPicker.18.2.0.47\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfPicker.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLStorage">
-      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\portable-net45+win8+wp8+wpa81\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="Validation">
-      <HintPath>..\packages\Validation.2.0.6.15003\lib\portable-net40+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Validation.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLCrypto">
-      <HintPath>..\packages\PCLCrypto.1.0.2.15130\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.Core">
-      <HintPath>..\packages\AWSSDK.Core.3.3.101\lib\portable-net45+win8+wpa81+wp8\AWSSDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.S3">
-      <HintPath>..\packages\AWSSDK.S3.3.3.101.7\lib\portable-net45+win8+wpa81+wp8\AWSSDK.S3.dll</HintPath>
-    </Reference>
-    <Reference Include="CarouselView.FormsPlugin.Abstractions">
-      <HintPath>..\packages\CarouselView.FormsPlugin.5.2.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\CarouselView.FormsPlugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Permissions">
-      <HintPath>..\packages\Plugin.Permissions.3.0.0.12\lib\netstandard1.0\Plugin.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="Toasts.Forms.Plugin.Abstractions">
-      <HintPath>..\packages\Toasts.Forms.Plugin-PCL.3.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\Toasts.Forms.Plugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions">
-      <HintPath>..\packages\Xam.Plugin.Connectivity.3.2.0\lib\netstandard1.0\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity">
-      <HintPath>..\packages\Xam.Plugin.Connectivity.3.2.0\lib\netstandard1.0\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.DeviceInfo">
-      <HintPath>..\packages\Xam.Plugin.DeviceInfo.4.1.1\lib\netstandard1.0\Plugin.DeviceInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Geolocator">
-      <HintPath>..\packages\Xam.Plugin.Geolocator.4.5.0.6\lib\netstandard1.0\Plugin.Geolocator.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Auth">
-      <HintPath>..\packages\Xamarin.Auth.1.6.0.4\lib\netstandard1.0\Xamarin.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Auth.XamarinForms">
-      <HintPath>..\packages\Xamarin.Auth.XamarinForms.1.6.0.4\lib\netstandard1.0\Xamarin.Auth.XamarinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Essentials.1.6.1\lib\netstandard1.0\Xamarin.Essentials.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.4.8.0.1687\lib\netstandard1.0\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.PancakeView, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.PancakeView.2.3.0.759\lib\netstandard1.0\Xamarin.Forms.PancakeView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.4.8.0.1687\lib\netstandard1.0\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.4.8.0.1687\lib\netstandard1.0\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Core">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.4.1\lib\netstandard1.0\ZXing.Net.Mobile.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="zxing.portable">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.4.1\lib\netstandard1.0\zxing.portable.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXingNetMobile">
-      <HintPath>..\packages\ZXing.Net.Mobile.2.4.1\lib\netstandard1.0\ZXingNetMobile.dll</HintPath>
-    </Reference>
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings">
-      <HintPath>..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
-    </Reference>
-    <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.2.0.2\lib\netstandard1.0\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Maps">
-      <HintPath>..\packages\Xamarin.Forms.Maps.2.5.0.121934\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Maps.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Forms">
-      <HintPath>..\packages\ZXing.Net.Mobile.Forms.2.3.2\lib\portable-net45+netcore45+wpa81+wp8\ZXing.Net.Mobile.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLStorage.Abstractions">
-      <HintPath>..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Media">
-      <HintPath>..\packages\Xam.Plugin.Media.4.0.1.5\lib\netstandard1.0\Plugin.Media.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Events\Page1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\PopupPages\SearchEventPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\Event\AddFriendsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\Event\EventStoriesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\User\ShowMedia.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.props'))" />
-    <Error Condition="!Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets'))" />
-  </Target>
-  <Import Project="..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.8.0.1687\build\Xamarin.Forms.targets')" />
 </Project>

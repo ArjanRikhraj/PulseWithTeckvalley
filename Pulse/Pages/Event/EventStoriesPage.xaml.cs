@@ -8,6 +8,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Connectivity;
 using Pulse.ViewModels;
+using MediaManager;
 
 namespace Pulse.Pages.Event
 {
@@ -25,23 +26,49 @@ namespace Pulse.Pages.Event
             InitializeComponent();
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
 			//eventStoryViewModel = ServiceContainer.Resolve<EventStoryViewModel>();
-			BindingContext = new EventStoryViewModel(eventViewModel.TappedEventId);
+			
             SetInitialValues();
         }
 
         private async void SetInitialValues()
         {
+			BindingContext = new EventStoryViewModel(eventViewModel.TappedEventId);
+            CrossMediaManager.Current.MediaItemFinished += Current_MediaItemFinished;
+            CrossMediaManager.Current.StateChanged += Current_StateChanged; ;
 			//eventStoryViewModel.eventId = eventViewModel.TappedEventId;
-            //progressBar.IsVisible = true;
-           // await progressBar.ProgressTo(1, 5000, Easing.Linear);
-           // progressBar.IsVisible = false;
+			//progressBar.IsVisible = true;
+   //         await progressBar.ProgressTo(1, 5000, Easing.Linear);
+			//progressBar.IsVisible = false;
+        }
+
+        private void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
+        {
+			//if (e.State == MediaManager.Player.MediaPlayerState.Buffering)
+				//grdOverlay.IsVisible = true;
+			//	if (e.State == MediaManager.Player.MediaPlayerState.Playing)
+				//grdOverlay.IsVisible = false;
+			//if (e.State == MediaManager.Player.MediaPlayerState.Stopped)
+
+		}
+
+        private void Current_MediaItemFinished(object sender, MediaManager.Media.MediaItemEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+				return;
+            }
         }
 
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
             try
             {
-                await Navigation.PopModalAsync();
+				//MessagingCenter.Send<object>(this, "BackFromStories");
+				await Navigation.PopModalAsync();
             }
             catch (Exception ex)
             {
@@ -452,7 +479,7 @@ namespace Pulse.Pages.Event
 						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 						_tapCount = 0;
 					}
-					await Navigation.PopModalAsync();
+					SetInitialValues();
 				}
 			}
 			catch (Exception)

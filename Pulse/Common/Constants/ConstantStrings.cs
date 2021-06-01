@@ -1,3 +1,4 @@
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -5,7 +6,7 @@ namespace Pulse
     public static partial class Constant
     {
         #region API Url's
-        
+        //public const string BaseServiceUrl_local = "https://localhost:8000";
         public const string BaseServiceUrl_local = "http://10.0.2.2:8000";
         public const string BaseServiceUrl_testing = "http://pulseph2-qc.netsol.in";
         public const string BaseServiceUrl_staging = "http://pli-pulseph2.agilecollab.com";
@@ -13,7 +14,7 @@ namespace Pulse
         //public const string BaseServiceUrlLive = "http://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
-        public const string BaseServiceUrl = BaseServiceUrl_local;
+        public const string BaseServiceUrl = BaseServiceUrlLive;
         public const string TokenServiceUrl = BaseServiceUrlLive + "/o/token/";
         public const string SignUpUrl = "/api/accounts/signup/";
         public const string SocialSignUpUrl = "/api/accounts/sociallogin/";

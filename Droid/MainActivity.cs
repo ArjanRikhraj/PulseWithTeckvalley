@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
+using MediaManager;
 
 namespace Pulse.Droid
 {
@@ -80,6 +81,7 @@ namespace Pulse.Droid
 			App.ScreenWidth = Resources.Configuration.ScreenWidthDp;
 			CarouselViewRenderer.Init();
 			ImageCircleRenderer.Init();
+			CrossMediaManager.Current.Init(this);
 			Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 			OpenSettings();
 			ZXing.Net.Mobile.Forms.Android.Platform.Init();

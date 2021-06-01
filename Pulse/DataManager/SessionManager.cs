@@ -9,31 +9,31 @@ namespace Pulse
 
         //Temporary bases access token
         public static string accessToken { get; set; } = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
-        public static string AccessToken
-        {
-            get
-            {
-                return accessToken;
-
-            }
-            set
-            {
-                accessToken = value;
-            }
-        }
-
-
         //public static string AccessToken
         //{
         //    get
         //    {
-        //        return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
+        //        return accessToken;
+
         //    }
         //    set
         //    {
-        //        Application.Current.Properties["AccessToken"] = value;
+        //        accessToken = value;
         //    }
         //}
+
+
+        public static string AccessToken
+        {
+            get
+            {
+                return Application.Current.Properties.ContainsKey("AccessToken") ? string.IsNullOrEmpty(Application.Current.Properties["AccessToken"].ToString()) ? string.Empty : Convert.ToString(Application.Current.Properties["AccessToken"]) : string.Empty;
+            }
+            set
+            {
+                Application.Current.Properties["AccessToken"] = value;
+            }
+        }
 
         public static string UserName
 		{

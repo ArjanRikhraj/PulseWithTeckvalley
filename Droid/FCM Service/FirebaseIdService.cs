@@ -13,7 +13,7 @@ namespace Pulse.Droid
 			if (!string.IsNullOrEmpty(refreshedToken))
 			{
 				var r = refreshedToken;
-				Settings.AppSettings.AddOrUpdateValue<string>(Constant.FcmToken, r);
+				Settings.AppSettings.AddOrUpdateValue(Constant.FcmToken, r);
 			}
 		}
 
