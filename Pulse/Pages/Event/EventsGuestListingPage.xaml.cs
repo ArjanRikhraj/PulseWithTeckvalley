@@ -58,7 +58,6 @@ namespace Pulse
 			lbl.TextColor = Color.FromHex(Constant.PinkButtonColor);
 			AttendingBox.BackgroundColor = Color.Transparent;
 			InterestedBox.BackgroundColor = Color.Transparent;
-			NotInterestedBox.BackgroundColor = Color.Transparent;
 			InvitedBox.BackgroundColor = Color.Transparent;
 			eventsBox.BackgroundColor = Color.FromHex(Constant.PinkButtonColor);
 		}
@@ -95,7 +94,14 @@ namespace Pulse
 							case GuestType.NotInterested:
 								if (button.EventGuestType != CurrentActiveGuestType)
 								{
-									TabPageGesture(lblNotInterested, NotInterestedBox);
+									//TabPageGesture(lblNotInterested, NotInterestedBox);
+									ClearFields(button.EventGuestType);
+								}
+								break;
+							case GuestType.CheckedIn:
+								if (button.EventGuestType != CurrentActiveGuestType)
+								{
+									//TabPageGesture(lblNotInterested, NotInterestedBox);
 									ClearFields(button.EventGuestType);
 								}
 								break;

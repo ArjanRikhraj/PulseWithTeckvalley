@@ -67,6 +67,7 @@ namespace Pulse
         public const string ReportEventUrl = "/api/event/event_report_spam/";
         public const string ReportEventCommentUrl = "/api/event/comment_report_spam/";
         public const string NotInterestedGuestUrl = "/api/event/not-interested/";
+        public const string CheckedInGuestUrl = "/api/event/checkedin/";
         public const string EventMediaListUrl = "/api/event/eventmediadetails/";
         public const string EventLiveMediaListUrl = "/api/event/livemediadetails/";
         public const string ProfileDetailUrl = "/api/accounts/friendsdetails/";

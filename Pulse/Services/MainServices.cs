@@ -56,7 +56,7 @@ namespace Pulse
             catch (Exception ex)
             {
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
-               // token.access_token = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
+                //token.access_token = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
                 return token;
             }
             return token;
@@ -66,6 +66,7 @@ namespace Pulse
             var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));
             var json = JsonConvert.SerializeObject(postData);
             var httpcontent = new StringContent(json, Encoding.UTF8, Constant.ContentType);
+         //   client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, SessionManager.AccessToken);
             var response = await client.PostAsync(uri, httpcontent);
             if (response.IsSuccessStatusCode)
@@ -80,6 +81,8 @@ namespace Pulse
             var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));
             var json = JsonConvert.SerializeObject(postData);
             var httpcontent = new StringContent(json, Encoding.UTF8, Constant.ContentType);
+            
+                // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, SessionManager.AccessToken);
             var response = await client.PutAsync(uri, httpcontent);
             if (response.IsSuccessStatusCode)
@@ -93,7 +96,7 @@ namespace Pulse
             try
             {
                 var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));
-                    //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, "MkEW7mfwCKLG1NUh5BjQl6stjV9JZX");
+                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT");
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Constant.TokenTypeBearer, SessionManager.AccessToken);
                 var response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)

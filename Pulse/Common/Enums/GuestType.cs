@@ -6,6 +6,7 @@ namespace Pulse
 		Attending,
 		Interested,
 		NotInterested,
-		Invited
+		Invited,
+		CheckedIn
 	}
 }

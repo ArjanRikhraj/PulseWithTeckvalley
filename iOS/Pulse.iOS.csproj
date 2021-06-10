@@ -45,7 +45,7 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <PlatformTarget>x86</PlatformTarget>
+    <!--<PlatformTarget>x86</PlatformTarget>-->
     <CodesignProvision>Pulse_Distribution</CodesignProvision>
     <MtouchFastDev>false</MtouchFastDev>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>

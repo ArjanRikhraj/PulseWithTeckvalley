@@ -39,7 +39,6 @@ namespace Pulse
 			eventViewModel.BoostEventConfirmation = false;
 			CreateGuestGrid();
 			CreatePhotosGrid();
-
 		}
 
 		#endregion
@@ -59,7 +58,6 @@ namespace Pulse
 					//editorDetails.HeightRequest = 55;
 					farmePopUp.CornerRadius = 5;
 				}
-
 				dtPkrFromDate.MinimumDate = DateTime.Now.Date;
 				dtPkrToDate.MinimumDate = DateTime.Now.Date;
 				timePkrToTime.Time = DateTime.Now.TimeOfDay;
@@ -90,8 +88,6 @@ namespace Pulse
 				await App.Instance.Alert(ex.Message, Constant.AlertTitle, Constant.Ok);
 				eventViewModel.IsLoading = false;
 				//App.HideMainPageLoader();
-
-
 			}
 		}
 
@@ -131,79 +127,97 @@ namespace Pulse
 			}
 		}
 
-		void CreateGuestGrid()
+		async void CreateGuestGrid()
 		{
-			gridSelectedGuests.Children.Clear();
-			int column = 0;
-			int row = 0;
-			if (eventViewModel.SelectedFriendsList != null && eventViewModel.SelectedFriendsList.Count > 0)
+			try
 			{
-				gridNoGuests.IsVisible = false;
-				stackguests.IsVisible = true;
-				foreach (var item in eventViewModel.SelectedFriendsList)
+				gridSelectedGuests.Children.Clear();
+				int column = 0;
+				int row = 0;
+				if (eventViewModel.SelectedFriendsList != null && eventViewModel.SelectedFriendsList.Count > 0)
 				{
-					gridSelectedGuests.RowSpacing = 2;
-					gridSelectedGuests.ColumnSpacing = 2;
-					var tapGestureRecognizer = new TapGestureRecognizer();
-					tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
-					Frame myView = CreateGuestList(item);
-					//myView.GestureRecognizers.Add(tapGestureRecognizer);
-					if (column < 1)
+					gridNoGuests.IsVisible = false;
+					stackguests.IsVisible = true;
+					foreach (var item in eventViewModel.SelectedFriendsList)
 					{
-						gridSelectedGuests.Children.Add(myView, column, row);
-						column++;
-					}
-					else
-					{
-						gridSelectedGuests.Children.Add(myView, column, row);
-						gridSelectedGuests.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
-						row++;
-						column = 0;
+						gridSelectedGuests.RowSpacing = 2;
+						gridSelectedGuests.ColumnSpacing = 2;
+						var tapGestureRecognizer = new TapGestureRecognizer();
+						tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
+						Frame myView = CreateGuestList(item);
+						//myView.GestureRecognizers.Add(tapGestureRecognizer);
+						if (column < 1)
+						{
+							gridSelectedGuests.Children.Add(myView, column, row);
+							column++;
+						}
+						else
+						{
+							gridSelectedGuests.Children.Add(myView, column, row);
+							gridSelectedGuests.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
+							row++;
+							column = 0;
+						}
 					}
 				}
+				else
+				{
+					gridNoGuests.IsVisible = true;
+					stackguests.IsVisible = false;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				gridNoGuests.IsVisible = true;
-				stackguests.IsVisible = false;
+				await App.Instance.Alert(ex.Message, Constant.AlertTitle, Constant.Ok);
+				eventViewModel.IsLoading = false;
+				//App.HideMainPageLoader();
 			}
 		}
 
-		void CreatePhotosGrid()
+		async void CreatePhotosGrid()
 		{
-			gridSelectedPhotos.Children.Clear();
-			int column = 0;
-			int row = 0;
-			if (eventViewModel.SelectedMediaList != null && eventViewModel.SelectedMediaList.Count > 0)
+			try
 			{
-				grdNoFiles.IsVisible = false;
-				stackFiles.IsVisible = true;
-				foreach (var item in eventViewModel.SelectedMediaList)
+				gridSelectedPhotos.Children.Clear();
+				int column = 0;
+				int row = 0;
+				if (eventViewModel.SelectedMediaList != null && eventViewModel.SelectedMediaList.Count > 0)
 				{
-					gridSelectedPhotos.RowSpacing = 2;
-					gridSelectedPhotos.ColumnSpacing = 2;
-					var tapGestureRecognizer = new TapGestureRecognizer();
-					tapGestureRecognizer.Tapped += PhotosTapGestureRecognizer_Tapped;
-					StackLayout myView = CreatPhotosList(item);
-					//myView.GestureRecognizers.Add(tapGestureRecognizer);
-					if (column < 2)
+					grdNoFiles.IsVisible = false;
+					stackFiles.IsVisible = true;
+					foreach (var item in eventViewModel.SelectedMediaList)
 					{
-						gridSelectedPhotos.Children.Add(myView, column, row);
-						column++;
-					}
-					else
-					{
-						gridSelectedPhotos.Children.Add(myView, column, row);
-						gridSelectedGuests.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
-						row++;
-						column = 0;
+						gridSelectedPhotos.RowSpacing = 2;
+						gridSelectedPhotos.ColumnSpacing = 2;
+						var tapGestureRecognizer = new TapGestureRecognizer();
+						tapGestureRecognizer.Tapped += PhotosTapGestureRecognizer_Tapped;
+						StackLayout myView = CreatPhotosList(item);
+						//myView.GestureRecognizers.Add(tapGestureRecognizer);
+						if (column < 2)
+						{
+							gridSelectedPhotos.Children.Add(myView, column, row);
+							column++;
+						}
+						else
+						{
+							gridSelectedPhotos.Children.Add(myView, column, row);
+							gridSelectedGuests.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
+							row++;
+							column = 0;
+						}
 					}
 				}
+				else
+				{
+					grdNoFiles.IsVisible = true;
+					stackFiles.IsVisible = false;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				grdNoFiles.IsVisible = true;
-				stackFiles.IsVisible = false;
+				await App.Instance.Alert(ex.Message, Constant.AlertTitle, Constant.Ok);
+				eventViewModel.IsLoading = false;
+				//App.HideMainPageLoader();
 			}
 		}
 

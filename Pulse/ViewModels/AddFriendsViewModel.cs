@@ -108,12 +108,13 @@ namespace Pulse.ViewModels
         {
            
         }
-
+      
         private async Task GetNearByFriends()
         {
             if (SessionManager.AccessToken != null)
             {
                 App.ShowMainPageLoader();
+                FriendModel = new AddFriendModel();
                 var result = await mainService.Get<ResultWrapper<AddfriendListResponse>>(Constant.GetAllUsersUrl);
                 if (result != null && result.status == Constant.Status200)
                 {
@@ -126,11 +127,20 @@ namespace Pulse.ViewModels
                     userInfo = new List<AddfriendListResponse>();
                     foreach (var item in result.response)
                     {
-                        var nearByFriendLoc = new Xamarin.Essentials.Location(double.Parse(item.latitude), double.Parse(item.longitude));
-                        var distance = userCurrentLoc.CalculateDistance(nearByFriendLoc, DistanceUnits.Kilometers);
-                        if (distance <= 25 && item.email!=SessionManager.Email)
+                        if (!string.IsNullOrEmpty(item.latitude))
                         {
-                            userInfo.Add(item);
+                            var lat = double.Parse(item.latitude.Remove(10));
+                            var lng = double.Parse(item.longitude.Remove(10));
+                            if(lat!=0)
+                            {
+                                var nearByFriendLoc = new Xamarin.Essentials.Location(lat, lng);
+                                var distance = userCurrentLoc.CalculateDistance(nearByFriendLoc, DistanceUnits.Kilometers);
+                                if (distance <= 25 && item.email != SessionManager.Email)
+                                {
+                                    userInfo.Add(item);
+                                }
+                            }
+                            
                         }
                     }
                     var topSixUser = userInfo.Take(6);
@@ -138,7 +148,7 @@ namespace Pulse.ViewModels
                         FriendsCount = "No";
                     else if (topSixUser.Count()> 0)
                         FriendsCount = topSixUser.Count().ToString();
-                    FriendModel = new AddFriendModel();
+                    
                     if (topSixUser.Count() >= 1)
                     {
                         var firstUser = userInfo[0];
@@ -265,6 +275,7 @@ namespace Pulse.ViewModels
                 FriendModel.FourthFriendIsVisible = false;
                 FriendModel.FifthFriendIsVisible = false;
                 FriendModel.SixthFriendIsVisible = false;
+                FriendsCount = "No";
                 App.HideMainPageLoader();
                 IsLoading = false;
                 await App.Instance.Alert("Problem in fetching location!", Constant.AlertTitle, Constant.Ok);

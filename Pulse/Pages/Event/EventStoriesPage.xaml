@@ -64,12 +64,12 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                <IndicatorView x:Name="indicatorView" Grid.Row="0" IndicatorColor="WhiteSmoke" SelectedIndicatorColor="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
+                <IndicatorView x:Name="indicatorView" Grid.Row="0" IndicatorColor="Gray" SelectedIndicatorColor="WhiteSmoke" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
                 <!--<ProgressBar Grid.Row="0" x:Name="progressBar" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>-->
                 <Image Grid.Row="0" Source="cross_add_event.png" WidthRequest="30" VerticalOptions="StartAndExpand" HorizontalOptions="Start" >
                     <Image.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
-                            <On Platform="Android">5,25,0,0</On>
+                            <On Platform="Android">5,27,0,0</On>
                             <On Platform="iOS">5,57,0,0</On>
                         </OnPlatform>
                     </Image.Margin>
@@ -122,10 +122,10 @@
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OverLayTapped" />
                 </Grid.GestureRecognizers>
             </Grid>
-            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
                 <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
-                        <ActivityIndicator x:Name="loader" Color="White" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <ActivityIndicator x:Name="loader" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
                     </StackLayout>
                 </Frame>
             </Grid>

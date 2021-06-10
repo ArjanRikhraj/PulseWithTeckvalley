@@ -67,15 +67,12 @@
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
 							<BoxView Grid.Column="0" x:Name="AttendingBox" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="FillAndExpand" HeightRequest="2">
 							</BoxView>
 							<BoxView Grid.Column="1" x:Name="InterestedBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
 							</BoxView>
-							<BoxView Grid.Column="2" x:Name="NotInterestedBox" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" HeightRequest="2">
-							</BoxView>
-							<BoxView Grid.Column="3" x:Name="InvitedBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+							<BoxView Grid.Column="2" x:Name="InvitedBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
 							</BoxView>
 						</Grid>
 					</Grid>

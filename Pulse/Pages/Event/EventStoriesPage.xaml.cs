@@ -463,7 +463,7 @@ namespace Pulse.Pages.Event
 					{
 						ShowToast(Constant.AlertTitle, "Successfully Uploaded");
 						eventViewModel.IsLoading = false;
-						
+						SetInitialValues();
 						_tapCount = 0;
 					}
 					else if (response != null && response.status == Constant.Status111 && response.message.non_field_errors != null)
@@ -501,10 +501,11 @@ namespace Pulse.Pages.Event
 			return false;
 		}
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-			grdOverlayDialog.IsVisible = true;
-			stackPopUp.IsVisible = true;
+			await TakePhoto();
+			//grdOverlayDialog.IsVisible = true;
+			//stackPopUp.IsVisible = true;
 		}
     }
 }

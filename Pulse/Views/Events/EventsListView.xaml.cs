@@ -715,6 +715,7 @@ namespace Pulse
             }
             catch (Exception ex)
             {
+                App.HideMainPageLoader();
                 await App.Instance.Alert("Can not create event right now", Constant.AlertTitle, Constant.Ok);
             }
         }

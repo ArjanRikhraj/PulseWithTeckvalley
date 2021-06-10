@@ -84,12 +84,12 @@
 	<key>CFBundleIdentifier</key>
 	<string>app.pulse.com</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.4</string>
+	<string>2.6</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>8</string>
 </dict>
 </plist>

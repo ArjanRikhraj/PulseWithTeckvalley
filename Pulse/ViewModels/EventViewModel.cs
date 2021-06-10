@@ -1991,7 +1991,6 @@ namespace Pulse
                 TapCount = 0;
             }
         }
-
         public async Task CancelEvent()
         {
             try
@@ -3033,7 +3032,7 @@ namespace Pulse
                     notification_unread_exist = item.notification_unread_exist,
                     title = item.title,
                     extra_data = item.extra_data,
-                    profile_image= item.profile_image
+                    profile_image= !string.IsNullOrEmpty(item.profile_image)?item.profile_image:Constant.UserDefaultSquareImage
                 });
             }
             ListNotification = tmpNotificationList;
@@ -3880,6 +3879,9 @@ namespace Pulse
                                 break;
                             case GuestType.NotInterested:
                                 url = Constant.NotInterestedGuestUrl;
+                                break;
+                            case GuestType.CheckedIn:
+                                url = Constant.CheckedInGuestUrl;
                                 break;
                             default:
                                 url = Constant.AttendeesGuestUrl;

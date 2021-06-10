@@ -558,6 +558,7 @@ namespace Pulse
 							await mainService.GetToken();
 							if (!string.IsNullOrEmpty(SessionManager.AccessToken))
 							{
+								//SessionManager.AccessToken = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
 								var result = await mainService.Post<ResultWrapperSingle<LoginResponse>>(Constant.SignInUrl, GetLoginUserData());
 								if (result != null && result.status == Constant.Status200)
 								{
