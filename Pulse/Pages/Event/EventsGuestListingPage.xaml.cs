@@ -52,12 +52,11 @@ namespace Pulse
 		{
 			Image img = new Image();
 			lblAttending.TextColor = Color.FromHex(Constant.GrayTextColor);
-			lblInterested.TextColor = Color.FromHex(Constant.GrayTextColor);
-			lblNotInterested.TextColor = Color.FromHex(Constant.GrayTextColor);
+			lblCheckedIn.TextColor = Color.FromHex(Constant.GrayTextColor);
 			lblInvited.TextColor = Color.FromHex(Constant.GrayTextColor);
 			lbl.TextColor = Color.FromHex(Constant.PinkButtonColor);
 			AttendingBox.BackgroundColor = Color.Transparent;
-			InterestedBox.BackgroundColor = Color.Transparent;
+			CheckedInBox.BackgroundColor = Color.Transparent;
 			InvitedBox.BackgroundColor = Color.Transparent;
 			eventsBox.BackgroundColor = Color.FromHex(Constant.PinkButtonColor);
 		}
@@ -84,24 +83,10 @@ namespace Pulse
 									ClearFields(button.EventGuestType);
 								}
 								break;
-							case GuestType.Interested:
-								if (button.EventGuestType != CurrentActiveGuestType)
-								{
-									TabPageGesture(lblInterested, InterestedBox);
-									ClearFields(button.EventGuestType);
-								}
-								break;
-							case GuestType.NotInterested:
-								if (button.EventGuestType != CurrentActiveGuestType)
-								{
-									//TabPageGesture(lblNotInterested, NotInterestedBox);
-									ClearFields(button.EventGuestType);
-								}
-								break;
 							case GuestType.CheckedIn:
 								if (button.EventGuestType != CurrentActiveGuestType)
 								{
-									//TabPageGesture(lblNotInterested, NotInterestedBox);
+									TabPageGesture(lblCheckedIn, CheckedInBox);
 									ClearFields(button.EventGuestType);
 								}
 								break;

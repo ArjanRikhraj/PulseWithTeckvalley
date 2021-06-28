@@ -1,4 +1,4 @@
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -53,6 +53,7 @@ namespace Pulse
         public const string AttendedPastUrl = "/api/event/attendingpastevents/?page=";
         public const string CheckedInPastUrl = "/api/event/checkedin_pastevents/?page=";
         public const string NextSevenDaysEventUrl = "/api/event/nexts-even-days-events/?page=";
+        public const string MyEventsUrl = "/api/event/myevent/";
         public const string UpdateEventUrl = "/api/event/updateevent/";
         public const string CancelEventUrl = "/api/event/cancelevent/";
         public const string LikeEventUrl = "/api/event/likeevent/";
@@ -121,7 +122,7 @@ namespace Pulse
         public const string UnreadNotificationsUrl = "/api/notifications/unreadcount/";
         public const string LatLongMapEventsUrl = "/api/event/lat_long_base/?page={0}&lat={1}&long={2}&datetime={3}&filter='{4}'";
         public const string PostUserLocationUrl = "/api/accounts/user/location/";
-        public const string GetAllUsersUrl = "/api/accounts/allusers/";
+        public const string GetAllUsersUrl = "/api/accounts/allusers/?longitude={0}&latitude={1}";
         #endregion
 
         public const string JsonContent = "application/json";
@@ -366,6 +367,7 @@ namespace Pulse
         public const string MobileRequired = "Please enter mobile number";
         public const string ConfimText = "Confirm";
         public const string DeleteText = "Delete";
+        public const string EndEventText = "End";
         public const string SaveStoryText = "Save Story";
         public const string DeleteStoryText = "Delete Story";
         public const string ReportStoryText = "Report Story";
@@ -419,7 +421,7 @@ namespace Pulse
         public const string TimeText = "Time";
         public const string GuestText = "Guests";
         public const string AddGuestText = "+ Add Guests";
-        public const string PhotosText = "Photos & Videos";
+        public const string PhotosText = "Cover photo & Event Media";
         public const string AddPhotosText = "+ Add Photos or Videos";
         public const string CreateEventText = "Create Event";
         public const string NextButtonText = "Next";
@@ -463,7 +465,7 @@ namespace Pulse
         public const string AttendedText = "Attended";
 
         public const string InterestedText = "Interested";
-        public const string CheckedInText = "Checked In";
+       // public const string CheckedInText = "Checked In";
 
         public const string PickerDoneClickText = "Done";
         public const string EditText = "Edit";
@@ -483,8 +485,13 @@ namespace Pulse
         public const string NotInterestedText = "Not Interested";
         public const string PaidEventText = "This is a paid event with $";
         public const string CoverFeeText = " Cover Fee.";
-        public const string JoinText = "Join & RSVP";
-        public const string CheckInText = "Check In";
+        public const string JoinText = "Pay for event";
+        public const string CheckInText = "Check-In";
+        public const string CheckedIn = "Checked-In";
+        public const string CheckedInText = "✔ Checked-In";
+        public const string ViewTicketText = "✔ View Ticket";
+        public const string JoinGuestListText = "Join Guest List";
+        public const string JoinedGuestListText = "✔ Guest List";
         public const string InvitedText = "Invited";
         public const string CheckInInfoText = "Check-In to upload event pictures & videos";
         public const string SuccessCheckInInfoText = "Add event pictures & videos to the party story";

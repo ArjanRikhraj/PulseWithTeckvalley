@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -40,6 +40,7 @@ namespace Pulse
         bool isStackOptionVisible;
         bool isStackCommentVisible;
         bool isEditIconOnDetailVisible;
+        bool isEndEventVisible;
         bool isUserNotCheckedIn;
         bool isContactNumberAvailable;
         bool isUserCheckedIn;
@@ -47,6 +48,8 @@ namespace Pulse
         bool isEmailVerified;
         bool isUpdateBoostEvent;
         bool isNotAlreadyBoosted;
+        string checkinButtonText;
+        string eventPaidButtonText;
         string iconStar;
         string coverPhoto;
         string eventTitle;
@@ -408,6 +411,15 @@ namespace Pulse
                 OnPropertyChanged("IsEditIconOnDetailVisible");
             }
         }
+        public bool IsEndEventVisible
+        {
+            get { return isEndEventVisible; }
+            set
+            {
+                isEndEventVisible = value;
+                OnPropertyChanged("IsEndEventVisible");
+            }
+        }
         public bool IsLocNoEventVisible
         {
             get { return isLocNoEventVisible; }
@@ -466,7 +478,24 @@ namespace Pulse
                 OnPropertyChanged("IsCommentDeleteIconVisible");
             }
         }
-
+        public string CheckinButtonText
+        {
+            get { return checkinButtonText; }
+            set
+            {
+                checkinButtonText = value;
+                OnPropertyChanged("CheckinButtonText");
+            }
+        }
+        public string EventPaidButtonText
+        {
+            get { return eventPaidButtonText; }
+            set
+            {
+                eventPaidButtonText = value;
+                OnPropertyChanged("EventPaidButtonText");
+            }
+        }
         public string AttendeeCountLabel
         {
             get { return attendeeCountLabel; }
@@ -1210,7 +1239,16 @@ namespace Pulse
             }
         }
 
-       
+        private string cover_Photo { get; set; }
+        public string Cover_Photo
+        {
+            get { return cover_Photo; }
+            set
+            {
+                cover_Photo = value;
+                OnPropertyChanged("Cover_Photo");
+            }
+        }
         #region Constructor
         public EventViewModel()
         {
@@ -2255,6 +2293,7 @@ namespace Pulse
             events.is_free_time_event = isCoverFeeChecked;
             events.cover_fee_amount = isCoverFeeChecked ? Convert.ToDouble(CoverAmount) : 0.0;
             events.bottle_service_amount = isBottleFeeChecked ? Convert.ToDouble(BottleAmount) : 0.0;
+            events.cover_photo = cover_Photo;
             List<Member> members = new List<Member>();
             List<Medium> medium = new List<Medium>();
             members.Clear();
@@ -3384,6 +3423,7 @@ namespace Pulse
                         {
                             TappedEventId = response.response.id;
                             EventTitle = response.response.name;
+                            IsOwner = response.response.is_owner;
                             IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
                             CoverPhoto= string.IsNullOrEmpty(response.response.cover_photo)? "party_story_header.png": response.response.cover_photo;
                             IsPartyTextVisible = CoverPhoto == "party_story_header.png" ? true : false;
@@ -3402,7 +3442,6 @@ namespace Pulse
                             eventLattitude = response.response.latitude;
                             EventLitScore = Convert.ToString(response.response.event_lit_score) + Constant.LitScoreText;
                             IsCoverFreeAmountAvailable = Convert.ToDouble(response.response.cover_fee_amount) > 0.0 ? true : false;
-
                             IsCoverAmount = response.response.is_free_time_event;
                             EventCoverAmount = string.Empty;
                             EventBottleAmount = string.Empty;
@@ -3446,11 +3485,12 @@ namespace Pulse
                             FetchMedia(response.response.event_media);
                             FetchComment(response.response.comments);
 
-                            IsCheckinButtonVisible = response.response.is_owner ? true : false;
+                         
                             IsCheckinDisableButtonVisible = false;
                             IsAddressListVisible = false;
                             IsSearchItemSelected = true;
                             IsEditIconOnDetailVisible = false;
+                           
                             if (currentActiveEventType == MyEventType.Upcoming)
                             {
                                 if (EventToDate.Date == DateTime.Now.Date && EventToTime < DateTime.Now.TimeOfDay)
@@ -3528,6 +3568,22 @@ namespace Pulse
                                 IsStackOptionVisible = false;
                                 IsCheckinButtonVisible = true;
                             }
+                            if(DateTime.Now.Date >= EventFromDate && DateTime.Now.TimeOfDay  >= EventFromTime)
+                            {
+                                //for live events
+                                    CheckinButtonText = response.response.is_checkin ? Constant.CheckedInText : Constant.CheckInText;
+                                    IsCheckinButtonVisible = true;
+                            }
+                            else
+                            {
+                                //for upcoming events
+                                    IsCheckinButtonVisible = true;
+                                    CheckinButtonText = response.response.is_going ? Constant.JoinedGuestListText : Constant.JoinGuestListText;
+                            }
+                          
+                            IsEndEventVisible = IsOwner ? true : false;
+                            IsJoinButtonVisible = IsCoverFreeAmountAvailable ? true : false;
+                            EventPaidButtonText = response.response.is_paid ? Constant.ViewTicketText : Constant.JoinText;
                             if (isDetailShown)
                                 await Navigation.PushModalAsync(new EventDetailPage(id));
                             IsLoading = false;
@@ -3640,8 +3696,6 @@ namespace Pulse
                                 else
                                 {
                                     ShowToast(Constant.AlertTitle, "Event joined successfully.");
-                                    //await App.Instance.Alert("Event joined successfully.", Constant.AlertTitle, Constant.Ok);
-                                    Application.Current.MainPage = new NavigationPage(new MainPage());
                                     IsLoading = false;
                                     TapCount = 0;
                                 }
@@ -4391,7 +4445,6 @@ namespace Pulse
                 return false;
             }
         }
-
         public async Task<bool> GetMyMediaList()
         {
             try
@@ -4439,8 +4492,6 @@ namespace Pulse
                 return false;
             }
         }
-
-
         public ICommand RefreshCommand
         {
             get
@@ -4451,9 +4502,9 @@ namespace Pulse
                     {
                         IsRefreshing = true;
                         pageNoLocBasedEvents = 1;
-                        totalLocBasedPages = 1;
+                       // totalLocBasedPages = 1;
                         tempLocBasedEventList.Clear();
-                        GetLocBasedEvents();
+                        GetAllUpComingEvents();
                         IsRefreshing = false;
                     }
                     else
@@ -4463,7 +4514,28 @@ namespace Pulse
                 });
             }
         }
-
+        public ICommand NotificationsRefreshCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (CrossConnectivity.Current.IsConnected)
+                    {
+                        IsRefreshing = true;
+                        pageNoLocBasedEvents = 1;
+                        // totalLocBasedPages = 1;
+                        tempLocBasedEventList.Clear();
+                        GetNotificationList();
+                        IsRefreshing = false;
+                    }
+                    else
+                    {
+                        await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+                    }
+                });
+            }
+        }
         public bool CardDetailsValidate()
         {
             if (string.IsNullOrEmpty(CardNumber))

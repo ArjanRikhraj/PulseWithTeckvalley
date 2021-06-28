@@ -96,7 +96,8 @@
     <CodesignExtraArgs>
     </CodesignExtraArgs>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
-    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchFloat32>false</MtouchFloat32>
+    <MtouchInterpreter>-all</MtouchInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />

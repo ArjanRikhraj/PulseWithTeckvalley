@@ -8,7 +8,12 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <local:SettingsHeader Grid.Row="0" IsBackButtonVisible="false"  HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeadingText="Notifications" LogoutVisible="false" />
-                <local:ExtendedListView x:Name="lstNotifications" ItemSelected="lstNotificationTapped"  Grid.Row="1" IsVisible="{Binding IsNotificationListVisible}" ItemsSource="{Binding ListNotification}" LoadMoreCommand="{Binding LoadMoreNotifications}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="FillAndExpand" SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
+                <local:ExtendedListView x:Name="lstNotifications" ItemSelected="lstNotificationTapped"  Grid.Row="1"
+                                        IsVisible="{Binding IsNotificationListVisible}" IsPullToRefreshEnabled="True"
+                                        RefreshCommand="{Binding NotificationsRefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                                        ItemsSource="{Binding ListNotification}" LoadMoreCommand="{Binding LoadMoreNotifications}"
+                                        BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="FillAndExpand" 
+                                        SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
                     <local:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

@@ -18,6 +18,7 @@ namespace Pulse
 		int _tapCount = 0;
 		string fileGotFrom;
 		bool isVideoSelected;
+		string coverPhoto;
 		int fileId = 0;
 		readonly EventViewModel eventViewModel;
 		ObservableCollection<MediaData> fileResult;
@@ -58,14 +59,14 @@ namespace Pulse
 					//editorDetails.HeightRequest = 55;
 					farmePopUp.CornerRadius = 5;
 				}
-				dtPkrFromDate.MinimumDate = DateTime.Now.Date;
-				dtPkrToDate.MinimumDate = DateTime.Now.Date;
-				timePkrToTime.Time = DateTime.Now.TimeOfDay;
-				timePkrFromTime.Time = DateTime.Now.TimeOfDay;
-				timePkrFromTime.PropertyChanged += TimePkrFromTime_PropertyChanged;
-				timePkrToTime.PropertyChanged += TimePkrToTime_PropertyChanged;
-				dtPkrFromDate.DateSelected += FromDate_SelectedChanged;
-				dtPkrToDate.DateSelected += ToDate_PropertyChanged;
+				//dtPkrFromDate.MinimumDate = DateTime.Now.Date;
+				//dtPkrToDate.MinimumDate = DateTime.Now.Date;
+				//timePkrToTime.Time = DateTime.Now.TimeOfDay;
+				//timePkrFromTime.Time = DateTime.Now.TimeOfDay;
+				//timePkrFromTime.PropertyChanged += TimePkrFromTime_PropertyChanged;
+				//timePkrToTime.PropertyChanged += TimePkrToTime_PropertyChanged;
+				//dtPkrFromDate.DateSelected += FromDate_SelectedChanged;
+				//dtPkrToDate.DateSelected += ToDate_PropertyChanged;
 				eventViewModel.ClearFields();
 				eventViewModel.EventFromDate = DateTime.Now.Date;
 				eventViewModel.EventToDate = DateTime.Now.AddDays(1);
@@ -241,15 +242,21 @@ namespace Pulse
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				Margin = new Thickness(0, 0, 0, 0)
 			};
-
+			StackLayout userStack = new StackLayout
+			{
+				Padding=0,
+				Margin=0,
+				ClassId=item.FileName
+			};
 			RoundImage userImage = new RoundImage
 			{
 				HeightRequest = 80,
 				Margin = new Thickness(0, 0, 0, 0),
 				Aspect = Aspect.AspectFill,
 				Source = item.imageSource,
-				BorderRadius = 18
+				BorderRadius = 18,
 			};
+			
 			Image videoImage = new Image
 			{
 				Aspect = Aspect.AspectFit,
@@ -266,16 +273,29 @@ namespace Pulse
 				VerticalOptions = LayoutOptions.Start,
 				ClassId = item.id.ToString(),
 			};
+			var mediaTapGestureRecognizer = new TapGestureRecognizer();
+            mediaTapGestureRecognizer.Tapped += MediaTapGestureRecognizer_Tapped;
+			userStack.GestureRecognizers.Add(mediaTapGestureRecognizer);
 			var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped1;
 			userCross.GestureRecognizers.Add(tapGestureRecognizer);
-			grid.Children.Add(userImage, 0, 0);
+			userStack.Children.Add(userImage);
+			grid.Children.Add(userStack, 0, 0);
 			grid.Children.Add(userCross, 0, 0);
 			if (item.FileType == 1) grid.Children.Add(videoImage, 0, 0);
 			stackLayout.Children.Add(grid);
 			return stackLayout;
 
 		}
+
+        private void MediaTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+			grdOverlayDialog.IsVisible = true;
+			MakeCoverPopup.IsVisible = true;
+			var stack = (StackLayout)sender;
+			 coverPhoto = stack.ClassId;
+			//var n= coverPhoto.
+		}            
 
         private void TapGestureRecognizer_Tapped1(object sender, EventArgs e)
         {
@@ -300,7 +320,6 @@ namespace Pulse
 			}
 			CreatePhotosGrid();
 		}
-
 
 		void TapGestureRecognizer_Tapped(object sender, EventArgs e)
 		{
@@ -450,7 +469,6 @@ namespace Pulse
 			}
 		}
 
-
 		void TimeZonePicker_Tapped(object sender, System.EventArgs e)
 		{
 			SetTimeZones();
@@ -462,17 +480,15 @@ namespace Pulse
 			});
 		}
 
-
-
 		void FromDate_Tapped(object sender, System.EventArgs e)
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
 
-				if (dtPkrFromDate.IsFocused)
-					dtPkrFromDate.Unfocus();
+				//if (dtPkrFromDate.IsFocused)
+				//	dtPkrFromDate.Unfocus();
 
-				dtPkrFromDate.Focus();
+				//dtPkrFromDate.Focus();
 			});
 		}
 
@@ -481,19 +497,19 @@ namespace Pulse
 
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				if (timePkrFromTime.IsFocused)
-					timePkrFromTime.Unfocus();
-				timePkrFromTime.Focus();
+				//if (timePkrFromTime.IsFocused)
+				//	timePkrFromTime.Unfocus();
+				//timePkrFromTime.Focus();
 			});
 		}
 		void ToDate_Tapped(object sender, System.EventArgs e)
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				if (dtPkrToDate.IsFocused)
-					dtPkrToDate.Unfocus();
+				//if (dtPkrToDate.IsFocused)
+				//	dtPkrToDate.Unfocus();
 
-				dtPkrToDate.Focus();
+				//dtPkrToDate.Focus();
 			});
 		}
 
@@ -502,9 +518,9 @@ namespace Pulse
 
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				if (timePkrToTime.IsFocused)
-					timePkrToTime.Unfocus();
-				timePkrToTime.Focus();
+				//if (timePkrToTime.IsFocused)
+				//	timePkrToTime.Unfocus();
+				//timePkrToTime.Focus();
 			});
 		}
 		void TimeFormat(TimeSpan Time, Label label)
@@ -539,7 +555,6 @@ namespace Pulse
 			//labelToDate.Text = eventViewModel.EventToDate.ToString("dd MMM,yyyy");
 
 		}
-
 
 		async void AddGuests_Tapped(object sender, System.EventArgs e)
 		{
@@ -1068,6 +1083,20 @@ namespace Pulse
         {
 			editorVenue.Text = "";
 			editorVenue.Unfocus();
+		}
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+			if(!string.IsNullOrEmpty(coverPhoto))
+			eventViewModel.Cover_Photo = coverPhoto;
+			grdOverlayDialog.IsVisible = false;
+			MakeCoverPopup.IsVisible = false;
+		}
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+			grdOverlayDialog.IsVisible = false;
+			MakeCoverPopup.IsVisible = false;
 		}
     }
 }

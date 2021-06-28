@@ -27,12 +27,14 @@
                 <ScrollView Orientation="Vertical" Grid.Row="1" VerticalOptions="FillAndExpand" BackgroundColor="White">
                     <StackLayout Spacing="0" Margin="0">
                         <!--<Grid IsVisible="{Binding IsCheckinButtonVisible}">-->
-                     <Grid>
-                            <Image Source="{Binding CoverPhoto}" Grid.Row="0" Aspect="AspectFill" />
-                           
+                        <Grid HeightRequest="250">
+                            <Image Source="{Binding CoverPhoto}" Grid.Row="0" Aspect="AspectFill"/>
                             <StackLayout Grid.Row="0" Spacing="0" Padding="0">
                                 <StackLayout Orientation="Horizontal" Padding="0" HeightRequest="50" VerticalOptions="StartAndExpand">
-                                    <local:ExtendedButton Image="{x:Static local:Constant.UploadButtonIcon}" IsVisible="{Binding IsUploadCoverImageVisible}" BackgroundColor="Transparent" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" BorderColor="Transparent" BorderRadius="0" Clicked="ExtendedButton_Clicked"/>
+                                    <local:ExtendedButton Image="{x:Static local:Constant.UploadButtonIcon}" IsVisible="{Binding IsUploadCoverImageVisible}" 
+                                                          BackgroundColor="Transparent" HorizontalOptions="StartAndExpand"
+                                                          VerticalOptions="StartAndExpand" BorderColor="Transparent"
+                                                          BorderRadius="0" Clicked="ExtendedButton_Clicked"/>
                                     <Image Source="{Binding IconStar}" HeightRequest="30" WidthRequest="30" Margin="0,10,15,0" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding StarEventCommand}" NumberOfTapsRequired="1"/>
@@ -49,69 +51,49 @@
                             </StackLayout>
                         </Grid>
                         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="10" Spacing="3">
-                            <StackLayout Orientation="Horizontal" Spacing="0">
-                                <!--column One-->
-                                <StackLayout HorizontalOptions="StartAndExpand" Padding="10,0,0,0">
-                                    <Image  Source="imgBoostTag.png" HorizontalOptions="Start"  IsVisible="{Binding IsBoostEvent}"/>
-                                    <local:ExtendedLabel x:Name="lblEventtitle" Text="{Binding EventTitle}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" FontSize="16" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" />
-                                    <local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" Text="{Binding Description}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
-                                    <local:ExtendedLabel x:Name="lblEventLitScore" TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsMedium" Text="{Binding EventLitScore}" FontSize="12" />
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                                <local:ExtendedLabel Grid.Column="0" Grid.Row="0" x:Name="lblEventtitle" Text="{Binding EventTitle}" TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsSemiBold" FontSize="16" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" />
+                                <StackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                    <Image Source="{x:Static local:Constant.LikeImage}" IsVisible="{Binding IsLikedIconVisible}" />
+                                    <Image Source="{x:Static local:Constant.UnlikeImage}" IsVisible="{Binding IsLikeIconVisible}" />
+                                    <local:ExtendedLabel x:Name="lblNoLikes" TextColor="{Binding LabelLikeColor}" FontFace="PoppinsRegular" 
+                                                         Text="{Binding LikesCount}" FontSize="12" VerticalTextAlignment="Center" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding LikeEventClick}" />
+                                    </StackLayout.GestureRecognizers>
                                 </StackLayout>
-                                <!--column Two-->
-                                <StackLayout HorizontalOptions="EndAndExpand">
-                                    <yummy:PancakeView  CornerRadius="15" Padding="8,2,8,2" ClassId="{Binding EventId}" HorizontalOptions="EndAndExpand">
-                                        <yummy:PancakeView.Border>
-                                            <yummy:Border Color="{x:Static local:Constant.PinkButtonColor}" Thickness="1"/>
-                                        </yummy:PancakeView.Border>
-                                        <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
-                                            <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
-                                            <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Guests List" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
-                                        </StackLayout>
-                                        <yummy:PancakeView.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllTapped" />
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInClicked" />--> 
-                                        </yummy:PancakeView.GestureRecognizers>
-                                    </yummy:PancakeView>
-                                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                        <Image Source="{x:Static local:Constant.LikeImage}" IsVisible="{Binding IsLikedIconVisible}" />
-                                        <Image Source="{x:Static local:Constant.UnlikeImage}" IsVisible="{Binding IsLikeIconVisible}" />
-                                        <local:ExtendedLabel x:Name="lblNoLikes" TextColor="{Binding LabelLikeColor}" FontFace="PoppinsRegular" Text="{Binding LikesCount}" FontSize="12" VerticalTextAlignment="Center" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding LikeEventClick}" />
-                                        </StackLayout.GestureRecognizers>
+                            </Grid>
+                            <local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" FontFace="PoppinsRegular" 
+                                                         Text="{Binding Description}" FontSize="12" HorizontalOptions="FillAndExpand" 
+                                                         VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <local:ExtendedLabel x:Name="lblEventLitScore" TextColor="{x:Static local:Constant.PinkButtonColor}" FontFace="PoppinsMedium" Text="{Binding EventLitScore}" FontSize="12" />
+                                        <Image  Source="imgBoostTag.png" HorizontalOptions="Start"  IsVisible="{Binding IsBoostEvent}"/>
                                     </StackLayout>
-                                </StackLayout>
+                            <StackLayout HorizontalOptions="EndAndExpand">
+                                <yummy:PancakeView  CornerRadius="15" Padding="8,2,8,2" ClassId="{Binding EventId}" HorizontalOptions="EndAndExpand" 
+                                                        IsVisible="False">
+                                    <yummy:PancakeView.Border>
+                                        <yummy:Border Color="{x:Static local:Constant.PinkButtonColor}" Thickness="1"/>
+                                    </yummy:PancakeView.Border>
+                                    <StackLayout Orientation="Horizontal" Padding="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
+                                        <Image Source="{x:Static local:Constant.IsCheckInImage}" Aspect="AspectFit" />
+                                        <local:ExtendedLabel FontFace="PoppinsMedium" VerticalOptions="Center" VerticalTextAlignment="Center" x:Name="lblCheckIn" Text="Guests List" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="11" />
+                                    </StackLayout>
+                                    <yummy:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="View_AllTapped" />
+                                        <!--<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CheckInClicked" />-->
+                                    </yummy:PancakeView.GestureRecognizers>
+                                </yummy:PancakeView>
                             </StackLayout>
                             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" BackgroundColor="White" Margin="10,0,10,7" IsVisible="{Binding IsCoverFreeAmountAvailable}">
                                 <Image Source="{x:Static local:Constant.StarImage}" Aspect="AspectFit" />
                                 <local:ExtendedLabel x:Name="lblPaidEvent" Margin="0,0,0,0" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CoverFreeAmountText}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
                             </StackLayout>
-                            <local:ExtendedButton x:Name="btnCreateEvent" FontFace="PoppinsMedium" Clicked="Join_Clicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{x:Static local:Constant.JoinText}"
+                            <local:ExtendedButton x:Name="btnCreateEvent" FontFace="PoppinsMedium" Clicked="Join_Clicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{Binding EventPaidButtonText}"
                                 TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsJoinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
-                            <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CheckInClicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{x:Static local:Constant.CheckInText}"
+                            <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CheckInClicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{Binding CheckinButtonText}"
                                 TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsCheckinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
-                            <Grid VerticalOptions="FillAndExpand" Margin="15,0,15,10" BackgroundColor="Transparent" ColumnSpacing="10" IsVisible="{Binding IsStackOptionVisible}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50*" />
-                                    <ColumnDefinition Width="50*" />
-                                </Grid.ColumnDefinitions>
-                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Grid.Column="0">
-                                    <Image Source="{x:Static local:Constant.InterestedDarkImage}" Aspect="AspectFit" IsVisible="{Binding IsInterestedImageVisible}" />
-                                    <Image Source="{x:Static local:Constant.InterestedLightImage}" Aspect="AspectFit" IsVisible="{Binding IsNotInterestedImageVisible}" />
-                                    <local:ExtendedLabel x:Name="labelOption" Margin="0,0,0,0" TextColor="{Binding InterestedTextColor}" FontFace="PoppinsRegular" Text="Interested" FontSize="Small" VerticalTextAlignment="Center" />
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="InterestedOption_Tapped" />
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Grid.Column="1">
-                                    <Image Source="{x:Static local:Constant.NotInterestedDarkImage}" Aspect="AspectFit" IsVisible="{Binding IsInterestedIconVisible}" />
-                                    <Image Source="{x:Static local:Constant.NotInterestedLightImage}" Aspect="AspectFit" IsVisible="{Binding IsNotInterestedIconVisible}" />
-                                    <local:ExtendedLabel x:Name="labelOptiontwo" Margin="0,0,0,0" TextColor="{Binding NotInterestedTextColor}" FontFace="PoppinsRegular" Text="Not Interested" FontSize="Small" VerticalTextAlignment="Center" />
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="NotInterestedOption_Tapped" />
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                            </Grid>
                             <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
                             <Grid Margin="10,5,10,5" RowSpacing="-4" ColumnSpacing="7">
                                 <Grid.RowDefinitions>
@@ -288,10 +270,10 @@
                         </StackLayout>
                         <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" IsVisible="{Binding IsEditIconOnDetailVisible}" HorizontalOptions="FillAndExpand">
                         </BoxView>
-                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEditIconOnDetailVisible}">
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEndEventVisible}">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
                                 <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
-                                <local:ExtendedLabel Text="{x:Static local:Constant.DeleteText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                <local:ExtendedLabel Text="{x:Static local:Constant.EndEventText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
                                 </local:ExtendedLabel>
                             </StackLayout>
                             <StackLayout.GestureRecognizers>
@@ -358,21 +340,14 @@
             </StackLayout>
             <StackLayout Grid.Row="0" IsVisible="false" x:Name="stackReason" Margin="15" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" BackgroundColor="Transparent">
                 <Frame Padding="0,10,0,10" x:Name="frameEdit" CornerRadius="7" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Grid RowSpacing="0" Margin="10,0,10,0" ColumnSpacing="4">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0" Padding="0,3,0,5" Grid.ColumnSpan="2" CornerRadius="0" Margin="0,10,0,10" OutlineColor="{x:Static local:Constant.BoxViewColor}" HasShadow="false">
+                    <StackLayout>
+                        <Frame BackgroundColor="White" Padding="0,3,0,5" Grid.ColumnSpan="2" CornerRadius="0" Margin="0,10,0,10" OutlineColor="{x:Static local:Constant.BoxViewColor}" HasShadow="false">
                             <local:ExtendedEditor x:Name="editorReasonToCancel" Placeholder="Mention Reason To Cancel Event" Text="{Binding ReasonToCancel}" TextColor="{x:Static local:Constant.PinkButtonColor}" HeightRequest="100" TextChanged="ReasonEditor_TextChanged" FontSize="14" HorizontalOptions="FillAndExpand">
                             </local:ExtendedEditor>
                         </Frame>
-                        <local:ExtendedButton Margin="10,5,10,0" Grid.Column="0" Grid.Row="1" Text="Cancel Event" FontFace="PoppinsRegular" FontSize="15" Clicked="CancelEvent_Clicked" WidthRequest="60" BorderRadius="12" HeightRequest="50"
+                        <local:ExtendedButton Margin="20,0,20,0" Text="Cancel Event" FontFace="PoppinsRegular" FontSize="15" Clicked="CancelEvent_Clicked" BorderRadius="12" HeightRequest="50"
                             HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="{x:Static local:Constant.WhiteTextColor}" />
-                    </Grid>
+                    </StackLayout>
                 </Frame>
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>

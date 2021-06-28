@@ -56,17 +56,17 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("Loc");
             }
         }
-        private List<AddfriendListResponse> userInfo;
-        public List<AddfriendListResponse> UserInfo
+        private List<AddfriendListResponse> topSixUser;
+        public List<AddfriendListResponse> TopSixUser
         {
             get
             {
-                return userInfo;
+                return topSixUser;
             }
             set
             {
-                userInfo = value;
-                OnPropertyChanged("UserInfo");
+                topSixUser = value;
+                OnPropertyChanged("TopSixUser");
             }
         }
         private AddFriendModel  friendModel;
@@ -115,7 +115,8 @@ namespace Pulse.ViewModels
             {
                 App.ShowMainPageLoader();
                 FriendModel = new AddFriendModel();
-                var result = await mainService.Get<ResultWrapper<AddfriendListResponse>>(Constant.GetAllUsersUrl);
+                var url = string.Format(Constant.GetAllUsersUrl, loc.Longitude, loc.Latitude);
+                var result = await mainService.Get<ResultWrapper<AddfriendListResponse>>(url);
                 if (result != null && result.status == Constant.Status200)
                 {
                     if(result.response.Count==0)
@@ -123,104 +124,88 @@ namespace Pulse.ViewModels
                         await App.Instance.Alert(Constant.NoFriendsFound, Constant.AlertTitle, Constant.Ok);
                         return;
                     }
-                    var userCurrentLoc = new Xamarin.Essentials.Location(loc.Latitude, loc.Longitude);
-                    userInfo = new List<AddfriendListResponse>();
-                    foreach (var item in result.response)
+                    if (result.response.Count > 0)
                     {
-                        if (!string.IsNullOrEmpty(item.latitude))
+                        topSixUser = new List<AddfriendListResponse>();
+                        topSixUser = result.response;
+                        if (topSixUser.Count() == 0)
+                            FriendsCount = "No";
+                        else if (topSixUser.Count() > 0)
+                            FriendsCount = topSixUser.Count().ToString();
+
+                        if (topSixUser.Count() >= 1)
                         {
-                            var lat = double.Parse(item.latitude.Remove(10));
-                            var lng = double.Parse(item.longitude.Remove(10));
-                            if(lat!=0)
-                            {
-                                var nearByFriendLoc = new Xamarin.Essentials.Location(lat, lng);
-                                var distance = userCurrentLoc.CalculateDistance(nearByFriendLoc, DistanceUnits.Kilometers);
-                                if (distance <= 25 && item.email != SessionManager.Email)
-                                {
-                                    userInfo.Add(item);
-                                }
-                            }
-                            
+                            var firstUser = topSixUser[0];
+                            FriendModel.FirstFriendName = firstUser.username;
+                            FriendModel.FirstFriendImage = firstUser.profile_image_url;
+                            FriendModel.FirstFriendUserId = firstUser.id;
+                            FriendModel.FirstFriendIsVisible = true;
+                            if (string.IsNullOrEmpty(firstUser.profile_image_url) || (!firstUser.profile_image_url.Contains("png") && !firstUser.profile_image_url.Contains("jpg")))
+                                FriendModel.FirstFriendImage = "profile_pic.png";
                         }
+                        else
+                            FriendModel.FirstFriendIsVisible = false;
+                        if (topSixUser.Count() >= 2)
+                        {
+                            var secondUser = topSixUser[1];
+                            FriendModel.SecondFriendName = secondUser.username;
+                            FriendModel.SecondFriendImage = secondUser.profile_image_url;
+                            FriendModel.SecondFriendUserId = secondUser.id;
+                            FriendModel.SecondFriendIsVisible = true;
+                            if (string.IsNullOrEmpty(secondUser.profile_image_url) || (!secondUser.profile_image_url.Contains("png") && !secondUser.profile_image_url.Contains("jpg")))
+                                FriendModel.SecondFriendImage = "profile_pic.png";
+                        }
+                        else
+                            FriendModel.SecondFriendIsVisible = false;
+                        if (topSixUser.Count() >= 3)
+                        {
+                            var thirdUser = topSixUser[2];
+                            FriendModel.ThirdFriendName = thirdUser.username;
+                            FriendModel.ThirdFriendImage = thirdUser.profile_image_url;
+                            FriendModel.ThirdFriendUserId = thirdUser.id;
+                            FriendModel.ThirdFriendIsVisible = true;
+                            if (string.IsNullOrEmpty(thirdUser.profile_image_url) || (!thirdUser.profile_image_url.Contains("png") && !thirdUser.profile_image_url.Contains("jpg")))
+                                FriendModel.ThirdFriendImage = "profile_pic.png";
+                        }
+                        else
+                            FriendModel.ThirdFriendIsVisible = false;
+                        if (topSixUser.Count() >= 4)
+                        {
+                            var fourthUser = topSixUser[3];
+                            FriendModel.FourthFriendName = fourthUser.username;
+                            FriendModel.FourthFriendImage = fourthUser.profile_image_url;
+                            FriendModel.FourthFriendUserId = fourthUser.id;
+                            FriendModel.FourthFriendIsVisible = true;
+                            if (string.IsNullOrEmpty(fourthUser.profile_image_url) || (!fourthUser.profile_image_url.Contains("png") && !fourthUser.profile_image_url.Contains("jpg")))
+                                FriendModel.FourthFriendImage = "profile_pic.png";
+                        }
+                        else
+                            FriendModel.FourthFriendIsVisible = false;
+                        if (topSixUser.Count() >= 5)
+                        {
+                            var fifthUser = topSixUser[4];
+                            FriendModel.FifthFriendName = fifthUser.username;
+                            FriendModel.FifthFriendImage = fifthUser.profile_image_url;
+                            FriendModel.FifthFriendUserId = fifthUser.id;
+                            FriendModel.FifthFriendIsVisible = true;
+                            if (string.IsNullOrEmpty(fifthUser.profile_image_url) || (!fifthUser.profile_image_url.Contains("png") && !fifthUser.profile_image_url.Contains("jpg")))
+                                FriendModel.FifthFriendImage = "profile_pic.png";
+                        }
+                        else
+                            FriendModel.FifthFriendIsVisible = false;
+                        if (topSixUser.Count() >= 6)
+                        {
+                            var sixthUser = topSixUser[5];
+                            FriendModel.SixthFriendName = sixthUser.username;
+                            FriendModel.SixthFriendImage = sixthUser.profile_image_url;
+                            FriendModel.SixthFriendUserId = sixthUser.id;
+                            FriendModel.SixthFriendIsVisible = true; if (string.IsNullOrEmpty(sixthUser.profile_image_url) || (!sixthUser.profile_image_url.Contains("png") && !sixthUser.profile_image_url.Contains("jpg")))
+                                FriendModel.SixthFriendImage = "profile_pic.png";
+                        }
+                        else
+                            FriendModel.SixthFriendIsVisible = false;
+                        IsLoading = false;
                     }
-                    var topSixUser = userInfo.Take(6);
-                    if (topSixUser.Count() == 0)
-                        FriendsCount = "No";
-                    else if (topSixUser.Count()> 0)
-                        FriendsCount = topSixUser.Count().ToString();
-                    
-                    if (topSixUser.Count() >= 1)
-                    {
-                        var firstUser = userInfo[0];
-                        FriendModel.FirstFriendName = firstUser.username;
-                        FriendModel.FirstFriendImage = firstUser.profile_image_url;
-                        FriendModel.FirstFriendUserId = firstUser.id;
-                        FriendModel.FirstFriendIsVisible = true;
-                        if (string.IsNullOrEmpty(firstUser.profile_image_url) || (!firstUser.profile_image_url.Contains("png") && !firstUser.profile_image_url.Contains("jpg")))
-                            FriendModel.FirstFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.FirstFriendIsVisible = false;
-                    if (topSixUser.Count() >= 2)
-                    {
-                        var secondUser = userInfo[1];
-                        FriendModel.SecondFriendName = secondUser.username;
-                        FriendModel.SecondFriendImage = secondUser.profile_image_url;
-                        FriendModel.SecondFriendUserId = secondUser.id;
-                        FriendModel.SecondFriendIsVisible = true;
-                        if (string.IsNullOrEmpty(secondUser.profile_image_url) || (!secondUser.profile_image_url.Contains("png") && !secondUser.profile_image_url.Contains("jpg")))
-                            FriendModel.SecondFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.SecondFriendIsVisible = false;
-                    if (topSixUser.Count() >= 3)
-                    {
-                        var thirdUser = userInfo[2];
-                        FriendModel.ThirdFriendName = thirdUser.username;
-                        FriendModel.ThirdFriendImage = thirdUser.profile_image_url;
-                        FriendModel.ThirdFriendUserId = thirdUser.id;
-                        FriendModel.ThirdFriendIsVisible = true;
-                        if (string.IsNullOrEmpty(thirdUser.profile_image_url) || (!thirdUser.profile_image_url.Contains("png") && !thirdUser.profile_image_url.Contains("jpg")))
-                            FriendModel.ThirdFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.ThirdFriendIsVisible = false;
-                    if (topSixUser.Count() >= 4)
-                    {
-                        var fourthUser = userInfo[3];
-                        FriendModel.FourthFriendName = fourthUser.username;
-                        FriendModel.FourthFriendImage = fourthUser.profile_image_url;
-                        FriendModel.FourthFriendUserId = fourthUser.id;
-                        FriendModel.FourthFriendIsVisible = true;
-                        if (string.IsNullOrEmpty(fourthUser.profile_image_url) || (!fourthUser.profile_image_url.Contains("png") && !fourthUser.profile_image_url.Contains("jpg")))
-                            FriendModel.FourthFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.FourthFriendIsVisible = false;
-                    if (topSixUser.Count() >= 5)
-                    {
-                        var fifthUser = userInfo[4];
-                        FriendModel.FifthFriendName = fifthUser.username;
-                        FriendModel.FifthFriendImage = fifthUser.profile_image_url;
-                        FriendModel.FifthFriendUserId = fifthUser.id;
-                        FriendModel.FifthFriendIsVisible = true;
-                        if (string.IsNullOrEmpty(fifthUser.profile_image_url) || (!fifthUser.profile_image_url.Contains("png") && !fifthUser.profile_image_url.Contains("jpg")))
-                            FriendModel.FifthFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.FifthFriendIsVisible = false;
-                    if (topSixUser.Count() >= 6)
-                    {
-                        var sixthUser = userInfo[5];
-                        FriendModel.SixthFriendName = sixthUser.username;
-                        FriendModel.SixthFriendImage = sixthUser.profile_image_url;
-                        FriendModel.SixthFriendUserId = sixthUser.id;
-                        FriendModel.SixthFriendIsVisible = true; if (string.IsNullOrEmpty(sixthUser.profile_image_url) || (!sixthUser.profile_image_url.Contains("png") && !sixthUser.profile_image_url.Contains("jpg")))
-                            FriendModel.SixthFriendImage = "iconUserEvents.png";
-                    }
-                    else
-                        FriendModel.SixthFriendIsVisible = false;
-                    IsLoading = false;
                 }
                 else
                 {

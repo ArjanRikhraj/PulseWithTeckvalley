@@ -330,6 +330,10 @@ namespace Pulse
 		}
 		async void CheckInClicked(object sender, System.EventArgs e)
 		{
+            try
+            {
+
+			var btn = (Button)sender;
 			if (CrossConnectivity.Current.IsConnected)
 			{
 				if (_tapCount < 1)
@@ -340,37 +344,49 @@ namespace Pulse
 					stackPopUp.IsVisible = false;
 					if (eventViewModel.currentActiveEventType == MyEventType.Upcoming)
 					{
-						if (DateTimeValidate() && !isPastEvent)
-						{
-							bool isEnable = await GetCurrentLoc();
-							if (isEnable)
+							if (btn.Text == Constant.CheckInText)
 							{
-								CheckIn();
-							}
-							else
-							{
-								checkInTitle.Text = Constant.CheckInNotProperTitleMessage;
-								checkInMessage.Text = Constant.CheckInNotProperMessage;
-								grdOverlayDialog.IsVisible = true;
-								stackcheckInMessage.IsVisible = true;
-								_tapCount = 0;
-							}
-						}
-						else if (!DateTimeValidate() && isPastEvent)
-						{
-							await App.Instance.Alert("You can not check-in past event", Constant.AlertTitle, Constant.Ok);
-							eventViewModel.IsLoading = false;
-							_tapCount = 0;
-						}
-						else
-						{
-							checkInTitle.Text = Constant.CheckInEarlyTitleMessage;
-							checkInMessage.Text = Constant.CheckInEarlyMessage;
-							grdOverlayDialog.IsVisible = false;
-							stackcheckInMessage.IsVisible = true;
-							_tapCount = 0;
-						}
 
+
+								if (DateTimeValidate() && !isPastEvent)
+								{
+									bool isEnable = await GetCurrentLoc();
+									if (isEnable)
+									{
+										CheckIn();
+									}
+									else
+									{
+										checkInTitle.Text = Constant.CheckInNotProperTitleMessage;
+										checkInMessage.Text = Constant.CheckInNotProperMessage;
+										grdOverlayDialog.IsVisible = true;
+										stackcheckInMessage.IsVisible = true;
+										_tapCount = 0;
+									}
+								}
+								else if (!DateTimeValidate() && isPastEvent)
+								{
+									await App.Instance.Alert("You can not check-in past event", Constant.AlertTitle, Constant.Ok);
+									eventViewModel.IsLoading = false;
+									_tapCount = 0;
+								}
+								else
+								{
+									checkInTitle.Text = Constant.CheckInEarlyTitleMessage;
+									checkInMessage.Text = Constant.CheckInEarlyMessage;
+									grdOverlayDialog.IsVisible = false;
+									stackcheckInMessage.IsVisible = true;
+									_tapCount = 0;
+								}
+							}
+							else if(btn.Text == Constant.JoinGuestListText)
+							{
+								JoinEvent();
+							}
+                            else
+                            {
+								await Navigation.PushModalAsync(new EventsGuestListingPage());
+							}
 					}
 					else
 					{
@@ -387,6 +403,14 @@ namespace Pulse
 			else
 			{
 				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+
+			}
+			catch (Exception ex)
+			{
+				eventViewModel.IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 				_tapCount = 0;
 			}
 		}
@@ -938,12 +962,10 @@ namespace Pulse
 			}
 		}
 
-		async void Join_Clicked(object sender, System.EventArgs e)
-		{
+		async void JoinEvent()
+        {
 			if (CrossConnectivity.Current.IsConnected)
 			{
-				if (_tapCount < 1)
-				{
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
 					if (eventViewModel.EventToDate.Date == DateTime.Now.Date && eventViewModel.EventToTime < DateTime.Now.TimeOfDay)
@@ -956,7 +978,7 @@ namespace Pulse
 					{
 						if (eventViewModel.IsCoverAmount || eventViewModel.IsBottleAmount)
 						{
-                            eventViewModel.IsJoinEvent = true;
+							eventViewModel.IsJoinEvent = true;
 							await Navigation.PushModalAsync(new JoinEventPage());
 						}
 						else
@@ -967,7 +989,6 @@ namespace Pulse
 					}
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
-				}
 			}
 			else
 			{
@@ -975,7 +996,22 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-
+		async void Join_Clicked(object sender, System.EventArgs e)
+		{
+            try
+            {
+				var btn = (Button)sender;
+				if (btn.Text == Constant.ViewTicketText)
+					await Navigation.PushModalAsync(new EventsGuestListingPage());
+				else
+				JoinEvent();
+			}
+            catch (Exception)
+            {
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+		}
 
 		async void GridMedia_Tapped(object sender, System.EventArgs e)
 
@@ -1008,7 +1044,6 @@ namespace Pulse
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
 					await Navigation.PushModalAsync(new EventStoriesPage());
-					//await Navigation.PushModalAsync(new StoriesPage());
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
@@ -1359,6 +1394,7 @@ namespace Pulse
 					{
 					    await eventViewModel.FetchEventDetail(eventViewModel.TappedEventId.ToString(), false);
 						ShowToast(Constant.AlertTitle, "Successfully Uploaded");
+						eventViewModel.GetAllUpComingEvents();
 						_tapCount = 0;
 						eventViewModel.IsLoading = false;
 					}

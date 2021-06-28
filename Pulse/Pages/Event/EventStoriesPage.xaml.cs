@@ -34,12 +34,9 @@ namespace Pulse.Pages.Event
         {
 			BindingContext = new EventStoryViewModel(eventViewModel.TappedEventId);
             CrossMediaManager.Current.MediaItemFinished += Current_MediaItemFinished;
-            CrossMediaManager.Current.StateChanged += Current_StateChanged; ;
-			//eventStoryViewModel.eventId = eventViewModel.TappedEventId;
-			//progressBar.IsVisible = true;
-   //         await progressBar.ProgressTo(1, 5000, Easing.Linear);
-			//progressBar.IsVisible = false;
-        }
+            CrossMediaManager.Current.StateChanged += Current_StateChanged;
+			stackAddStory.IsVisible = eventViewModel.IsUserCheckedIn ||eventViewModel.IsOwner ? true : false;
+		}
 
         private void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)
         {

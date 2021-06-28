@@ -83,13 +83,13 @@
 	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>app.pulse.com</string>
-	<key>CFBundleShortVersionString</key>
-	<string>2.6</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>12</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0</string>
 </dict>
 </plist>

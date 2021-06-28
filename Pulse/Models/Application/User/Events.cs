@@ -38,6 +38,7 @@ namespace Pulse
 		public List<Member> members { get; set; }
 		public List<Medium> media { get; set; }
         public MyTransaction transaction { get; set; }
+		public string cover_photo { get; set; }
 	}
 
 	public class EventResponse

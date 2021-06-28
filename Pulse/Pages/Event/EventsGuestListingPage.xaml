@@ -40,8 +40,8 @@
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
                                 </local:ExtendedStackLayout.GestureRecognizers>
                             </local:ExtendedStackLayout>
-                            <local:ExtendedStackLayout x:Name="stackInterested" EventGuestType="Interested" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                <local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblInterested" FontSize="13" Text="{x:Static local:Constant.CheckedInText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                            <local:ExtendedStackLayout x:Name="stackInterested" EventGuestType="CheckedIn" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblCheckedIn" FontSize="13" Text="{x:Static local:Constant.CheckedIn}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                                 <local:ExtendedStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
                                 </local:ExtendedStackLayout.GestureRecognizers>
@@ -52,15 +52,6 @@
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
                                 </local:ExtendedStackLayout.GestureRecognizers>
                             </local:ExtendedStackLayout>
-						
-                            
-                            <local:ExtendedStackLayout IsVisible="False" x:Name="stackNotInterested" EventGuestType="NotInterested" BackgroundColor="Transparent" Spacing="3" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-								<local:ExtendedLabel FontFace="PoppinsSemiBold" x:Name="lblNotInterested" FontSize="13" Text="{x:Static local:Constant.NotInterestedText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-								<local:ExtendedStackLayout.GestureRecognizers>
-									<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped"/>
-								</local:ExtendedStackLayout.GestureRecognizers>
-							</local:ExtendedStackLayout>
-							
 						</Grid>
 						<Grid Grid.Row="1" ColumnSpacing="0" Margin="0">
 							<Grid.ColumnDefinitions>
@@ -70,7 +61,7 @@
 							</Grid.ColumnDefinitions>
 							<BoxView Grid.Column="0" x:Name="AttendingBox" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" HorizontalOptions="FillAndExpand" HeightRequest="2">
 							</BoxView>
-							<BoxView Grid.Column="1" x:Name="InterestedBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+							<BoxView Grid.Column="1" x:Name="CheckedInBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
 							</BoxView>
 							<BoxView Grid.Column="2" x:Name="InvitedBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
 							</BoxView>

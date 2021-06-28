@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:custom="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse" xmlns:xct1="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit" xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:custom="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse" xmlns:xct1="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit" xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                        x:Class="Pulse.Pages.Event.EventStoriesPage" x:Name="StoriesPage">
     <local:BaseContentPage.Content>
         <Grid>
@@ -28,7 +28,42 @@
                                     </StackLayout>
 
                                 </Grid>
-                                <StackLayout x:Name="stackSaveStoryPopUp" Spacing="10" IsVisible="{Binding IsMenuOptionVisible}" Margin="0" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                <yummy:PancakeView x:Name="stackSaveStoryPopUp" IsVisible="{Binding IsMenuOptionVisible}" BackgroundColor="White" Padding="0"  CornerRadius="20" Margin="35,10,35,10" VerticalOptions="CenterAndExpand">
+                                    <yummy:PancakeView.Border>
+                                        <yummy:Border Color="LightGray" Thickness="1"/>
+                                    </yummy:PancakeView.Border>
+                                    <StackLayout>
+                                        <Frame BorderColor="LightGray"
+                                                HasShadow="False"
+                                                  HeightRequest="50" Padding="5">
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,0">
+                                                    <GradientStop Color="#e7b6ab"
+                          Offset="0.1"/>
+                                                    <GradientStop Color="#E687BA"
+                          Offset="1.0"/>
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            <local:ExtendedLabel Text="Story will be saved in your photoalbum" TextColor="White" 
+                                                                 FontFace="PoppinsMedium" FontSize="16" HorizontalOptions="FillAndExpand" 
+                                                                 HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                        </Frame>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20" Spacing="20">
+                                        <Button Text="{x:Static local:Constant.SaveStoryText}"
+                                                HorizontalOptions="CenterAndExpand" VerticalOptions="Center" WidthRequest="80"
+                                                FontSize="14" BackgroundColor="#E687BA" TextColor="White" CornerRadius="20" HeightRequest="40" 
+                                                Command="{Binding  Source={x:Reference StoriesPage}, Path=BindingContext.SaveStoryCommand}" 
+                                                CommandParameter="{Binding .}"/>
+                                        <Button Text="Cancel"
+                                                HorizontalOptions="CenterAndExpand" VerticalOptions="Center" WidthRequest="80"
+                                                FontSize="14" BackgroundColor="White" TextColor="#db6cb8" CornerRadius="20" HeightRequest="40" BorderWidth="1" BorderColor="#db6cb8"
+                                               Command="{Binding  Source={x:Reference StoriesPage}, Path=BindingContext.CancelCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </yummy:PancakeView>
+                                <!--<StackLayout x:Name="stackSaveStoryPopUp" Spacing="10" IsVisible="{Binding IsMenuOptionVisible}" Margin="0" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
                                     <Frame CornerRadius="10" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
                                             <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
@@ -52,14 +87,14 @@
                                             <StackLayout x:Name="stackRpt" Padding="5,6,5,6" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
                                                 <local:ExtendedLabel Text="{x:Static local:Constant.ReportStoryText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="#db6cb8">
                                                 </local:ExtendedLabel>
-                                                <!--<StackLayout.GestureRecognizers>
+                                                --><!--<StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                                                </StackLayout.GestureRecognizers>-->
+                                                </StackLayout.GestureRecognizers>--><!--
                                             </StackLayout>
                                         </StackLayout>
                                     </Frame>
                                     <local:ExtendedButton FontFace="PoppinsMedium" Command="{Binding  Source={x:Reference StoriesPage}, Path=BindingContext.CancelCommand}" CommandParameter="{Binding .}" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                                </StackLayout>
+                                </StackLayout>-->
                             </Grid>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
@@ -77,7 +112,7 @@
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,0,30" Padding="0" Spacing="0" Grid.Row="0">
+                <StackLayout x:Name="stackAddStory" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,0,30" Padding="0" Spacing="0" Grid.Row="0">
                     <Image Source="add_pulse.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
                     <StackLayout.GestureRecognizers>

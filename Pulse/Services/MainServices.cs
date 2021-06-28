@@ -60,7 +60,7 @@ namespace Pulse
                 return token;
             }
             return token;
-        }
+        }   
         public async Task<T> Post<T>(string methodName, object postData)
         {
             var uri = new Uri(string.Format("{0}{1}", Constant.BaseServiceUrl, methodName));

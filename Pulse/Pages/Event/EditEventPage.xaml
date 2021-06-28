@@ -42,7 +42,10 @@
                             </Image>
                             <StackLayout x:Name="stackMain" Grid.Column="1" Grid.Row="0" Spacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15,2,13,2" Margin="0">
                                 <local:ExtendedLabel x:Name="lblDetailsSmall" Margin="0,0,0,-8" FontFace="PoppinsRegular" Text="{x:Static local:Constant.DescriptionText}" TextColor="Transparent" FontSize="10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" />
-                                <local:ExtendedEditor BackgroundColor="Transparent" Text="{Binding Description}" x:Name="editorDetails" Margin="-5,0,0,0" Placeholder="{x:Static local:Constant.DescriptionText}" FontSize="14" HeightRequest="40" HorizontalOptions="FillAndExpand" TextChanged="Editor_TextChanged" TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
+                                <local:ExtendedEditor BackgroundColor="Transparent" AutoSize="TextChanges" Text="{Binding Description}" x:Name="editorDetails"
+                                                      Margin="-5,0,0,0" Placeholder="{x:Static local:Constant.DescriptionText}" FontSize="14" 
+                                                      HorizontalOptions="FillAndExpand" TextChanged="Editor_TextChanged" 
+                                                      TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
                             </StackLayout>
                             <BoxView Grid.Row="1" x:Name="box" Margin="15,10,0,0" Grid.Column="1" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
                             </BoxView>
@@ -65,8 +68,11 @@
                                 </Image.Margin>
                             </Image>
                             <StackLayout x:Name="stackAddress" Grid.Column="1" Grid.Row="0" Spacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="15,2,13,2" Margin="0">
-                                <local:ExtendedLabel x:Name="lblSmallVenue" FontFace="PoppinsRegular" Text="{x:Static local:Constant.VenueTitle}" TextColor="Transparent" Margin="0,0,0,-8" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
-                                <local:ExtendedEditor x:Name="editorVenue" BackgroundColor="Transparent" Margin="-5,0,0,0" Placeholder="{x:Static local:Constant.VenueTitle}" FontSize="13" HeightRequest="62" HorizontalOptions="FillAndExpand" TextChanged="Venue_TextChanged" TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
+                                <local:ExtendedLabel x:Name="lblSmallVenue" FontFace="PoppinsRegular" Text="{x:Static local:Constant.VenueTitle}" TextColor="Transparent" 
+                                                     Margin="0,0,0,-8" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                                <local:ExtendedEditor x:Name="editorVenue" AutoSize="TextChanges" BackgroundColor="Transparent" Margin="-5,0,0,0" VerticalOptions="FillAndExpand"
+                                                      Placeholder="{x:Static local:Constant.VenueTitle}" FontSize="13" HorizontalOptions="FillAndExpand"
+                                                      TextChanged="Venue_TextChanged" TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
                                 <local:ExtendedListView x:Name="lstPlaces" HeightRequest="{Binding ListPlacesHeight}" IsVisible="{Binding IsAddressListVisible}" ItemsSource="{Binding Places}" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" VerticalOptions="Fill" SeparatorVisibility="None" HasUnevenRows="true" HorizontalOptions="CenterAndExpand">
                                     <local:ExtendedListView.ItemTemplate>
                                         <DataTemplate>
@@ -87,7 +93,9 @@
                             <BoxView Grid.Row="1" x:Name="boxAddress" Margin="15,10,0,0" Grid.Column="1" HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}">
                             </BoxView>
                         </Grid>
-                        <local:MyCustomEntry EntryMaxLength="100"  x:Name="txtAddress" KeyBoard="Default" EntryPlaceholder="{x:Static local:Constant.UnitText}" HorizontalOptions="FillAndExpand" Text="{Binding EventVenue}" LabelText="{x:Static local:Constant.UnitText}" >
+                        <local:MyCustomEntry EntryMaxLength="100"  x:Name="txtAddress" KeyBoard="Default" 
+                                             EntryPlaceholder="{x:Static local:Constant.UnitText}" HorizontalOptions="FillAndExpand" 
+                                             Text="{Binding EventVenue}" LabelText="{x:Static local:Constant.UnitText}" >
                          <local:MyCustomEntry.Margin>
                                    <OnPlatform x:TypeArguments="Thickness">
                                    <On Platform="iOS" Value="40,0,0,15" />

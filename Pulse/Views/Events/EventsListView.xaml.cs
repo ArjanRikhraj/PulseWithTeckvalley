@@ -137,7 +137,7 @@ namespace Pulse
                 if (SessionManager.AccessToken != null)
                 {
                     App.ShowMainPageLoader();
-                    var response = await mainService.Get<ResultWrapper<MyEventResponse>>(Constant.NextSevenDaysEventUrl + "1" + "&datetime=" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    var response = await mainService.Get<ResultWrapper<MyEventResponse>>(Constant.MyEventsUrl);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
                         list = response.response;
@@ -273,7 +273,7 @@ namespace Pulse
             App.HideMainPageLoader();
             GetCurrentLoc();
         }
-       
+      
         async void GetCurrentLoc()
         {
             //if (Device.RuntimePlatform == Device.iOS)

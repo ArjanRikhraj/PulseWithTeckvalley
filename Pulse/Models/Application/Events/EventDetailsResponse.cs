@@ -59,6 +59,9 @@ namespace Pulse
 		public int total_comments { get; set; }
 		public string cover_photo{get; set;}
 		public bool is_star { get; set; }
+		public bool is_going { get; set; }
+		public bool is_paid { get; set; }
+		public string event_status { get; set; }
 	}
 
 	public class CancelEvent

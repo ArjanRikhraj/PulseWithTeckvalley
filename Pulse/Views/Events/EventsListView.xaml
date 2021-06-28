@@ -78,7 +78,11 @@
                    
                     <!--Current Func-->
                 </StackLayout>
-                <local:ExtendedListView Grid.Row="2" x:Name="listViewEvents" RowHeight="300" ItemsSource="{Binding AllUpcomingEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HasUnevenRows="True"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                <local:ExtendedListView Grid.Row="2" x:Name="listViewEvents" RowHeight="300" ItemsSource="{Binding AllUpcomingEvents}"
+                                        ItemTapped="MyEventsList_ItemTapped" IsPullToRefreshEnabled="true" 
+                                        RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                                        BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"
+                                        HasUnevenRows="True" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                     <local:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -88,12 +92,8 @@
                                             <yummy:Border Color="Gainsboro" x:Name="borderGradient" Thickness="1"/>
                                         </yummy:PancakeView.Border>
                                         <StackLayout Spacing="0">
-                                            <Grid RowSpacing="0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="170"/>
-                                                </Grid.RowDefinitions>
-                                                <Image  Grid.Row="0" Grid.Column="0" Source="{Binding PartyImage}" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
-                                                <local:GradientColorStack IsVisible="False" stackOrientation="Vertical" StartColor="#0dFFFFFF" EndColor="#0dFFFFFF" Grid.Row="0" Grid.Column="0" HeightRequest="120" HorizontalOptions="FillAndExpand"/>
+                                            <Grid HeightRequest="170">
+                                                <Image  Grid.Row="0" Source="{Binding PartyImage}" Aspect="AspectFill"/>
                                                 <Image Source="{Binding IconStar}" HeightRequest="30" WidthRequest="30" Margin="0,10,15,0" Grid.Row="0" Grid.Column="0" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand">
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding  Source={x:Reference EventListViewPage}, Path=BindingContext.StarEventCommand}" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
@@ -108,9 +108,11 @@
                                                 </Grid.RowDefinitions>
                                                 <StackLayout Orientation="Horizontal" Grid.Row="0">
                                                     <StackLayout VerticalOptions="CenterAndExpand" Spacing="0">
-                                                            <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand"/>
-                                                            <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
+                                                            <local:ExtendedLabel Text="{Binding EventName}" TextColor="HotPink" LineBreakMode="WordWrap" FontFace="PoppinsSemiBold" FontSize="15" Margin="0,0,0,0"/>
+                                                    <StackLayout Orientation="Horizontal">
                                                         <local:ExtendedLabel Text="{Binding EventLitScore}" FontAttributes="Bold" LineBreakMode="TailTruncation" FontFace="PoppinsMedium" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.PinkButtonColor}"/>
+                                                            <Image Source="imgBoostTag.png" IsVisible="{Binding IsBoostEvent}" HorizontalOptions="StartAndExpand"/>
+                                                        </StackLayout>
                                                         <local:ExtendedLabel Text="{Binding EventStatus}" IsVisible="False" TextColor="Black" FontFace="PoppinsRegular" FontSize="12"/>
                                                         <local:ExtendedLabel Text="{Binding EventAddress}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand"/>
                                                     </StackLayout>
@@ -151,7 +153,8 @@
                                                             <local:ExtendedLabel Text="{Binding EventDateTime}" TextColor="#303030" FontFace="PoppinsRegular" FontSize="12" VerticalOptions="CenterAndExpand"/>
                                                         </StackLayout>
                                                     </StackLayout>
-                                                    <yummy:PancakeView CornerRadius="15" Padding="8,2,8,2" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand">
+                                                    <!--<yummy:PancakeView CornerRadius="15" Padding="8,2,8,2" IsVisible="{Binding IsCheckInButtonVisible}" ClassId="{Binding EventId}" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand">-->
+                                                        <yummy:PancakeView CornerRadius="15" Padding="8,2,8,2" ClassId="{Binding EventId}" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand">
                                                         <yummy:PancakeView.Border>
                                                             <yummy:Border Color="{x:Static local:Constant.PinkButtonColor}" Thickness="1"/>
                                                         </yummy:PancakeView.Border>
