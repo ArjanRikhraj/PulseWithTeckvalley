@@ -52,7 +52,10 @@
                                     <StackLayout x:Name="stackMainCard" Grid.Column="0" Grid.Row="0" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0,0,0,0" Margin="0">
                                         <local:ExtendedLabel x:Name="lblSmallcard" FontFace="PoppinsRegular" Text="{x:Static local:Constant.CreditCardText}" TextColor="Transparent" Margin="0,0,0,0" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="0" Margin="0,0,0,0">
-                                            <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entCardNo" Margin="0" MaxLength="20" TextChanged="EntryCard_TextChanged" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CardNumber}" Placeholder="{x:Static local:Constant.CreditCardText}" Keyboard="Numeric"
+                                            <local:ExtendedEntry FontFace="PoppinsRegular" x:Name="entCardNo" Margin="0" MaxLength="20" 
+                                                                 TextChanged="EntryCard_TextChanged" PlaceholderColor="{x:Static local:Constant.GrayTextColor}" 
+                                                                 TextColor="{x:Static local:Constant.GrayTextColor}" Keyboard="Numeric"
+                                                                 Text="{Binding CardNumber}" Placeholder="{x:Static local:Constant.CreditCardText}"
                                                 FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
                                         </StackLayout>
                                     </StackLayout>
@@ -72,7 +75,8 @@
                                     </Grid.RowDefinitions>
                                     <StackLayout Grid.Row="0" Grid.Column="0">
                                         <local:ExtendedLabel x:Name="lblMonth" FontFace="PoppinsRegular" Margin="0" Text="MM" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
-                                        <local:ExtendedPicker x:Name="monthPicker" TextSize="14" SelectedIndexChanged="Month_SelectedIndexChanged" DoneClicked="MonthPicker_DoneClicked" IsVisible="false">
+                                        <local:ExtendedPicker x:Name="monthPicker" TextSize="14" SelectedIndexChanged="Month_SelectedIndexChanged" 
+                                                              DoneClicked="MonthPicker_DoneClicked" IsVisible="false">
                                         </local:ExtendedPicker>
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MonthPickerTapped" />
@@ -170,7 +174,9 @@
                                     <Image Source="{x:Static local:Constant.SecuredIcon}" Aspect="AspectFit" />
                                     <local:ExtendedLabel Text="Secured Credit Card Payment" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="11" FontFace="PoppinsLight" />
                                 </StackLayout>
-                                <local:ExtendedButton FontFace="PoppinsMedium" Margin="20,5,20,15" BorderRadius="23" BorderColor="Transparent" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" FontSize="15" HeightRequest="45" Command="{Binding PaymentClick}" Text="Pay Now" TextColor="{x:Static local:Constant.WhiteTextColor}"
+                                <local:ExtendedButton FontFace="PoppinsMedium" Margin="20,5,20,15" BorderRadius="23" BorderColor="Transparent" 
+                                                      BackgroundColor="{x:Static local:Constant.PinkButtonColor}" FontSize="15" HeightRequest="45"
+                                                      Command="{Binding PaymentClick}" Text="Pay Now" TextColor="{x:Static local:Constant.WhiteTextColor}"
                                     VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
                             </StackLayout>
                         </StackLayout>

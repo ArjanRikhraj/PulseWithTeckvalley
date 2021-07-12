@@ -102,6 +102,7 @@ namespace Pulse
 
 		//Setting Images
 		public const string ChangePasswordIcon = "change_password.png";
+		public const string LogOutIcon = "logout_icon.png";
 		public const string AboutPulseIcon = "about_pulse.png";
 		public const string ContactUsIcon = "contact.png";
 		public const string TermsOfUseIcon = "termsofuse.png";

@@ -36,6 +36,7 @@ namespace Pulse
 		public bool is_boosted_event { get; set; }
 		public string bottle_service_amount { get; set; }
 		public bool is_owner { get; set; }
+		public bool is_superuser { get; set; }
 		public bool is_public { get; set; }
 		public int event_likes_count { get; set; }
 		public string contact_number { get; set; }

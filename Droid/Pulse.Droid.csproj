@@ -633,7 +633,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\add.png" />
     <AndroidResource Include="Resources\drawable-hdpi\add_events.png" />
     <AndroidResource Include="Resources\drawable-hdpi\add_pulse.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\arrow_down.png" />
     <AndroidResource Include="Resources\drawable-hdpi\arrow_right.png" />
     <AndroidResource Include="Resources\drawable-hdpi\attending.png" />
     <AndroidResource Include="Resources\drawable-hdpi\back.png" />
@@ -1155,16 +1154,10 @@
     <AndroidResource Include="Resources\drawable\iconSearch.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iconUserEvents.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\mapIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconAddFriendsCircle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\addFriend.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconAddFriendsCircle.png" />
@@ -1173,25 +1166,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\iconSearch.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconUserEvents.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\DiscoverIcon32.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconMap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconParty.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconparty2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconParty3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconParty4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconScan.png" />
@@ -1212,12 +1190,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\iconCancelUser.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\toyboxmediaCover.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rebelnightclubcover.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\AplhaCoverpic.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -1234,6 +1206,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconPin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\logout_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\logout_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\logout_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\logout_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets')" />
@@ -1387,7 +1371,7 @@
   <Import Project="..\packages\Xamarin.Android.Support.v7.MediaRouter.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.MediaRouter.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.v7.MediaRouter.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionPulseDroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionPulseDroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\Xamarin.AndroidX.MultiDex.2.0.1.5\build\monoandroid90\Xamarin.AndroidX.MultiDex.targets" Condition="Exists('..\packages\Xamarin.AndroidX.MultiDex.2.0.1.5\build\monoandroid90\Xamarin.AndroidX.MultiDex.targets')" />

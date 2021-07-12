@@ -116,7 +116,9 @@
                                                         <local:ExtendedLabel Text="{Binding EventStatus}" IsVisible="False" TextColor="Black" FontFace="PoppinsRegular" FontSize="12"/>
                                                         <local:ExtendedLabel Text="{Binding EventAddress}" LineBreakMode="TailTruncation" FontFace="PoppinsRegular" FontSize="12" Margin="0,0,0,0" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand"/>
                                                     </StackLayout>
-                                                    <custom:CircleImage x:Name="imgUser" Margin="0,-20,0,0" HeightRequest="60" WidthRequest="60" BorderThickness="2" BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{Binding profile_image}" VerticalOptions="Start" Aspect="AspectFill" HorizontalOptions="EndAndExpand"/>
+                                                    <custom:CircleImage x:Name="imgUser" Margin="0,-20,0,0" HeightRequest="60" WidthRequest="60" BorderThickness="2" 
+                                                                        BorderColor="{x:Static local:Constant.WhiteTextColor}" Source="{Binding profile_image}" 
+                                                                        VerticalOptions="Start" Aspect="AspectFill" HorizontalOptions="EndAndExpand"/>
                                                 </StackLayout>
                                                
                                                 <StackLayout IsVisible="False" Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">

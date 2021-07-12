@@ -38,7 +38,10 @@ namespace Pulse
         }
 		async void SetInitialValues()
 		{
-			string amount = string.Format("{0:0.00}", eventViewModel.TotalAmount);
+            eventViewModel.GetUserPaymentCardDetails();
+            //lblMonth.Text = eventViewModel.ExpiryMonth.ToString();
+            //lblYear.Text = eventViewModel.ExpiryYear.ToString();
+            string amount = string.Format("{0:0.00}", eventViewModel.TotalAmount);
 			if (!string.IsNullOrEmpty(amount))
 			{
 				string[] amounts = amount.Split('.');

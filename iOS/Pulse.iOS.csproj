@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
+    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
@@ -30,7 +30,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
+    <CodesignProvision>dist_appStore</CodesignProvision>
     <MtouchSdkVersion>12.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -39,14 +39,14 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
+    <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
+    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
     <MtouchFastDev>false</MtouchFastDev>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchUseLlvm>true</MtouchUseLlvm>
@@ -61,11 +61,12 @@
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision>PulseDistribution</CodesignProvision>
+    <OptimizePNGs>false</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -797,6 +798,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\iconStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout_icon%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout_icon%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

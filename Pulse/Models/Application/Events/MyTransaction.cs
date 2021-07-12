@@ -8,6 +8,29 @@
 		public bool is_bottle_service { get; set; }
 		public double total_amount { get; set; }
         public PaymentType payment_type { get; set; }
+		public string card_no { get; set; }
+		public string name { get; set; }
+		public int expiry_month { get; set; }
+		public int expiry_year { get; set; }
+		public string country { get; set; }
+		public string city { get; set; }
+		public string state { get; set; }
+		public string address { get; set; }
+		public string postal_code { get; set; }
+	}
+	public class CreditCardDetailsResponse
+    {
+		public int id { get; set; }
+		public int user_id { get; set; }
+		public string card_no { get; set; }
+		public string name { get; set; }
+		public int expiry_month { get; set; }
+		public int expiry_year { get; set; }
+		public string country { get; set; }
+		public string city { get; set; }
+		public string state { get; set; }
+		public string address { get; set; }
+		public string postal_code { get; set; }
 	}
 	public class Countries
 	{

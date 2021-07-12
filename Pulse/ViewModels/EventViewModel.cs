@@ -36,6 +36,8 @@ namespace Pulse
         string reasonToCancel;
         bool isReportedSpam;
         bool isOwner;
+        bool isAdmin;
+        bool isGoing;
         bool isAddressListVisible;
         bool isStackOptionVisible;
         bool isStackCommentVisible;
@@ -316,6 +318,24 @@ namespace Pulse
             {
                 isOwner = value;
                 OnPropertyChanged("IsOwner");
+            }
+        }
+        public bool IsGoing
+        {
+            get { return isOwner; }
+            set
+            {
+                isOwner = value;
+                OnPropertyChanged("IsGoing");
+            }
+        }
+        public bool IsAdmin
+        {
+            get { return isAdmin; }
+            set
+            {
+                isAdmin = value;
+                OnPropertyChanged("IsAdmin");
             }
         }
         public bool IsUserCheckedIn
@@ -1289,6 +1309,32 @@ namespace Pulse
         }
         #endregion
         #region Methods
+        public async void GetUserPaymentCardDetails()
+        {
+            try
+            {
+                if(SessionManager.AccessToken!=null)
+                {
+                    var response = await mainService.Get<ResultWrapperSingle<CreditCardDetailsResponse>>(Constant.GetUserCreditCardDetailsUrl);
+                    if (response != null && response.status == Constant.Status200 && response.response != null)
+                    {
+                        //CardNumber = response.response.card_no="1233335436636";
+                        ////ExpiryYear = response.response.expiry_year=2025;
+                        //ExpiryMonth = response.response.expiry_month=11;
+                        //EventBillingAddress = response.response.address="AIG Park avenue, gaur city";
+                        //EventBillingCity = response.response.city="Noida";
+                        //EventBillingState = response.response.state="Uttar Pradesh";
+                        //EventBillingZipCode = response.response.postal_code="201009";
+                        //NameOnCard = response.response.name="Ajay";
+                        //EventBillingCountry = response.response.country="India";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         private async void CreateStarredEvent(object Sender)
         {
             try
@@ -3422,6 +3468,7 @@ namespace Pulse
                         if (response != null && response.status == Constant.Status200 && response.response != null)
                         {
                             TappedEventId = response.response.id;
+                            IsAdmin = response.response.is_superuser;
                             EventTitle = response.response.name;
                             IsOwner = response.response.is_owner;
                             IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
@@ -3430,6 +3477,7 @@ namespace Pulse
                             EventLocation = response.response.location_address;
                             EventVenue = response.response.event_venue;
                             Description = response.response.description;
+                            IsGoing = response.response.is_going;
                             EventFromDate = DateTime.Parse(response.response.start_date).Date;
                             EventToDate = DateTime.Parse(response.response.end_date).Date;
                             EventFromTime = DateTime.Parse(response.response.start_time).TimeOfDay;
@@ -3568,19 +3616,15 @@ namespace Pulse
                                 IsStackOptionVisible = false;
                                 IsCheckinButtonVisible = true;
                             }
-                            if(DateTime.Now.Date >= EventFromDate && DateTime.Now.TimeOfDay  >= EventFromTime)
-                            {
-                                //for live events
-                                    CheckinButtonText = response.response.is_checkin ? Constant.CheckedInText : Constant.CheckInText;
-                                    IsCheckinButtonVisible = true;
-                            }
-                            else
-                            {
-                                //for upcoming events
-                                    IsCheckinButtonVisible = true;
-                                    CheckinButtonText = response.response.is_going ? Constant.JoinedGuestListText : Constant.JoinGuestListText;
-                            }
-                          
+                            var startDateTime = EventFromDate.Date + EventFromTime;
+                            var EventDates = DateTime.Compare(DateTime.Now, startDateTime);
+                            //for upcoming events
+                            if (EventDates < 0)
+                                CheckinButtonText = response.response.is_going ? Constant.JoinedGuestListText : Constant.JoinGuestListText;
+                            //for live events
+                            else if(EventDates > 0 || EventDates == 0)
+                                CheckinButtonText = response.response.is_checkin ? Constant.CheckedInText : Constant.CheckInText;
+                            IsCheckinButtonVisible = true;
                             IsEndEventVisible = IsOwner ? true : false;
                             IsJoinButtonVisible = IsCoverFreeAmountAvailable ? true : false;
                             EventPaidButtonText = response.response.is_paid ? Constant.ViewTicketText : Constant.JoinText;
@@ -4526,7 +4570,9 @@ namespace Pulse
                         pageNoLocBasedEvents = 1;
                         // totalLocBasedPages = 1;
                         tempLocBasedEventList.Clear();
-                        GetNotificationList();
+                        bool isList = await GetNotifications();
+                        SetNotificationList(isList, NotificationList);
+                        // GetNotificationList();
                         IsRefreshing = false;
                     }
                     else
@@ -4808,6 +4854,15 @@ namespace Pulse
                                     myTransaction.is_bottle_service = isUserTakenBottleService;
                                     myTransaction.total_amount = TotalAmount;
                                     myTransaction.payment_type = PaymentType.JOININGPAYMENT;
+                                    myTransaction.card_no = CardNumber;
+                                    myTransaction.name = NameOnCard;
+                                    myTransaction.expiry_month = ExpiryMonth;
+                                    myTransaction.expiry_year = Convert.ToInt32(ExpiryYear);
+                                    myTransaction.country = EventBillingCountry;
+                                    myTransaction.city = EventBillingCity;
+                                    myTransaction.state = EventBillingState;
+                                    myTransaction.address = EventBillingAddress;
+                                    myTransaction.postal_code = EventBillingZipCode;
                                     var response = await mainService.Post<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.PaymentSuccessfulApi + TappedEventId + "/", myTransaction);
                                     if (response != null && response.status == Constant.Status200)
                                     {

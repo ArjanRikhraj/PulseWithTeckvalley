@@ -121,7 +121,12 @@
                                         <controls:NoUnderlineTimePicker Time="{Binding EventToTime}" TextColor="#707070" FontSize="Small"/>
                                     </StackLayout>
                                 </yummy:PancakeView>
-                            </StackLayout>
+                            <!--Next Button-->
+                            <local:ExtendedButton x:Name="btnNext" Margin="0,0,0,10" FontFace="PoppinsMedium" Command="{Binding NextButtonClick}" IsVisible="{Binding IsScreenFirstVisible}"
+                                              BorderRadius="23" FontAttributes="Bold" FontSize="Small" HeightRequest="45" Text="Next         >" 
+                                              TextColor="{x:Static local:Constant.WhiteTextColor}"
+                            VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" />
+                        </StackLayout>
                         </ScrollView>
                         <!--SCREEN2-->
                     <ScrollView  x:Name="Screen2" IsVisible="{Binding IsScreenSecondVisible}" VerticalScrollBarVisibility="Never">
@@ -342,25 +347,22 @@
                                     <local:ExtendedLabel Text="Pay $5 to boost your event" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.AddEventEntriesColor}" Margin="0,0,0,0" FontSize="11" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
                                 </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                        </ScrollView>
-                        <!--Next Button-->
-                        <local:ExtendedButton x:Name="btnNext" Margin="0,0,0,10" FontFace="PoppinsMedium" Command="{Binding NextButtonClick}" IsVisible="{Binding IsScreenFirstVisible}"
-                                              BorderRadius="23" FontAttributes="Bold" FontSize="Small" HeightRequest="45" Text="Next         >" 
-                                              TextColor="{x:Static local:Constant.WhiteTextColor}"
-                            VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" />
-                        
-                        <!--Second ScreenButtons-->
-                        <Grid ColumnDefinitions="*,*" VerticalOptions="EndAndExpand" Margin="0,0,0,10" IsVisible="{Binding IsScreenSecondVisible}">
-                            <local:ExtendedButton Grid.Column="0" FontFace="PoppinsMedium" Command="{Binding PreviousButtonClick}"  BorderRadius="23"
+                            <!--Second ScreenButtons-->
+                            <Grid ColumnDefinitions="*,*" VerticalOptions="EndAndExpand" Margin="0,0,0,10" IsVisible="{Binding IsScreenSecondVisible}">
+                                <local:ExtendedButton Grid.Column="0" FontFace="PoppinsMedium" Command="{Binding PreviousButtonClick}"  BorderRadius="23"
                                                       FontAttributes="Bold" FontSize="Small" HeightRequest="45" 
                                                       Text="{x:Static local:Constant.PreviousButtonText}" TextColor="{x:Static local:Constant.WhiteTextColor}"
                             VerticalOptions="Fill" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" />
-                            <local:ExtendedButton Grid.Column="1" FontFace="PoppinsMedium" Command="{Binding CreateEventClick}" BorderRadius="23" FontAttributes="Bold"
+                                <local:ExtendedButton Grid.Column="1" FontFace="PoppinsMedium" Command="{Binding CreateEventClick}" BorderRadius="23" FontAttributes="Bold"
                                                       FontSize="Small" HeightRequest="45" Text="{x:Static local:Constant.CreateEventText}" 
                                                       TextColor="{x:Static local:Constant.WhiteTextColor}"
                             VerticalOptions="Fill" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" />
-                        </Grid>
+                            </Grid>
+                        </StackLayout>
+                        </ScrollView>
+                      
+                        
+                       
                             <!--<StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" Margin="0,0,0,10" IsVisible="{Binding IsScreenSecondVisible}">
                                 
                             </StackLayout>-->

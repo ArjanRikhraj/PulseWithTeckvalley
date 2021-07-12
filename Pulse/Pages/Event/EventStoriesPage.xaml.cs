@@ -32,10 +32,10 @@ namespace Pulse.Pages.Event
 
         private async void SetInitialValues()
         {
+			stackAddStory.IsVisible = eventViewModel.IsUserCheckedIn || eventViewModel.IsOwner ? true : false;
 			BindingContext = new EventStoryViewModel(eventViewModel.TappedEventId);
             CrossMediaManager.Current.MediaItemFinished += Current_MediaItemFinished;
             CrossMediaManager.Current.StateChanged += Current_StateChanged;
-			stackAddStory.IsVisible = eventViewModel.IsUserCheckedIn ||eventViewModel.IsOwner ? true : false;
 		}
 
         private void Current_StateChanged(object sender, MediaManager.Playback.StateChangedEventArgs e)

@@ -123,6 +123,7 @@ namespace Pulse
         public const string LatLongMapEventsUrl = "/api/event/lat_long_base/?page={0}&lat={1}&long={2}&datetime={3}&filter='{4}'";
         public const string PostUserLocationUrl = "/api/accounts/user/location/";
         public const string GetAllUsersUrl = "/api/accounts/allusers/?longitude={0}&latitude={1}";
+        public const string GetUserCreditCardDetailsUrl = "/api/accounts/carddetails/";
         #endregion
 
         public const string JsonContent = "application/json";

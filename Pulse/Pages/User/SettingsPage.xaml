@@ -7,9 +7,11 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-              <local:SettingsHeader Grid.Row="0" IsBackButtonVisible="true" HorizontalOptions="FillAndExpand" LogoutVisible="true" VerticalOptions="FillAndExpand" HeadingText="Settings" />
+              <local:SettingsHeader Grid.Row="0" IsBackButtonVisible="true" HorizontalOptions="FillAndExpand" LogoutVisible="False" VerticalOptions="FillAndExpand" HeadingText="Settings" />
                 <Grid x:Name="grdItems" Grid.Row="1" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.SettingScreenBackgroundColor}" HorizontalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="1" />
                         <RowDefinition Height="Auto" />
@@ -25,12 +27,21 @@
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
-                    <BoxView Grid.Row="1" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" x:Name="boxChangePassword" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                    <StackLayout Grid.Row="2"  BackgroundColor="{x:Static local:Constant.SettingScreenBackgroundColor}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Padding="20,20,20,10">
+                    <BoxView Grid.Row="1" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                    <StackLayout x:Name="stkLogout" BackgroundColor="White" Grid.Row="2" Spacing="15" Orientation="Horizontal" VerticalOptions="FillAndExpand"  Padding="20,16,20,15">
+                        <Image Source="{x:Static local:Constant.LogOutIcon}" Margin="-3,0,0,0"  Grid.Row="2" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
+                        <local:ExtendedLabel Text="Logout" FontFace="PoppinsLight" Grid.Row="2" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"  TextColor="{x:Static local:Constant.SettingLinksTextColor}" FontSize="15" />
+                        <Image Grid.Row="2" Source="{x:Static local:Constant.ArrowRightIcon}" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView Grid.Row="3" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" x:Name="boxChangePassword" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                    <StackLayout Grid.Row="4"  BackgroundColor="{x:Static local:Constant.SettingScreenBackgroundColor}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Padding="20,20,20,10">
                         <Label Text="{x:Static local:Constant.AboutText}" TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" />
                     </StackLayout>
-                    <BoxView Grid.Row="3" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                    <ScrollView Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <BoxView Grid.Row="5" BackgroundColor="{x:Static local:Constant.SettingSeperatorColor}" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+                    <ScrollView Grid.Row="6" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout x:Name="stkAboutPulse"  BackgroundColor="White"  Orientation="Horizontal" Spacing="15" Padding="20,15,20,15">
                                 <Image Source="{x:Static local:Constant.AboutPulseIcon}"  Grid.Row="0" VerticalOptions="CenterAndExpand"  Aspect="AspectFit" />

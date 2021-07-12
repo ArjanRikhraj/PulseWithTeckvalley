@@ -14,6 +14,7 @@ namespace Pulse.ViewModels
 {
    public class EventStoryViewModel : BaseViewModel
     {
+        readonly EventViewModel eventViewModel;
         MainServices mainService;
         ObservableCollection<Story> eventStories { get; set; }
         public ObservableCollection<Story> EventStories
@@ -56,6 +57,61 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("IsNoStoryVisible");
             }
         }
+        bool isReportStoryVisible;
+        public bool IsReportStoryVisible
+        {
+            get
+            {
+                return this.isReportStoryVisible;
+            }
+
+            set
+            {
+                this.isReportStoryVisible = value;
+                OnPropertyChanged("IsReportStoryVisible");
+            }
+        }
+        bool isDeleteStoryVisible;
+        public bool IsDeleteStoryVisible
+        {
+            get
+            {
+                return this.isDeleteStoryVisible;
+            }
+
+            set
+            {
+                this.isDeleteStoryVisible = value;
+                OnPropertyChanged("IsDeleteStoryVisible");
+            }
+        }
+        bool isReportPopupVisible;
+        public bool IsReportPopupVisible
+        {
+            get
+            {
+                return this.isReportPopupVisible;
+            }
+
+            set
+            {
+                this.isReportPopupVisible = value;
+                OnPropertyChanged("IsReportPopupVisible");
+            }
+        }
+        private List<string> reportCommentList;
+        public List<string> ReportCommentList
+        {
+            get
+            {
+                return reportCommentList;
+            }
+            set
+            {
+                reportCommentList = value;
+                OnPropertyChanged("ReportCommentList");
+            }
+        }
         private ICommand storyMenuCommand { get; set; }
         public ICommand StoryMenuCommand
         {
@@ -72,9 +128,6 @@ namespace Pulse.ViewModels
                 return cancelCommand ?? (cancelCommand = new Command<object>((currentObject) => CancelStory(currentObject)));
             }
         }
-
-        
-
         private ICommand saveStoryCommand { get; set; }
         public ICommand SaveStoryCommand
         {
@@ -83,13 +136,27 @@ namespace Pulse.ViewModels
                 return saveStoryCommand ?? (saveStoryCommand = new Command<object>((currentObject) => SaveStory(currentObject)));
             }
         }
+        private ICommand reportStoryCommand { get; set; }
+        public ICommand ReportStoryCommand
+        {
+            get
+            {
+                return reportStoryCommand ?? (reportStoryCommand = new Command<object>((currentObject) => OnReportStoryCommand(currentObject)));
+            }
+        }
+
+        private Story StoryDetails;
+
         private CancellationTokenSource cancellation;
         public EventStoryViewModel(int eventId)
         {
             mainService = new MainServices();
             GetAllStories(eventId);
+            GetAllReportComments();
             this.cancellation = new CancellationTokenSource();
+            eventViewModel = ServiceContainer.Resolve<EventViewModel>();
         }
+
         private async void SaveStory(object sender)
         {
             try
@@ -107,6 +174,55 @@ namespace Pulse.ViewModels
                         ShowToast(Constant.AlertTitle, "Story Successfully Saved");
                         currentObject.IsMenuOptionVisible = true;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        private async void OnReportStoryCommand(object sender)
+        {
+            try
+            {
+                var currentObject = (Story)sender;
+                if (currentObject != null)
+                {
+                    IsReportPopupVisible = true;
+                    StoryDetails = currentObject;
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+
+        private async void GetAllReportComments()
+        {
+            try
+            {
+                reportCommentList = new List<string>();
+                reportCommentList.Add("Bullying or harassment");
+                reportCommentList.Add("False information");
+                reportCommentList.Add("Violence or dangerous organizations");
+                reportCommentList.Add("Scam or fraud");
+                reportCommentList.Add("Intellectual property vioation");
+                reportCommentList.Add("Sale of illegal or regulated goods");
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+
+        private async void ReportStory()
+        {
+            try
+            {
+                if (StoryDetails != null)
+                {
+
                 }
             }
             catch (Exception ex)
@@ -134,9 +250,10 @@ namespace Pulse.ViewModels
             try
             {
                 var currentObject = (Story)sender;
-                if(currentObject!=null)
+                if (currentObject != null)
                 {
                     currentObject.IsMenuOptionVisible = true;
+                    IsDeleteStoryVisible = (eventViewModel.IsOwner || eventViewModel.IsAdmin || currentObject.user_id == SessionManager.UserId) ? true : false;
                 }
             }
             catch (Exception ex)
@@ -205,6 +322,8 @@ namespace Pulse.ViewModels
                     }
                     else
                         IsNoStoryVisible = true;
+                    IsReportStoryVisible = eventViewModel.IsGoing||eventViewModel.IsUserCheckedIn ? true : false;
+                   
                 }
             }
             catch (Exception ex)

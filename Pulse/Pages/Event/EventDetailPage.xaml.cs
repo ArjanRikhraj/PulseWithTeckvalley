@@ -381,7 +381,9 @@ namespace Pulse
 							}
 							else if(btn.Text == Constant.JoinGuestListText)
 							{
-								JoinEvent();
+								eventViewModel.eventStatus = 3;
+								await eventViewModel.EventAttendingConfirmation("Detail");
+								//JoinEvent();
 							}
                             else
                             {
@@ -436,6 +438,7 @@ namespace Pulse
 						eventViewModel.IsUserNotCheckedIn = false;
 						eventViewModel.IsUserCheckedIn = true;
 						ShowToast(Constant.AlertTitle, "Successfully checked in");
+						eventViewModel.FetchEventDetail(eventViewModel.TappedEventId.ToString(),true);
 						//await App.Instance.Alert("Successfully checked in", Constant.AlertTitle, Constant.Ok);
 						eventViewModel.IsLoading = false;
 						_tapCount = 0;

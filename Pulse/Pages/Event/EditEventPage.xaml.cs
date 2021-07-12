@@ -43,7 +43,7 @@ namespace Pulse
 					editorVenue.Margin = new Thickness(-2, 0, 0, -5);
 					txtAddress.Margin = new Thickness(37, 0, 0, 15);
 					box.Margin = new Thickness(15, 6, 0, 0);
-					editorDetails.HeightRequest = 55;
+					//editorDetails.HeightRequest = 55;
 				}
 				lstPlaces.ItemTapped += lstPlacesItemTapped;
 				dtPkrFromDate.MinimumDate = DateTime.Now.Date;

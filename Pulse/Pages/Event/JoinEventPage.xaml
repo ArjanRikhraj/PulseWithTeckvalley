@@ -104,7 +104,9 @@
 							<BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="{x:Static local:Constant.OutLineColor}" />
 						</StackLayout>
 						<local:ExtendedLabel TextColor="{x:Static local:Constant.GrayTextColor}" Margin="15,10,15,25" FontFace="PoppinsLight" Text="A payment receipt would be send to this email ID" FontSize="10" HorizontalOptions="Center" />
-						<local:ExtendedButton FontFace="PoppinsMedium" Margin="20,5,20,25" BorderRadius="23" BorderColor="Transparent" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" Clicked="ProceedPaymentClicked" FontSize="15" HeightRequest="45" Text="Proceed to Pay" TextColor="{x:Static local:Constant.WhiteTextColor}"
+						<local:ExtendedButton FontFace="PoppinsMedium" Margin="20,5,20,25" BorderRadius="23" BorderColor="Transparent" 
+                                              BackgroundColor="{x:Static local:Constant.PinkButtonColor}" Clicked="ProceedPaymentClicked"
+                                              FontSize="15" HeightRequest="45" Text="Proceed to Pay" TextColor="{x:Static local:Constant.WhiteTextColor}"
 							VerticalOptions="Fill" HorizontalOptions="FillAndExpand" />
 						<!--</StackLayout>-->
 					</StackLayout>
