@@ -92,6 +92,8 @@ namespace Pulse
         public const string AddEventStories = "/api/event/addeventstory/";
         public const string GetEventStories = "/api/event/geteventstory/";
         public const string SaveEventStories = "/api/event/savestorymedia/";
+        public const string ReportEventStories = "/api/event/reportstory/";
+        public const string DeleteEventStories = "/api/event/deletestory/";
         public const string UploadEventCoverImage = "/api/event/addeventcoverphoto/";
         public const string ShareEventUrl = "/api/event/share/";
         public const string MediaDeleteUrl = "/api/event/mediadelete/";

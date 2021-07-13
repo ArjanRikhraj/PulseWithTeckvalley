@@ -3729,6 +3729,7 @@ namespace Pulse
                             IsLoading = true;
                             EventAttend eventAttend = new EventAttend();
                             eventAttend.invitee_status = eventStatus;
+                            eventAttend.guest_count = 1;
                             var response = await mainService.Put<ResultWrapperSingle<EventConfirmation>>(Constant.EventAttendingConfirmationUrl + Convert.ToString(TappedEventId) + "/", eventAttend);
                             if (response != null && response.status == Constant.Status200 && response.response != null)
                             {

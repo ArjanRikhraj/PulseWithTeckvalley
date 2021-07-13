@@ -147,7 +147,8 @@
                 </Frame>
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CameraCancel_Clicked" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
-            <Grid x:Name="grdOverlayPopUp" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
+            <Grid x:Name="grdOverlayPopUp" Grid.Row="0" IsVisible="{Binding IsOverlayPopupVisible}" VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OverLayTapped" />
                 </Grid.GestureRecognizers>
@@ -188,25 +189,39 @@
                 </Frame>
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CameraCancel_Clicked" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
-            <controls1:CustomFrame Margin="0,25,0,0" IsVisible="{Binding IsReportPopupVisible}" VerticalOptions="FillAndExpand" Padding="0" CornerRadius="20,20,0,0">
+            <controls1:CustomFrame x:Name="reportPopup" Margin="0,80,0,0" IsVisible="{Binding IsReportPopupVisible}" VerticalOptions="FillAndExpand" 
+                                   Padding="0,10,0,0" CornerRadius="20,20,0,0">
                 <StackLayout>
-                    <BoxView HeightRequest="2" WidthRequest="70" BackgroundColor="LightGray" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+                    <BoxView HeightRequest="4" WidthRequest="50" BackgroundColor="LightGray" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0"/>
+
+
+                    <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" HorizontalOptions="CenterAndExpand" />
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
-                    <Label Text="Why are you reporting this post?" TextColor="Black" FontAttributes="Bold" FontSize="Small"/>
+                    <Label Text="Why are you reporting this post?" TextColor="Black" FontAttributes="Bold" FontSize="Small" Margin="10,0,10,0"/>
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
-                    <ListView ItemsSource="{Binding ReportCommentList}">
-                        <ListView.ItemTemplate>
+                    <local:ExtendedListView ItemsSource="{Binding ReportCommentList}" SelectedItem="{Binding SelectedReason}" SelectionMode="Single" SeparatorVisibility="Default" SeparatorColor="Gray">
+                        <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding .}"/>
-                                        <Label Text="\U000f0e73" HorizontalOptions="EndAndExpand" TextColor="LightGray"/>
+                                    <StackLayout Orientation="Horizontal" Padding="10">
+                                        <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="#303030"/>
+                                        <Image Source="arrow_right.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </local:ExtendedListView.ItemTemplate>
+                        <local:ExtendedListView.Footer>
+                                <StackLayout>
+                                    <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
+                                    <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="100" Padding="0" Margin="20,0,20,0" BackgroundColor="LightGray">
+                                        <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
+                                    </controls1:CustomFrame>
+                            </StackLayout>
+                        </local:ExtendedListView.Footer>
+                    </local:ExtendedListView>
+                    <StackLayout.GestureRecognizers>
+                        <SwipeGestureRecognizer Direction="Down" Command="{Binding CloseReportPopupCommand}"/>
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
             </controls1:CustomFrame>
         </Grid>

@@ -99,6 +99,33 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("IsReportPopupVisible");
             }
         }
+        bool isOverlayPopupVisible;
+        public bool IsOverlayPopupVisible
+        {
+            get
+            {
+                return this.isOverlayPopupVisible;
+            }
+
+            set
+            {
+                this.isOverlayPopupVisible = value;
+                OnPropertyChanged("IsOverlayPopupVisible");
+            }
+        }
+        private string descriptionComment;
+        public string DescriptionComment
+        {
+            get
+            {
+                return descriptionComment;
+            }
+            set
+            {
+                descriptionComment = value;
+                OnPropertyChanged("DescriptionComment");
+            }
+        }
         private List<string> reportCommentList;
         public List<string> ReportCommentList
         {
@@ -112,6 +139,23 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("ReportCommentList");
             }
         }
+        private string selectedReason;
+        public string SelectedReason
+        {
+            get
+            {
+                return selectedReason;
+            }
+            set
+            {
+                selectedReason = value;
+                OnPropertyChanged("SelectedReason");
+                ReportStory(selectedReason);
+            }
+        }
+
+       
+
         private ICommand storyMenuCommand { get; set; }
         public ICommand StoryMenuCommand
         {
@@ -144,19 +188,37 @@ namespace Pulse.ViewModels
                 return reportStoryCommand ?? (reportStoryCommand = new Command<object>((currentObject) => OnReportStoryCommand(currentObject)));
             }
         }
+        private ICommand deleteStoryCommand { get; set; }
+        public ICommand DeleteStoryCommand
+        {
+            get
+            {
+                return deleteStoryCommand ?? (deleteStoryCommand = new Command<object>((currentObject) => OnDeleteStoryCommand(currentObject)));
+            }
+        }
 
+       
+
+        public Command CloseReportPopupCommand { private set; get; }
         private Story StoryDetails;
-
+        private int EventId;
         private CancellationTokenSource cancellation;
         public EventStoryViewModel(int eventId)
         {
+            this.EventId = eventId;
+            CloseReportPopupCommand = new Command(CloseReportPopup);
             mainService = new MainServices();
-            GetAllStories(eventId);
+            GetAllStories();
             GetAllReportComments();
             this.cancellation = new CancellationTokenSource();
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
         }
 
+        private void CloseReportPopup(object obj)
+        {
+            IsReportPopupVisible = false;
+            IsOverlayPopupVisible = false;
+        }
         private async void SaveStory(object sender)
         {
             try
@@ -188,8 +250,12 @@ namespace Pulse.ViewModels
                 var currentObject = (Story)sender;
                 if (currentObject != null)
                 {
-                    IsReportPopupVisible = true;
-                    StoryDetails = currentObject;
+                    if(!IsReportPopupVisible)
+                    {
+                        IsReportPopupVisible = true;
+                        IsOverlayPopupVisible = true;
+                        StoryDetails = currentObject;
+                    }
                 }
             }
             catch (Exception ex)
@@ -197,7 +263,32 @@ namespace Pulse.ViewModels
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-
+        private async void OnDeleteStoryCommand(object sender)
+        {
+            try
+            {
+                var currentObject = (Story)sender;
+                if (currentObject != null)
+                {
+                    ReportStoryRequest request = new ReportStoryRequest();
+                    request.story_id = currentObject.id;
+                    var response = await mainService.Put<ResultWrapperSingle<Stories>>(Constant.DeleteEventStories, request);
+                    if (response != null && response.status == Constant.Status200 && response.response != null)
+                    {
+                        ShowToast(Constant.AlertTitle, "Successfully Deleted");
+                        currentObject.IsMenuOptionVisible = false;
+                        IsOverlayPopupVisible = false;
+                        GetAllStories();
+                        if (EventStories.Count == 0 || EventStories == null)
+                            await Navigation.PopModalAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         private async void GetAllReportComments()
         {
             try
@@ -216,13 +307,23 @@ namespace Pulse.ViewModels
             }
         }
 
-        private async void ReportStory()
+        private async void ReportStory(string reason)
         {
             try
             {
-                if (StoryDetails != null)
+                if (StoryDetails != null && !string.IsNullOrEmpty(reason))
                 {
-
+                    ReportStoryRequest request = new ReportStoryRequest();
+                    request.story_id = StoryDetails.id;
+                    request.reason = reason;
+                    //request.description = DescriptionComment;
+                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventStories, request);
+                    if (response != null && response.status == Constant.Status200 && response.response != null)
+                    {
+                        ShowToast(Constant.AlertTitle, "Successfully Reported");
+                        IsReportPopupVisible = false;
+                        IsOverlayPopupVisible = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -261,12 +362,12 @@ namespace Pulse.ViewModels
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-         private async void GetAllStories(int eventId)
+         private async void GetAllStories()
         {
             try
             {
                 EventStoryRequest request = new EventStoryRequest();
-                request.event_id = eventId;
+                request.event_id = EventId;
                 var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.GetEventStories, request);
                 if (response != null && response.status == Constant.Status200 && response.response != null)
                 {

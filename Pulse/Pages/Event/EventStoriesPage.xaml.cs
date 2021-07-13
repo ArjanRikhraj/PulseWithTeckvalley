@@ -82,6 +82,7 @@ namespace Pulse.Pages.Event
 		{
 			stackInnerPopUp.IsVisible = false;
 			grdOverlayPopUp.IsVisible = false;
+			//reportPopup.IsVisible = false;
 		}
 
 		void Camera_Tapped(object sender, System.EventArgs e)

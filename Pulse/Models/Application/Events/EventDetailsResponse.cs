@@ -73,6 +73,7 @@ namespace Pulse
 	public class EventAttend
 	{
 		public int invitee_status { get; set; }
+		public int guest_count { get; set; }
 	}
 	public class PinMediaRequest
 	{
