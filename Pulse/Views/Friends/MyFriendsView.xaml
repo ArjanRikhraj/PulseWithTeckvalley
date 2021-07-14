@@ -23,16 +23,35 @@
                         <local:ExtendedButton x:Name="btnSearch" Grid.Column="1" Image="{x:Static local:Constant.SearchWhiteIcon}" Clicked="SearchIcon_Tapped" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
                     </Grid>
                 </local:GradientColorStack>
-                <StackLayout HorizontalOptions="FillAndExpand" x:Name="stackPendingRequest" BackgroundColor="White" Grid.Row="1" Orientation="Horizontal" Margin="0" VerticalOptions="FillAndExpand" Padding="0,10,0,10">
-                    <local:ExtendedLabel Text="{Binding PendingText}" Margin="20,0,0,0" FontFace="PoppinsMedium" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="13" />
-                    <Image Source="{x:Static local:Constant.ArrowRightIcon}" Margin="0,0,20,0" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="Center">
-                    </Image>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RightArrowIcon_Tapped" NumberOfTapsRequired="1" />
-                    </StackLayout.GestureRecognizers>
+                <StackLayout Grid.Row="1" BackgroundColor="White">
+                    <StackLayout HorizontalOptions="FillAndExpand" x:Name="stackPendingRequest" 
+                                 Orientation="Horizontal" Margin="0" VerticalOptions="FillAndExpand" Padding="0,10,0,10">
+                        <local:ExtendedLabel Text="{Binding PendingText}" Margin="20,0,0,0" FontFace="PoppinsMedium"
+                                             HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" 
+                                             TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="13" />
+                        <Image Source="{x:Static local:Constant.ArrowRightIcon}" Margin="0,0,20,0" Aspect="AspectFit" 
+                           HorizontalOptions="End" VerticalOptions="Center"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RightArrowIcon_Tapped" NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView HeightRequest="5" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"/>
+                    <StackLayout HorizontalOptions="FillAndExpand" x:Name="stackContacts" 
+                                 Orientation="Horizontal" Margin="0" VerticalOptions="FillAndExpand" Padding="0,10,0,10">
+                        <local:ExtendedLabel Text="{Binding ContactText}" Margin="20,0,0,0" FontFace="PoppinsMedium"
+                                             HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" 
+                                             TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="13" />
+                        <Image Source="{x:Static local:Constant.ArrowRightIcon}" Margin="0,0,20,0" Aspect="AspectFit" 
+                           HorizontalOptions="End" VerticalOptions="Center"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Contact_Tapped" NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout Grid.Row="2" Padding="10" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <CollectionView ItemsSource="{Binding ListMyFriends}" IsVisible="{Binding IsListFriendVisible}" SelectedItem="{Binding SelectedFriend}" SelectionMode="Single">
+                <StackLayout Grid.Row="2" Padding="10" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"
+                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <CollectionView ItemsSource="{Binding ListMyFriends}" IsVisible="{Binding IsListFriendVisible}" 
+                                    SelectedItem="{Binding SelectedFriend}" SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                         Span="5"

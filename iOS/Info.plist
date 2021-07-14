@@ -83,6 +83,8 @@
 	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>app.pulse.com</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app needs access to contacts to pick a contact and get info.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Plugin.Connectivity;
+using Pulse.Pages.Friends;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 
@@ -309,8 +310,26 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-
-        async void lstFriendTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+		async void Contact_Tapped(object sender, System.EventArgs e)
+		{
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				if (_tapCount < 1)
+				{
+					_tapCount = 1;
+					friendsViewModel.IsLoading=true;
+					await Navigation.PushModalAsync(new ContactsPage());
+					friendsViewModel.IsLoading = false;
+					_tapCount = 0;
+				}
+			}
+			else
+			{
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+		}
+		async void lstFriendTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
 		{
 			if (CrossConnectivity.Current.IsConnected)
 			{

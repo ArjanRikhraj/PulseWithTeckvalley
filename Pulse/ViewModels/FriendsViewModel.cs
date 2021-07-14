@@ -29,6 +29,7 @@ namespace Pulse
         string selectedUsername;
 
 		string pendingText;
+		string contactText="Sync Contacts";
 		ObservableCollection<Friend> listUsers;
 		ObservableCollection<Friend> listMyFriends;
 		ObservableCollection<Friend> listPendingRequest;
@@ -81,7 +82,15 @@ namespace Pulse
 				OnPropertyChanged("PendingText");
 			}
 		}
-
+		public string ContactText
+		{
+			get { return contactText; }
+			set
+			{
+				contactText = value;
+				OnPropertyChanged("ContactText");
+			}
+		}
 		public ObservableCollection<MyEvents> ListMyFriendsEvents
 		{
 			get { return listMyFriendsEvents; }

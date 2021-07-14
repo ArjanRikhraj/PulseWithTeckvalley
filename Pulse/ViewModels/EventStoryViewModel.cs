@@ -254,6 +254,7 @@ namespace Pulse.ViewModels
                     {
                         IsReportPopupVisible = true;
                         IsOverlayPopupVisible = true;
+                        currentObject.IsMenuOptionVisible = false;
                         StoryDetails = currentObject;
                     }
                 }
@@ -316,7 +317,7 @@ namespace Pulse.ViewModels
                     ReportStoryRequest request = new ReportStoryRequest();
                     request.story_id = StoryDetails.id;
                     request.reason = reason;
-                    //request.description = DescriptionComment;
+                    request.description = DescriptionComment;
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventStories, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
@@ -422,7 +423,10 @@ namespace Pulse.ViewModels
                         }
                     }
                     else
+                    {
                         IsNoStoryVisible = true;
+                        EventStories = null;
+                    }
                     IsReportStoryVisible = eventViewModel.IsGoing||eventViewModel.IsUserCheckedIn ? true : false;
                    
                 }

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="Pulse.Pages.Friends.ContactsPage">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#fff">
+            <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:GradientColorStack stackOrientation="Horizontal" Grid.Row="0" StartColor="#eead92" Spacing="0"
+                                          EndColor="#dc70b7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <local:GradientColorStack.Effects>
+                        <local:NotchEffect />
+                    </local:GradientColorStack.Effects>
+                    <Grid VerticalOptions="FillAndExpand" x:Name="topStack" Margin="15,20,11,8" BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="85*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+                        <local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="cross_add_event.png" Clicked="Cross_Clicked" 
+                                              BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" 
+                                              BorderColor="Transparent" BorderRadius="0" />
+                        <local:ExtendedLabel Text="My Contacts" FontFace="PoppinsMedium" Grid.Column="1" VerticalOptions="Center"
+                                             HorizontalOptions="CenterAndExpand" TextColor="#fff"
+                                             FontSize="15" />
+                        <local:ExtendedButton x:Name="btnSearch" Grid.Column="2" Image="search_white.png"
+                                              BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"
+                                              BorderColor="Transparent" BorderRadius="0" />
+                    </Grid>
+                </local:GradientColorStack>
+                <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="18,13,18,0">
+                    <CollectionView ItemsSource="{Binding ContactList}" VerticalScrollBarVisibility="Never" BackgroundColor="#f8f8f8">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                        Span="1" 
+                        VerticalItemSpacing="8"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                    <Grid ColumnDefinitions="Auto,*, Auto" BackgroundColor="White" Padding="10" Margin="10">
+                                        <controls:CircleImage Grid.Column="0" HeightRequest="50" WidthRequest="50" 
+                                                              Source="{Binding profileImage}" VerticalOptions="CenterAndExpand" 
+                                                              BorderThickness="2" BorderColor="Transparent" Aspect="AspectFill"
+                                                              HorizontalOptions="Start"/>
+                                        <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                            <local:ExtendedLabel Text="{Binding name}" FontFace="PoppinsMedium" 
+                                             TextColor="#303030"
+                                             FontSize="15" />
+                                            <local:ExtendedLabel Text="{Binding contactNumber}" FontFace="PoppinsMedium" 
+                                             TextColor="#303030"
+                                             FontSize="15" />
+                                        </StackLayout>
+                                    <Image Source="{Binding contactIcon}" Grid.Column="2" VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+            <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                  IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
+                <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                       BackgroundColor="Transparent" HasShadow="false">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" 
+                                           VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label x:Name="lblLoaderMessage" Text="Syncing contacts..." TextColor="White" FontSize="12" VerticalOptions="Center"
+                               HorizontalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
