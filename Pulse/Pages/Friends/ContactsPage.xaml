@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="Pulse.Pages.Friends.ContactsPage">
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#fff">
@@ -22,42 +22,61 @@
                         </Grid.ColumnDefinitions>
                         <local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="cross_add_event.png" Clicked="Cross_Clicked" 
                                               BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" 
-                                              BorderColor="Transparent" BorderRadius="0" />
+                                              BorderColor="Transparent" BorderRadius="0"/>
                         <local:ExtendedLabel Text="My Contacts" FontFace="PoppinsMedium" Grid.Column="1" VerticalOptions="Center"
                                              HorizontalOptions="CenterAndExpand" TextColor="#fff"
-                                             FontSize="15" />
-                        <local:ExtendedButton x:Name="btnSearch" Grid.Column="2" Image="search_white.png"
+                                             FontSize="15"/>
+                        <local:ExtendedButton Grid.Column="2" Image="search_white.png"
                                               BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"
-                                              BorderColor="Transparent" BorderRadius="0" />
+                                              BorderColor="Transparent" BorderRadius="0" Clicked="ExtendedButton_Clicked"/>
                     </Grid>
                 </local:GradientColorStack>
-                <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="18,13,18,0">
-                    <CollectionView ItemsSource="{Binding ContactList}" VerticalScrollBarVisibility="Never" BackgroundColor="#f8f8f8">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                        Span="1" 
-                        VerticalItemSpacing="8"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
+                <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="13,13,13,0">
+                    <yummy:PancakeView IsVisible="{Binding IsSearchBoxVisible}" CornerRadius="10" Padding="3,0,3,0" 
+                                       BackgroundColor="{x:Static local:Constant.WhiteTextColor}" 
+                                       HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit"
+                                   HorizontalOptions="Start" />
+                            <local:ExtendedEntry FontFace="PoppinsMedium" Placeholder="Search Friends"
+                                                Text="{Binding SearchText}"
+                                                 PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}"
+                                                 TextColor="{x:Static local:Constant.SearchFriendTextColor}" 
+                                                 Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                            <Image Source="{x:Static local:Constant.SearchCloseIcon}" IsVisible="{Binding IsSearchCloseVisible}"
+                                   VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SearchCrossCommand}" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </yummy:PancakeView>
+                    <local:ExtendedListView ItemsSource="{Binding ContactList}" VerticalScrollBarVisibility="Never" HasUnevenRows="True" SeparatorVisibility="None"
+                                            BackgroundColor="#f8f8f8" LoadMoreCommand="{Binding LoadMoreContacts}" VerticalOptions="FillAndExpand" Scrolled="ExtendedListView_Scrolled">
+                        <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
-                                    <Grid ColumnDefinitions="Auto,*, Auto" BackgroundColor="White" Padding="10" Margin="10">
-                                        <controls:CircleImage Grid.Column="0" HeightRequest="50" WidthRequest="50" 
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <Grid ColumnDefinitions="Auto,*, Auto" RowDefinitions="Auto" BackgroundColor="White" Padding="10" Margin="10">
+                                            <controls:CircleImage Grid.Column="0" HeightRequest="50" WidthRequest="50" 
                                                               Source="{Binding profileImage}" VerticalOptions="CenterAndExpand" 
                                                               BorderThickness="2" BorderColor="Transparent" Aspect="AspectFill"
                                                               HorizontalOptions="Start"/>
-                                        <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
-                                            <local:ExtendedLabel Text="{Binding name}" FontFace="PoppinsMedium" 
+                                            <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                                <local:ExtendedLabel Text="{Binding name}" FontFace="PoppinsMedium" 
                                              TextColor="#303030"
                                              FontSize="15" />
-                                            <local:ExtendedLabel Text="{Binding contactNumber}" FontFace="PoppinsMedium" 
+                                                <local:ExtendedLabel Text="{Binding contactNumber}" FontFace="PoppinsMedium" 
                                              TextColor="#303030"
                                              FontSize="15" />
-                                        </StackLayout>
-                                    <Image Source="{Binding contactIcon}" Grid.Column="2" VerticalOptions="CenterAndExpand"/>
-                                </Grid>
+                                            </StackLayout>
+                                            <Image Source="{Binding contactIcon}" Aspect="AspectFill"  HorizontalOptions="End" Grid.Column="2" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        </local:ExtendedListView.ItemTemplate>
+                    </local:ExtendedListView>
                 </StackLayout>
             </Grid>
             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
@@ -67,7 +86,7 @@
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
                         <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" 
                                            VerticalOptions="Center" HorizontalOptions="Center" />
-                        <Label x:Name="lblLoaderMessage" Text="Syncing contacts..." TextColor="White" FontSize="12" VerticalOptions="Center"
+                        <Label x:Name="lblLoaderMessage" Text="Loading contacts..." TextColor="White" FontSize="12" VerticalOptions="Center"
                                HorizontalOptions="Center">
                         </Label>
                     </StackLayout>

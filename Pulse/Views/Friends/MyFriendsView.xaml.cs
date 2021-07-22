@@ -29,6 +29,7 @@ namespace Pulse
 			friendsViewModel.pageNoFriend = 1;
 			friendsViewModel.totalPagesMyFriends = 1;
 			friendsViewModel.GetMyFriendsList();
+			friendsViewModel.GetAllContacts();
 		}
 		void SetUi()
 		{

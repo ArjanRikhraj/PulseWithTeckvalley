@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Pulse.Models.Application.Events;
+using Pulse.Models.Friends;
 using Pulse.Pages.Event;
 using Pulse.Pages.User;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -26,6 +30,7 @@ namespace Pulse
 		bool isPendingFriendVisible;
 		bool isPendingNoFriendFoundVisible;
         string blockUnBlockText;
+
         string selectedUsername;
 
 		string pendingText;
@@ -315,13 +320,140 @@ namespace Pulse
 					ShowMedia(MediaSelectedItem);
 			}
 		}
+		string contactsCount;
+		public string ContactsCount
+		{
+			get { return contactsCount; }
+			set
+			{
+				contactsCount = value;
+				OnPropertyChanged("ContactsCount");
+			}
+		}
+		private ObservableCollection<ContactsModel> contactList { get; set; }
+		public ObservableCollection<ContactsModel> ContactList
+		{
+			get
+			{
+				return contactList;
+			}
+			set
+			{
+				contactList = value;
+				OnPropertyChanged("ContactList");
+			}
+		}
+		private ICommand shareInvitationLinkCommand { get; set; }
+		public ICommand ShareInvitationLinkCommand
+		{
+			get
+			{
+				return shareInvitationLinkCommand ?? (shareInvitationLinkCommand = new Command<ContactsModel>((currentObject) => OnShareInvitationLinkCommand(currentObject)));
+			}
+		}
 
+       
 
+        private List<string> reportCommentList;
+		public List<string> ReportCommentList
+		{
+			get
+			{
+				return reportCommentList;
+			}
+			set
+			{
+				reportCommentList = value;
+				OnPropertyChanged("ReportCommentList");
+			}
+		}
+		private string selectedReason;
+		public string SelectedReason
+		{
+			get
+			{
+				return selectedReason;
+			}
+			set
+			{
+				selectedReason = value;
+				OnPropertyChanged("SelectedReason");
+				ReportUser(selectedReason);
+			}
+		}
+		private string descriptionComment;
+		public string DescriptionComment
+		{
+			get
+			{
+				return descriptionComment;
+			}
+			set
+			{
+				descriptionComment = value;
+				OnPropertyChanged("DescriptionComment");
+			}
+		}
+		bool isReportPopupVisible;
+		public bool IsReportPopupVisible
+		{
+			get
+			{
+				return this.isReportPopupVisible;
+			}
 
+			set
+			{
+				this.isReportPopupVisible = value;
+				OnPropertyChanged("IsReportPopupVisible");
+			}
+		}
+		bool isSearchBoxVisible;
+		public bool IsSearchBoxVisible
+		{
+			get
+			{
+				return this.isSearchBoxVisible;
+			}
+
+			set
+			{
+				this.isSearchBoxVisible = value;
+				OnPropertyChanged("IsSearchBoxVisible");
+			}
+		}
+		string searchText;
+		public string SearchText
+		{
+			get
+			{
+				return this.searchText;
+			}
+
+			set
+			{
+				this.searchText = value;
+				OnPropertyChanged("SearchText");
+				OnSearchCommand(searchText);
+			}
+		}
+
+       
+
+        public ICommand LoadMoreContacts
+		{
+			get;
+			set;
+		}
+
+		public List<ContactsModel> allContacts;
+		public List<ContactsModel> loadMoreContacts;
+		int page = 2;
 		#endregion
 		#region Constructor
 		public FriendsViewModel()
 		{
+			LoadMoreContacts = new Command(OnLoadMoreContacts);
 			LoadMoreUsers = new Command(GetUsers);
 			LoadMoreMyFriends = new Command(GetMyFriendsList);
 			LoadMorePending = new Command(GetPendingFriendsList);
@@ -333,14 +465,162 @@ namespace Pulse
 			tempPendingList = new ObservableCollection<Friend>();
 			tempFriendEventList = new ObservableCollection<MyEvents>();
 			friendsMediaList = new ObservableCollection<EventGallery>();
+			contactList = new ObservableCollection<ContactsModel>();
 			mainService = new MainServices();
-
+			GetAllReportComments();
 		}
 		#endregion
 
-
 		#region Methods
-
+		private async void OnShareInvitationLinkCommand(ContactsModel currentObject)
+		{
+            try
+            {
+				if(currentObject.contactIcon=="share_icon")
+                {
+					string messageText = "";
+					var message = new SmsMessage(messageText, new[] { currentObject.contactNumber });
+					await Sms.ComposeAsync(message);
+				}
+                else
+                {
+					await AddFriend(Convert.ToInt32(currentObject.contactNumber), true);
+                }
+            }
+			catch (FeatureNotSupportedException ex)
+			{
+				await App.Instance.Alert("SMS API not supported in this device", Constant.AlertTitle, Constant.Ok);
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		private async void GetAllReportComments()
+		{
+			try
+			{
+				reportCommentList = new List<string>();
+				reportCommentList.Add("Bullying or harassment");
+				reportCommentList.Add("False information");
+				reportCommentList.Add("Violence or dangerous organizations");
+				reportCommentList.Add("Scam or fraud");
+				reportCommentList.Add("Intellectual property vioation");
+				reportCommentList.Add("Sale of illegal or regulated goods");
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		private void OnSearchCommand(string searchText)
+		{
+			IsLoading = true;
+			if(!string.IsNullOrEmpty(searchText))
+				loadMoreContacts = allContacts.Where(x => x.name == searchText).ToList();
+			IsLoading = false;
+		}
+		private async void ReportUser(string reason)
+		{
+			try
+			{
+				if (!string.IsNullOrEmpty(reason))
+				{
+					ReportUserRequest request = new ReportUserRequest();
+					request.report_user_id =Convert.ToInt32(TappedFriendid);
+					request.reason = reason;
+					request.description = DescriptionComment;
+					var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportUser, request);
+					if (response != null && response.status == Constant.Status200 && response.response != null)
+					{
+						ShowToast(Constant.AlertTitle, "User Successfully Reported");
+						IsReportPopupVisible = false;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		public async void GetAllContacts()
+		{
+			try
+			{
+				var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+				if (status == PermissionStatus.Granted)
+				{
+					IsLoading = true;
+					var result = await Contacts.GetAllAsync();
+					
+					//ContactsCount = Convert.ToString(result.ToList().Count);
+					allContacts = new List<ContactsModel>();
+					foreach (var item in result.ToList())
+					{
+						ContactsModel model = new ContactsModel();
+						model.profileImage = Constant.UserDefaultSquareImage;
+						model.name = item.DisplayName;
+						model.contactNumber = item.Phones[0].ToString();
+						model.contactIcon = Constant.IconShare;
+						allContacts.Add(model);
+					}
+					loadMoreContacts = allContacts;
+					//ContactsCount =Convert.ToString( allContacts.Count);
+					IsLoading = false;
+				}
+				else
+					await App.Instance.Alert(Constant.ContactPermissionMessage, Constant.AlertTitle, Constant.Ok);
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		public async void GetContacts(int page)
+		{
+			try
+			{
+				IsLoading = true;
+				loadMoreContacts = allContacts.Skip(page * 20).Take(20).ToList();
+				SetContacts();
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		void SetContacts()
+        {
+            foreach (var item in loadMoreContacts)
+            {
+				contactList.Add(new ContactsModel
+				{
+					profileImage = Constant.UserDefaultSquareImage,
+					name = item.name,
+					contactNumber = item.contactNumber,
+					contactIcon = Constant.IconShare
+				});
+				ContactList = contactList;
+            }
+			IsLoading = false;
+		}
+		
+		private async void OnLoadMoreContacts()
+		{
+			try
+			{
+				GetContacts(page);
+				page += 1;
+			}
+			catch (Exception ex)
+			{
+				page = 1;
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
 		private async void GetFriendPage(object obj)
 		{
 			try

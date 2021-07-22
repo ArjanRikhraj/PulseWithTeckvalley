@@ -23,7 +23,9 @@
                 </local:GradientColorStack>
 <!--                <local:VideoPlayer HeightRequest="300" Grid.Row="1"   Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4"   VerticalOptions="FillAndExpand" BackgroundColor="Red" AutoPlay="true" />
 -->
-                <local:ExtendedListView Grid.Row="1"   BackgroundColor="White" ItemTapped="lstMediaTapped"  x:Name="listViewMedia" HorizontalOptions="FillAndExpand"  HasUnevenRows="true" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                <local:ExtendedListView Grid.Row="1"   BackgroundColor="White" ItemTapped="lstMediaTapped" 
+                                        x:Name="listViewMedia" HorizontalOptions="FillAndExpand"  HasUnevenRows="true"
+                                        VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                     <local:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                             <local:GalleryViewCell BindingContext="{Binding .}"/>

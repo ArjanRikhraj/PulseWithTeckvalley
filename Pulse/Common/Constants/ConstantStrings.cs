@@ -11,7 +11,7 @@ namespace Pulse
         public const string BaseServiceUrl_testing = "http://pulseph2-qc.netsol.in";
         public const string BaseServiceUrl_staging = "http://pli-pulseph2.agilecollab.com";
         public const string BaseServiceUrlLive = "https://www.pulseapp.ca";
-        //public const string BaseServiceUrlLive = "http://35.182.22.214";
+       // public const string BaseServiceUrlLive = "https://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
         public const string BaseServiceUrl = BaseServiceUrlLive;
@@ -94,6 +94,8 @@ namespace Pulse
         public const string SaveEventStories = "/api/event/savestorymedia/";
         public const string ReportEventStories = "/api/event/reportstory/";
         public const string DeleteEventStories = "/api/event/deletestory/";
+        public const string ReportUser = "/api/accounts/userreport/";
+        public const string ReportMedia = "/api/accounts/reporteventmedia/";
         public const string UploadEventCoverImage = "/api/event/addeventcoverphoto/";
         public const string ShareEventUrl = "/api/event/share/";
         public const string MediaDeleteUrl = "/api/event/mediadelete/";
@@ -182,7 +184,8 @@ namespace Pulse
         public const string GroupText = "Group";
         public const string EventText = "Event";
         public const string ShareText = "Share";
-        public const string ReportText = "Report";
+        public const string ReportEventText = "Report Event";
+        public const string ReportMediaText = "Report Media";
 
 
         public const string MaxPasswordLengthMessage = "Passwords must be of minimum length 6 and should contain a number";
@@ -197,6 +200,7 @@ namespace Pulse
         public const string AlertTitleDefaultText = "Oops!";
         public const string AlertTitle = "Info";
         public const string MessgeTitle = "Message";
+        public const string ContactPermissionMessage = "Allow contacts permission to see your contacts";
         public const string Done = "OK";
         public const string Success = "Success";
         public const string OTP = "One Time Password";

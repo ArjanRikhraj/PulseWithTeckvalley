@@ -38,7 +38,7 @@
                     <BoxView HeightRequest="5" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"/>
                     <StackLayout HorizontalOptions="FillAndExpand" x:Name="stackContacts" 
                                  Orientation="Horizontal" Margin="0" VerticalOptions="FillAndExpand" Padding="0,10,0,10">
-                        <local:ExtendedLabel Text="{Binding ContactText}" Margin="20,0,0,0" FontFace="PoppinsMedium"
+                        <local:ExtendedLabel Text="{Binding ContactsCount,StringFormat='{0:N} Contacts'}" Margin="20,0,0,0" FontFace="PoppinsMedium"
                                              HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" 
                                              TextColor="{x:Static local:Constant.GrayTextColor}" FontSize="13" />
                         <Image Source="{x:Static local:Constant.ArrowRightIcon}" Margin="0,0,20,0" Aspect="AspectFit" 

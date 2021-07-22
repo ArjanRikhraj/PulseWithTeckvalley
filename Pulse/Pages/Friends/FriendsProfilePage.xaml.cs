@@ -45,7 +45,7 @@ namespace Pulse
 				//lblSchool.Text = friendsViewModel.FriendProfileList[0].school;
 				lblScore.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].scores);
 				lblHosted.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].hosted_events);
-				lblAttended.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].attended_events) ;
+				lblAttended.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].attended_events);
 				lblFriends.Text = Convert.ToString(friendsViewModel.FriendProfileList[0].friends);
 			}
 			if (friendsViewModel.IsFriendsButtonVisible)
@@ -58,51 +58,51 @@ namespace Pulse
 
 			await friendsViewModel.GetFriendMediaList();
 		}
-        async void View_AllTapped(object sender, System.EventArgs e)
+		async void View_AllTapped(object sender, System.EventArgs e)
 
-        {
-            if (CrossConnectivity.Current.IsConnected)
-            {
-                if (_tapCount < 1)
-                {
-                    _tapCount = 1;
-                    eventViewModel.IsLoading = true;
-                    var selected = sender as ExtendedLabel;
-                    eventViewModel.TappedEventId = Convert.ToInt32(selected.ClassId);
-                    eventViewModel.FetchEventDetail(Convert.ToString(eventViewModel.TappedEventId), false);
-                    await Navigation.PushModalAsync(new EventsGuestListingPage());
-                    eventViewModel.IsLoading = false;
-                    _tapCount = 0;
-                }
-            }
-            else
-            {
-                await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-                _tapCount = 0;
-            }
-        }
-        async void View_AllGridTapped(object sender, System.EventArgs e)
+		{
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				if (_tapCount < 1)
+				{
+					_tapCount = 1;
+					eventViewModel.IsLoading = true;
+					var selected = sender as ExtendedLabel;
+					eventViewModel.TappedEventId = Convert.ToInt32(selected.ClassId);
+					eventViewModel.FetchEventDetail(Convert.ToString(eventViewModel.TappedEventId), false);
+					await Navigation.PushModalAsync(new EventsGuestListingPage());
+					eventViewModel.IsLoading = false;
+					_tapCount = 0;
+				}
+			}
+			else
+			{
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+		}
+		async void View_AllGridTapped(object sender, System.EventArgs e)
 
-        {
-            if (CrossConnectivity.Current.IsConnected)
-            {
-                if (_tapCount < 1)
-                {
-                    _tapCount = 1;
-                    eventViewModel.IsLoading = true;
-                    var selected = sender as Grid;
-                    eventViewModel.FetchEventDetail(Convert.ToString(eventViewModel.TappedEventId), false);
-                    await Navigation.PushModalAsync(new EventsGuestListingPage());
-                    eventViewModel.IsLoading = false;
-                    _tapCount = 0;
-                }
-            }
-            else
-            {
-                await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-                _tapCount = 0;
-            }
-        }
+		{
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				if (_tapCount < 1)
+				{
+					_tapCount = 1;
+					eventViewModel.IsLoading = true;
+					var selected = sender as Grid;
+					eventViewModel.FetchEventDetail(Convert.ToString(eventViewModel.TappedEventId), false);
+					await Navigation.PushModalAsync(new EventsGuestListingPage());
+					eventViewModel.IsLoading = false;
+					_tapCount = 0;
+				}
+			}
+			else
+			{
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				_tapCount = 0;
+			}
+		}
 		async void Friend_Button_Clicked(object sender, System.EventArgs e)
 		{
 			if (CrossConnectivity.Current.IsConnected)
@@ -140,33 +140,33 @@ namespace Pulse
 			grdOverlayDialog.IsVisible = false;
 			stackPopUp.IsVisible = false;
 		}
-        
-       async void Block_Unblock_Clicked(object sender, System.EventArgs e)
-        {
 
-            if (CrossConnectivity.Current.IsConnected)
-            {
-                
-                    if (friendsViewModel.BlockUnBlockText.Equals(Constant.BlockText))
-                    {
-                        var result = await App.Instance.ConfirmAlert("Are you sure you want to block " + friendsViewModel.SelectedUsername, Constant.AlertTitle, Constant.Ok, Constant.CancelText);
-                        if (result)
-                        {
-                            await friendsViewModel.BlockUnblockFreind();
-                        }
-                    }
-                    else
-                    {
-                        var result = await App.Instance.ConfirmAlert("Are you sure you want to unblock " + friendsViewModel.SelectedUsername, Constant.AlertTitle, Constant.Ok, Constant.CancelText);
-                        if (result)
-                        {
-                            await friendsViewModel.BlockUnblockFreind();
-                        }
-                    }
-                }
+		async void Block_Unblock_Clicked(object sender, System.EventArgs e)
+		{
 
-        }
-	    async void FriendEventsList_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+			if (CrossConnectivity.Current.IsConnected)
+			{
+
+				if (friendsViewModel.BlockUnBlockText.Equals(Constant.BlockText))
+				{
+					var result = await App.Instance.ConfirmAlert("Are you sure you want to block " + friendsViewModel.SelectedUsername, Constant.AlertTitle, Constant.Ok, Constant.CancelText);
+					if (result)
+					{
+						await friendsViewModel.BlockUnblockFreind();
+					}
+				}
+				else
+				{
+					var result = await App.Instance.ConfirmAlert("Are you sure you want to unblock " + friendsViewModel.SelectedUsername, Constant.AlertTitle, Constant.Ok, Constant.CancelText);
+					if (result)
+					{
+						await friendsViewModel.BlockUnblockFreind();
+					}
+				}
+			}
+
+		}
+		async void FriendEventsList_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
 		{
 			if (CrossConnectivity.Current.IsConnected)
 			{
@@ -176,14 +176,14 @@ namespace Pulse
 					friendsViewModel.IsLoading = true;
 					var selected = (MyEvents)e.Item;
 					listViewfriendsEvents.SelectedItem = null;
-                    await eventViewModel.FetchEventDetail(Convert.ToString(selected.EventId), true);
+					await eventViewModel.FetchEventDetail(Convert.ToString(selected.EventId), true);
 					friendsViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
 			}
 			else
 			{
-                await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
 				_tapCount = 0;
 			}
 		}
@@ -217,30 +217,30 @@ namespace Pulse
 					if (_tapCount < 1)
 					{
 						_tapCount = 1;
-                        friendsViewModel.IsLoading = true;
-                        if (pageType.Equals("My Friends"))
-                        {
-                            friendsViewModel.PendingRequestCount();
-                            friendsViewModel.pageNoUser = 1;
-                            friendsViewModel.tempUserList.Clear();
-                            friendsViewModel.tempFriendList.Clear();
-                            friendsViewModel.pageNoFriend = 1;
-                            friendsViewModel.totalPagesMyFriends = 1;
-                            friendsViewModel.GetMyFriendsList();
-                        }
-                        else if (pageType.Equals("Pending"))
-                        {
-                            friendsViewModel.pageNoPending = 1;
-                            friendsViewModel.tempPendingList.Clear();
-                            friendsViewModel.GetPendingFriendsList();
-                        }
-                        else
-                        {
-                            friendsViewModel.tempUserList.Clear();
-                            friendsViewModel.pageNoUser = 1;
-                            friendsViewModel.GetUsers();
-                        }
-                        await App.Current.MainPage.Navigation.PopModalAsync();
+						friendsViewModel.IsLoading = true;
+						if (pageType.Equals("My Friends"))
+						{
+							friendsViewModel.PendingRequestCount();
+							friendsViewModel.pageNoUser = 1;
+							friendsViewModel.tempUserList.Clear();
+							friendsViewModel.tempFriendList.Clear();
+							friendsViewModel.pageNoFriend = 1;
+							friendsViewModel.totalPagesMyFriends = 1;
+							friendsViewModel.GetMyFriendsList();
+						}
+						else if (pageType.Equals("Pending"))
+						{
+							friendsViewModel.pageNoPending = 1;
+							friendsViewModel.tempPendingList.Clear();
+							friendsViewModel.GetPendingFriendsList();
+						}
+						else
+						{
+							friendsViewModel.tempUserList.Clear();
+							friendsViewModel.pageNoUser = 1;
+							friendsViewModel.GetUsers();
+						}
+						await App.Current.MainPage.Navigation.PopModalAsync();
 						//await Navigation.PopModalAsync();
 						friendsViewModel.IsLoading = false;
 						_tapCount = 0;
@@ -257,44 +257,44 @@ namespace Pulse
 				return;
 			}
 		}
-        #endregion
+		#endregion
 
-        private void btnEdit_Clicked(object sender, EventArgs e)
-        {
+		private void btnEdit_Clicked(object sender, EventArgs e)
+		{
 			stackPopUp.IsVisible = true;
 			grdOverlayDialog.IsVisible = true;
 		}
 
-        private async void btnMessage_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
+		private async void btnMessage_Clicked(object sender, EventArgs e)
+		{
+			try
+			{
 				await Navigation.PushModalAsync(new MessageChatPage(int.Parse(friendId), true, false));
 			}
-            catch (Exception ex)
-            {
+			catch (Exception ex)
+			{
 				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
 			}
-        }
+		}
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            try
-            {
+		private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+		{
+			try
+			{
 				friendsViewModel.IsFriendEventListVisible = true;
 				friendsViewModel.IsMediaListVisible = false;
 				//friendsViewModel.IsNoMediaVisible = true;
 				lblEvent.TextDecorations = TextDecorations.Underline;
 				lblMedia.TextDecorations = TextDecorations.None;
 			}
-            catch (Exception ex)
-            {
+			catch (Exception ex)
+			{
 				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
 			}
-        }
+		}
 
-        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
-        {
+		private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+		{
 			try
 			{
 				friendsViewModel.IsFriendEventListVisible = false;
@@ -317,5 +317,21 @@ namespace Pulse
 				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
 			}
 		}
-    }
+		async void Report_Clicked(object sender, System.EventArgs e)
+		{
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					friendsViewModel.IsReportPopupVisible = true;
+				}
+				else
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+	}
 }

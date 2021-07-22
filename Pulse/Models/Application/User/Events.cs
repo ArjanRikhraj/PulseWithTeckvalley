@@ -76,4 +76,10 @@ namespace Pulse
 		public bool is_star { get; set; }
 		public string msg { get; set; }
 	}
+	public partial class ReportEventMedia
+	{
+		public long media_id { get; set; }
+		public string reason { get; set; }
+		public string description { get; set; }
+	}
 }

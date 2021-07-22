@@ -100,7 +100,6 @@ namespace Pulse
                     WidthRequest = 30,
 				};
 
-
 				if (count == 1)
 				{
 					Image image = new Image()
@@ -1017,7 +1016,6 @@ namespace Pulse
 		}
 
 		async void GridMedia_Tapped(object sender, System.EventArgs e)
-
 		{
 			if (CrossConnectivity.Current.IsConnected)
 			{
@@ -1036,8 +1034,6 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-
-
 		async void PartyStory_Clicked(object sender, System.EventArgs e)
 		{
 			if (CrossConnectivity.Current.IsConnected)
@@ -1431,5 +1427,10 @@ namespace Pulse
 			grdOverlayDialog.IsVisible = true;
 			stackUploadImagePopUp.IsVisible = true;
 		}
+
+        private void Report_Media_Clicked(object sender, EventArgs e)
+        {
+			eventViewModel.IsReportPopupVisible = !eventViewModel.IsReportPopupVisible;
+        }
     }
 }

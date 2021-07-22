@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Pulse.Models.Application.Events;
 using Pulse.Pages.User;
 using Xamarin.Forms;
 
@@ -1269,6 +1270,61 @@ namespace Pulse
                 OnPropertyChanged("Cover_Photo");
             }
         }
+        //Report Region
+        private List<string> reportCommentList;
+        public List<string> ReportCommentList
+        {
+            get
+            {
+                return reportCommentList;
+            }
+            set
+            {
+                reportCommentList = value;
+                OnPropertyChanged("ReportCommentList");
+            }
+        }
+        private string selectedReason;
+        public string SelectedReason
+        {
+            get
+            {
+                return selectedReason;
+            }
+            set
+            {
+                selectedReason = value;
+                OnPropertyChanged("SelectedReason");
+                ReportMedia(selectedReason);
+            }
+        }
+        private string descriptionComment;
+        public string DescriptionComment
+        {
+            get
+            {
+                return descriptionComment;
+            }
+            set
+            {
+                descriptionComment = value;
+                OnPropertyChanged("DescriptionComment");
+            }
+        }
+        bool isReportPopupVisible;
+        public bool IsReportPopupVisible
+        {
+            get
+            {
+                return this.isReportPopupVisible;
+            }
+
+            set
+            {
+                this.isReportPopupVisible = value;
+                OnPropertyChanged("IsReportPopupVisible");
+            }
+        }
         #region Constructor
         public EventViewModel()
         {
@@ -1306,9 +1362,50 @@ namespace Pulse
             EventAttendeeList = new List<Attendee>();
             EventMediaList = new List<EventMedia>();
             NotificationList = new List<NotificationResponse>();
+            GetAllReportComments();
         }
         #endregion
         #region Methods
+        private async void GetAllReportComments()
+        {
+            try
+            {
+                reportCommentList = new List<string>();
+                reportCommentList.Add("Bullying or harassment");
+                reportCommentList.Add("False information");
+                reportCommentList.Add("Violence or dangerous organizations");
+                reportCommentList.Add("Scam or fraud");
+                reportCommentList.Add("Intellectual property vioation");
+                reportCommentList.Add("Sale of illegal or regulated goods");
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        private async void ReportMedia(string reason)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(reason))
+                {
+                    ReportEventMedia request = new ReportEventMedia();
+                    //request.media_id = Convert.ToInt32(TappedFriendid);
+                    request.reason = reason;
+                    request.description = DescriptionComment;
+                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportMedia, request);
+                    if (response != null && response.status == Constant.Status200 && response.response != null)
+                    {
+                        ShowToast(Constant.AlertTitle, "Media Successfully Reported");
+                        IsReportPopupVisible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         public async void GetUserPaymentCardDetails()
         {
             try

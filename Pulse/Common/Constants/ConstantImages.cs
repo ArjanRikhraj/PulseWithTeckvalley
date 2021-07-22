@@ -98,7 +98,8 @@ namespace Pulse
 		public const string VideoIcon = "video_player.png";
         public const string ReportImage = "report.png";
         public const string ShareIcon = "share_icon.png";
-        public const string PhoneImage = "icPhone.png";
+		public const string IconShare = "icon_Share.png";
+		public const string PhoneImage = "icPhone.png";
 
 		//Setting Images
 		public const string ChangePasswordIcon = "change_password.png";

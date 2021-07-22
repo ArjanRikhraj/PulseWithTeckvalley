@@ -135,4 +135,10 @@ namespace Pulse
         public int block_to { get; set; }
 
     }
+	public class ReportUserRequest
+	{
+		public int report_user_id { get; set; }
+		public string reason { get; set; }
+		public string description { get; set; }
+	}
 }
