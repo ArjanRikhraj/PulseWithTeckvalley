@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Plugin.Messaging;
 using Pulse.Models.Application.Events;
 using Pulse.Models.Friends;
 using Pulse.Pages.Event;
@@ -343,12 +344,12 @@ namespace Pulse
 				OnPropertyChanged("ContactList");
 			}
 		}
-		private ICommand shareInvitationLinkCommand { get; set; }
-		public ICommand ShareInvitationLinkCommand
+		private ICommand friendTypeCommand { get; set; }
+		public ICommand FriendTypeCommand
 		{
 			get
 			{
-				return shareInvitationLinkCommand ?? (shareInvitationLinkCommand = new Command<ContactsModel>((currentObject) => OnShareInvitationLinkCommand(currentObject)));
+				return friendTypeCommand ?? (friendTypeCommand = new Command<ContactsModel>((currentObject) => OnFriendTypeCommand(currentObject)));
 			}
 		}
 
@@ -447,7 +448,9 @@ namespace Pulse
 		}
 
 		public List<ContactsModel> allContacts;
-		public List<ContactsModel> loadMoreContacts;
+		public List<ContactsModel> loadContacts;
+		List<ContactsModel> PulseUserList;
+		List<ContactsModel> MatchedContactList;
 		int page = 2;
 		#endregion
 		#region Constructor
@@ -472,19 +475,135 @@ namespace Pulse
 		#endregion
 
 		#region Methods
-		private async void OnShareInvitationLinkCommand(ContactsModel currentObject)
+		public async void GetAllUser()
+		{
+			try
+			{
+				IsLoading = true;
+				if (SessionManager.AccessToken != null)
+				{
+
+					var response = await mainService.Get<ResultWrapper<UserData>>(Constant.GetAllPulseUserUrl);
+					if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+					{
+						PulseUserList = new List<ContactsModel>();
+						foreach (var item in response.response)
+						{
+							ContactsModel model = new ContactsModel();
+							model.userId = item.id;
+							model.name = item.fullname;
+							model.profileImage = item.profile_image;
+							model.friendType = item.request_type;
+							model.contactNumber = item.mobile;
+							PulseUserList.Add(model);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		public async void GetAllContacts()
+		{
+			try
+			{
+				var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+				if (status == PermissionStatus.Granted)
+				{
+					IsLoading = true;
+					var result = await Contacts.GetAllAsync();
+
+					//ContactsCount = Convert.ToString(result.ToList().Count);
+					allContacts = new List<ContactsModel>();
+					foreach (var item in result.ToList())
+					{
+						ContactsModel model = new ContactsModel();
+						model.profileImage = Constant.UserDefaultSquareImage;
+						model.name = item.DisplayName;
+						model.contactNumber = item.Phones[0].ToString();
+						model.nonPulseUser = "Invite";
+						allContacts.Add(model);
+					}
+					loadContacts = allContacts;
+					//ContactsCount =Convert.ToString( allContacts.Count);
+					IsLoading = false;
+				}
+				else
+					await App.Instance.Alert(Constant.ContactPermissionMessage, Constant.AlertTitle, Constant.Ok);
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		public async void GetAllMatchedContacts()
+        {
+            try
+            {
+				if(PulseUserList.Count>0 && allContacts.Count>0)
+                {
+					var userList = from first in PulseUserList
+											   join second in allContacts
+											   on first.contactNumber equals second.contactNumber
+											   select first;
+					if(userList.Count()>0)
+                    {
+						MatchedContactList = userList.ToList();
+						MatchedContactList.AddRange(allContacts.Except(MatchedContactList));
+						loadContacts = MatchedContactList;
+					}
+					SetContacts();
+				}
+			}
+			catch (Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		public async void SetContacts()
+		{
+			try
+			{
+				ContactList = new ObservableCollection<ContactsModel>();
+				foreach (var item in loadContacts)
+				{
+					ContactsModel model = new ContactsModel();
+					model.userId = item.userId;
+					model.name = item.name;
+					model.ProfileImage = !string.IsNullOrEmpty(item.profileImage) ? item.profileImage : Constant.UserDefaultSquareImage;
+					model.FriendType = !string.IsNullOrEmpty(item.friendType)?item.friendType:"Invite";
+					model.contactNumber = item.contactNumber;
+					ContactList.Add(model);
+				}
+				IsLoading = false;
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		private async void OnFriendTypeCommand(ContactsModel currentObject)
 		{
             try
             {
-				if(currentObject.contactIcon=="share_icon")
+				if(currentObject.friendType=="Invite")
                 {
 					string messageText = "";
+					var smsMessenger = CrossMessaging.Current.SmsMessenger;
+					if (smsMessenger.CanSendSms)
+						smsMessenger.SendSms(currentObject.contactNumber, "Well hello there from Xam.Messaging.Plugin");
 					var message = new SmsMessage(messageText, new[] { currentObject.contactNumber });
 					await Sms.ComposeAsync(message);
 				}
                 else
                 {
-					await AddFriend(Convert.ToInt32(currentObject.contactNumber), true);
+					if(currentObject.userId>0)
+					await AddFriend(Convert.ToInt32(currentObject.userId), false);
                 }
             }
 			catch (FeatureNotSupportedException ex)
@@ -495,6 +614,33 @@ namespace Pulse
 			{
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
+		}
+		
+		private void OnSearchCommand(string searchText)
+		{
+			if(!string.IsNullOrEmpty(searchText))
+            {
+				loadContacts = allContacts.Where(s => searchText.All(w => s.name.Contains(w))).ToList();
+				//loadMoreContacts = allContacts.Where(x => x.name == searchText).ToList();
+				SetContacts();
+			}
+		}
+		public async void GetContacts(int page)
+		{
+			try
+			{
+				loadContacts = allContacts.Skip(page * 20).Take(20).ToList();
+			}
+			catch (Exception ex)
+			{
+				IsLoading = false;
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+			}
+		}
+		private async void OnLoadMoreContacts()
+		{
+			GetContacts(page);
+			page += 1;
 		}
 		private async void GetAllReportComments()
 		{
@@ -513,13 +659,6 @@ namespace Pulse
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
-		private void OnSearchCommand(string searchText)
-		{
-			IsLoading = true;
-			if(!string.IsNullOrEmpty(searchText))
-				loadMoreContacts = allContacts.Where(x => x.name == searchText).ToList();
-			IsLoading = false;
-		}
 		private async void ReportUser(string reason)
 		{
 			try
@@ -527,7 +666,7 @@ namespace Pulse
 				if (!string.IsNullOrEmpty(reason))
 				{
 					ReportUserRequest request = new ReportUserRequest();
-					request.report_user_id =Convert.ToInt32(TappedFriendid);
+					request.report_user_id = Convert.ToInt32(TappedFriendid);
 					request.reason = reason;
 					request.description = DescriptionComment;
 					var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportUser, request);
@@ -540,84 +679,6 @@ namespace Pulse
 			}
 			catch (Exception ex)
 			{
-				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
-			}
-		}
-		public async void GetAllContacts()
-		{
-			try
-			{
-				var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
-				if (status == PermissionStatus.Granted)
-				{
-					IsLoading = true;
-					var result = await Contacts.GetAllAsync();
-					
-					//ContactsCount = Convert.ToString(result.ToList().Count);
-					allContacts = new List<ContactsModel>();
-					foreach (var item in result.ToList())
-					{
-						ContactsModel model = new ContactsModel();
-						model.profileImage = Constant.UserDefaultSquareImage;
-						model.name = item.DisplayName;
-						model.contactNumber = item.Phones[0].ToString();
-						model.contactIcon = Constant.IconShare;
-						allContacts.Add(model);
-					}
-					loadMoreContacts = allContacts;
-					//ContactsCount =Convert.ToString( allContacts.Count);
-					IsLoading = false;
-				}
-				else
-					await App.Instance.Alert(Constant.ContactPermissionMessage, Constant.AlertTitle, Constant.Ok);
-			}
-			catch (Exception ex)
-			{
-				IsLoading = false;
-				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
-			}
-		}
-		public async void GetContacts(int page)
-		{
-			try
-			{
-				IsLoading = true;
-				loadMoreContacts = allContacts.Skip(page * 20).Take(20).ToList();
-				SetContacts();
-			}
-			catch (Exception ex)
-			{
-				IsLoading = false;
-				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
-			}
-		}
-		void SetContacts()
-        {
-            foreach (var item in loadMoreContacts)
-            {
-				contactList.Add(new ContactsModel
-				{
-					profileImage = Constant.UserDefaultSquareImage,
-					name = item.name,
-					contactNumber = item.contactNumber,
-					contactIcon = Constant.IconShare
-				});
-				ContactList = contactList;
-            }
-			IsLoading = false;
-		}
-		
-		private async void OnLoadMoreContacts()
-		{
-			try
-			{
-				GetContacts(page);
-				page += 1;
-			}
-			catch (Exception ex)
-			{
-				page = 1;
-				IsLoading = false;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
@@ -971,7 +1032,6 @@ namespace Pulse
 		}
 
 		public async Task ChangeRequestStatus(int friendId, FriendType friendType, string pageType, bool isProfileDetailPage)
-
 		{
 			try
 			{

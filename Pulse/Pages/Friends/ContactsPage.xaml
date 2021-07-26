@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="Pulse.Pages.Friends.ContactsPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Pulse.Pages.Friends.ContactsPage" x:Name="ContactPage">
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#fff">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
@@ -33,17 +35,17 @@
                 </local:GradientColorStack>
                 <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="13,13,13,0">
                     <yummy:PancakeView IsVisible="{Binding IsSearchBoxVisible}" CornerRadius="10" Padding="3,0,3,0" 
-                                       BackgroundColor="{x:Static local:Constant.WhiteTextColor}" 
+                                       BackgroundColor="#fff" 
                                        HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" Padding="0">
-                            <Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit"
+                            <Image Source="search.png" VerticalOptions="Center" Aspect="AspectFit"
                                    HorizontalOptions="Start" />
                             <local:ExtendedEntry FontFace="PoppinsMedium" Placeholder="Search Friends"
                                                 Text="{Binding SearchText}"
-                                                 PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}"
-                                                 TextColor="{x:Static local:Constant.SearchFriendTextColor}" 
+                                                 PlaceholderColor="#28324e"
+                                                 TextColor="#28324e" 
                                                  Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
-                            <Image Source="{x:Static local:Constant.SearchCloseIcon}" IsVisible="{Binding IsSearchCloseVisible}"
+                            <Image Source="search_close.png" IsVisible="{Binding IsSearchCloseVisible}"
                                    VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SearchCrossCommand}" NumberOfTapsRequired="1" />
@@ -51,15 +53,16 @@
                             </Image>
                         </StackLayout>
                     </yummy:PancakeView>
-                    <local:ExtendedListView ItemsSource="{Binding ContactList}" VerticalScrollBarVisibility="Never" HasUnevenRows="True" SeparatorVisibility="None"
-                                            BackgroundColor="#f8f8f8" LoadMoreCommand="{Binding LoadMoreContacts}" VerticalOptions="FillAndExpand" Scrolled="ExtendedListView_Scrolled">
+                    <local:ExtendedListView ItemsSource="{Binding ContactList}" VerticalScrollBarVisibility="Never" HasUnevenRows="True" 
+                                            SeparatorVisibility="None" BackgroundColor="#f8f8f8" 
+                                            VerticalOptions="FillAndExpand" Scrolled="ExtendedListView_Scrolled">
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <ViewCell.View>
                                         <Grid ColumnDefinitions="Auto,*, Auto" RowDefinitions="Auto" BackgroundColor="White" Padding="10" Margin="10">
                                             <controls:CircleImage Grid.Column="0" HeightRequest="50" WidthRequest="50" 
-                                                              Source="{Binding profileImage}" VerticalOptions="CenterAndExpand" 
+                                                              Source="{Binding ProfileImage}" VerticalOptions="CenterAndExpand" 
                                                               BorderThickness="2" BorderColor="Transparent" Aspect="AspectFill"
                                                               HorizontalOptions="Start"/>
                                             <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
@@ -70,7 +73,11 @@
                                              TextColor="#303030"
                                              FontSize="15" />
                                             </StackLayout>
-                                            <Image Source="{Binding contactIcon}" Aspect="AspectFill"  HorizontalOptions="End" Grid.Column="2" VerticalOptions="CenterAndExpand"/>
+                                            <local:ExtendedButton Text="{Binding FriendType}" FontSize="10" Grid.Column="2" WidthRequest="94" HeightRequest="30"
+                                                                  FontFace="PoppinsMedium" HorizontalOptions="End" TextColor="#d576a5"
+                                                                  VerticalOptions="CenterAndExpand" BackgroundColor="#fff" BorderWidth="1" BorderColor="#d576a5"
+                                                                  CornerRadius="20" Command="{Binding  Source={x:Reference ContactPage},
+                                                                  Path=BindingContext.FriendTypeCommand}" CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </ViewCell.View>
                                 </ViewCell>

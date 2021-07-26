@@ -19,7 +19,7 @@ namespace Pulse.Pages.Friends
             InitializeComponent();
             friendsViewModel = ServiceContainer.Resolve<FriendsViewModel>();
             BindingContext = friendsViewModel;
-            friendsViewModel.GetContacts(0);
+            friendsViewModel.GetAllMatchedContacts();
         }
 
         private async void Cross_Clicked(object sender, EventArgs e)

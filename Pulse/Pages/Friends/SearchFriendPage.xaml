@@ -53,7 +53,13 @@
 													<local:ExtendedLabel Text="{Binding friendMutual}" LineBreakMode="TailTruncation" FontFace="PoppinsLight" FontSize="11" Margin="0,0,0,0" TextColor="{x:Static local:Constant.VeryLightGrayColor}" HorizontalOptions="FillAndExpand">
 													</local:ExtendedLabel>
 												</StackLayout>
-												<local:ExtendedButton friendType="AddFriend" ClassId="{Binding friendId}"  FontSize="10" WidthRequest="94" IsVisible="{Binding IsAddFriendButtonVisible}" Clicked="Friend_Button_Clicked"  HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontFace="PoppinsMedium" Text="{x:Static local:Constant.AddFriendText}" BackgroundColor="{x:Static local:Constant.PinkButtonColor}" TextColor="{x:Static local:Constant.WhiteTextColor}">
+												<local:ExtendedButton friendType="AddFriend" ClassId="{Binding friendId}"  FontSize="10" 
+                                                                      WidthRequest="94" IsVisible="{Binding IsAddFriendButtonVisible}" 
+                                                                      Clicked="Friend_Button_Clicked"  HorizontalOptions="EndAndExpand" 
+                                                                      VerticalOptions="Center" FontFace="PoppinsMedium"
+                                                                      Text="{x:Static local:Constant.AddFriendText}" 
+                                                                      BackgroundColor="{x:Static local:Constant.PinkButtonColor}" 
+                                                                      TextColor="{x:Static local:Constant.WhiteTextColor}">
 													<local:ExtendedButton.HeightRequest>
 														<OnPlatform x:TypeArguments="x:Double" iOS="27" Android="29" />
 													</local:ExtendedButton.HeightRequest>

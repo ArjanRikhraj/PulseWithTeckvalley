@@ -42,7 +42,7 @@ namespace Pulse.ViewModels
                     model.profileImage = Constant.UserDefaultSquareImage;
                     model.name = item.DisplayName;
                     model.contactNumber = item.Phones[0].ToString();
-                    model.contactIcon = Constant.ShareIcon;
+                    model.friendType = Constant.ShareIcon;
                     contactList.Add(model);
                 }
                 ContactList = contactList;

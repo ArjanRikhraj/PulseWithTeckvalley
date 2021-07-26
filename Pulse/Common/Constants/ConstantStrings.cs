@@ -14,8 +14,8 @@ namespace Pulse
        // public const string BaseServiceUrlLive = "https://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
-        public const string BaseServiceUrl = BaseServiceUrlLive;
-        public const string TokenServiceUrl = BaseServiceUrlLive + "/o/token/";
+        public const string BaseServiceUrl = BaseServiceUrl_local;
+        public const string TokenServiceUrl = BaseServiceUrl_local + "/o/token/";
         public const string SignUpUrl = "/api/accounts/signup/";
         public const string SocialSignUpUrl = "/api/accounts/sociallogin/";
         public const string SignInUrl = "/api/accounts/signin/";
@@ -127,6 +127,7 @@ namespace Pulse
         public const string LatLongMapEventsUrl = "/api/event/lat_long_base/?page={0}&lat={1}&long={2}&datetime={3}&filter='{4}'";
         public const string PostUserLocationUrl = "/api/accounts/user/location/";
         public const string GetAllUsersUrl = "/api/accounts/allusers/?longitude={0}&latitude={1}";
+        public const string GetAllPulseUserUrl = "/api/accounts/alluserslist/";
         public const string GetUserCreditCardDetailsUrl = "/api/accounts/carddetails/";
         #endregion
 

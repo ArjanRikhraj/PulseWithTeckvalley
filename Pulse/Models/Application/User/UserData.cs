@@ -3,6 +3,7 @@ namespace Pulse
 {
 	public class UserData
 	{
+		public long id { get; set; }
 		public string username { get; set; }
 		public DateTime dob { get; set; }
 		public string password { get; set; }
@@ -22,6 +23,7 @@ namespace Pulse
 		public string newpassword { get; set; }
 		public double latitude { get; set; }
 		public double longitude { get; set; }
-	}
+		public string request_type { get; set; }
 
+	}
 }

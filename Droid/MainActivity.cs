@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
 using MediaManager;
+using Plugin.Messaging;
 
 namespace Pulse.Droid
 {
