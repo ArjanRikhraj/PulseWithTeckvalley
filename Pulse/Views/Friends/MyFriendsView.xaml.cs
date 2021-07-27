@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Plugin.Connectivity;
 using Pulse.Pages.Friends;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 
@@ -29,8 +30,6 @@ namespace Pulse
 			friendsViewModel.pageNoFriend = 1;
 			friendsViewModel.totalPagesMyFriends = 1;
 			friendsViewModel.GetMyFriendsList();
-			friendsViewModel.GetAllUser();
-			friendsViewModel.GetAllContacts();
 		}
 		void SetUi()
 		{
@@ -320,8 +319,14 @@ namespace Pulse
 				{
 					_tapCount = 1;
 					friendsViewModel.IsLoading=true;
+					var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+					if (status != PermissionStatus.Granted)
+                    {
+						await Permissions.RequestAsync<Permissions.ContactsRead>();
+						return;
+					}
 					await Navigation.PushModalAsync(new ContactsPage());
-					friendsViewModel.IsLoading = false;
+					//friendsViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
 			}

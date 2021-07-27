@@ -114,6 +114,7 @@ namespace Pulse.Models.Application.Events
     public partial class ReportStoryRequest
     {
         public long story_id { get; set; }
+        public long media_id { get; set; }
         public string description { get; set; }
         public String reason { get; set; }
     }

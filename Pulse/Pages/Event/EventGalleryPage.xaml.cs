@@ -129,6 +129,7 @@ namespace Pulse
 			{
                 tempMediaList.Add(new EventGallery
                 {
+					MediaId= item.id,
                     ImageWidth = App.ScreenWidth,
                     ImageHeight = App.ScreenHeight / 1.2,
                     FileName = item.file_type == 1 ? PageHelper.GetEventTranscodedVideo(PageHelper.GetEventTranscodedVideo(item.file_name)) : PageHelper.GetEventImage(item.file_name),

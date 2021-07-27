@@ -10,12 +10,12 @@ namespace Pulse
         public const string BaseServiceUrl_local = "http://10.0.2.2:8000";
         public const string BaseServiceUrl_testing = "http://pulseph2-qc.netsol.in";
         public const string BaseServiceUrl_staging = "http://pli-pulseph2.agilecollab.com";
-        public const string BaseServiceUrlLive = "https://www.pulseapp.ca";
+        public const string BaseServiceUrlLive = "https://pulseapp.ca";
        // public const string BaseServiceUrlLive = "https://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";
-        public const string BaseServiceUrl = BaseServiceUrl_local;
-        public const string TokenServiceUrl = BaseServiceUrl_local + "/o/token/";
+        public const string BaseServiceUrl = BaseServiceUrlLive;
+        public const string TokenServiceUrl = BaseServiceUrlLive + "/o/token/";
         public const string SignUpUrl = "/api/accounts/signup/";
         public const string SocialSignUpUrl = "/api/accounts/sociallogin/";
         public const string SignInUrl = "/api/accounts/signin/";
@@ -95,7 +95,8 @@ namespace Pulse
         public const string ReportEventStories = "/api/event/reportstory/";
         public const string DeleteEventStories = "/api/event/deletestory/";
         public const string ReportUser = "/api/accounts/userreport/";
-        public const string ReportMedia = "/api/accounts/reporteventmedia/";
+        public const string ReportMedia = "/api/event/reporteventmedia/";
+        public const string DeleteEventMedia = "/api/event/deleteeventmedia/";
         public const string UploadEventCoverImage = "/api/event/addeventcoverphoto/";
         public const string ShareEventUrl = "/api/event/share/";
         public const string MediaDeleteUrl = "/api/event/mediadelete/";

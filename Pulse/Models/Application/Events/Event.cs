@@ -24,6 +24,7 @@ namespace Pulse
     {
         public int event_id { get; set; }
         public string reason_to_spam { get; set; }
+        public string description { get; set; }
     }
     public class EventCommentReport
     {

@@ -82,4 +82,10 @@ namespace Pulse
 		public string reason { get; set; }
 		public string description { get; set; }
 	}
+	public partial class ReportEvent
+	{
+		public long event_id { get; set; }
+		public string reason_to_spam { get; set; }
+		public string description { get; set; }
+	}
 }

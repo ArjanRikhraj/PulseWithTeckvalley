@@ -269,18 +269,6 @@
                         </StackLayout>
                         <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" >
                         </BoxView>
-                        <StackLayout x:Name="stackRpt" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
-                                <Image Source="{x:Static local:Constant.ReportImage}" Aspect="AspectFit" />
-                                <local:ExtendedLabel Text="{x:Static local:Constant.ReportMediaText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
-                                </local:ExtendedLabel>
-                            </StackLayout>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Report_Media_Clicked" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                        <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" >
-                        </BoxView>
                         <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal" IsVisible="{Binding IsEditIconOnDetailVisible}">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
                                 <Image Source="{x:Static local:Constant.EditIcon}" Aspect="AspectFit" />
@@ -458,16 +446,17 @@
                 </Frame>
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="OverLayTapped" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
-            <controls1:CustomFrame x:Name="reportPopup" Margin="0,80,0,0" VerticalOptions="FillAndExpand" 
+            <controls1:CustomFrame x:Name="reportPopup" IsVisible="{Binding IsReportPopupVisible}" Margin="0,100,0,0" VerticalOptions="FillAndExpand" 
                                    Padding="0,10,0,0" CornerRadius="20,20,0,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
-                        <local:ExtendedButton Image="cross_thumbnails.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
-                                            Command="{Binding CloseReportPopupCommand}"/>
+                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" 
+                                HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="20,0,0,0"/>
+                        <local:ExtendedButton Image="cross_thumbnails.png" WidthRequest="50" Command="{Binding CloseReportPopupCommand}"
+                                             BackgroundColor="Transparent" VerticalOptions="Center"/>
                     </StackLayout>
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
-                    <Label Text="Why are you reporting this user?" TextColor="Black" FontAttributes="Bold" FontSize="Small" Margin="10,0,10,0"/>
+                    <Label Text="Why are you reporting this event?" TextColor="Black" FontAttributes="Bold" FontSize="Small" Margin="10,0,10,0"/>
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
                     <local:ExtendedListView ItemsSource="{Binding ReportCommentList}" SelectedItem="{Binding SelectedReason}" SelectionMode="Single" SeparatorVisibility="Default" SeparatorColor="Gray">
                         <local:ExtendedListView.ItemTemplate>

@@ -15,7 +15,7 @@
                         <local:ExtendedButton WidthRequest="50" x:Name="btnBack" Image="{x:Static local:Constant.BackWhiteImage}" 
                                           Clicked="BackIcon_Tapped" BackgroundColor="Transparent" HorizontalOptions="StartAndExpand"
                                           VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
-                        <local:ExtendedButton x:Name="btnEdit" Grid.Column="2" Text="Report" TextColor="White" FontFace="PoppinsSemiBold"
+                        <local:ExtendedButton x:Name="btnEdit" Grid.Column="2" Text="Report" HeightRequest="30" TextColor="White" FontFace="PoppinsSemiBold"
                                               Clicked="Report_Clicked" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand" 
                                               VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" FontSize="Micro"/>
                     </StackLayout>
@@ -296,12 +296,13 @@
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="Cancel_Clicked" TextColor="{x:Static local:Constant.GrayTextColor}" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
             <controls1:CustomFrame x:Name="reportPopup" Margin="0,80,0,0" IsVisible="{Binding IsReportPopupVisible}" VerticalOptions="FillAndExpand" 
-                                   Padding="0,10,0,0" CornerRadius="20,20,0,0">
+                                   Padding="0,0,0,0" CornerRadius="20,20,0,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
-                        <local:ExtendedButton Image="cross_thumbnails.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"
-                                            Command="{Binding CloseReportPopupCommand}"/>
+                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" 
+                                HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="20,0,0,0"/>
+                        <local:ExtendedButton Image="cross_thumbnails.png" WidthRequest="50" 
+                                            Command="{Binding CloseReportPopupCommand}" BackgroundColor="Transparent" VerticalOptions="Center"/>
                     </StackLayout>
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
                     <Label Text="Why are you reporting this user?" TextColor="Black" FontAttributes="Bold" FontSize="Small" Margin="10,0,10,0"/>

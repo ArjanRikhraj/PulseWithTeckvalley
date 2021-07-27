@@ -624,9 +624,10 @@ namespace Pulse
                 if (_tapCount < 1)
                 {
                     _tapCount++;
+					eventViewModel.IsReportPopupVisible = true;
                     stackPopUp.IsVisible = false;
                     grdOverlayDialog.IsVisible = false;
-                    await DisplayActionSheet();
+                    //await DisplayActionSheet();
                     _tapCount = 0;
                 }
             }

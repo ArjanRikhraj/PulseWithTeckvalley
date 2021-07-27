@@ -11,6 +11,7 @@ namespace Pulse
     {
         readonly EventViewModel eventViewModel;
         int _tapCount;
+        int mediaId;
         private List<string> reportCommentList;
         public List<string> ReportCommentList
         {
@@ -154,24 +155,22 @@ namespace Pulse
         }
         private void btnEdit_Clicked(object sender, EventArgs e)
         {
-            var id = (EventGallery)sender;
-            reportPopup.IsVisible = true;
+            var selected = (ExtendedButton)sender;
+             mediaId = int.Parse(selected.ClassId);
+            stackPopUp.IsVisible = true;
         }
-        private async void OnDeleteMediaCommand(object sender)
+        private async void OnDeleteMediaCommand()
         {
             try
             {
-                var currentObject = (Story)sender;
-                if (currentObject != null)
+                ReportEventMedia request = new ReportEventMedia();
+                request.media_id = mediaId;
+                var response = await mainService.Put<ResultWrapperSingle<Stories>>(Constant.DeleteEventMedia, request);
+                if (response != null && response.status == Constant.Status200 && response.response != null)
                 {
-                    ReportStoryRequest request = new ReportStoryRequest();
-                    request.story_id = currentObject.id;
-                    var response = await mainService.Put<ResultWrapperSingle<Stories>>(Constant.DeleteEventStories, request);
-                    if (response != null && response.status == Constant.Status200 && response.response != null)
-                    {
-                        ShowToast(Constant.AlertTitle, "Successfully Deleted");
-                        currentObject.IsMenuOptionVisible = false;
-                    }
+                    ShowToast(Constant.AlertTitle, "Successfully Deleted");
+                    await eventViewModel.Navigation.PopModalAsync();
+                    stackPopUp.IsVisible = false;
                 }
             }
             catch (Exception ex)
@@ -183,19 +182,19 @@ namespace Pulse
         {
             try
             {
-               
-                var selectedItem = (string)sender;
+                var selectedItem = e.Item as string;
                 if (selectedItem != null)
                 {
-                    ReportStoryRequest request = new ReportStoryRequest();
-                    //request.story_id = StoryDetails.id;
+                    ReportEventMedia request = new ReportEventMedia();
+                    request.media_id = mediaId;
                     request.reason = selectedItem;
                     request.description = descEditor.Text;
-                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventStories, request);
+                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportMedia, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
                         ShowToast(Constant.AlertTitle, "Successfully Reported");
                         reportPopup.IsVisible = false;
+                        stackPopUp.IsVisible = false;
                     }
                 }
             }
@@ -223,6 +222,26 @@ namespace Pulse
                 };
                 var result = await notificator.Notify(options);
             }
+        }
+
+        private void Report_Button_Clicked(object sender, EventArgs e)
+        {
+            reportPopup.IsVisible = true;
+        }
+
+        private void DeleteTapped(object sender, EventArgs e)
+        {
+            OnDeleteMediaCommand();
+        }
+
+        private void Cancel_Clicked(object sender, EventArgs e)
+        {
+            stackPopUp.IsVisible = false;
+        }
+
+        private void ExtendedButton_Clicked(object sender, EventArgs e)
+        {
+            reportPopup.IsVisible = false;
         }
     }
 }

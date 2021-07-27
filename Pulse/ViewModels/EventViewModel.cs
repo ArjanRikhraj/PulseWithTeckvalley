@@ -181,6 +181,7 @@ namespace Pulse
         public ICommand PostCommentClick { get; private set; }
         public ICommand PaymentClick { get; private set; }
         public ICommand NoThanksTapped { get; private set; }
+        public ICommand CloseReportPopupCommand { get; private set; }
         public ObservableCollection<Friend> tempFriendList;
         public List<Attendee> EventAttendeeList;
         public List<EventMedia> EventMediaList;
@@ -1295,7 +1296,7 @@ namespace Pulse
             {
                 selectedReason = value;
                 OnPropertyChanged("SelectedReason");
-                ReportMedia(selectedReason);
+                ReportEvent(selectedReason);
             }
         }
         private string descriptionComment;
@@ -1359,11 +1360,14 @@ namespace Pulse
             tempLatlongBasedEventList = new ObservableCollection<MyEvents>();
             //PostCommentClick = new Command(PostComment);
             PaymentClick = new Command(MakePayment);
+            CloseReportPopupCommand = new Command(OnCloseReportPopupCommand);
             EventAttendeeList = new List<Attendee>();
             EventMediaList = new List<EventMedia>();
             NotificationList = new List<NotificationResponse>();
             GetAllReportComments();
         }
+
+       
         #endregion
         #region Methods
         private async void GetAllReportComments()
@@ -1383,20 +1387,20 @@ namespace Pulse
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-        private async void ReportMedia(string reason)
+        private async void ReportEvent(string reason)
         {
             try
             {
                 if (!string.IsNullOrEmpty(reason))
                 {
-                    ReportEventMedia request = new ReportEventMedia();
-                    //request.media_id = Convert.ToInt32(TappedFriendid);
-                    request.reason = reason;
+                    EventReport request = new EventReport();
+                    request.event_id = Convert.ToInt32(TappedEventId);
+                    request.reason_to_spam = reason;
                     request.description = DescriptionComment;
-                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportMedia, request);
+                    var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventUrl, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        ShowToast(Constant.AlertTitle, "Media Successfully Reported");
+                        ShowToast(Constant.AlertTitle, "Event Successfully Reported");
                         IsReportPopupVisible = false;
                     }
                 }
@@ -1405,6 +1409,10 @@ namespace Pulse
             {
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
+        }
+        private void OnCloseReportPopupCommand(object obj)
+        {
+            IsReportPopupVisible = false;
         }
         public async void GetUserPaymentCardDetails()
         {
@@ -3722,7 +3730,7 @@ namespace Pulse
                             else if(EventDates > 0 || EventDates == 0)
                                 CheckinButtonText = response.response.is_checkin ? Constant.CheckedInText : Constant.CheckInText;
                             IsCheckinButtonVisible = true;
-                            IsEndEventVisible = IsOwner ? true : false;
+                            IsEndEventVisible = response.response.is_owner;
                             IsJoinButtonVisible = IsCoverFreeAmountAvailable ? true : false;
                             EventPaidButtonText = response.response.is_paid ? Constant.ViewTicketText : Constant.JoinText;
                             if (isDetailShown)
@@ -3747,6 +3755,7 @@ namespace Pulse
             }
             catch (Exception e)
             {
+                IsLoading = false;
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }

@@ -19,7 +19,8 @@ namespace Pulse.Pages.Friends
             InitializeComponent();
             friendsViewModel = ServiceContainer.Resolve<FriendsViewModel>();
             BindingContext = friendsViewModel;
-            friendsViewModel.GetAllMatchedContacts();
+            friendsViewModel.GetAllUser();
+           // friendsViewModel.GetAllMatchedContacts();
         }
 
         private async void Cross_Clicked(object sender, EventArgs e)
@@ -30,6 +31,11 @@ namespace Pulse.Pages.Friends
         private void CrossIcon_Tapped(object sender, EventArgs e)
         {
             friendsViewModel.SearchText = string.Empty;
+            if (string.IsNullOrEmpty(friendsViewModel.SearchText))
+            {
+                friendsViewModel.loadContacts = friendsViewModel.LoadedContacts;
+                friendsViewModel.SetContacts();
+            }
         }
 
         private void ExtendedButton_Clicked(object sender, EventArgs e)

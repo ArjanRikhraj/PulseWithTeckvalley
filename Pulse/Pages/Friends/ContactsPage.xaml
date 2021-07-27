@@ -48,7 +48,7 @@
                             <Image Source="search_close.png" IsVisible="{Binding IsSearchCloseVisible}"
                                    VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SearchCrossCommand}" NumberOfTapsRequired="1" />
+                                    <TapGestureRecognizer Tapped="CrossIcon_Tapped" NumberOfTapsRequired="1" />
                                 </Image.GestureRecognizers>
                             </Image>
                         </StackLayout>
@@ -60,7 +60,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <ViewCell.View>
-                                        <Grid ColumnDefinitions="Auto,*, Auto" RowDefinitions="Auto" BackgroundColor="White" Padding="10" Margin="10">
+                                        <Grid ColumnDefinitions="Auto,*, Auto" RowDefinitions="Auto" BackgroundColor="White" Padding="10" Margin="5">
                                             <controls:CircleImage Grid.Column="0" HeightRequest="50" WidthRequest="50" 
                                                               Source="{Binding ProfileImage}" VerticalOptions="CenterAndExpand" 
                                                               BorderThickness="2" BorderColor="Transparent" Aspect="AspectFill"
@@ -93,7 +93,7 @@
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
                         <ActivityIndicator x:Name="loader" IsVisible="{Binding IsLoading}" Color="White" IsRunning="{Binding IsLoading}" 
                                            VerticalOptions="Center" HorizontalOptions="Center" />
-                        <Label x:Name="lblLoaderMessage" Text="Loading contacts..." TextColor="White" FontSize="12" VerticalOptions="Center"
+                        <Label x:Name="lblLoaderMessage" Text="Syncing contacts..." TextColor="White" FontSize="12" VerticalOptions="Center"
                                HorizontalOptions="Center">
                         </Label>
                     </StackLayout>
