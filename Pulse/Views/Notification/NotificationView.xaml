@@ -23,13 +23,16 @@
                                             <yummy:Border Color="{x:Static local:Constant.WhiteTextColor}" Thickness="1"/>
                                         </yummy:PancakeView.Border>
                                         <Grid VerticalOptions="FillAndExpand" ColumnSpacing="10" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" Padding="5">
-                                                <custom:CircleImage x:Name="imgUser" Grid.Column="0" Source="{Binding profile_image}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" BorderColor="LightGray" BorderThickness="2" VerticalOptions="CenterAndExpand"/>
+                                                <custom:CircleImage x:Name="imgUser" Grid.Column="0" Source="{Binding profile_image}"
+                                                                    WidthRequest="50" HeightRequest="50" Aspect="AspectFill" 
+                                                                    BorderColor="LightGray" BorderThickness="2" 
+                                                                    VerticalOptions="CenterAndExpand"/>
                                                 <StackLayout Spacing="5" Grid.Column="1" BackgroundColor="Transparent"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                                     <local:ExtendedLabel Text="{Binding title}" LineBreakMode="TailTruncation" FontFace="PoppinsSemiBold" FontSize="13"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">
                                                     </local:ExtendedLabel>
                                                     <local:ExtendedLabel Text="{Binding message}" LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="12"  TextColor="{x:Static local:Constant.GrayTextColor}" HorizontalOptions="Start">
                                                     </local:ExtendedLabel>
-                                                    <local:ExtendedLabel Text="{Binding date}"   LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" HorizontalOptions="Start">
+                                                    <local:ExtendedLabel Text="{Binding date}" LineBreakMode="WordWrap" FontFace="PoppinsRegular" FontSize="11" TextColor="{x:Static local:Constant.FilterLightGreyColor}" HorizontalOptions="Start">
                                                     </local:ExtendedLabel>
                                                 </StackLayout>
                                             </Grid>
