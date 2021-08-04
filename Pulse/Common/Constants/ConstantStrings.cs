@@ -249,7 +249,6 @@ namespace Pulse
         public const string BlockText = "Block";
         public const string UnBlockText = "Unblock";
         public const string ReportMessage = "Admin has been notified about the issue you reported and an early action will be taken by him";
-        public const string ReportDescriptionMessage = "\nPlease describe your issue in comment box it will be easy for us to understand";
 
         #region Social Login
         public const string FacebookText = "Facebook";
@@ -377,7 +376,6 @@ namespace Pulse
         public const string MobileRequired = "Please enter mobile number";
         public const string ConfimText = "Confirm";
         public const string DeleteText = "Delete";
-        public const string ReportText = "Report";
         public const string EndEventText = "End";
         public const string SaveStoryText = "Save Story";
         public const string DeleteStoryText = "Delete Story";

@@ -1,6 +1,5 @@
 ﻿using Pulse.Models.Application.Events;
 using Pulse.Pages.Event;
-using Pulse.Pages.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -100,21 +99,6 @@ namespace Pulse.ViewModels
                 OnPropertyChanged("IsReportPopupVisible");
             }
         }
-        bool isAddStoryVisible;
-        public bool IsAddStoryVisible
-        {
-            get
-            {
-                return this.isAddStoryVisible;
-            }
-
-            set
-            {
-                this.isAddStoryVisible = value;
-                OnPropertyChanged("IsAddStoryVisible");
-            }
-        }
-        
         bool isOverlayPopupVisible;
         public bool IsOverlayPopupVisible
         {
@@ -221,13 +205,13 @@ namespace Pulse.ViewModels
         private CancellationTokenSource cancellation;
         public EventStoryViewModel(int eventId)
         {
-            eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             this.EventId = eventId;
             CloseReportPopupCommand = new Command(CloseReportPopup);
             mainService = new MainServices();
             GetAllStories();
             GetAllReportComments();
             this.cancellation = new CancellationTokenSource();
+            eventViewModel = ServiceContainer.Resolve<EventViewModel>();
         }
 
         private void CloseReportPopup(object obj)
@@ -250,10 +234,9 @@ namespace Pulse.ViewModels
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
                         ShowToast(Constant.AlertTitle, "Story Successfully Saved");
-                        currentObject.IsMenuOptionVisible = false;
+                        currentObject.IsMenuOptionVisible = true;
                     }
                 }
-                IsAddStoryVisible = true;
             }
             catch (Exception ex)
             {
@@ -274,7 +257,6 @@ namespace Pulse.ViewModels
                         currentObject.IsMenuOptionVisible = false;
                         StoryDetails = currentObject;
                     }
-                    IsAddStoryVisible = true;
                 }
             }
             catch (Exception ex)
@@ -301,7 +283,6 @@ namespace Pulse.ViewModels
                         if (EventStories.Count == 0 || EventStories == null)
                             await Navigation.PopModalAsync();
                     }
-                    IsAddStoryVisible = true;
                 }
             }
             catch (Exception ex)
@@ -314,7 +295,7 @@ namespace Pulse.ViewModels
             try
             {
                 reportCommentList = new List<string>();
-                reportCommentList.Add("Bullying/Harassment");
+                reportCommentList.Add("Bullying or harassment");
                 reportCommentList.Add("False information");
                 reportCommentList.Add("Violence or dangerous organizations");
                 reportCommentList.Add("Scam or fraud");
@@ -333,11 +314,6 @@ namespace Pulse.ViewModels
             {
                 if (StoryDetails != null && !string.IsNullOrEmpty(reason))
                 {
-                    if (string.IsNullOrEmpty(DescriptionComment))
-                    {
-                        await App.Instance.Alert(Constant.ReportDescriptionMessage, Constant.AlertTitle, Constant.Ok);
-                        return;
-                    }
                     ReportStoryRequest request = new ReportStoryRequest();
                     request.story_id = StoryDetails.id;
                     request.reason = reason;
@@ -345,16 +321,14 @@ namespace Pulse.ViewModels
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventStories, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await Navigation.PushModalAsync(new ReportConfirmationPage("Story"));
+                        ShowToast(Constant.AlertTitle, "Successfully Reported");
                         IsReportPopupVisible = false;
                         IsOverlayPopupVisible = false;
                     }
                 }
-                reason = null;
             }
             catch (Exception ex)
             {
-                reason = null;
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
@@ -366,7 +340,6 @@ namespace Pulse.ViewModels
                 if (currentObject != null)
                 {
                     currentObject.IsMenuOptionVisible = false;
-                    IsAddStoryVisible = true;
                 }
             }
             catch (Exception ex)
@@ -381,7 +354,6 @@ namespace Pulse.ViewModels
                 var currentObject = (Story)sender;
                 if (currentObject != null)
                 {
-                    IsAddStoryVisible = false;
                     currentObject.IsMenuOptionVisible = true;
                     IsDeleteStoryVisible = (eventViewModel.IsOwner || eventViewModel.IsAdmin || currentObject.user_id == SessionManager.UserId) ? true : false;
                 }
@@ -395,7 +367,6 @@ namespace Pulse.ViewModels
         {
             try
             {
-                IsAddStoryVisible = eventViewModel.IsUserCheckedIn || eventViewModel.IsOwner ? true : false;
                 EventStoryRequest request = new EventStoryRequest();
                 request.event_id = EventId;
                 var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.GetEventStories, request);

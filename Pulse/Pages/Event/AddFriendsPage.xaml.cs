@@ -306,17 +306,10 @@ namespace Pulse.Pages.Event
         {
             try
             {
-				
-				if(!lblFirstFriendName.IsVisible)
-					lblFirstFriendName.IsVisible = true;
-                else
-                {
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.firstFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FirstFriendUserId.ToString()));
-				}
-				
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if(friends.firstFriendUserId!=0)
+				await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FirstFriendUserId.ToString()));
 			}
             catch (Exception ex)
             {
@@ -330,15 +323,11 @@ namespace Pulse.Pages.Event
         {
 			try
 			{
-				if (!lblSecondFriendName.IsVisible)
-					lblSecondFriendName.IsVisible = true;
-                else
-                {
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.secondFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.SecondFriendUserId.ToString()));
-				}
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				 if (friends.secondFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.SecondFriendUserId.ToString()));
+				
 			}
 			catch (Exception ex)
 			{
@@ -351,15 +340,11 @@ namespace Pulse.Pages.Event
         {
 			try
 			{
-				if (!lblThirdFriendName.IsVisible)
-					lblThirdFriendName.IsVisible = true;
-				else
-				{
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.thirdFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.ThirdFriendUserId.ToString()));
-				}
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.thirdFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.ThirdFriendUserId.ToString()));
+
 			}
 			catch (Exception ex)
 			{
@@ -372,15 +357,11 @@ namespace Pulse.Pages.Event
         {
 			try
 			{
-				if (!lblFourthFriendName.IsVisible)
-					lblFourthFriendName.IsVisible = true;
-				else
-				{
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.fourthFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FourthFriendUserId.ToString()));
-				}
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.fourthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FourthFriendUserId.ToString()));
+
 			}
 			catch (Exception ex)
 			{
@@ -393,15 +374,11 @@ namespace Pulse.Pages.Event
         {
 			try
 			{
-				if (!lblFifthFriendName.IsVisible)
-					lblFifthFriendName.IsVisible = true;
-				else
-				{
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.fifthFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FifthFriendUserId.ToString()));
-				}
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.fifthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.FifthFriendUserId.ToString()));
+
 			}
 			catch (Exception ex)
 			{
@@ -414,15 +391,11 @@ namespace Pulse.Pages.Event
         {
 			try
 			{
-				if (!lblSixthFriendName.IsVisible)
-					lblSixthFriendName.IsVisible = true;
-				else
-				{
-					var stack = (StackLayout)sender;
-					var friends = stack.BindingContext as AddFriendModel;
-					if (friends.sixthFriendUserId != 0)
-						await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.sixthFriendUserId.ToString()));
-				}
+				var stack = (StackLayout)sender;
+				var friends = stack.BindingContext as AddFriendModel;
+				if (friends.sixthFriendUserId != 0)
+					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", friends.sixthFriendUserId.ToString()));
+
 			}
 			catch (Exception ex)
 			{

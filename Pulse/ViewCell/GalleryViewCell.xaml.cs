@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Plugin.Connectivity;
 using Plugin.Toasts;
 using Pulse.Models.Application.Events;
-using Pulse.Pages.User;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -31,8 +30,7 @@ namespace Pulse
         {
             InitializeComponent();
              mainService = new MainServices();
-            eventViewModel = ServiceContainer.Resolve<EventViewModel>();
-            stackReport.IsVisible = eventViewModel.IsOwner || eventViewModel.IsAdmin ? true : false;
+            eventViewModel = ServiceContainer.Resolve<EventViewModel>();      
             //videoFile.UpdateStatus += VideoFile_UpdateStatus;
             loader.IsVisible = Device.RuntimePlatform == Device.iOS;
           }
@@ -142,7 +140,7 @@ namespace Pulse
             try
             {
                 reportCommentList = new List<string>();
-                reportCommentList.Add("Bullying/Harassment");
+                reportCommentList.Add("Bullying or harassment");
                 reportCommentList.Add("False information");
                 reportCommentList.Add("Violence or dangerous organizations");
                 reportCommentList.Add("Scam or fraud");
@@ -187,11 +185,6 @@ namespace Pulse
                 var selectedItem = e.Item as string;
                 if (selectedItem != null)
                 {
-                    if (string.IsNullOrEmpty(descEditor.Text))
-                    {
-                        await App.Instance.Alert(Constant.ReportDescriptionMessage, Constant.AlertTitle, Constant.Ok);
-                        return;
-                    }
                     ReportEventMedia request = new ReportEventMedia();
                     request.media_id = mediaId;
                     request.reason = selectedItem;
@@ -199,16 +192,14 @@ namespace Pulse
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportMedia, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await eventViewModel.Navigation.PushModalAsync(new ReportConfirmationPage("Media"));
+                        ShowToast(Constant.AlertTitle, "Successfully Reported");
                         reportPopup.IsVisible = false;
                         stackPopUp.IsVisible = false;
                     }
                 }
-                ReportListview.SelectedItem = null;
             }
             catch (Exception ex)
             {
-                ReportListview.SelectedItem = null;
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
@@ -251,7 +242,6 @@ namespace Pulse
         private void ExtendedButton_Clicked(object sender, EventArgs e)
         {
             reportPopup.IsVisible = false;
-            stackPopUp.IsVisible = false;
         }
     }
 }

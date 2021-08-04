@@ -699,7 +699,7 @@ namespace Pulse
 			try
 			{
 				reportCommentList = new List<string>();
-				reportCommentList.Add("Bullying/harassment");
+				reportCommentList.Add("Bullying or harassment");
 				reportCommentList.Add("False information");
 				reportCommentList.Add("Violence or dangerous organizations");
 				reportCommentList.Add("Scam or fraud");
@@ -715,14 +715,8 @@ namespace Pulse
 		{
 			try
 			{
-				
 				if (!string.IsNullOrEmpty(reason))
 				{
-					if (string.IsNullOrEmpty(DescriptionComment))
-					{
-						await App.Instance.Alert(Constant.ReportDescriptionMessage, Constant.AlertTitle, Constant.Ok);
-						return;
-					}
 					ReportUserRequest request = new ReportUserRequest();
 					request.report_user_id = Convert.ToInt32(TappedFriendid);
 					request.reason = reason;
@@ -730,16 +724,13 @@ namespace Pulse
 					var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportUser, request);
 					if (response != null && response.status == Constant.Status200 && response.response != null)
 					{
-						
+						ShowToast(Constant.AlertTitle, "User Successfully Reported");
 						IsReportPopupVisible = false;
-							await Navigation.PushModalAsync(new ReportConfirmationPage("User"));
 					}
-					reason = null;
 				}
 			}
 			catch (Exception ex)
 			{
-				reason = null;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
