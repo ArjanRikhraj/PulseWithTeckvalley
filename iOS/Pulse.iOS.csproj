@@ -30,9 +30,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
+    <CodesignProvision>dist_appStore</CodesignProvision>
+    <MtouchSdkVersion>12.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -40,14 +39,14 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
+    <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
+    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
     <MtouchFastDev>false</MtouchFastDev>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchUseLlvm>true</MtouchUseLlvm>
@@ -89,7 +88,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
+    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
     <MtouchExtraArgs>
     </MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
@@ -824,16 +823,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_Share.png" />
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon_report.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon_delete.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

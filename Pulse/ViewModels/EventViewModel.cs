@@ -1375,7 +1375,7 @@ namespace Pulse
             try
             {
                 reportCommentList = new List<string>();
-                reportCommentList.Add("Bullying/Harassment");
+                reportCommentList.Add("Bullying or harassment");
                 reportCommentList.Add("False information");
                 reportCommentList.Add("Violence or dangerous organizations");
                 reportCommentList.Add("Scam or fraud");
@@ -1393,11 +1393,6 @@ namespace Pulse
             {
                 if (!string.IsNullOrEmpty(reason))
                 {
-                    if (string.IsNullOrEmpty(DescriptionComment))
-                    {
-                        await App.Instance.Alert(Constant.ReportDescriptionMessage, Constant.AlertTitle, Constant.Ok);
-                        return;
-                    }
                     EventReport request = new EventReport();
                     request.event_id = Convert.ToInt32(TappedEventId);
                     request.reason_to_spam = reason;
@@ -1405,15 +1400,13 @@ namespace Pulse
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventUrl, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await Navigation.PushModalAsync(new ReportConfirmationPage("Event"));
+                        ShowToast(Constant.AlertTitle, "Event Successfully Reported");
                         IsReportPopupVisible = false;
                     }
                 }
-                reason = null;
             }
             catch (Exception ex)
             {
-                reason = null;
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
@@ -3605,7 +3598,7 @@ namespace Pulse
                             IsCoverAmount = response.response.is_free_time_event;
                             EventCoverAmount = string.Empty;
                             EventBottleAmount = string.Empty;
-                            IsOwner=  IsUploadCoverImageVisible = SessionManager.UserId == response.response.user ? true : false;
+                            IsUploadCoverImageVisible = SessionManager.UserId == response.response.user ? true : false;
                             IsUserCheckedIn = response.response.is_checkin;
                             IsBoostEvent = response.response.is_boosted_event;
                             IsNotAlreadyBoosted = !IsBoostEvent;
