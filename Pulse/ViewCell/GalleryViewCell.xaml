@@ -57,7 +57,7 @@
                                    Padding="0,10,0,0" CornerRadius="20,20,0,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" 
+                        <Label Text="Report" TextColor="Black" FontSize="Large" 
                                 HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="20,0,0,0"/>
                         <local:ExtendedButton Image="cross_thumbnails.png" WidthRequest="50" 
                                             Clicked="ExtendedButton_Clicked" BackgroundColor="Transparent" VerticalOptions="Center"/>
@@ -71,7 +71,7 @@
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" Padding="10">
+                                    <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="White">
                                         <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="#303030"/>
                                         <Image Source="arrow_right.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
@@ -79,17 +79,15 @@
                             </DataTemplate>
                         </local:ExtendedListView.ItemTemplate>
                         <local:ExtendedListView.Footer>
-                            <StackLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                                 <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
-                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="100" Padding="0" Margin="20,0,20,0" BackgroundColor="LightGray">
+                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0" BorderColor="LightGray">
                                     <local:ExtendedEditor x:Name="descEditor" MaxLength="200"/>
                                 </controls1:CustomFrame>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
                     </local:ExtendedListView>
-                    <StackLayout.GestureRecognizers>
-                        <SwipeGestureRecognizer Direction="Down" Command="{Binding CloseReportPopupCommand}"/>
-                    </StackLayout.GestureRecognizers>
                 </StackLayout>
             </controls1:CustomFrame>
             <StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
@@ -107,7 +105,7 @@
                         </StackLayout>
                         <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" >
                         </BoxView>
-                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEndEventVisible}">
+                        <StackLayout x:Name="stackReport" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEndEventVisible}">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
                                 <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
                                 <local:ExtendedLabel Text="{x:Static local:Constant.DeleteText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">

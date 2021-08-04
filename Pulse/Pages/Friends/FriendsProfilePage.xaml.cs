@@ -323,6 +323,8 @@ namespace Pulse
 			{
 				if (CrossConnectivity.Current.IsConnected)
 				{
+					stackPopUp.IsVisible = false;
+					grdOverlayDialog.IsVisible = false;
 					friendsViewModel.IsReportPopupVisible = true;
 				}
 				else
@@ -333,5 +335,5 @@ namespace Pulse
 				await App.Instance.Alert(Constant.UnableToSyncMessages, Constant.AlertTitle, Constant.Ok);
 			}
 		}
-	}
+    }
 }

@@ -21,7 +21,9 @@ namespace Pulse
 		public const string InActiveMenuTextColor = "#afafaf";
 		public const string LightPinkColor = "#eead92";
 		public const string DarkPinkColor = "#dc70b7";
-		public const string BoxViewColor = "#e6e6e6";
+		//public const string BoxViewColor = "#e6e6e6";
+		public const string BoxViewColor = "#D3D3D3";
+		
 		public const string LightBackGroungColor = "#f8f8f8";
 		public const string FilterLightGreyColor = "#7d7d7d";
 		public const string FrameBackgroundColor = "#f9f9f9";
