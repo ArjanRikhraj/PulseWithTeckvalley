@@ -22,9 +22,16 @@
                                                 <On Platform="iOS">40,40,0,0</On>
                                             </OnPlatform>
                                         </StackLayout.Margin>
-                                        <custom:CircleImage x:Name="imgUser" Source="{Binding profile_url}" Aspect="AspectFill" WidthRequest="60" HeightRequest="60" BorderColor="LightGray" BorderThickness="0.5"  VerticalOptions="StartAndExpand">
+                                        <custom:CircleImage x:Name="imgUser" Source="{Binding profile_url}" Aspect="AspectFill" WidthRequest="60" 
+                                                            HeightRequest="60" BorderColor="LightGray" BorderThickness="0.5"  
+                                                            VerticalOptions="StartAndExpand">
                                         </custom:CircleImage>
-                                        <local:ExtendedButton Image="{x:Static local:Constant.OptionsWhiteIcon}" Command="{Binding  Source={x:Reference StoriesPage}, Path=BindingContext.StoryMenuCommand}" CommandParameter="{Binding .}" BackgroundColor="Transparent" WidthRequest="40" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                                        <local:ExtendedButton Image="{x:Static local:Constant.OptionsWhiteIcon}" Margin="0,-10,0,0"
+                                                              Command="{Binding  Source={x:Reference StoriesPage}, 
+                                            Path=BindingContext.StoryMenuCommand}" CommandParameter="{Binding .}" 
+                                                              BackgroundColor="Transparent" WidthRequest="40" HeightRequest="30" 
+                                                              HorizontalOptions="EndAndExpand" VerticalOptions="Center" 
+                                                              BorderColor="Transparent" BorderRadius="0" />
                                     </StackLayout>
 
                                 </Grid>
@@ -107,9 +114,11 @@
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <StackLayout x:Name="stackAddStory" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,0,30" Padding="0" Spacing="0" Grid.Row="0">
+                <StackLayout IsVisible="{Binding IsAddStoryVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" 
+                             Margin="0,0,0,30" Padding="0" Spacing="0" Grid.Row="0">
                     <Image Source="add_pulse.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                    <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
+                    <local:ExtendedLabel Text="Add Story" TextColor="White" FontSize="Micro" VerticalOptions="CenterAndExpand" 
+                                         FontFace="PoppinsRegular" HorizontalOptions="CenterAndExpand"/>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
@@ -189,11 +198,12 @@
                 </Frame>
                 <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CameraCancel_Clicked" TextColor="Gray" BackgroundColor="White" FontSize="16" HeightRequest="50" Text="Cancel" BorderRadius="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
-            <controls1:CustomFrame x:Name="reportPopup" Margin="0,80,0,0" IsVisible="{Binding IsReportPopupVisible}" VerticalOptions="FillAndExpand" 
+            <controls1:CustomFrame x:Name="reportPopup" Margin="0,80,0,0" IsVisible="{Binding IsReportPopupVisible}" 
+                                   VerticalOptions="FillAndExpand" 
                                    Padding="0,10,0,0" CornerRadius="20,20,0,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Report" TextColor="Black" FontAttributes="Bold" FontSize="Large" 
+                        <Label Text="Report" TextColor="Black" FontSize="Large" 
                                 HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="20,0,0,0"/>
                         <local:ExtendedButton Image="cross_thumbnails.png" WidthRequest="50" 
                                             Command="{Binding CloseReportPopupCommand}" BackgroundColor="Transparent" VerticalOptions="Center"/>
@@ -201,11 +211,12 @@
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
                     <Label Text="Why are you reporting this post?" TextColor="Black" FontAttributes="Bold" FontSize="Small" Margin="10,0,10,0"/>
                     <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
-                    <local:ExtendedListView ItemsSource="{Binding ReportCommentList}" SelectedItem="{Binding SelectedReason}" SelectionMode="Single" SeparatorVisibility="Default" SeparatorColor="Gray">
+                    <local:ExtendedListView ItemsSource="{Binding ReportCommentList}" SelectedItem="{Binding SelectedReason}"
+                                            SelectionMode="Single" SeparatorVisibility="Default" SeparatorColor="Gray">
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" Padding="10">
+                                    <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="White">
                                         <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="#303030"/>
                                         <Image Source="arrow_right.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
@@ -213,10 +224,11 @@
                             </DataTemplate>
                         </local:ExtendedListView.ItemTemplate>
                         <local:ExtendedListView.Footer>
-                                <StackLayout>
-                                    <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
-                                    <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="100" Padding="0" Margin="20,0,20,0" BackgroundColor="LightGray">
-                                        <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                                <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
+                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0" BorderColor="LightGray">
+                                    <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
                                     </controls1:CustomFrame>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
