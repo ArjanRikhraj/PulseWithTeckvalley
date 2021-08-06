@@ -99,7 +99,7 @@
                             <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CheckInClicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{Binding CheckinButtonText}"
                                 TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsCheckinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
                             <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
-                            <Grid Margin="10,5,10,5" RowSpacing="-4" ColumnSpacing="7">
+                            <Grid Margin="10,5,10,0" RowSpacing="-4" ColumnSpacing="7">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -107,10 +107,16 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{x:Static local:Constant.TimeImage}" Grid.RowSpan="2" Grid.Column="0" />
-                                <local:ExtendedLabel x:Name="lblEventDate" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventDate}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
-                                <local:ExtendedLabel x:Name="lblEventTime" TextColor="{x:Static local:Constant.GrayTextColor}" Grid.Row="1" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventTime}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                <local:ExtendedLabel x:Name="lblEventDate" TextColor="{x:Static local:Constant.GrayTextColor}" 
+                                                     Grid.Row="0" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventDate}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                <local:ExtendedLabel x:Name="lblEventTime" TextColor="{x:Static local:Constant.GrayTextColor}" 
+                                                     Grid.Row="1" Grid.Column="1" FontFace="PoppinsRegular" Text="{Binding EventTime}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+                                <Button Grid.Column="2" HeightRequest="25" Grid.RowSpan="2" Text="Live" BorderColor="Gray" 
+                                        TextColor="Gray" IsVisible="{Binding EventIsLive}"
+                                        BorderWidth="1" CornerRadius="15" VerticalOptions="CenterAndExpand" BackgroundColor="White" HorizontalOptions="EndAndExpand"/>
                             </Grid>
                             <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
                             <StackLayout Orientation="Horizontal" Margin="10,5,10,5">
@@ -260,11 +266,15 @@
             </Grid>
             <StackLayout x:Name="stackPopUp" Grid.Row="0" Spacing="10" IsVisible="false" Margin="10,0,10,10" Padding="0" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
                 <Frame x:Name="farmePopUp" CornerRadius="10" BackgroundColor="White" Padding="0,10,0,10" HasShadow="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                 BackgroundColor="Transparent">
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                     Orientation="Horizontal">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
                                 <Image Source="{x:Static local:Constant.ReportImage}" Aspect="AspectFit" />
-                                <local:ExtendedLabel Text="{x:Static local:Constant.ReportEventText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
+                                <local:ExtendedLabel Text="{x:Static local:Constant.ReportEventText}" FontFace="PoppinsMedium"
+                                                     HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14"
+                                                     TextColor="{x:Static local:Constant.PinkTextColor}">
                                 </local:ExtendedLabel>
                             </StackLayout>
                             <StackLayout.GestureRecognizers>
@@ -287,7 +297,8 @@
                         <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" 
                                  IsVisible="{Binding IsEditIconOnDetailVisible}" HorizontalOptions="FillAndExpand">
                         </BoxView>
-                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal"   IsVisible="{Binding IsEndEventVisible}">
+                        <StackLayout Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                     Orientation="Horizontal" IsVisible="{Binding IsEndEventVisible}">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
                                 <Image Source="{x:Static local:Constant.DeleteIcon}" Aspect="AspectFit" />
                                 <local:ExtendedLabel Text="{x:Static local:Constant.EndEventText}" FontFace="PoppinsMedium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="14" TextColor="{x:Static local:Constant.PinkTextColor}">
@@ -298,7 +309,7 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                         <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" 
-                                 HorizontalOptions="FillAndExpand">
+                                 HorizontalOptions="FillAndExpand" IsVisible="{Binding IsEndEventVisible}">
                         </BoxView>
                         <StackLayout x:Name="stackShare" Padding="5,6,5,6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
                             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" VerticalOptions="Center">
@@ -307,7 +318,7 @@
                                 </local:ExtendedLabel>
                             </StackLayout>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Share_Button_Tapped" />
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Share_Button_Tapped"/>
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </StackLayout>
@@ -471,7 +482,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" Padding="10" 
-                                                 BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
+                                                 BackgroundColor="White">
                                         <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="#303030"/>
                                         <Image Source="arrow_right.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
@@ -479,13 +490,16 @@
                             </DataTemplate>
                         </local:ExtendedListView.ItemTemplate>
                         <local:ExtendedListView.Footer>
-                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="White">
                                 <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate"
                                        HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
-                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
-                                                       Margin="20,0,20,0" BorderColor="LightGray">
+                                <yummy:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0">
+                                    <yummy:PancakeView.Border>
+                                        <yummy:Border Color="LightGray" Thickness="1"/>
+                                    </yummy:PancakeView.Border>
                                     <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
-                                </controls1:CustomFrame>
+                                </yummy:PancakeView>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
                     </local:ExtendedListView>

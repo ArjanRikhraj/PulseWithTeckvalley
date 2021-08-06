@@ -84,6 +84,7 @@ namespace Pulse
         double listPlacesHeight;
         string eventLitScore;
         string coverFreeAmountText;
+        bool eventIsLive;
         bool isCoverFreeAmountAvailable;
         bool isUploadCoverImageVisible;
         bool isPartyTextVisible;
@@ -933,6 +934,18 @@ namespace Pulse
             {
                 listPlacesHeight = value;
                 OnPropertyChanged("ListPlacesHeight");
+            }
+        }
+        public bool EventIsLive
+        {
+            get
+            {
+                return eventIsLive;
+            }
+            set
+            {
+                eventIsLive = value;
+                OnPropertyChanged("EventIsLive");
             }
         }
         public ObservableCollection<SearchResultModel> Places
@@ -3732,10 +3745,16 @@ namespace Pulse
                             var EventDates = DateTime.Compare(DateTime.Now, startDateTime);
                             //for upcoming events
                             if (EventDates < 0)
+                            {
                                 CheckinButtonText = response.response.is_going ? Constant.JoinedGuestListText : Constant.JoinGuestListText;
+                                EventIsLive = false;
+                            }
                             //for live events
                             else if(EventDates > 0 || EventDates == 0)
+                            {
+                                EventIsLive = true;
                                 CheckinButtonText = response.response.is_checkin ? Constant.CheckedInText : Constant.CheckInText;
+                            }
                             IsCheckinButtonVisible = true;
                             IsEndEventVisible = response.response.is_owner;
                             IsJoinButtonVisible = IsCoverFreeAmountAvailable ? true : false;

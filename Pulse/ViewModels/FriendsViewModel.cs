@@ -482,6 +482,7 @@ namespace Pulse
 		{
 			try
 			{
+				IsLoading = true;
 				if (SessionManager.AccessToken != null)
 				{
 					var response = await mainService.Get<ResultWrapper<UserData>>(Constant.GetAllPulseUserUrl);
@@ -613,10 +614,11 @@ namespace Pulse
 					var smsMessenger = CrossMessaging.Current.SmsMessenger;
 					if (smsMessenger.CanSendSms)
 					{
+						string text = "Download Pulse! Discover, host and share nightlife events like never before";
 						if (Device.RuntimePlatform == Device.Android)
-							messageText = "Check it out \n https://play.google.com/store/apps/details?id=com.netsol.pulse";
+							messageText =text + " \n https://play.google.com/store/apps/details?id=com.netsol.pulse";
 						else if (Device.RuntimePlatform == Device.iOS)
-							messageText = "Check it out \n https://apps.apple.com/in/app/pulse-nightlife/id1370756129";
+							messageText = text + " \n https://apps.apple.com/in/app/pulse-nightlife/id1370756129";
 						smsMessenger.SendSms(currentObject.contactNumber, messageText);
 					}
 					else

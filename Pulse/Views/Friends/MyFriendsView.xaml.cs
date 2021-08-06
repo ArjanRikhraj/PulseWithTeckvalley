@@ -315,10 +315,6 @@ namespace Pulse
 		{
 			if (CrossConnectivity.Current.IsConnected)
 			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					friendsViewModel.IsLoading=true;
 					var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
 					if (status != PermissionStatus.Granted)
                     {
@@ -326,14 +322,10 @@ namespace Pulse
 						return;
 					}
 					await Navigation.PushModalAsync(new ContactsPage());
-					//friendsViewModel.IsLoading = false;
-					_tapCount = 0;
-				}
 			}
 			else
 			{
 				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
 			}
 		}
 		async void lstFriendTapped(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)

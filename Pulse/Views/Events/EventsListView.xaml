@@ -18,7 +18,7 @@
                             </yummy:PancakeView.Border>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="Start" />
-                                <local:ExtendedEntry x:Name="entryVenue" FontAttributes="Bold" FontFace="PoppinsRegular" BackgroundColor="Transparent"  Placeholder="Upcoming Events" FontSize="13" HorizontalOptions="Fill" TextChanged="Venue_TextChanged" PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}" TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
+                                <local:ExtendedEntry x:Name="entryVenue"  FontAttributes="Bold" FontFace="PoppinsRegular" BackgroundColor="Transparent"  Placeholder="Upcoming Events" FontSize="13" HorizontalOptions="Fill" TextChanged="Venue_TextChanged" PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}" TextColor="{x:Static local:Constant.AddEventEntriesColor}" />
                                 <Image x:Name="imageCross" Source="{x:Static local:Constant.SearchCloseIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End" IsVisible="False">
 									<Image.GestureRecognizers>
 										<TapGestureRecognizer Tapped="CrossIcon_Tapped" NumberOfTapsRequired="1" />

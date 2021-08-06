@@ -42,103 +42,103 @@
                         <Grid HorizontalOptions="CenterAndExpand" Padding="0">
                             <Image Source="iconAddFriendsCircle.png" HorizontalOptions="CenterAndExpand"/>
                             <Grid RowDefinitions="*,*,*,*,*,*,*,*" RowSpacing="25" Padding="10" HeightRequest="380" ColumnDefinitions="*,*,*">
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="1" Grid.Column="0"
-                                             HeightRequest="120" 
-                                             HorizontalOptions="StartAndExpand" IsVisible="{Binding FirstFriendIsVisible}"
-                                             WidthRequest="120">
-                                    <custom:CircleImage Source="{Binding FirstFriendImage}" Aspect="AspectFill" WidthRequest="70" 
-                                                        HeightRequest="70" 
-                                                        BorderColor="Transparent" 
-                                                        BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblFirstFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" 
+                                      RowSpacing="0" Grid.Row="1" Grid.Column="0" HeightRequest="120" WidthRequest="120" 
+                                             HorizontalOptions="StartAndExpand" IsVisible="{Binding FirstFriendIsVisible}">
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding FirstFriendImage}" HorizontalOptions="Center" Aspect="AspectFill" WidthRequest="70" 
+                                                        HeightRequest="70" BorderColor="Transparent" BorderThickness="2"/>
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblFirstFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" 
                                                        WidthRequest="70" HorizontalOptions="CenterAndExpand">
                                         <local:ExtendedLabel Text="{Binding FirstFriendName}" TextColor="White" FontFace="PoppinsRegular"
                                                              FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="1" Grid.Column="1"
-                                             HeightRequest="120"
-                                             HorizontalOptions="EndAndExpand" IsVisible="{Binding SecondFriendIsVisible}" WidthRequest="120">
-                                    <custom:CircleImage Source="{Binding SecondFriendImage}" Aspect="AspectFill" WidthRequest="70" 
-                                                        HeightRequest="70" BorderColor="Transparent" BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblSecondFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" Grid.Row="1" Grid.Column="1"
+                                             HeightRequest="120" IsVisible="{Binding SecondFriendIsVisible}"
+                                             HorizontalOptions="EndAndExpand" WidthRequest="120">
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding SecondFriendImage}" HorizontalOptions="Center"
+                                                        Aspect="AspectFill" WidthRequest="70" BorderThickness="2"
+                                                        HeightRequest="70" BorderColor="Transparent"/>
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblSecondFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" WidthRequest="70" HorizontalOptions="CenterAndExpand">
                                         <local:ExtendedLabel Text="{Binding SecondFriendName}" TextColor="White" FontFace="PoppinsRegular"
                                                              FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_4"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="3"
-                                             Grid.Column="2" HorizontalOptions="StartAndExpand" HeightRequest="100"
-                                             IsVisible="{Binding ThirdFriendIsVisible}" WidthRequest="100">
-                                    <custom:CircleImage Source="{Binding ThirdFriendImage}" Aspect="AspectFill" WidthRequest="70"
-                                                        HeightRequest="70" 
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" Grid.Row="3"
+                                             Grid.Column="2" HorizontalOptions="StartAndExpand" HeightRequest="120"
+                                             IsVisible="{Binding ThirdFriendIsVisible}" WidthRequest="120">
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding ThirdFriendImage}" Aspect="AspectFill" WidthRequest="70"
+                                                        HeightRequest="70" HorizontalOptions="Center"
                                                         BorderColor="Transparent" BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblThirdFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblThirdFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" WidthRequest="70" HorizontalOptions="CenterAndExpand">
-                                        <local:ExtendedLabel Text="{Binding ThirdFriendName}" TextColor="White" FontFace="PoppinsRegular" FontSize="Micro"
+                                        <local:ExtendedLabel Text="{Binding ThirdFriendName}" TextColor="White" 
+                                                             FontFace="PoppinsRegular" FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_5"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="4" HeightRequest="100" 
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" Grid.Row="4" HeightRequest="100" 
                                              Grid.Column="0" HorizontalOptions="EndAndExpand" WidthRequest="100"
                                              IsVisible="{Binding FourthFriendIsVisible}">
-                                    <custom:CircleImage Source="{Binding FourthFriendImage}" Aspect="AspectFill" WidthRequest="70"
-                                                        HeightRequest="70"
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding FourthFriendImage}" Aspect="AspectFill" WidthRequest="70"
+                                                        HeightRequest="70" HorizontalOptions="Center"
                                                         BorderColor="Transparent" BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblFourthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblFourthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" WidthRequest="70" HorizontalOptions="CenterAndExpand">
                                         <local:ExtendedLabel Text="{Binding FourthFriendName}" TextColor="White" FontFace="PoppinsRegular" FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_6"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="5" Grid.Column="2" 
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" Grid.Row="5" Grid.Column="2" 
                                              HeightRequest="100" 
                                              HorizontalOptions="StartAndExpand" WidthRequest="100" 
                                              IsVisible="{Binding FifthFriendIsVisible}">
-                                    <custom:CircleImage Source="{Binding FifthFriendImage}" Aspect="AspectFill" WidthRequest="70" 
-                                                        HeightRequest="70" 
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding FifthFriendImage}" Aspect="AspectFill" WidthRequest="70" 
+                                                        HeightRequest="70" HorizontalOptions="Center"
                                                         BorderColor="Transparent" BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblFifthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblFifthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" WidthRequest="70" HorizontalOptions="CenterAndExpand">
                                         <local:ExtendedLabel Text="{Binding FifthFriendName}" TextColor="White" FontFace="PoppinsRegular"
                                                              FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_7"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding FriendModel}" Spacing="0" Grid.Row="6" HeightRequest="100"
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                                <Grid RowDefinitions="Auto,Auto" BindingContext="{Binding FriendModel}" Grid.Row="6" HeightRequest="100"
                                              Grid.Column="0" HorizontalOptions="EndAndExpand" WidthRequest="100"
                                              IsVisible="{Binding SixthFriendIsVisible}">
-                                    <custom:CircleImage Source="{Binding SixthFriendImage}" Aspect="AspectFill"
-                                                        WidthRequest="70" HeightRequest="70" 
+                                    <custom:CircleImage Grid.Row="0" Source="{Binding SixthFriendImage}" Aspect="AspectFill"
+                                                        WidthRequest="70" HeightRequest="70" HorizontalOptions="Center"
                                                         BorderColor="Transparent" BorderThickness="2"/>
-                                    <yummy:PancakeView x:Name="lblSixthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
+                                    <yummy:PancakeView Grid.Row="1" x:Name="lblSixthFriendName" IsVisible="False" BackgroundColor="#E687BA" 
                                                        CornerRadius="10" Padding="7,0,7,0" WidthRequest="70" HorizontalOptions="CenterAndExpand">
                                         <local:ExtendedLabel Text="{Binding SixthFriendName}" TextColor="White" FontFace="PoppinsRegular"
                                                              FontSize="Micro"
                                                              LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"/>
                                     </yummy:PancakeView>
-                                    <StackLayout.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_8"/>
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding FriendsCount,StringFormat='{0:N} people around you'}" TextColor="#E687BA"

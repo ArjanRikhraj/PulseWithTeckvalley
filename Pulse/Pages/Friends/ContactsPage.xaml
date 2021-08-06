@@ -28,7 +28,7 @@
                         <local:ExtendedLabel Text="My Contacts" FontFace="PoppinsMedium" Grid.Column="1" VerticalOptions="Center"
                                              HorizontalOptions="CenterAndExpand" TextColor="#fff"
                                              FontSize="15"/>
-                        <local:ExtendedButton Grid.Column="2" Image="search_white.png"
+                        <local:ExtendedButton Grid.Column="2" Image="search_white.png" IsVisible="False"
                                               BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"
                                               BorderColor="Transparent" BorderRadius="0" Clicked="ExtendedButton_Clicked"/>
                     </Grid>
