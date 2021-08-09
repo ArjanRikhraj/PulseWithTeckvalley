@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Plugin.Connectivity;
+using Pulse.Helpers;
+using Pulse.Models.User;
+using Pulse.Pages.User;
 using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace Pulse
 {
-    public partial class SignUpPage : BaseContentPage
+    public partial class SignUpPage : BaseContentPage,INotifyPropertyChanged
     {
         #region properties
         readonly AuthenticationViewModel authenticationViewModel;
@@ -15,6 +23,7 @@ namespace Pulse
         #region Constructor
         public SignUpPage()
         {
+           
             InitializeComponent();
             authenticationViewModel = ServiceContainer.Resolve<AuthenticationViewModel>();
             BindingContext = authenticationViewModel;
@@ -24,6 +33,7 @@ namespace Pulse
         }
         #endregion
         #region Private Methods
+
 
         async void SignUpfacebook_Click(object sender, EventArgs e)
         {
@@ -111,22 +121,18 @@ namespace Pulse
                 _tapCount = 0;
             }
         }
-
-
-
         void Check_Uncheck_Tapped(object sender, System.EventArgs e)
-
         {
             termsCheck.IsVisible = !termsCheck.IsVisible;
             termsUncheck.IsVisible = !termsUncheck.IsVisible;
             authenticationViewModel.IsTermAndConditionAccepted = termsCheck.IsVisible;
         }
-		#endregion
-		#region Override Methods
+        #endregion
+        #region Override Methods
         protected async override void OnAppearing()
 		{
             base.OnAppearing();   
         }
-		#endregion
-	}
+        #endregion
+    }
 	}

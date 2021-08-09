@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:Pulse.Controls" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:local="clr-namespace:Pulse"
+             x:Class="Pulse.Pages.User.CountryCodePage">
+    <ContentPage.Content>
+        <StackLayout Spacing="8" Padding="10">
+            <StackLayout Orientation="Horizontal" 
+                         HorizontalOptions="FillAndExpand">
+                <local:ExtendedButton Text="Cancel"
+                        TextColor="Indigo" FontFace="PoppinsMedium"
+                        BackgroundColor="Transparent"
+                        Clicked="CloseBtn_Clicked"
+                        HorizontalOptions="Start" />
+                <local:ExtendedLabel Text="Select your country"
+                       FontSize="18" FontFace="PoppinsMedium"
+                       FontAttributes="Bold"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       HeightRequest="60"
+                       HorizontalOptions="CenterAndExpand" />
+                <local:ExtendedButton Text="Done" FontFace="PoppinsMedium"
+                        BackgroundColor="Transparent"
+                        TextColor="Indigo"
+                        Clicked="ConfirmBtn_Clicked"
+                        HorizontalOptions="End" />
+            </StackLayout>
+            <BoxView Style="{StaticResource SeparatorBoxView}"/>
+            <yummy:PancakeView Style="{StaticResource eventFrameStyle}">
+                <yummy:PancakeView.Border>
+                    <yummy:Border Color="LightGray" Thickness="1"/>
+                </yummy:PancakeView.Border>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="iconSearch.png"/>
+                    <local:BorderlessEntry x:Name="searchBar" FontFace="PoppinsRegular" MaxLength="50"
+                                           Placeholder="Search for country" 
+                                           Text="{Binding EventTitle}" TextChanged="SearchBar_OnTextChanged"/>
+                </StackLayout>
+            </yummy:PancakeView>
+            <Label Text="Selected"
+                   FontSize="14"
+                   Margin="0,0,0,10"/>
+            <controls:CountryControl x:Name="CurrentCountryControl" />
+            <BoxView Style="{StaticResource SeparatorBoxView}"/>
+            <Label Text="Countries"
+                   FontSize="14"/>
+            <ListView x:Name="CommonCountriesList" BackgroundColor="White"
+                      CachingStrategy="RetainElement"
+                      HasUnevenRows="True"
+                      SelectionMode="Single"
+                      SeparatorVisibility="None"
+                      ItemSelected="CommonCountriesList_OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <controls:CountryControl Country="{Binding .}"  Margin="0,10"/>
+                                <BoxView Style="{StaticResource SeparatorBoxView}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

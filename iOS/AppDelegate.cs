@@ -10,6 +10,7 @@ using UserNotifications;
 using Xamarin.Forms;
 using Pulse;
 using MediaManager;
+using FFImageLoading.Forms.Platform;
 
 namespace Pulse.iOS
 {
@@ -30,6 +31,7 @@ namespace Pulse.iOS
             DependencyService.Register<ToastNotification>(); // Register your dependency
             ToastNotification.Init();
             CarouselViewRenderer.Init();
+            CachedImageRenderer.Init();
             CrossMediaManager.Current.Init();
             CrossMedia.Current.Initialize();
             ImageCircleRenderer.Init();

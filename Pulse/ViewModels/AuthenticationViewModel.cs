@@ -1,11 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
+using Pulse.Helpers;
+using Pulse.Models.User;
+using Pulse.Pages.User;
 using Xamarin.Auth;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -14,6 +19,14 @@ namespace Pulse
 {
 	public class AuthenticationViewModel : BaseViewModel
 	{
+		private CountryModel _selectedCountry;
+		public ICommand ShowPopupCommand { get; }
+		public ICommand CountrySelectedCommand { get; }
+		public CountryModel SelectedCountry
+		{
+			get => _selectedCountry;
+			set => SetProperty(ref _selectedCountry, value);
+		}
 		#region Private variables
 		string id;
 		string facebookEmail;
@@ -218,10 +231,26 @@ namespace Pulse
 			ChangePassword_Click = new Command(ChangePassword);
 			mainService = new MainServices();
 			pulseViewModel = ServiceContainer.Resolve<PulseViewModel>();
+			SelectedCountry = CountryUtils.GetCountryModelByName("Canada");
+			ShowPopupCommand = new Command(async _ => await ExecuteShowPopupCommand());
+			CountrySelectedCommand = new Command(country => ExecuteCountrySelectedCommand(country as CountryModel));
 		}
 
 		#endregion
 		#region Methods
+		private Task ExecuteShowPopupCommand()
+		{
+			var popup = new CountryCodePage(SelectedCountry)
+			{
+				CountrySelectedCommand = CountrySelectedCommand
+			};
+			return Navigation.PushModalAsync(popup);
+		}
+
+		private void ExecuteCountrySelectedCommand(CountryModel country)
+		{
+			SelectedCountry = country;
+		}
 		public async Task<ResultCustom> GetFacebookProfile(Account account)
 		{
 			ResultCustom result = new ResultCustom();
@@ -1370,6 +1399,16 @@ namespace Pulse
 			{
 				return true;
 			}
+		}
+		protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
+		{
+			if (EqualityComparer<T>.Default.Equals(backingStore, value))
+				return false;
+
+			backingStore = value;
+			onChanged?.Invoke();
+			OnPropertyChanged(propertyName);
+			return true;
 		}
 	}
 }

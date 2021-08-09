@@ -13,6 +13,7 @@ using Android.Gms.Common.Apis;
 using Android.Gms.Location;
 using MediaManager;
 using Plugin.Messaging;
+using FFImageLoading.Forms.Platform;
 
 namespace Pulse.Droid
 {
@@ -82,6 +83,7 @@ namespace Pulse.Droid
 			App.ScreenWidth = Resources.Configuration.ScreenWidthDp;
 			CarouselViewRenderer.Init();
 			ImageCircleRenderer.Init();
+			CachedImageRenderer.Init(true);
 			CrossMediaManager.Current.Init(this);
 			Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
 			OpenSettings();
