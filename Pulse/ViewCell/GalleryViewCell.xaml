@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
           xmlns:local="clr-namespace:Pulse;assembly=Pulse"
-          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls1="clr-namespace:Pulse.Controls"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls1="clr-namespace:Pulse.Controls" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
           x:Class="Pulse.GalleryViewCell">
     <ViewCell.View>
         <Grid Margin="0" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
@@ -81,10 +81,13 @@
                         <local:ExtendedListView.Footer>
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                                 <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
-                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
-                                                       Margin="20,0,20,0" BorderColor="LightGray">
+                                <pancakeview:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0">
+                                    <pancakeview:PancakeView.Border>
+                                        <pancakeview:Border Color="LightGray" Thickness="1"/>
+                                    </pancakeview:PancakeView.Border>
                                     <local:ExtendedEditor x:Name="descEditor" MaxLength="200"/>
-                                </controls1:CustomFrame>
+                                    </pancakeview:PancakeView>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
                     </local:ExtendedListView>

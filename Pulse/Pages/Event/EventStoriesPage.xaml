@@ -226,10 +226,13 @@
                         <local:ExtendedListView.Footer>
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                                 <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
-                                <controls1:CustomFrame HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
-                                                       Margin="20,0,20,0" BorderColor="LightGray">
+                                <yummy:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0">
+                                    <yummy:PancakeView.Border>
+                                        <yummy:Border Color="LightGray" Thickness="1"/>
+                                    </yummy:PancakeView.Border>
                                     <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
-                                    </controls1:CustomFrame>
+                                </yummy:PancakeView>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
                     </local:ExtendedListView>

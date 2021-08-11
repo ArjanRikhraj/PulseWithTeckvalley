@@ -52,7 +52,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <StackLayout BackgroundColor="White">
                                 <controls:CountryControl Country="{Binding .}"  Margin="0,10"/>
                                 <BoxView Style="{StaticResource SeparatorBoxView}"/>
                             </StackLayout>

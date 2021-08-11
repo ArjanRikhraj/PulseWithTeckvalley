@@ -8,8 +8,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.Connectivity;
+using Plugin.Messaging;
 using Pulse.Models.Application.Events;
+using Pulse.Models.Friends;
 using Pulse.Pages.User;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -1339,11 +1342,54 @@ namespace Pulse
                 OnPropertyChanged("IsReportPopupVisible");
             }
         }
+        private ObservableCollection<ContactsModel> contactList { get; set; }
+        public ObservableCollection<ContactsModel> ContactList
+        {
+            get
+            {
+                return contactList;
+            }
+            set
+            {
+                contactList = value;
+                OnPropertyChanged("ContactList");
+            }
+        }
+        string searchText;
+        public string SearchText
+        {
+            get
+            {
+                return this.searchText;
+            }
+
+            set
+            {
+                this.searchText = value;
+                OnPropertyChanged("SearchText");
+                OnSearchCommand(searchText);
+            }
+        }
+        private ICommand friendTypeCommand { get; set; }
+        public ICommand FriendTypeCommand
+        {
+            get
+            {
+                return friendTypeCommand ?? (friendTypeCommand = new Command<ContactsModel>((currentObject) => OnFriendTypeCommand(currentObject)));
+            }
+        }
+        public List<ContactsModel> allContacts;
+        public List<ContactsModel> loadContacts;
+        List<ContactsModel> PulseUserList;
+        List<ContactsModel> MatchedContactList;
+        public List<ContactsModel> LoadedContacts;
+        List<ContactsModel> contacts;
         #region Constructor
         public EventViewModel()
         {
             mainService = new MainServices();
             UpdateUserLocation();
+            contactList = new ObservableCollection<ContactsModel>();
             tempFriendList = new ObservableCollection<Friend>();
             tempGuestList = new ObservableCollection<Friend>();
             SelectedFriendsList = new ObservableCollection<Friend>();
@@ -1377,12 +1423,206 @@ namespace Pulse
             EventAttendeeList = new List<Attendee>();
             EventMediaList = new List<EventMedia>();
             NotificationList = new List<NotificationResponse>();
+            contacts = new List<ContactsModel>();
             GetAllReportComments();
         }
-
-       
         #endregion
         #region Methods
+        public async void GetAllUser()
+        {
+            try
+            {
+                IsLoading = true;
+                if (SessionManager.AccessToken != null)
+                {
+                    var response = await mainService.Get<ResultWrapper<UserData>>(Constant.GetAllPulseUserUrl);
+                    if (response != null && response.status == Constant.Status200 && response.response != null && response.response.Count > 0)
+                    {
+                        PulseUserList = new List<ContactsModel>();
+                        foreach (var item in response.response)
+                        {
+                            ContactsModel model = new ContactsModel();
+                            model.userId = item.id;
+                            model.name = item.fullname;
+                            model.profileImage = item.profile_image;
+                            model.friendType = item.request_type;
+                            model.contactNumber = item.mobile;
+                            PulseUserList.Add(model);
+                        }
+                    }
+                    GetAllContacts();
+                }
+            }
+            catch (Exception ex)
+            {
+                IsLoading = false;
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        public async void GetAllContacts()
+        {
+            try
+            {
+                var status = await Permissions.CheckStatusAsync<Permissions.ContactsRead>();
+                if (status != PermissionStatus.Granted)
+                {
+                    await Permissions.RequestAsync<Permissions.ContactsRead>();
+                    return;
+                }
+                if (status == PermissionStatus.Granted)
+                {
+                    var result = await Contacts.GetAllAsync();
+                    allContacts = new List<ContactsModel>();
+                    foreach (var item in result.ToList())
+                    {
+                        ContactsModel model = new ContactsModel();
+                        model.profileImage = Constant.UserDefaultSquareImage;
+                        model.name = item.DisplayName;
+                        if (item.Phones != null && item.Phones.Count > 0)
+                            model.contactNumber = item.Phones[0].ToString();
+                        else
+                            model.contactNumber = "Contact not available";
+                        model.nonPulseUser = "Invite";
+                        allContacts.Add(model);
+                    }
+                    loadContacts = allContacts;
+                    GetAllMatchedContacts();
+                }
+                else
+                    await Permissions.RequestAsync<Permissions.ContactsRead>();
+            }
+            catch (Exception ex)
+            {
+                IsLoading = false;
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        public async void GetAllMatchedContacts()
+        {
+            try
+            {
+                if (PulseUserList.Count > 0 && allContacts.Count > 0)
+                {
+                    var userList = from first in PulseUserList
+                                   join second in allContacts
+                                   on first.contactNumber equals second.contactNumber
+                                   select first;
+                    if (userList.Count() > 0)
+                    {
+                        MatchedContactList = userList.ToList();
+                        MatchedContactList.AddRange(allContacts.Except(MatchedContactList));
+                        loadContacts = MatchedContactList;
+                    }
+                }
+                SetContacts();
+            }
+            catch (Exception ex)
+            {
+                IsLoading = false;
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        public async void SetContacts()
+        {
+            try
+            {
+                if (loadContacts.Count > 0)
+                {
+                    LoadedContacts = loadContacts;
+                    ContactList = new ObservableCollection<ContactsModel>();
+                    foreach (var item in loadContacts)
+                    {
+                        ContactsModel model = new ContactsModel();
+                        model.userId = item.userId;
+                        model.name = item.name;
+                        model.ProfileImage = !string.IsNullOrEmpty(item.profileImage) ? item.profileImage : Constant.UserDefaultSquareImage;
+                        model.FriendType = "Invite";
+                        model.contactNumber = item.contactNumber;
+                        ContactList.Add(model);
+                    }
+                }
+                IsLoading = false;
+            }
+            catch (Exception ex)
+            {
+                IsLoading = false;
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
+        private void OnSearchCommand(string searchText)
+        {
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                loadContacts = allContacts.Where(s => searchText.All(w => s.name.Contains(w))).ToList();
+                SetContacts();
+            }
+            else
+                loadContacts = LoadedContacts;
+        }
+        private async void OnFriendTypeCommand(ContactsModel currentObject)
+        {
+            try
+            {
+                if (currentObject.friendType == "Invite")
+                {
+                    string messageText = "";
+                    var smsMessenger = CrossMessaging.Current.SmsMessenger;
+                    if (smsMessenger.CanSendSms)
+                    {
+                        string text = "Download Pulse! Discover, host and share nightlife events like never before";
+                        if (Device.RuntimePlatform == Device.Android)
+                            messageText = text + " \n https://play.google.com/store/apps/details?id=com.netsol.pulse";
+                        else if (Device.RuntimePlatform == Device.iOS)
+                            messageText = text + " \n https://apps.apple.com/in/app/pulse-nightlife/id1370756129";
+                        smsMessenger.SendSms(currentObject.contactNumber, messageText);
+                        contacts.Add(currentObject);
+                    }
+                    else
+                        await App.Instance.Alert("Dynamic linking not supported in this device", Constant.AlertTitle, Constant.Ok);
+                }
+                else if (currentObject.friendType == "Add Friend")
+                {
+                    if (currentObject.userId > 0)
+                    {
+                        FriendRequest friend = new FriendRequest();
+                        friend.friend_id = Convert.ToInt32(currentObject.userId);
+                        var result = await mainService.Post<ResultWrapperSingle<AddFriendResponse>>(Constant.AddFriendUrl, friend);
+                        if (result != null && result.status == Constant.Status200)
+                        {
+                            GetAllUser();
+                        }
+                    }
+                }
+                else
+                {
+                    FriendRequest friend = new FriendRequest();
+                    friend.friend_request_status = currentObject.friendType == "Cancel Request" ? 2 : 1;
+                    friend.friend_id = SessionManager.UserId;
+                    friend.user_id = Convert.ToInt32(currentObject.userId);
+                    var result = await mainService.Put<ResultWrapperSingle<AddFriendResponse>>(Constant.RequestChangeUrl, friend);
+                    if (result != null && result.status == Constant.Status200)
+                    {
+                        if (friend.friend_request_status == 2)
+                            currentObject.FriendType = "Add Friend";
+                        else
+                        {
+                            var itemToRemove = loadContacts.SingleOrDefault(r => r.userId == currentObject.userId);
+                            loadContacts.Remove(itemToRemove);
+                        }
+                    }
+                    else
+                        await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+                }
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                await App.Instance.Alert("SMS API not supported in this device", Constant.AlertTitle, Constant.Ok);
+            }
+            catch (Exception ex)
+            {
+                await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+            }
+        }
         private async void GetAllReportComments()
         {
             try
@@ -2467,6 +2707,20 @@ namespace Pulse
             events.cover_photo = cover_Photo;
             List<Member> members = new List<Member>();
             List<Medium> medium = new List<Medium>();
+            List<InvitedContacts> contactsModels = new List<InvitedContacts>();
+            contactsModels.Clear();
+            if (contacts!=null && contacts.Count>0)
+            {
+                foreach (var i in contacts)
+                {
+                    InvitedContacts model = new InvitedContacts();
+                    model.name = i.name;
+                    model.mobile_no = i.contactNumber;
+                    contactsModels.Add(model);
+                }
+                
+            }
+            events.contacts = contactsModels;
             members.Clear();
             if (IsUpdateEvent)
             {
@@ -2478,7 +2732,6 @@ namespace Pulse
                         Member member = new Member();
                         member.user_id = i.friendId;
                         members.Add(member);
-
                     }
                 }
             }
@@ -2491,7 +2744,6 @@ namespace Pulse
                         Member member = new Member();
                         member.user_id = i.friendId;
                         members.Add(member);
-
                     }
                 }
             }
@@ -3574,7 +3826,6 @@ namespace Pulse
                 return false;
 
             }
-
         }
         public async Task FetchEventDetail(string id, bool isDetailShown)
         {

@@ -23,9 +23,6 @@
                         <local:ExtendedLabel Text="Add New Event" FontFace="PoppinsMedium" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
                     </Grid>
                 </local:GradientColorStack>
-
-               
-
                     <StackLayout Grid.Row="1" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="25,0,25,0">
                         <!--Screen1-->
                     <ScrollView x:Name="Screen1"  IsVisible="{Binding IsScreenFirstVisible}" VerticalScrollBarVisibility="Never">
@@ -76,9 +73,11 @@
                                     <yummy:PancakeView.Border>
                                         <yummy:Border Color="Gray" Thickness="1"/>
                                     </yummy:PancakeView.Border>
-                                    <StackLayout Style="{StaticResource eventEntryStack}" >
+                                    <StackLayout Style="{StaticResource eventEntryStack}">
                                         <Image Source="{x:Static local:Constant.DetailIcon}"/>
-                                    <local:ExtendedEditor Style="{StaticResource eventEntryStyle}" AutoSize="TextChanges" Placeholder="+ Description" Text="{Binding Description}" BackgroundColor="White"/>
+                                    <local:ExtendedEditor Style="{StaticResource eventEntryStyle}" AutoSize="TextChanges"
+                                                          Margin="0,0,5,0" Placeholder="+ Description" Text="{Binding Description}" 
+                                                          BackgroundColor="White"/>
                                     </StackLayout>
                                 </yummy:PancakeView>
                                 <!--DATE & Time Grid-->

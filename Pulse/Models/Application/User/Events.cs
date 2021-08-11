@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Pulse.Models.Friends;
+using System.Collections.Generic;
 
 namespace Pulse
 {
@@ -37,10 +38,15 @@ namespace Pulse
 		public bool is_public { get; set; }
 		public List<Member> members { get; set; }
 		public List<Medium> media { get; set; }
-        public MyTransaction transaction { get; set; }
+		public List<InvitedContacts> contacts { get; set; }
+		public MyTransaction transaction { get; set; }
 		public string cover_photo { get; set; }
 	}
-
+	public class InvitedContacts
+    {
+		public string name { get; set; }
+		public string mobile_no { get; set; }
+	}
 	public class EventResponse
 	{
 		public int id { get; set; }

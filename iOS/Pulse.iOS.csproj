@@ -60,13 +60,13 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
+    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>PulseDistribution</CodesignProvision>
+    <CodesignProvision>Pulse_Distribution</CodesignProvision>
     <OptimizePNGs>false</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
@@ -839,7 +839,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

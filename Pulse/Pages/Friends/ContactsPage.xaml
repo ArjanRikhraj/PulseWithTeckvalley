@@ -22,7 +22,7 @@
                             <ColumnDefinition Width="85*"/>
                             <ColumnDefinition Width="15*"/>
                         </Grid.ColumnDefinitions>
-                        <local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="cross_add_event.png" Clicked="Cross_Clicked" 
+                        <local:ExtendedButton x:Name="btnBack" Grid.Column="0" Image="cross_add_event.png" Clicked="Cross_Clicked"
                                               BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" 
                                               BorderColor="Transparent" BorderRadius="0"/>
                         <local:ExtendedLabel Text="My Contacts" FontFace="PoppinsMedium" Grid.Column="1" VerticalOptions="Center"
@@ -34,7 +34,7 @@
                     </Grid>
                 </local:GradientColorStack>
                 <StackLayout Grid.Row="1" BackgroundColor="#f8f8f8" Padding="13,13,13,0">
-                    <yummy:PancakeView IsVisible="{Binding IsSearchBoxVisible}" CornerRadius="10" Padding="3,0,3,0" 
+                    <yummy:PancakeView CornerRadius="10" Padding="3,0,3,0" 
                                        BackgroundColor="#fff" 
                                        HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" Padding="0">

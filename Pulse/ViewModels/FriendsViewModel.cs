@@ -354,8 +354,6 @@ namespace Pulse
 			}
 		}
 
-       
-
         private List<string> reportCommentList;
 		public List<string> ReportCommentList
 		{

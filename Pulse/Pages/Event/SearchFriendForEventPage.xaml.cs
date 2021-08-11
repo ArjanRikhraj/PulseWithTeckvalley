@@ -59,6 +59,11 @@ namespace Pulse
             eventViewModel.pageNoFriend = 1;
             eventViewModel.totalPagesFriends = 1;
             GetFriends();
+            eventViewModel.GetAllUser();
+            FriendsView.IsVisible = true;
+            FriendsBoxView.BackgroundColor = Color.FromHex(Constant.PinkButtonColor);
+            ContactsView.IsVisible = false;
+            ContactsBoxView.BackgroundColor = Color.FromHex(Constant.WhiteTextColor);
         }
         #endregion
         #region Methods
@@ -318,5 +323,34 @@ namespace Pulse
             }
         }
         #endregion
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            FriendsView.IsVisible = true;
+            FriendsBoxView.BackgroundColor =Color.FromHex(Constant.PinkButtonColor);
+            ContactsView.IsVisible = false;
+            ContactsBoxView.BackgroundColor = Color.FromHex(Constant.WhiteTextColor);
+        }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            FriendsView.IsVisible = false;
+            FriendsBoxView.BackgroundColor = Color.FromHex(Constant.WhiteTextColor);
+            ContactsView.IsVisible = true;
+            ContactsBoxView.BackgroundColor = Color.FromHex(Constant.PinkButtonColor);
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            entryContact.Text = string.Empty;
+        }
+
+        private void ExtendedEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(entryContact.Text))
+            {
+
+            }
+        }
     }
 }

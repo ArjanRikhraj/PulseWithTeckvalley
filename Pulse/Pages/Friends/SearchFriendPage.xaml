@@ -17,7 +17,7 @@
                                 <TapGestureRecognizer Tapped="Cancel_Tapped"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        <yummy:PancakeView x:Name="searchFrame" CornerRadius="10" Padding="3,0,3,0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="FillAndExpand">
+                        <yummy:PancakeView x:Name="searchFrame" CornerRadius="10" Padding="5" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" HorizontalOptions="FillAndExpand">
 							<StackLayout Orientation="Horizontal">
 								<Image Source="{x:Static local:Constant.SearchBlackIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="Start" />
 								<local:ExtendedEntry FontFace="PoppinsMedium" Placeholder="Search Friends" x:Name="entryUser" TextChanged="SearchEntry_TextChanged" PlaceholderColor="{x:Static local:Constant.SearchFriendTextColor}" TextColor="{x:Static local:Constant.SearchFriendTextColor}" Keyboard="Default" FontSize="14" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
