@@ -14,10 +14,10 @@
                                          HorizontalOptions="FillAndExpand" Text="{Binding Name}" 
                                          LabelText="{x:Static local:Constant.NameText}" />
 					<local:MyCustomEntry IsPasswordEyeImageVisible="false" x:Name="txtEmail" EntryMaxLength="256" Margin="0,10,0,0" KeyBoard="Email" EntryPlaceholder="{x:Static local:Constant.EmailText}" HorizontalOptions="FillAndExpand" Text="{Binding Email}" LabelText="{x:Static local:Constant.EmailText}" />
-                    <Grid RowDefinitions="*,1" RowSpacing="10">
+                    <Grid RowDefinitions="30,1" RowSpacing="10">
                         <Grid.Margin>
                             <OnPlatform x:TypeArguments="Thickness">
-                                <On Platform="iOS" Value="0,0,0,0" />
+                                <On Platform="iOS" Value="0,25,0,0" />
                                 <On Platform="Android" Value="8,45,0,0" />
                             </OnPlatform>
                         </Grid.Margin>
@@ -36,14 +36,17 @@
                                 </Label.GestureRecognizers>
                             </Label>
                             <local:BorderlessEntry FontFace="PoppinsRegular" PlaceholderColor="#4a4a4a" TextColor="#4a4a4a" FontSize="15"
-                                               Placeholder="Mobile" MaxLength="11" Keyboard="Numeric" 
+                                               Placeholder="Mobile" MaxLength="11" Keyboard="Numeric" HorizontalOptions="FillAndExpand"
                                                Text="{Binding Mobile}" x:Name="txtMobile" VerticalOptions="Center"/>
                         </StackLayout>
 
                         <BoxView HeightRequest=".5" BackgroundColor="{x:Static local:Constant.GrayBoxViewColor}"
-                                 Grid.ColumnSpan="2" Grid.Row="1"/>
+                                   Grid.Row="1"/>
                     </Grid>
-					<local:MyCustomEntry IsPasswordEyeImageVisible="true" Margin="0,10,0,0" EntryMaxLength="16" x:Name="txtPassword" IsPassword="true" KeyBoard="Default" EntryPlaceholder="{x:Static local:Constant.PasswordText}" Text="{Binding Password}" HorizontalOptions="FillAndExpand" LabelText="{x:Static local:Constant.PasswordText}" />
+					<local:MyCustomEntry IsPasswordEyeImageVisible="true" Margin="0,10,0,0" EntryMaxLength="16"
+                                         x:Name="txtPassword" IsPassword="true" KeyBoard="Default" 
+                                         EntryPlaceholder="{x:Static local:Constant.PasswordText}" Text="{Binding Password}" 
+                                         HorizontalOptions="FillAndExpand" LabelText="{x:Static local:Constant.PasswordText}" />
 					<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,10,0,0" VerticalOptions="Fill">
 						<StackLayout x:Name="stackCheckUncheckIcon" HorizontalOptions="Start" VerticalOptions="Start">
 							<Image Source="{x:Static local:Constant.CheckIcon}" Aspect="AspectFit" x:Name="termsCheck" IsVisible="false" />

@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
+    <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
@@ -30,7 +30,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
+    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
     <MtouchSdkVersion>
     </MtouchSdkVersion>
   </PropertyGroup>

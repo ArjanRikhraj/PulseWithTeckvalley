@@ -5,7 +5,7 @@
         <ResourceDictionary>
             <Style x:Key="eventFrameStyle" TargetType="yummy:PancakeView">
                 <Setter Property="Padding" Value="7,12,5,12" />
-                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="CornerRadius" Value="30" />
             </Style>
             <Style x:Key="eventEntryStyle" TargetType="local:BorderlessEntry">
                 <Setter Property="FontSize" Value="16" />
@@ -18,7 +18,7 @@
             </Style>
             <Style x:Key="eventEntryStack" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal" />
-                <Setter Property="Margin" Value="20,3,0,3" />
+                <Setter Property="Margin" Value="20,3,7,3" />
             </Style>
             <Style TargetType="BoxView"
                    x:Key="SeparatorBoxView">

@@ -2718,7 +2718,6 @@ namespace Pulse
                     model.mobile_no = i.contactNumber;
                     contactsModels.Add(model);
                 }
-                
             }
             events.contacts = contactsModels;
             members.Clear();

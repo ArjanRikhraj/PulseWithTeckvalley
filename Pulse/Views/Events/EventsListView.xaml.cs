@@ -50,6 +50,7 @@ namespace Pulse
 
         void SetUi()
         {
+            loader.Easing = Easing.CubicIn;
             var effect = Effect.Resolve($"NotchEffect.{nameof(NotchEffect)}");
             GradientColorStack gradientColorStack = new GradientColorStack()
             {

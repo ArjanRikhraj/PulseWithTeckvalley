@@ -431,7 +431,7 @@ namespace Pulse
         public const string ToText = "To DateTime";
         public const string TimeText = "Time";
         public const string GuestText = "Guests";
-        public const string AddGuestText = "+ Add Guests";
+        public const string AddGuestText = "+ Add Friends and Contacts";
         public const string PhotosText = "Cover photo & Event Media";
         public const string AddPhotosText = "+ Add Photos or Videos";
         public const string CreateEventText = "Create Event";

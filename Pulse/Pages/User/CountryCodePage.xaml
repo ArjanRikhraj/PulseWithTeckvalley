@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:Pulse.Controls" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:local="clr-namespace:Pulse"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:Pulse.Controls" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:local="clr-namespace:Pulse"
              x:Class="Pulse.Pages.User.CountryCodePage">
     <ContentPage.Content>
         <StackLayout Spacing="8" Padding="10">
-            <StackLayout Orientation="Horizontal" 
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,0" 
                          HorizontalOptions="FillAndExpand">
                 <local:ExtendedButton Text="Cancel"
                         TextColor="Indigo" FontFace="PoppinsMedium"

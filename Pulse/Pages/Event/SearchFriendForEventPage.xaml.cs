@@ -180,11 +180,8 @@ namespace Pulse
         {
             try
             {
-                
                 if (e.SelectedItem == null)
-                {
                     return;
-                }
                 else
                 {
                     var user = (Friend)e.SelectedItem;

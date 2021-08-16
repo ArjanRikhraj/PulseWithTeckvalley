@@ -34,7 +34,9 @@
                                     </yummy:PancakeView.Border>
                                     <StackLayout Style="{StaticResource eventEntryStack}">
                                         <Image Source="{x:Static local:Constant.EventTitleImage}" VerticalOptions="CenterAndExpand"/>
-                                        <local:BorderlessEntry Style="{StaticResource eventEntryStyle}" FontFace="PoppinsRegular" Placeholder="+ Event Title" x:Name="txtEventTitle" MaxLength="100" Text="{Binding EventTitle}"/>
+                                        <local:BorderlessEntry Style="{StaticResource eventEntryStyle}" FontFace="PoppinsRegular" 
+                                                               Placeholder="+ Event Title" x:Name="txtEventTitle" MaxLength="100" 
+                                                               Text="{Binding EventTitle}"/>
                                     </StackLayout>
                                 </yummy:PancakeView>
 
@@ -45,7 +47,10 @@
                                     </yummy:PancakeView.Border>
                                     <StackLayout Style="{StaticResource eventEntryStack}">
                                         <Image Source="{x:Static local:Constant.VenueImage}"/>
-                                        <local:BorderlessEntry x:Name="editorVenue" Placeholder="+ Venue" Style="{StaticResource eventEntryStyle}" ReturnType="Search" FontFace="PoppinsRegular" Text="{Binding EventVenue}" MaxLength="200" TextChanged="Venue_TextChanged" />
+                                        <local:BorderlessEntry x:Name="editorVenue" Placeholder="+ Venue" 
+                                                               Style="{StaticResource eventEntryStyle}" ReturnType="Search" 
+                                                               FontFace="PoppinsRegular" Text="{Binding EventVenue}" 
+                                                               MaxLength="200" TextChanged="Venue_TextChanged" />
                                         <ActivityIndicator IsVisible="{Binding AddressListLoading}" IsRunning="{Binding AddressListLoading}" Color="DarkGray" HeightRequest="25" WidthRequest="25"/>
                                         <Image x:Name="imageCross" Source="{x:Static local:Constant.SearchCloseIcon}" VerticalOptions="Center" Aspect="AspectFit" HorizontalOptions="End" IsVisible="False">
                                             <Image.GestureRecognizers>
@@ -69,15 +74,15 @@
                                     </local:ExtendedListView.ItemTemplate>
                                 </local:ExtendedListView>
                                 <!--EVENT DESCRIPTION-->
-                            <yummy:PancakeView CornerRadius="30" Padding="7,6,5,6">
+                            <yummy:PancakeView CornerRadius="30" Padding="7,9,5,9">
                                     <yummy:PancakeView.Border>
                                         <yummy:Border Color="Gray" Thickness="1"/>
                                     </yummy:PancakeView.Border>
-                                    <StackLayout Style="{StaticResource eventEntryStack}">
+                                    <StackLayout Orientation="Horizontal" Margin="20,3,7,3" Padding="0,0,5,0">
                                         <Image Source="{x:Static local:Constant.DetailIcon}"/>
-                                    <local:ExtendedEditor Style="{StaticResource eventEntryStyle}" AutoSize="TextChanges"
-                                                          Margin="0,0,5,0" Placeholder="+ Description" Text="{Binding Description}" 
-                                                          BackgroundColor="White"/>
+                                            <local:ExtendedEditor FontSize="18" PlaceholderColor="{x:Static local:Constant.ExtraDarkGrayColor}" AutoSize="TextChanges"
+                                                          Placeholder="+ Description" Text="{Binding Description}" Margin="10,0,10,0" HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="CenterAndExpand" Keyboard="Default" TextColor="#303030"/>
                                     </StackLayout>
                                 </yummy:PancakeView>
                                 <!--DATE & Time Grid-->

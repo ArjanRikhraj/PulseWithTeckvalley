@@ -21,15 +21,8 @@ namespace Pulse
 
 		public bool IsLoading
 		{
-			get
-			{
-				return isLoading;
-			}
-			set
-			{
-				isLoading = value;
-				this.OnPropertyChanged("IsLoading");
-			}
+			get { return isLoading; }
+			set { SetProperty(ref isLoading, value); }
 		}
 
 		public bool IsEnabled
@@ -57,14 +50,16 @@ namespace Pulse
 			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		protected void SetObservableProperty<T>(
+		protected bool SetProperty<T>(
 			ref T field,
 			T value,
-			[CallerMemberName] string propertyName = "")
+			[CallerMemberName] string propertyName = "",Action onChanged=null)
 		{
-			if (EqualityComparer<T>.Default.Equals(field, value)) return;
+			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
 			field = value;
+			onChanged?.Invoke();
 			OnPropertyChanged(propertyName);
+			return true;
 		}
 
 		#region INotifyPropertyChanged implementation
