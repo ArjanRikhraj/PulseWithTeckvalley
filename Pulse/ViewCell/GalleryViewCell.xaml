@@ -38,7 +38,14 @@
                         </Image>
                         <Image x:Name="imgPlay" Source="{x:Static local:Constant.VideoIcon}"  Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
                         </Image>
-                 <ActivityIndicator x:Name="loader" IsVisible="false" Color="White" IsRunning="true" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                        <controls1:CustomLoader 
+            x:Name="loader"
+            Source="icon.png"
+            RotationLenght="1000"
+           IsVisible="false"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+                        <!--<ActivityIndicator x:Name="loader" IsVisible="false" Color="White" IsRunning="true" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />-->
 
                       <!-- <Grid.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Handle_Tapped" />

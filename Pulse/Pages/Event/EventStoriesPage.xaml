@@ -165,7 +165,15 @@
             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
                 <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
-                        <ActivityIndicator x:Name="loader" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <controls1:CustomLoader 
+            x:Name="loader"
+            Source="icon.png"
+            RotationLenght="1000"
+            IsVisible="{Binding IsLoading}" 
+            IsRunning="{Binding IsLoading}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+                        <!--<ActivityIndicator x:Name="loader" Color="White" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />-->
                     </StackLayout>
                 </Frame>
             </Grid>

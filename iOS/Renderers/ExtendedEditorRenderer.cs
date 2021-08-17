@@ -4,6 +4,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
+using System.Drawing;
 
 [assembly: ExportRenderer(typeof(ExtendedEditor), typeof(ExtendedEditorRenderer))]
 
@@ -17,7 +18,7 @@ namespace Pulse.iOS
 		///// <returns>The element changed.</returns>
 		///// <param name="e">E.</param>
 
-		readonly UIColor DefaultPlaceholderColor = Color.FromRgb(86, 88, 92).ToUIColor();
+		readonly UIColor DefaultPlaceholderColor = Xamarin.Forms.Color.FromRgb(86, 88, 92).ToUIColor();
 
 		private UILabel PlaceholderLabel { get; set; }
 
@@ -26,7 +27,7 @@ namespace Pulse.iOS
 			base.OnElementChanged(e);
 
 			if (Control == null) return;
-
+			this.AddDoneButton();
 			if (PlaceholderLabel != null) return;
 
 			var element = Element as ExtendedEditor;
@@ -68,6 +69,23 @@ namespace Pulse.iOS
 			{
 				PlaceholderLabel.Hidden = !string.IsNullOrEmpty(Control.Text);
 			}
+		}
+		protected void AddDoneButton()
+		{
+			var toolbar = new UIToolbar(new RectangleF(0.0f, 0.0f, 50.0f, 44.0f));
+
+			var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate
+			{
+				this.Control.ResignFirstResponder();
+				var baseEntry = this.Element.GetType();
+				((IEntryController)Element).SendCompleted();
+			});
+
+			toolbar.Items = new UIBarButtonItem[] {
+				new UIBarButtonItem (UIBarButtonSystemItem.FlexibleSpace),
+				doneButton
+			};
+			this.Control.InputAccessoryView = toolbar;
 		}
 	}
 }

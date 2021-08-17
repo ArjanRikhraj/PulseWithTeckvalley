@@ -76,7 +76,7 @@
                                             <local:ExtendedButton Text="{Binding FriendType}" FontSize="10" Grid.Column="2" WidthRequest="94" HeightRequest="30"
                                                                   FontFace="PoppinsMedium" HorizontalOptions="End" TextColor="#d576a5"
                                                                   VerticalOptions="CenterAndExpand" BackgroundColor="#fff" BorderWidth="1" BorderColor="#d576a5"
-                                                                  CornerRadius="20" Command="{Binding  Source={x:Reference ContactPage},
+                                                                  CornerRadius="15" Command="{Binding Source={x:Reference ContactPage},
                                                                   Path=BindingContext.FriendTypeCommand}" CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </ViewCell.View>

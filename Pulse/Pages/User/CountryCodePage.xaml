@@ -16,7 +16,6 @@
                         HorizontalOptions="Start" />
                 <local:ExtendedLabel Text="Select your country"
                        FontSize="18" FontFace="PoppinsMedium"
-                       FontAttributes="Bold"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"
                        HeightRequest="60"

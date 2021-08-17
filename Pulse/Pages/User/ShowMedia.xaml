@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:mm="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  xmlns:local="clr-namespace:Pulse"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  xmlns:local="clr-namespace:Pulse" xmlns:controls1="clr-namespace:Pulse.Controls"
                        x:Class="Pulse.Pages.User.ShowMedia">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0" Padding="0">
@@ -36,7 +36,13 @@
             <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
                 <Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
-                        <ActivityIndicator x:Name="loader" Color="White" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <controls1:CustomLoader 
+            x:Name="loader"
+            Source="icon.png"
+            RotationLenght="1000"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+                        <!--<ActivityIndicator x:Name="loader" Color="White" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />-->
                     </StackLayout>
                 </Frame>
             </Grid>

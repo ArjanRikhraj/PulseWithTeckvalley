@@ -836,10 +836,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_delete.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
