@@ -842,7 +842,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
