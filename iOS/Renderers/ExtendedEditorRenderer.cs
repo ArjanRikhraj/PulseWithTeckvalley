@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
 using System.Drawing;
+using System;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(ExtendedEditor), typeof(ExtendedEditorRenderer))]
 
@@ -25,9 +27,7 @@ namespace Pulse.iOS
 		protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
 		{
 			base.OnElementChanged(e);
-
 			if (Control == null) return;
-			this.AddDoneButton();
 			if (PlaceholderLabel != null) return;
 
 			var element = Element as ExtendedEditor;
@@ -39,7 +39,8 @@ namespace Pulse.iOS
 				Font = UIFont.FromName("Poppins-Regular", 13f),
 				BackgroundColor = UIColor.Clear
 			};
-
+			//if ((Control != null) && (e.NewElement != null))
+				//Control.ReturnKeyType = GetValueFromDescription<UIReturnKeyType>(element.ReturnType);
 			var edgeInsets = Control.TextContainerInset;
 			var lineFragmentPadding = Control.TextContainer.LineFragmentPadding;
 			Control.AddSubview(PlaceholderLabel);
@@ -61,31 +62,20 @@ namespace Pulse.iOS
             PlaceholderLabel.Hidden = !string.IsNullOrEmpty(Control.Text);
 		}
 
-		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			base.OnElementPropertyChanged(sender, e);
-
+			var element = Element as ExtendedEditor;
 			if (e.PropertyName == "Text")
 			{
 				PlaceholderLabel.Hidden = !string.IsNullOrEmpty(Control.Text);
 			}
-		}
-		protected void AddDoneButton()
-		{
-			var toolbar = new UIToolbar(new RectangleF(0.0f, 0.0f, 50.0f, 44.0f));
-
-			var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate
+			if (e.PropertyName == element.ReturnType.ToString())
 			{
-				this.Control.ResignFirstResponder();
-				var baseEntry = this.Element.GetType();
-				((IEntryController)Element).SendCompleted();
-			});
-
-			toolbar.Items = new UIBarButtonItem[] {
-				new UIBarButtonItem (UIBarButtonSystemItem.FlexibleSpace),
-				doneButton
-			};
-			this.Control.InputAccessoryView = toolbar;
+				//Control.ReturnKeyType = GetValueFromDescription<UIReturnKeyType>(element.ReturnType);
+			}
+		
+		
 		}
 	}
 }

@@ -40,19 +40,20 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>Apple Distribution: Arjan Rikhraj (LTYWP9WMCS)</CodesignKey>
+    <CodesignKey>Apple Development: Arjan Rikhraj (7PQVN8VKM9)</CodesignKey>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <CodesignProvision>Pulse_Distribution</CodesignProvision>
+    <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
     <MtouchFastDev>false</MtouchFastDev>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -842,7 +843,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

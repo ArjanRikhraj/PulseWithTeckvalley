@@ -89,9 +89,9 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>CFBundleShortVersionString</key>
-	<string>3.9</string>
 	<key>CFBundleVersion</key>
-	<string>21</string>
+	<string>22</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.0</string>
 </dict>
 </plist>

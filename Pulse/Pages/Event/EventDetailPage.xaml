@@ -515,7 +515,7 @@
                                     <yummy:PancakeView.Border>
                                         <yummy:Border Color="LightGray" Thickness="1"/>
                                     </yummy:PancakeView.Border>
-                                    <local:ExtendedEditor Text="{Binding DescriptionComment}" MaxLength="200"/>
+                                    <local:ExtendedEditor x:Name="editorDescription" Text="{Binding DescriptionComment}" MaxLength="200" ReturnType="Done"/>
                                 </yummy:PancakeView>
                             </StackLayout>
                         </local:ExtendedListView.Footer>
