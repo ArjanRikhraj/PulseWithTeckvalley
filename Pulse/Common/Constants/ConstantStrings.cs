@@ -10,7 +10,8 @@ namespace Pulse
         public const string BaseServiceUrl_local = "http://10.0.2.2:8000";
         public const string BaseServiceUrl_testing = "http://pulseph2-qc.netsol.in";
         public const string BaseServiceUrl_staging = "http://pli-pulseph2.agilecollab.com";
-        public const string BaseServiceUrlLive = "https://pulseapp.ca";
+        // public const string BaseServiceUrlLive = "https://pulseapp.ca";
+        public const string BaseServiceUrlLive = "https://prod.pulseapp.ca";
        // public const string BaseServiceUrlLive = "https://35.182.22.214";
 
         //public const string BaseServiceUrl = "http://pli-socialma.agilecollab.com";

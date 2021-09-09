@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using ModernHttpClient;
 using Xamarin.Forms;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Pulse
 {
@@ -17,7 +18,15 @@ namespace Pulse
         #region Public Methods
         public MainServices()
         {
-            client = Device.RuntimePlatform == Device.iOS ? new HttpClient() : new HttpClient(new NativeMessageHandler());
+            HttpClientHandler handler = new HttpClientHandler();
+
+            //not sure about this one, but I think it should work to allow all certificates:
+            handler.ServerCertificateCustomValidationCallback += (sender, cert, chaun, ssPolicyError) =>
+            {
+                return true;
+            };
+            client = new HttpClient(handler);
+            //client = Device.RuntimePlatform == Device.iOS ? new HttpClient() : new HttpClient(new NativeMessageHandler());
             client.MaxResponseContentBufferSize = Constant.MaxResponseContentBufferSize;
         }
         public async Task<Token> GetToken()

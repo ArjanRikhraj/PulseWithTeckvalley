@@ -94,10 +94,17 @@
                                 <Image Source="{x:Static local:Constant.StarImage}" Aspect="AspectFit" />
                                 <local:ExtendedLabel x:Name="lblPaidEvent" Margin="0,0,0,0" FontFace="PoppinsRegular" TextColor="{x:Static local:Constant.GrayTextColor}" Text="{Binding CoverFreeAmountText}" FontSize="12" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
                             </StackLayout>
-                            <local:ExtendedButton x:Name="btnCreateEvent" FontFace="PoppinsMedium" Clicked="Join_Clicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{Binding EventPaidButtonText}"
+                            <local:ExtendedButton x:Name="btnCreateEvent" FontFace="PoppinsMedium" Clicked="Join_Clicked"
+                                                  Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" 
+                                                  BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" 
+                                                  HeightRequest="40" Text="{Binding EventPaidButtonText}"
                                 TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsJoinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
-                            <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CheckInClicked" Margin="10,0,10,10" BorderRadius="21" BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small" HeightRequest="40" Text="{Binding CheckinButtonText}"
-                                TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" IsVisible="{Binding IsCheckinButtonVisible}" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
+                            <local:ExtendedButton FontFace="PoppinsMedium" Clicked="CheckInClicked" Margin="10,0,10,10" BorderRadius="21" 
+                                                  BorderWidth="2" BorderColor="{x:Static local:Constant.PinkButtonColor}" FontSize="Small"
+                                                  HeightRequest="40" Text="{Binding CheckinButtonText}"
+                                TextColor="{x:Static local:Constant.PinkButtonColor}" VerticalOptions="Fill" 
+                                                  IsVisible="{Binding IsCheckinButtonVisible}" HorizontalOptions="FillAndExpand" 
+                                                  BackgroundColor="{x:Static local:Constant.WhiteTextColor}" />
                             <BoxView HeightRequest="1" BackgroundColor="{x:Static local:Constant.BoxViewColor}" HorizontalOptions="FillAndExpand" Margin="0" />
                             <Grid Margin="10,5,10,0" RowSpacing="-4" ColumnSpacing="7">
                                 <Grid.RowDefinitions>

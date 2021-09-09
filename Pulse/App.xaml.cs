@@ -342,7 +342,7 @@ namespace Pulse
             }
             catch (Exception ex)
             {
-                return;
+                return; App.HideMainPageLoader();
             }
         }
     }

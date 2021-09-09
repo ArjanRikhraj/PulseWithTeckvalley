@@ -1042,6 +1042,7 @@ namespace Pulse
             {
                 App.HideMainPageLoader();
                 isPageFirstLoad = false;
+                eventViewModel.IsLoading = false;
                 await App.Instance.Alert("Problem in fetching location!", Constant.AlertTitle, Constant.Ok);
 
             }
@@ -1051,7 +1052,7 @@ namespace Pulse
         {
             try
             {
-
+               
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
                 if (status != PermissionStatus.Granted)
                 {
@@ -1090,11 +1091,13 @@ namespace Pulse
 
                 }
                 App.HideMainPageLoader();
+                eventViewModel.IsLoading = false;
             }
             catch (Exception)
             {
                 await App.Instance.Alert("Please Turn your Location on!.", Constant.AlertTitle, Constant.Ok);
                 App.HideMainPageLoader();
+                eventViewModel.IsLoading = false;
                 //await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
                 //App.HideMainPageLoader();
             }
