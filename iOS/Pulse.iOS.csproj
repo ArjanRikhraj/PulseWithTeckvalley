@@ -31,8 +31,6 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <!--<PlatformTarget>x86</PlatformTarget>-->
     <CodesignProvision>VS: app.pulse.com Development</CodesignProvision>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -94,8 +92,6 @@
     <MtouchExtraArgs>
     </MtouchExtraArgs>
     <OptimizePNGs>true</OptimizePNGs>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
     <CodesignExtraArgs>
     </CodesignExtraArgs>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
@@ -191,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\iconSearch.png" />
+    <BundleResource Include="Resources\Fonts\materialdesignicons.ttf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -226,7 +223,6 @@
     <Compile Include="Shared Services\QRCodeService.cs" />
     <Compile Include="Shared Services\SharedService.cs" />
     <Compile Include="Shared Services\VideoService.cs" />
-    <Compile Include="Xamarin.Auth\AppDelegate.OpenUrl.cs" />
     <Compile Include="Renderers\CustomMapViewDelegate.cs" />
     <Compile Include="FormsVideoLibrary\VideoPicker.cs" />
     <Compile Include="FormsVideoLibrary\VideoPlayerRenderer.cs" />
@@ -763,12 +759,6 @@
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Auth">
-      <Version>1.6.0.4</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Auth.XamarinForms">
-      <Version>1.6.0.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.4.11</Version>

@@ -328,6 +328,7 @@ namespace Pulse
         public const string SignInSmallLetter = "Sign in";
         public const string SignUpSmallLetter = "Sign up";
         public const string FacebookLoginText = "Facebook";
+        public const string GoogleLoginText = "Google";
         public const string AlreadyAccountText = "Already have an account?";
         public const string TermsConditionText = "By checking this box I agree that I have read and accept";
         public const string TermsNConditionText = "'Terms & Condition'";

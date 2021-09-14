@@ -13,6 +13,7 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
+		<integer>2</integer>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
@@ -38,6 +39,7 @@
 		<string>Fonts/Poppins-SemiBold.ttf</string>
 		<string>Fonts/Poppins-Regular.ttf</string>
 		<string>Fonts/Poppins-ExtraLight.ttf</string>
+		<string>Fonts/materialdesignicons.ttf</string>
 	</array>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImage.launchimage</string>

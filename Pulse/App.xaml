@@ -27,6 +27,11 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="Opacity" Value="0.1"/>
             </Style>
+             <OnPlatform x:Key="FontFamilyName" x:TypeArguments="x:String" iOS="materialdesignicons" Android="materialdesignicons.ttf#materialdesignicons"/>
+            <Style x:Key="FontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName}" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
