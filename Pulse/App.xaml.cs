@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Pulse.Interfaces;
+using Matcha.BackgroundService;
 
 namespace Pulse
 {
@@ -56,10 +57,15 @@ namespace Pulse
         }
         protected override void OnStart()
         {
+            //Register Periodic Tasks
+            BackgroundAggregatorService.Add(() => new EventViewModel());
+            //Start the background service
+            BackgroundAggregatorService.StartBackgroundService();
         }
 
         protected override void OnSleep()
         {
+            BackgroundAggregatorService.StopBackgroundService();
         }
 
         public async Task FetchEventDetailMethod(string id)

@@ -14,6 +14,7 @@ using Android.Gms.Location;
 using MediaManager;
 using Plugin.Messaging;
 using FFImageLoading.Forms.Platform;
+using Matcha.BackgroundService.Droid;
 
 namespace Pulse.Droid
 {
@@ -42,6 +43,7 @@ namespace Pulse.Droid
 		protected override void OnCreate(Bundle bundle)
 		{
             Current = this;
+			BackgroundAggregator.Init(this);
 			base.OnCreate(bundle);
 			Xamarin.Essentials.Platform.Init(this, bundle);
 			APPLICATION_CONTEXT = this;

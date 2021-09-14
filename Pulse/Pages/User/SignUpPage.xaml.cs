@@ -23,7 +23,6 @@ namespace Pulse
         #region Constructor
         public SignUpPage()
         {
-           
             InitializeComponent();
             authenticationViewModel = ServiceContainer.Resolve<AuthenticationViewModel>();
             BindingContext = authenticationViewModel;

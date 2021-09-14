@@ -79,7 +79,7 @@
                     <!--Current Func-->
                 </StackLayout>
                 <local:ExtendedListView Grid.Row="2" x:Name="listViewEvents" RowHeight="300" ItemsSource="{Binding AllUpcomingEvents}"
-                                        ItemTapped="MyEventsList_ItemTapped" IsPullToRefreshEnabled="true" 
+                                        ItemTapped="MyEventsList_ItemTapped" IsPullToRefreshEnabled="true"  LoadMoreCommand="{Binding LoadMoreLocBasedEvents}" 
                                         RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
                                         BackgroundColor="{x:Static local:Constant.LightBackGroungColor}"
                                         HasUnevenRows="True" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
@@ -181,7 +181,10 @@
                 </StackLayout>
                 
                 <StackLayout Grid.Row="2" x:Name="stackList" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
-                    <local:ExtendedListView x:Name="listViewMyEvents"  ItemsSource="{Binding ListLocBasedEvents}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" LoadMoreCommand="{Binding LoadMoreLocBasedEvents}" ItemTapped="MyEventsList_ItemTapped" BackgroundColor="Transparent" IsVisible="{Binding IsLocEventListVisible}" HasUnevenRows="false" RowHeight="244"
+                    <local:ExtendedListView x:Name="listViewMyEvents"  ItemsSource="{Binding ListLocBasedEvents}" IsPullToRefreshEnabled="true"
+                                            RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" 
+                                            LoadMoreCommand="{Binding LoadMoreLocBasedEvents}" ItemTapped="MyEventsList_ItemTapped" 
+                                            BackgroundColor="Transparent" IsVisible="{Binding IsLocEventListVisible}" HasUnevenRows="false" RowHeight="244"
 						VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>

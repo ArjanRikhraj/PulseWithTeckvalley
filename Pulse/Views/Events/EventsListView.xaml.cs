@@ -123,7 +123,6 @@ namespace Pulse
                     await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
                     _tapCount = 0;
                 }
-               
             }
             catch (Exception ex)
             {
@@ -270,17 +269,13 @@ namespace Pulse
             eventViewModel.IsAddressListVisible = false;
             eventViewModel.FilterLocType = "Recent";
             eventViewModel.listURL = Constant.LatLongBasedEventsUrl;
+            GetCurrentLoc();
             eventViewModel.GetAllUpComingEvents();
             App.HideMainPageLoader();
-            GetCurrentLoc();
         }
       
         async void GetCurrentLoc()
         {
-            //if (Device.RuntimePlatform == Device.iOS)
-            //	GetPermission();
-            //else
-            //GetCurrentLocation();
             GetPermission();
         }
         async void View_AllTapped(object sender, System.EventArgs e)
@@ -308,7 +303,6 @@ namespace Pulse
             }
         }
         async void View_AllGridTapped(object sender, System.EventArgs e)
-
         {
             if (CrossConnectivity.Current.IsConnected)
             {
@@ -348,7 +342,6 @@ namespace Pulse
         }
         async void MapIconTapped(object sender, System.EventArgs e)
         {
-            
             lblList.IsVisible = true;
             mapFilter.IsVisible = true;
             listFilter.IsVisible = false;
@@ -372,15 +365,9 @@ namespace Pulse
         void SelectMap(ObservableCollection<MyEvents> list)
         {
             App.ShowMainPageLoader();
-            //mapSelectedImage.IsVisible = true;
-           // mapUnselectedImage.IsVisible = false;
-           // listSelectedImage.IsVisible = false;
-           // listUnselectedImage.IsVisible = true;
             stackMap.IsVisible = true;
             stackList.IsVisible = false;
             listViewEvents.IsVisible = false;
-           // stackAddress.IsVisible = false;
-           // stackFilter.IsVisible = false;
             imgAddEvent.IsVisible = true;
             eventViewModel.IsAddressListVisible = false;
             CreateMap(list);
@@ -940,7 +927,6 @@ namespace Pulse
             }
             else
             {
-
                 var notificator = DependencyService.Get<IToastNotificator>();
                 var options = new NotificationOptions()
                 {
@@ -1027,7 +1013,7 @@ namespace Pulse
                     eventViewModel.currenteventLat = position.Latitude.ToString();
                     eventViewModel.currenteventLong = position.Longitude.ToString();
                     ClearFields();
-                    eventViewModel.GetLocBasedEvents();
+                    //eventViewModel.GetLocBasedEvents();
                     App.HideMainPageLoader();
                 }
                 else

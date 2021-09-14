@@ -27,9 +27,6 @@ namespace Pulse
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-           
         }
-
 	}
 }

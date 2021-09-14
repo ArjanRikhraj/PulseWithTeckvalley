@@ -587,7 +587,6 @@ namespace Pulse
 							await mainService.GetToken();
 							if (!string.IsNullOrEmpty(SessionManager.AccessToken))
 							{
-								//SessionManager.AccessToken = "9ZRUIrvipnpQIO2eWWnGgtIuiTSAQT";
 								var result = await mainService.Post<ResultWrapperSingle<LoginResponse>>(Constant.SignInUrl, GetLoginUserData());
 								if (result != null && result.status == Constant.Status200)
 								{
@@ -682,7 +681,7 @@ namespace Pulse
 							{
 								UserData user = new UserData();
 								user.email = Email.Trim();
-								user.mobile = Mobile;
+								user.mobile =SelectedCountry.CountryCode+ Mobile;
 								var result = await mainService.Post<ResultWrapperSingle<CheckEmailUserResponse>>(Constant.CheckEmailExistUrl, user);
 								if (result != null && result.status == Constant.Status200)
 								{
@@ -741,7 +740,7 @@ namespace Pulse
 						UserData user = new UserData();
 						user.email = Email.Trim();
 						user.token = token;
-						user.mobile = mobile;
+						user.mobile =SelectedCountry.CountryCode+ mobile;
 						var result = await mainService.Put<ResultWrapperSingle<SendEmailOTPResponse>>(Constant.VerifyTokenUrl, user);
 						if (result != null && result.status == Constant.Status200)
 						{
@@ -795,7 +794,7 @@ namespace Pulse
 					{
 						UserData user = new UserData();
 						user.email = Email.Trim();
-						user.mobile = Mobile;
+						user.mobile = SelectedCountry.CountryCode+Mobile;
 						string url = IsSignUpPage ? Constant.SendOtpOnMobileUrl : Constant.ForgotPasswordUrl;
 						var result = await mainService.Post<ResultWrapperSingle<SendEmailOTPResponse>>(url, user);
 						if (result != null && result.status == Constant.Status200)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Matcha.BackgroundService;
 using Plugin.Connectivity;
 using Plugin.Messaging;
 using Pulse.Models.Application.Events;
@@ -17,9 +18,10 @@ using Xamarin.Forms;
 
 namespace Pulse
 {
-    public class EventViewModel : BaseViewModel
+    public class EventViewModel : BaseViewModel, IPeriodicTask
     {
         #region private variables
+        public TimeSpan Interval { get; set; }
         bool isScreenFirstVisible = true;
         bool isScreenSecondVisible = false;
         bool isNoUserFoundVisible;
@@ -1734,31 +1736,7 @@ namespace Pulse
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-        //private async void PinMedia(object sender)
-        //{
-        //    try
-        //    {
-        //        var obj= (EventGallery)sender;
-        //        if(obj!=null)
-        //        {
-        //            PinMediaRequest request = new PinMediaRequest();
-        //            request.story_id = obj.MediaId;
-        //            request.user_id = SessionManager.UserId;
-        //            if (request == null)
-        //                return;
-        //            var response = await mainService.Post<ResultWrapperSingle<StarEventResponse>>(Constant.PinStoryUrl, request);
-        //            if (response != null && response.status == Constant.Status200 && response.response != null)
-        //            {
-        //                if (currentObject == null)
-        //                    IconStar = response.response.is_star ? "iconStarred.png" : "iconStar.png";
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
-        //    }
-        //}
+     
         private void GetEventsByDate(DateTime selectedDate)
         {
             try
@@ -5454,15 +5432,30 @@ namespace Pulse
 
         public async Task UpdateUserLocation()
         {
-            Device.StartTimer(new TimeSpan(0, 0, 60), () =>
+            Interval = TimeSpan.FromSeconds(60);
+           // await StartJob();
+            ////
+            ////Device.StartTimer(new TimeSpan(0, 0, 60), () =>
+            ////{
+            ////    // do something every 60 seconds
+            ////    Device.BeginInvokeOnMainThread(async() => 
+            ////    {
+            ////      await  PostUserLocation();
+            ////    });
+            ////    return true; // runs again, or false to stop
+            ////});
+        }
+        public async Task<bool> StartJob()
+        {
+            UserLocationModel locationModel = new UserLocationModel();
+            if (!string.IsNullOrEmpty(SessionManager.Email) && !string.IsNullOrEmpty(eventLat))
             {
-                // do something every 600 seconds
-                Device.BeginInvokeOnMainThread(async() => 
-                {
-                  await  PostUserLocation();
-                });
-                return true; // runs again, or false to stop
-            });
+                locationModel.email = SessionManager.Email;
+                locationModel.latitude = double.Parse(eventLat);
+                locationModel.longitude = double.Parse(eventLong);
+                var response = await mainService.Put<PostUserLocationResponse>(Constant.PostUserLocationUrl, locationModel);
+            }
+                return true;
         }
         public async Task PostUserLocation()
         {
@@ -5483,6 +5476,5 @@ namespace Pulse
             }
         }
         #endregion
-
     }
 }

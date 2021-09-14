@@ -8,6 +8,7 @@
 	  <PackageReference Include="AWSSDK.S3" Version="3.3.101.7" />
 	  <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
 	  <PackageReference Include="libphonenumber-csharp" Version="8.12.28" />
+	  <PackageReference Include="Matcha.BackgroundService" Version="1.0.5478" />
 	  <PackageReference Include="Microsoft.AppCenter" Version="4.2.0" />
 	  <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.2.0" />
 	  <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
@@ -41,6 +42,8 @@
 	  <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
 	  <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
 	  <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+	  <PackageReference Include="System.Reactive.Core" Version="5.0.0" />
+	  <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
 	  <PackageReference Include="System.Reflection" Version="4.3.0" />
 	  <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
 	  <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />

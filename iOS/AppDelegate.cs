@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Pulse;
 using MediaManager;
 using FFImageLoading.Forms.Platform;
+using Matcha.BackgroundService.iOS;
 
 namespace Pulse.iOS
 {
@@ -31,6 +32,7 @@ namespace Pulse.iOS
             DependencyService.Register<ToastNotification>(); // Register your dependency
             ToastNotification.Init();
             CarouselViewRenderer.Init();
+            BackgroundAggregator.Init(this);
             CachedImageRenderer.Init();
             CrossMediaManager.Current.Init();
             CrossMedia.Current.Initialize();

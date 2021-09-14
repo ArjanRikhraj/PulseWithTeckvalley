@@ -695,6 +695,9 @@
     <PackageReference Include="libphonenumber-csharp">
       <Version>8.12.28</Version>
     </PackageReference>
+    <PackageReference Include="Matcha.BackgroundService">
+      <Version>1.0.5478</Version>
+    </PackageReference>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection">
       <Version>9.0.0</Version>
     </PackageReference>
@@ -727,6 +730,12 @@
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>5.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive.Core">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive.Linq">
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation">
       <Version>4.3.0</Version>
@@ -843,7 +852,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarPulseiOSHideInfoBar="True" TriggeredFromHotReload="False" XamarinHotReloadMonoInterpreterErrorInfoBarPulseiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
