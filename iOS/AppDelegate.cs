@@ -21,8 +21,6 @@ namespace Pulse.iOS
         {
             ServiceRegistrar.Startup();
             global::Xamarin.Forms.Forms.Init();
-            global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
-            global::Xamarin.Auth.WebViewConfiguration.IOS.UserAgent = "moljac++";
             NSObject ver = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
             App.iOSAppVersion = ver.Description;
             App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
