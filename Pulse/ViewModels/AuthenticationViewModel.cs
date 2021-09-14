@@ -11,7 +11,6 @@ using Plugin.DeviceInfo;
 using Pulse.Helpers;
 using Pulse.Models.User;
 using Pulse.Pages.User;
-using Xamarin.Auth;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -48,7 +47,7 @@ namespace Pulse
 		string confirmNewPassword;
 		string oldPassword;
 		string newChangePassword;
-		OAuth2Authenticator authenticator;
+		//OAuth2Authenticator authenticator;
 		PulseViewModel pulseViewModel;
 		#endregion
 		#region Public Properties
@@ -251,47 +250,47 @@ namespace Pulse
 		{
 			SelectedCountry = country;
 		}
-		public async Task<ResultCustom> GetFacebookProfile(Account account)
-		{
-			ResultCustom result = new ResultCustom();
-			result.Status = false;
-			try
-			{
+		//public async Task<ResultCustom> GetFacebookProfile(Account account)
+		//{
+		//	ResultCustom result = new ResultCustom();
+		//	result.Status = false;
+		//	try
+		//	{
 
-				var memberResult = await GetFacebookMember(account);
-				if (memberResult != null)
-				{
-					id = memberResult.Id;
-					facebookEmail = memberResult.Email;
-					if (!string.IsNullOrEmpty(memberResult.Name))
-						GetName(memberResult.Name);
-					this.FacebookUserDetails = memberResult;
-					result.Status = true;
-				}
-				else
-				{
-					result.Message = Constant.SOCIAL_LOGIN_ERROR_MESSAGE;
-				}
-			}
-			catch (Exception ex)
-			{
-				result.IsError = true;
-				result.Message = ex.Message;
-			}
-			return result;
-		}
+		//		var memberResult = await GetFacebookMember(account);
+		//		if (memberResult != null)
+		//		{
+		//			id = memberResult.Id;
+		//			facebookEmail = memberResult.Email;
+		//			if (!string.IsNullOrEmpty(memberResult.Name))
+		//				GetName(memberResult.Name);
+		//			this.FacebookUserDetails = memberResult;
+		//			result.Status = true;
+		//		}
+		//		else
+		//		{
+		//			result.Message = Constant.SOCIAL_LOGIN_ERROR_MESSAGE;
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		result.IsError = true;
+		//		result.Message = ex.Message;
+		//	}
+		//	return result;
+		//}
 
-	public async Task<SocialUserDetails> GetFacebookMember(Account account)
-		{
-			var fbRequest = new OAuth2Request("GET", new Uri(Constant.FacebookProfileUrl), null, account);
-			var profileResponse = await fbRequest.GetResponseAsync();
-			SocialUserDetails member = null;
-			if (profileResponse != null && profileResponse.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				member = JsonManager.DeSerialize<SocialUserDetails>(await profileResponse.GetResponseTextAsync());
-			}
-			return member;
-		}
+	//public async Task<SocialUserDetails> GetFacebookMember(Account account)
+	//	{
+	//		var fbRequest = new OAuth2Request("GET", new Uri(Constant.FacebookProfileUrl), null, account);
+	//		var profileResponse = await fbRequest.GetResponseAsync();
+	//		SocialUserDetails member = null;
+	//		if (profileResponse != null && profileResponse.StatusCode == System.Net.HttpStatusCode.OK)
+	//		{
+	//			member = JsonManager.DeSerialize<SocialUserDetails>(await profileResponse.GetResponseTextAsync());
+	//		}
+	//		return member;
+	//	}
 		public void GetName(String name)
 		{
 			string[] names = name.Split(' ');
@@ -1213,82 +1212,82 @@ namespace Pulse
 
 		void InitializeFacebookAuthenticator()
 		{
-			authenticator
-				 = new Xamarin.Auth.OAuth2Authenticator
-				 (
-					 clientId: Constant.FacebookAppID,
-					 authorizeUrl: new Uri(Constant.FacebookAuthorizeUrl),
-                     redirectUrl: new Uri(Constant.FacebookRedirectUrliOS),
-					 scope: "email", // "basic", "email",
-					 getUsernameAsync: null,
-					 isUsingNativeUI: true
+			//authenticator
+			//	 = new Xamarin.Auth.OAuth2Authenticator
+			//	 (
+			//		 clientId: Constant.FacebookAppID,
+			//		 authorizeUrl: new Uri(Constant.FacebookAuthorizeUrl),
+   //                  redirectUrl: new Uri(Constant.FacebookRedirectUrliOS),
+			//		 scope: "email", // "basic", "email",
+			//		 getUsernameAsync: null,
+			//		 isUsingNativeUI: true
 
-				 )
-				 {
-                AllowCancel = false,
-				 };
+			//	 )
+			//	 {
+   //             AllowCancel = false,
+			//	 };
 		}
 
-		async void Facebook_Authentication_Complete(object sender, AuthenticatorCompletedEventArgs e)
-		{
-            if(e.IsAuthenticated)
-            {
+		//async void Facebook_Authentication_Complete(object sender, AuthenticatorCompletedEventArgs e)
+		//{
+  //          if(e.IsAuthenticated)
+  //          {
                 
-            }
-			if (e.Account != null && e.Account.Properties != null)
-			{
-				try
-				{
-					var result = await GetFacebookProfile(e.Account);
-					if (result != null && result.Status)
-					{
-						await CheckSocialUserExist();
-                        return;
-					}
-				}
-				catch (Exception)
-				{
-					await App.Instance.Alert(Constant.AlertTitle, Constant.ServerNotRunningMessage, Constant.Ok);
-				}
-			}
-			else
-			{
-				StringBuilder sb = new StringBuilder();
-				sb.Append("Not authenticated ").AppendLine($"Account.Properties does not exist");
-				await App.Instance.Alert
-									(
-										"Authentication Results",
-										sb.ToString(),
-										"OK"
-									);
-			}
-			return;
-		}
-		void Facebook_Authentication_Error(object sender, AuthenticatorErrorEventArgs e)
-		{
-			StringBuilder sb = new StringBuilder();
-			if (!e.Message.ToLower().Contains("permissions+error"))
-			{
-				sb.AppendLine($"{e.Message}");
-			}
-			return;
-		}
-		void PresentUILoginScreen()
-		{
-			AuthenticationState.Authenticator = authenticator;
-			Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
-			presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-            presenter.Login(authenticator);
-			return;
-		}
+  //          }
+		//	if (e.Account != null && e.Account.Properties != null)
+		//	{
+		//		try
+		//		{
+		//			var result = await GetFacebookProfile(e.Account);
+		//			if (result != null && result.Status)
+		//			{
+		//				await CheckSocialUserExist();
+  //                      return;
+		//			}
+		//		}
+		//		catch (Exception)
+		//		{
+		//			await App.Instance.Alert(Constant.AlertTitle, Constant.ServerNotRunningMessage, Constant.Ok);
+		//		}
+		//	}
+		//	else
+		//	{
+		//		StringBuilder sb = new StringBuilder();
+		//		sb.Append("Not authenticated ").AppendLine($"Account.Properties does not exist");
+		//		await App.Instance.Alert
+		//							(
+		//								"Authentication Results",
+		//								sb.ToString(),
+		//								"OK"
+		//							);
+		//	}
+		//	return;
+		//}
+		//void Facebook_Authentication_Error(object sender, AuthenticatorErrorEventArgs e)
+		//{
+		//	StringBuilder sb = new StringBuilder();
+		//	if (!e.Message.ToLower().Contains("permissions+error"))
+		//	{
+		//		sb.AppendLine($"{e.Message}");
+		//	}
+		//	return;
+		//}
+		//void PresentUILoginScreen()
+		//{
+		//	AuthenticationState.Authenticator = authenticator;
+		//	Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
+		//	presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+        //  presenter.Login(authenticator);
+		//	return;
+		//}
 
 
 		public async Task CallFacebook()
 		{
 			InitializeFacebookAuthenticator();
-			authenticator.Completed += Facebook_Authentication_Complete;
-			authenticator.Error += Facebook_Authentication_Error;
-			PresentUILoginScreen();
+			//authenticator.Completed += Facebook_Authentication_Complete;
+			//authenticator.Error += Facebook_Authentication_Error;
+			//PresentUILoginScreen();
 		}
 
 

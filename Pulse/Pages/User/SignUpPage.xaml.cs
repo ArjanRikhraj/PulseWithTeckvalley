@@ -9,7 +9,6 @@ using Plugin.Connectivity;
 using Pulse.Helpers;
 using Pulse.Models.User;
 using Pulse.Pages.User;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace Pulse

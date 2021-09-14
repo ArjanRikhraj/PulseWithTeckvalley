@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls1="clr-namespace:Pulse.Controls" x:Class="Pulse.MainPage">
     <local:BaseContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Margin="0" Padding="0">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Margin="0" Padding="0">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0" Margin="0" Padding="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
