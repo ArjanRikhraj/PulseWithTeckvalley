@@ -36,10 +36,12 @@ namespace Pulse
 
 		private async void BackTapped(object sender, EventArgs e)
 		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				await Navigation.PopModalAsync();
-			}
+			//if (CrossConnectivity.Current.IsConnected)
+			//{
+			
+		      await Navigation.PopModalAsync();
+				
+			//}
 		}
         public bool IsBackButtonVisible
         {

@@ -18,6 +18,7 @@ namespace Pulse
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             BindingContext = eventViewModel;
             imgFull.Source = imageURL.Replace("Uri: ","");
+            imgFull.CacheDuration = TimeSpan.FromDays(30);
         }
 
         async void Cross_Clicked(object sender, System.EventArgs e)

@@ -17,7 +17,7 @@
                 </StackLayout>
                 
             </Grid>
-            <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="0" Margin="20,30,20,10" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="0" Margin="30,50,30,20" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
                 <Image x:Name="btnBack" Source="cross_add_event.png" HeightRequest="25" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Cross_Clicked"/>

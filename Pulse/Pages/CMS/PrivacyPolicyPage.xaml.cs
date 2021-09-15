@@ -7,8 +7,6 @@ namespace Pulse
 {
 	public partial class PrivacyPolicyPage : BaseContentPage
 	{
-
-
 		public PrivacyPolicyPage()
 		{
 			InitializeComponent();

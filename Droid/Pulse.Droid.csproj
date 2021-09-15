@@ -633,7 +633,6 @@
     <Compile Include="Renderers\ExtendedFrameRenderer.cs" />
     <Compile Include="Renderers\ExtendedLabelRenderer.cs" />
     <Compile Include="Renderers\ExtendedPickerRenderer.cs" />
-    <Compile Include="Renderers\ExtendedWebViewRenderer.cs" />
     <Compile Include="Renderers\GradientColorFrameRenderer.cs" />
     <Compile Include="Renderers\GradientColorStackRenderer.cs" />
     <Compile Include="Renderers\PlacehoderEditorRenderer.cs" />

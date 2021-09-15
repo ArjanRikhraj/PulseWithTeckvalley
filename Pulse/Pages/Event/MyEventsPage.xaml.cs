@@ -517,6 +517,6 @@ namespace Pulse
 
             }
         }
-		#endregion
-	}
+        #endregion
+    }
 }

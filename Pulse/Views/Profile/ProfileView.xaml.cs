@@ -89,10 +89,10 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					App.ShowMainPageLoader();
+					//App.ShowMainPageLoader();
 					await Navigation.PushModalAsync(new SettingsPage(profileViewModel.isChangePasswordShown));
 					App.HideMainPageLoader();
-					_tapCount = 0;
+					//_tapCount = 0;
 				}
 			}
 			else
@@ -103,23 +103,32 @@ namespace Pulse
 		}
 
 		async void PhotoAlbum_Tapped(object sender, System.EventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
+        {
+            try
+            {
+				if (CrossConnectivity.Current.IsConnected)
 				{
-					_tapCount = 1;
-					App.ShowMainPageLoader();
-					await Navigation.PushModalAsync(new PhotoAlbumPage());
-					App.HideMainPageLoader();
+					if (_tapCount < 1)
+					{
+						_tapCount = 1;
+						//App.ShowMainPageLoader();
+						await Navigation.PushModalAsync(new PhotoAlbumPage());
+						//App.HideMainPageLoader();
+						_tapCount = 0;
+					}
+				}
+				else
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
 					_tapCount = 0;
 				}
+
 			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
+            catch (System.Exception ex)
+            {
+
+            }
+			
 		}
 	}
 }
