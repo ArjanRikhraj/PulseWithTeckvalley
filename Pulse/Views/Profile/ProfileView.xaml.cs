@@ -18,6 +18,7 @@ namespace Pulse
 			SetInitialValues();
             profileViewModel.ProfileIcon = Constant.ProfileIcon;
             App.HideMainPageLoader();
+			profileViewModel.GetMyProfileDetail();
 		}
 
 		void SetInitialValues()
@@ -28,6 +29,7 @@ namespace Pulse
 			}
         
 		}
+
 
 		async void EditTapped(object sender, System.EventArgs e)
 		{
@@ -49,17 +51,22 @@ namespace Pulse
 			}
 
 		}
+
+
+	
+
+
 		
        async  void profileCollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
 
 			var selecteditem = ((CollectionView)sender).SelectedItem as MenuList;
-
 			if (selecteditem == null)
 				return;
-
 			if(selecteditem.ID ==1)
             {
+				//::Note Do not remove
+				Common.Constants.AppConstants.PopNavigationFromProfileEnabled = true;
 				await Navigation.PushModalAsync(new MyEventsPage());
 			}
 			else if(selecteditem.ID ==2)

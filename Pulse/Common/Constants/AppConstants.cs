@@ -1,10 +1,9 @@
 ﻿using System;
 namespace Pulse.Common.Constants
 {
-    public class AppConstants
+    public static partial class AppConstants
     {
-        public AppConstants()
-        {
-        }
+        public static bool PopNavigationFromProfileEnabled { get; set; }
     }
+
 }

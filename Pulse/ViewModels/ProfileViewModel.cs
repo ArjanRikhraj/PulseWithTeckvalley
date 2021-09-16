@@ -200,7 +200,7 @@ namespace Pulse
 				new MenuList{ ID =2 , MenuTitle ="Photo Album",MenuImage="photo_album.png"},
 				new MenuList{ ID =3 , MenuTitle ="Settings",MenuImage=Constant.SettingsIcon},
 			};
-			GetMyProfileDetail();
+			
 
 		}
 		#endregion
