@@ -829,6 +829,7 @@ namespace Pulse
                     grdOverlay.IsVisible = true;
                     eventViewModel.IsLoading = true;
                     await eventViewModel.GetLocEvents();
+					App.GetUnreadNotification();
 					await Navigation.PopModalAsync();
                     grdOverlay.IsVisible = false;
                     eventViewModel.IsLoading = false;

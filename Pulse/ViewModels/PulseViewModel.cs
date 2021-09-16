@@ -573,15 +573,10 @@ namespace Pulse
 
 		void SetPulseList(bool isList, List<PulseResponse> list)
 		{
-
 			if (isList && pageNoPulse < 2)
-			{
 				SetPulse(list);
-			}
 			else if (isList)
-			{
 				SetPulse(list);
-			}
 			else if (!isList && pageNoPulse < 2)
 			{
 				IsPulseListVisible = false;
@@ -657,7 +652,6 @@ namespace Pulse
 			{
 				App.HideMainPageLoader();
 			}
-
 		}
 
 		void GetMessageNotifyCount()
@@ -671,7 +665,6 @@ namespace Pulse
 					var matchedPulse = SavedList.Where(x => x.PulseId == pulse.PulseId).FirstOrDefault();
 					if (pulse.LastMessageUserId != SessionManager.UserId)
 					{
-
 						if (matchedPulse != null)
 						{
 							pulse.NotifyCount = matchedPulse.TotalMessagesCount < pulse.TotalMessagesCount ? Convert.ToString(pulse.TotalMessagesCount - matchedPulse.TotalMessagesCount) : string.Empty;
@@ -706,11 +699,8 @@ namespace Pulse
 				return dateTime.ToString("h:mm tt");
 			}
 			else
-			{
 				return DateTime.Parse(createDate).ToLocalTime().ToString("dd/MM/yyyy");
-			}
 		}
-
 
 		public async Task<bool> GetMyEvents(string searchValue)
 		{
@@ -824,8 +814,6 @@ namespace Pulse
 								}
 								Settings.AppSettings.AddOrUpdateValue("SavedPulseListing", JsonConvert.SerializeObject(SavedList));
 							}
-							///
-
 							return true;
 
 						}

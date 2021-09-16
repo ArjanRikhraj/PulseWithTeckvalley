@@ -49,8 +49,7 @@ namespace Pulse
             BindingContext = eventViewModel;
             eventViewModel.GetUnreadNotificationCount();
             grdInnerView.Children.Add(eventsListView, 0, 0);
-            //grdInnerView.Children.Add(pulseView, 0, 0);
-			//grdOverlay.IsVisible = false;
+            
 		}
 
 		public MainPage(ActivePage page)

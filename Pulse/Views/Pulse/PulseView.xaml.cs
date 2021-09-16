@@ -31,10 +31,6 @@ namespace Pulse
 				pulseViewModel.IsPulseListVisible = false;
 				pulseViewModel.IsFirstTimePulse = true;
 			}
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                
-            }
 			SetInitialValues();
 
 		}
@@ -47,10 +43,6 @@ namespace Pulse
 				topStack.Padding = new Thickness(0, 10, 0, 10);
 				topStack.Margin = new Thickness(13, 0, 13, 0);
 			}
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                
-            }
 			pulseViewModel.pageNoPulse = 1;
 			pulseViewModel.totalGroupsPage = 1;
 			while (pulseViewModel.tempPulseList.Count > 0)
@@ -79,13 +71,10 @@ namespace Pulse
 			}
 		}
 
-
-
 		async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
 		{
 			try
 			{
-
 				if (CrossConnectivity.Current.IsConnected)
 				{
 					if (_tapCount < 1)
@@ -137,8 +126,6 @@ namespace Pulse
 				_tapCount = 0;
 			}
 		}
-
-
 
 		async void CreatePulse_Tapped(object sender, System.EventArgs e)
 		{

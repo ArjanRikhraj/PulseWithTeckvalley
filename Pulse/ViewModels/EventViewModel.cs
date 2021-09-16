@@ -2989,7 +2989,6 @@ namespace Pulse
                     SetNotificationList(isList, NotificationList);
                 }
             }
-
             catch (Exception e)
             {
                 App.HideMainPageLoader();
@@ -3339,10 +3338,7 @@ namespace Pulse
                 EventToTime = DateTime.Parse(item.end_time).TimeOfDay;
                 if (currentActiveEventType == MyEventType.Upcoming)
                 {
-
                     CheckInButtonStatus(item.event_status_label);
-
-
                 }
                 else
                 {
@@ -3404,7 +3400,6 @@ namespace Pulse
             else if (!isList && pageNoLocBasedEvents < 2)
             {
                 IsLocEventListVisible = false;
-                //IsLocNoEventVisible = true;
                 App.HideMainPageLoader();
             }
             else
@@ -3673,19 +3668,13 @@ namespace Pulse
                 }
                 else
                 {
-
                     if (SessionManager.AccessToken != null)
                     {
-                        NotificationList = new List<NotificationResponse>();
                         var response = await mainService.Get<ResultWrapperSingle<List<NotificationResponse>>>(Constant.GetNotificationsUrl + pageNoNotification + "&datetime=" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         if (response != null && response.status == Constant.Status200 && response.response != null)
                         {
-                            foreach (var item in response.response)
-                            {
-                                NotificationList.Add(item);
-                            }
+                            NotificationList = new List<NotificationResponse>(response.response);
                             return true;
-
                         }
                         else if (response != null && response.status == Constant.Status401)
                         {
@@ -3698,7 +3687,6 @@ namespace Pulse
                             return false;
                         }
                     }
-
                 }
                 return false;
             }

@@ -271,6 +271,11 @@ namespace Pulse
             eventViewModel.listURL = Constant.LatLongBasedEventsUrl;
             GetCurrentLoc();
             eventViewModel.GetAllUpComingEvents();
+            MessagingCenter.Subscribe<App>(this, "GetNotificationCount", (obj) => {
+                eventViewModel.IsNotification = false;
+                eventViewModel.GetUnreadNotificationCount();
+
+            });
             App.HideMainPageLoader();
         }
       
