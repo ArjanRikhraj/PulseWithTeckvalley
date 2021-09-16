@@ -1,6 +1,7 @@
 ﻿
 using Plugin.Connectivity;
 using Xamarin.Forms;
+using static Pulse.ProfileViewModel;
 
 namespace Pulse
 {
@@ -16,7 +17,6 @@ namespace Pulse
 			BindingContext = profileViewModel;
 			SetInitialValues();
             profileViewModel.ProfileIcon = Constant.ProfileIcon;
-			profileViewModel.GetMyProfileDetail();
             App.HideMainPageLoader();
 		}
 
@@ -26,10 +26,7 @@ namespace Pulse
 			{
 				topStack.Margin = new Thickness(10, 10, 10, 10);
 			}
-            //if (Device.RuntimePlatform == Device.iOS)
-            //{
-            //    gradient
-            //}
+        
 		}
 
 		async void EditTapped(object sender, System.EventArgs e)
@@ -52,83 +49,30 @@ namespace Pulse
 			}
 
 		}
-		async void Handle_Clicked(object sender, System.EventArgs e)
-		{
-			if (_tapCount < 1)
-			{
-				_tapCount = 1;
-				await Navigation.PushModalAsync(new SettingsPage(profileViewModel.isChangePasswordShown));
-				_tapCount = 0;
-			}
-		}
-
-		async void MyEventsTapped(object sender, System.EventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					App.ShowMainPageLoader();
-					await Navigation.PushModalAsync(new MyEventsPage());
-					App.HideMainPageLoader();
-					_tapCount = 0;
-				}
-			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
-		}
-
-		async void SettingsTapped(object sender, System.EventArgs e)
-		{
-			if (CrossConnectivity.Current.IsConnected)
-			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					//App.ShowMainPageLoader();
-					await Navigation.PushModalAsync(new SettingsPage(profileViewModel.isChangePasswordShown));
-					App.HideMainPageLoader();
-					//_tapCount = 0;
-				}
-			}
-			else
-			{
-				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
-			}
-		}
-
-		async void PhotoAlbum_Tapped(object sender, System.EventArgs e)
+		
+       async  void profileCollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
-            try
+
+			var selecteditem = ((CollectionView)sender).SelectedItem as MenuList;
+
+			if (selecteditem == null)
+				return;
+
+			if(selecteditem.ID ==1)
             {
-				if (CrossConnectivity.Current.IsConnected)
-				{
-					if (_tapCount < 1)
-					{
-						_tapCount = 1;
-						//App.ShowMainPageLoader();
-						await Navigation.PushModalAsync(new PhotoAlbumPage());
-						//App.HideMainPageLoader();
-						_tapCount = 0;
-					}
-				}
-				else
-				{
-					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-					_tapCount = 0;
-				}
+				await Navigation.PushModalAsync(new MyEventsPage());
+			}
+			else if(selecteditem.ID ==2)
+            {
+				await Navigation.PushModalAsync(new PhotoAlbumPage());
+			}
+			else if(selecteditem.ID ==3)
+            {
+				await Navigation.PushModalAsync(new SettingsPage(profileViewModel.isChangePasswordShown));
 
 			}
-            catch (System.Exception ex)
-            {
+			((CollectionView)sender).SelectedItem = null;
 
-            }
-			
 		}
-	}
+    }
 }

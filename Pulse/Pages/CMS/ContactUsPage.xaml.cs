@@ -14,17 +14,8 @@ namespace Pulse
 			BindingContext = cmsViewModel;
 			stackAddress.WidthRequest = App.ScreenWidth / 2.2;
 			stackInfo.WidthRequest = App.ScreenWidth / 1.5;
-			cmsViewModel.GetContactUsInfo();
 		}
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			if (!CrossConnectivity.Current.IsConnected)
-			{
-				App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-			}
-		}
-
+	
 		async void HaveQueryClicked(object sender, System.EventArgs e)
 		{
 			if (CrossConnectivity.Current.IsConnected)

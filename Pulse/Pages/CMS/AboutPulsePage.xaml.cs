@@ -51,7 +51,7 @@ namespace Pulse
 
 		void WebOnEndNavigating(object sender, WebNavigatedEventArgs e)
 		{
-			IsLoading = false;
+			 IsLoading = false;
 		}
 	}
 }

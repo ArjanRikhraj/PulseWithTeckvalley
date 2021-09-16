@@ -50,9 +50,9 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					profileViewModel.IsLoading = true;
+					//profileViewModel.IsLoading = true;
 					await Navigation.PopModalAsync();
-					profileViewModel.IsLoading = false;
+					//profileViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
 			}

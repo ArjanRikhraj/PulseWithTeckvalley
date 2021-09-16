@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:controls1="clr-namespace:Pulse.Controls" x:Class="Pulse.AboutPulsePage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					   xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:controls1="clr-namespace:Pulse.Controls" x:Class="Pulse.AboutPulsePage">
 	<local:BaseContentPage.Content>
 		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
 			<Grid x:Name="grdAboutPulse" Grid.Row="0" RowSpacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
@@ -8,8 +9,8 @@
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 				<local:SettingsHeader Grid.Row="0" HorizontalOptions="FillAndExpand" LogoutVisible="false" VerticalOptions="FillAndExpand" HeadingText="{x:Static local:Constant.AboutPulseText}" />
-				<local:CustomWebView x:Name="AboutPulseView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Navigated="WebOnEndNavigating" BackgroundColor="White" Margin="0,0,0,0">
-				</local:CustomWebView>
+				<WebView x:Name="AboutPulseView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Navigated="WebOnEndNavigating" BackgroundColor="White" Margin="0,0,0,0">
+				</WebView>
 			</Grid>
 			<!--<Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Black" Opacity="0.7">
 				<Frame x:Name="frmOverLay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HasShadow="false">

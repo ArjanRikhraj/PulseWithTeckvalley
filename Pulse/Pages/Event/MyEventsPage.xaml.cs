@@ -22,7 +22,7 @@ namespace Pulse
 		public MyEventsPage()
 		{
 			InitializeComponent();
-            IsFirstLoad = true;
+            //IsFirstLoad = true;
 			eventViewModel = ServiceContainer.Resolve<EventViewModel>();
 			BindingContext = eventViewModel;
 			SetInitialValues();

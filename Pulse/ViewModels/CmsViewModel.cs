@@ -35,6 +35,7 @@ namespace Pulse
 			ShowQueryEmailError = false;
 			ShowQueryMessageError = false;
 			mainService = new MainServices();
+			GetContactUsInfo();
 		}
 
 		#region Properties

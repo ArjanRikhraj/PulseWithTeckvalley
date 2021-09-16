@@ -1105,7 +1105,7 @@ namespace Pulse
 					if (Device.RuntimePlatform == Device.iOS)
 					{
 						stckVideo.IsVisible = true;
-						CustomWebView video = new CustomWebView
+						WebView video = new WebView
 						{
 							HorizontalOptions = LayoutOptions.FillAndExpand,
 							VerticalOptions = LayoutOptions.FillAndExpand

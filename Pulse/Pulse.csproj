@@ -99,4 +99,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Xamarin.FFImageLoading.Transformations" />
+  </ItemGroup>
 </Project>

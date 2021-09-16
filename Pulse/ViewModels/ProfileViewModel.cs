@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -167,12 +168,40 @@ namespace Pulse
 				OnPropertyChanged("IsEmailVisible");
 			}
 		}
+		public class MenuList
+		{
+			public int ID { get; set; }
+			public string MenuImage{ get; set; }
+			public string MenuTitle { get; set; }
+		}
+
+		private ObservableCollection<MenuList> profileMenuList;
+		public ObservableCollection<MenuList> ProfileMenuList
+        {
+
+			get { return profileMenuList; }
+			set
+			{
+				profileMenuList = value;
+				OnPropertyChanged("ProfileMenuList");
+			}
+		}
+
+
 
 		#endregion
 		#region constructor
 		public ProfileViewModel()
 		{
 			UpdateUserClick = new Command(UpdateUser);
+			ProfileMenuList = new ObservableCollection<MenuList>
+			{
+				new MenuList{ ID =1 , MenuTitle ="My Events",MenuImage=Constant.EventTitleImage},
+				new MenuList{ ID =2 , MenuTitle ="Photo Album",MenuImage="photo_album.png"},
+				new MenuList{ ID =3 , MenuTitle ="Settings",MenuImage=Constant.SettingsIcon},
+			};
+			GetMyProfileDetail();
+
 		}
 		#endregion
 		#region Methods

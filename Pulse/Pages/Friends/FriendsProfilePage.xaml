@@ -149,7 +149,7 @@
                                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                                         </local:ExtendedLabel.GestureRecognizers>
                                     </local:ExtendedLabel>
-                                <local:ExtendedLabel x:Name="lblMedia" Text="Photo Album" FontFace="PoppinsLight" FontSize="16" TextColor="Black" HorizontalOptions="EndAndExpand">
+                                    <local:ExtendedLabel x:Name="lblMedia" Text="Photo Album" FontFace="PoppinsLight" FontSize="16" TextColor="Black" HorizontalOptions="EndAndExpand">
                                         <local:ExtendedLabel.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                                         </local:ExtendedLabel.GestureRecognizers>

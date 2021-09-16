@@ -51,30 +51,30 @@ namespace Pulse
 				switch (settingPage.ToLower())
 				{
 					case Constant.ChangePasswordEvent:
-						IsLoading = true;
+						//IsLoading = true;
 						await Navigation.PushModalAsync(new ChangePasswordPage());
-						IsLoading = false;
+						//IsLoading = false;
 						break;
 					case Constant.AboutPulseEvent:
-						IsLoading = true;
+						//IsLoading = true;
 						await Navigation.PushModalAsync(new AboutPulsePage());
-						IsLoading = false;
+						//IsLoading = false;
 						break;
 					case Constant.PrivacyPolicyEvent:
-						IsLoading = true;
+						//IsLoading = true;
 						await Navigation.PushModalAsync(new PrivacyPolicyPage());
-						IsLoading = false;
+						//IsLoading = false;
 						break;
 					case Constant.FaqsEvent:
-						IsLoading = true;
+						//IsLoading = true;
 						await Navigation.PushModalAsync(new FAQPage());
-						IsLoading = false;
+						//IsLoading = false;
 
 						break;
 					case Constant.ContactUsEvent:
-						IsLoading = true;
+						//IsLoading = true;
 						await Navigation.PushModalAsync(new ContactUsPage());
-						IsLoading = false;
+						//IsLoading = false;
 						break;
 					default:
 						break;

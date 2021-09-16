@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" x:Class="Pulse.ProfileView">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" x:Class="Pulse.ProfileView">
 	<ContentView.Content>
 		<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
 			<Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
@@ -26,35 +26,25 @@
 					<local:ExtendedLabel x:Name="lblUser" Text="{Binding UserName}" FontFace="PoppinsRegular" LineBreakMode="TailTruncation" Margin="0,0,0,10" VerticalOptions="Start" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12" />
                     <local:ExtendedLabel x:Name="lblSchool" Text="{Binding School}" FontFace="PoppinsRegular" LineBreakMode="TailTruncation" Margin="0,0,0,10" VerticalOptions="Start" HorizontalOptions="Center" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="12" />
 				</local:GradientColorStack>
+
 				<StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" Margin="0,70,0,0" Spacing="0">
-					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-					<StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
-						<Image Source="{x:Static local:Constant.EventTitleImage}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
-						<local:ExtendedLabel Text="My Events" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
-						<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
-						<StackLayout.GestureRecognizers>
-							<TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MyEventsTapped" />
-						</StackLayout.GestureRecognizers>
-					</StackLayout>
-					<BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
-                        <Image Source="photo_album.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <local:ExtendedLabel Text="Photo Album" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
-                        <Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PhotoAlbum_Tapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
-                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
-                        <Image Source="{x:Static local:Constant.SettingsIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <local:ExtendedLabel Text="Settings" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
-                        <Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SettingsTapped" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+					<CollectionView  BackgroundColor="White"  x:Name="profileCollectionView"  ItemsSource="{Binding ProfileMenuList}" SelectionChanged="profileCollectionView_SelectionChanged" SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+								<Grid BackgroundColor="White"  RowDefinitions="Auto,*">
+							      <StackLayout  HorizontalOptions="FillAndExpand" Orientation="Horizontal" Padding="17,14,17,14" BackgroundColor="{x:Static local:Constant.WhiteTextColor}">
+									<Image Source="{Binding MenuImage}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Start" />
+									<local:ExtendedLabel Text="{Binding MenuTitle}" FontFace="PoppinsLight" Margin="10,0,0,0" LineBreakMode="TailTruncation" VerticalOptions="Center" TextColor="{x:Static local:Constant.AddEventEntriesColor}" HorizontalOptions="FillAndExpand" FontSize="15" />
+									<Image Source="{x:Static local:Constant.RightArrowIcon}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" />
+							     	</StackLayout>
+									<BoxView Grid.Row="1" HeightRequest="1.3" HorizontalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.BoxOnMyProfileColor}" />
+								</Grid>
+                         </DataTemplate>
+                     </CollectionView.ItemTemplate>
+                  </CollectionView>
 				</StackLayout>
 				<Frame HasShadow="false" Grid.RowSpan="2" VerticalOptions="Center" Grid.Row="0" Padding="0" BackgroundColor="{x:Static local:Constant.WhiteTextColor}" CornerRadius="1" Margin="15,0,15,5">
 					<Grid ColumnSpacing="0">
@@ -102,7 +92,7 @@
 						</Label>
 					</StackLayout>
 				</Frame>
-			</Grid>-->
+	       </Grid>-->
 		</Grid>
 	</ContentView.Content>
 </ContentView>
