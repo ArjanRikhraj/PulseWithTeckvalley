@@ -1263,21 +1263,21 @@ namespace Pulse
                 return starEventCommand ?? (starEventCommand = new Command<object>((currentObject) => CreateStarredEvent(currentObject)));
             }
         }
-        private EventGallery mediaSelectedItem;
-        public EventGallery MediaSelectedItem
-        {
-            get
-            {
-                return mediaSelectedItem;
-            }
-            set
-            {
-                mediaSelectedItem = value;
-                OnPropertyChanged("MediaSelectedItem");
-                if(mediaSelectedItem!=null)
-                ShowMedia(MediaSelectedItem);
-            }
-        }
+        //private EventGallery mediaSelectedItem;
+        //public EventGallery MediaSelectedItem
+        //{
+        //    get
+        //    {
+        //        return mediaSelectedItem;
+        //    }
+        //    set
+        //    {
+        //        mediaSelectedItem = value;
+        //        OnPropertyChanged("MediaSelectedItem");
+        //        if(mediaSelectedItem!=null)
+        //        ShowMedia(MediaSelectedItem);
+        //    }
+        //}
 
         private string cover_Photo { get; set; }
         public string Cover_Photo
@@ -1725,7 +1725,7 @@ namespace Pulse
                 await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
             }
         }
-        private async void ShowMedia(EventGallery selectedItem)
+        internal async Task ShowMedia(EventGallery selectedItem)
         {
             try
             {

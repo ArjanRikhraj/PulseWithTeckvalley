@@ -64,7 +64,6 @@ namespace Pulse
 						IsLoading = true;
 						await Navigation.PushModalAsync(new PrivacyPolicyPage());
 						IsLoading = false;
-
 						break;
 					case Constant.FaqsEvent:
 						IsLoading = true;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 
@@ -19,8 +20,8 @@ namespace Pulse
 			eventViewModel = ServiceContainer.Resolve<EventViewModel>();
 			BindingContext = eventViewModel;
 			SetInitialValues();
-           // listViewMedia.ItemAppearing += ListViewMedia_ItemAppearing;
-            //listViewMedia.ItemDisappearing += ListViewMedia_ItemDisappearing;
+			// listViewMedia.ItemAppearing += ListViewMedia_ItemAppearing;
+			//listViewMedia.ItemDisappearing += ListViewMedia_ItemDisappearing;
 		}
 		void SetInitialValues()
 		{
@@ -33,30 +34,10 @@ namespace Pulse
 			tempMediaList.Clear();
 			listViewMedia.IsVisible = false;
 			lblNoMedia.IsVisible = false;
-			listViewMedia.LoadMoreCommand = new Command(GetMedia);
-			GetMedia();
+			listViewMedia.LoadMoreCommand = new Command(async () => await GetMedia());
+			 GetMedia();
 		}
-        //void ListViewMedia_ItemAppearing(object sender, ItemVisibilityEventArgs e)
-        //{
-        //    IEnumerable<PropertyInfo> pInfos = (listViewMedia as ItemsView<Cell>).GetType().;
-        //    var templatedItems = pInfos.FirstOrDefault(info => info.Name == "TemplatedItems");
-        //    if (templatedItems != null)
-        //    {
-        //        var cells = templatedItems.GetValue(listViewMedia);
-        //        Xamarin.Forms.ITemplatedItemsList<Xamarin.Forms.Cell> listCell = cells as Xamarin.Forms.ITemplatedItemsList<Xamarin.Forms.Cell>;
-        //        ViewCell currentCell = listCell[position] as ViewCell;
-        //        currentCell.View.BackgroundColor = Color.White;
-
-        //        foreach (ViewCell cell in cells as Xamarin.Forms.ITemplatedItemsList<Xamarin.Forms.Cell>)
-        //        {
-        //            if (cell.BindingContext != null && currentCell != cell)
-        //            {
-        //                cell.View. = Color.Transparent;
-        //            }
-        //        }
-        //    }
-        //}
-
+    
         void ListViewMedia_ItemDisappearing(object sender, ItemVisibilityEventArgs e)
         {
             if (e != null && sender != null)
@@ -88,7 +69,7 @@ namespace Pulse
         protected override void OnAppearing()
         {
             base.OnAppearing();
-			MessagingCenter.Subscribe<object>(this, "getPhotoAlbumMedia", (obj) => {
+			  MessagingCenter.Subscribe<object>(this, "getPhotoAlbumMedia", (obj) => {
                 eventViewModel.pageNoMedia = 1;
                 eventViewModel.totalMediaPages = 1;
                 lblNoMedia.IsVisible = false;
@@ -96,22 +77,23 @@ namespace Pulse
                 listViewMedia.IsVisible = false;
                 GetMedia();
             });
-           
         }
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<App>(this, "getPhotoAlbumMedia");
-           }
+        }
+
+
 		async void Cross_Clicked(object sender, System.EventArgs e)
 		{
+			 await Navigation.PopModalAsync();
 			if (CrossConnectivity.Current.IsConnected)
 			{
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
-					await Navigation.PopModalAsync();
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
@@ -123,7 +105,7 @@ namespace Pulse
 			}
 		}
 
-		async void GetMedia()
+		async Task GetMedia()
 		{
 
 			try
@@ -248,5 +230,13 @@ namespace Pulse
 			stckVideo.IsVisible = false;
 		}
 
+        async  void mediaCollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
+        {
+			var items = ((CollectionView)sender).SelectedItem as EventGallery;
+			if (items == null)
+				return;
+			await eventViewModel.ShowMedia(items);
+			((CollectionView)sender).SelectedItem = null;
+		}
     }
 }

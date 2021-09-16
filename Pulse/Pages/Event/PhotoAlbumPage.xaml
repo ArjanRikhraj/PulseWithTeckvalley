@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" x:Name="UserMediaPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls1="clr-namespace:Pulse.Controls" x:Class="Pulse.PhotoAlbumPage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" x:Name="UserMediaPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls1="clr-namespace:Pulse.Controls" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" x:Class="Pulse.PhotoAlbumPage">
     <local:BaseContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" Margin="0" Padding="0">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="White">
@@ -20,8 +20,8 @@
                         <local:ExtendedLabel Text="Photo Album" Grid.ColumnSpan="2" FontFace="PoppinsMedium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" TextColor="{x:Static local:Constant.WhiteTextColor}" FontSize="15" />
                     </Grid>
                 </local:GradientColorStack>
-                <StackLayout Grid.Row="1" BackgroundColor="White" Padding="0">
-                    <CollectionView x:Name="mediaCollectionView" SelectedItem="{Binding MediaSelectedItem}" SelectionMode="Single">
+                <StackLayout Grid.Row="1"  Padding="0">
+                    <CollectionView x:Name="mediaCollectionView" SelectionChanged="mediaCollectionView_SelectionChanged"  SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                         Span="3"
@@ -33,7 +33,9 @@
                                 <Grid RowDefinitions="Auto" ColumnDefinitions="Auto" HorizontalOptions="FillAndExpand" Padding="0">
                                     <Frame Grid.Row="0" IsClippedToBounds="True" HeightRequest="150" WidthRequest="150" Padding="0">
                                         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                            <Image Source="{Binding FileName}" Aspect="AspectFill"/>
+                                             <ffimageloading:CachedImage  CacheDuration="50"  x:Name="imgFull" BackgroundColor="White" Aspect="AspectFill" DownsampleToViewSize="true" Source="{Binding FileName}">
+                                             </ffimageloading:CachedImage>
+                                            <!--<Image Source="{Binding FileName}" Aspect="AspectFill"/>-->
                                             <Image Source="{x:Static local:Constant.VideoIcon}" HeightRequest="20" WidthRequest="20" IsVisible="{Binding IsPlayIconVisible}" Aspect="AspectFit" HorizontalOptions="Start" VerticalOptions="Start"/>
                                             <Image Source="{Binding PinIcon}" HeightRequest="20" WidthRequest="20" Aspect="AspectFit" HorizontalOptions="End" VerticalOptions="End" Margin="0,0,5,5"/>
                                         </Grid>

@@ -110,13 +110,13 @@ namespace Pulse.Pages.User
         {
             try
             {
+                await Navigation.PopModalAsync();
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     //MessagingCenter.Send<object>(this, "getPhotoAlbumMedia");
                     if (CrossMediaManager.Current.IsPlaying())
                         await CrossMediaManager.Current.Stop();
                     CrossMediaManager.Current.Dispose();
-                    await Navigation.PopModalAsync();
                 }
                 else
                     await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);

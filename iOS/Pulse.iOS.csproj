@@ -204,7 +204,6 @@
     <Compile Include="Renderers\CustomFrameRenderer.cs" />
     <Compile Include="Renderers\CustomMapRenderer.cs" />
     <Compile Include="Renderers\CustomMKAnnotationView.cs" />
-    <Compile Include="Renderers\CustomWebView.cs" />
     <Compile Include="Helpers\FontHelper.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Renderers\ExtendedButtonRenderer.cs" />

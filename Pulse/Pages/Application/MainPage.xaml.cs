@@ -41,7 +41,7 @@ namespace Pulse
 		public MainPage()
 		{
 			InitializeComponent();
-			grdOverlay.IsVisible = true;
+			//grdOverlay.IsVisible = true;
 			eventsListView = new EventsListView();
 			CurrentActivePage = App.CurrentActivePageName = ActivePage.Event;
 			pulseViewModel = ServiceContainer.Resolve<PulseViewModel>();
@@ -55,7 +55,7 @@ namespace Pulse
 		public MainPage(ActivePage page)
 		{
 			InitializeComponent();
-            grdOverlay.IsVisible = true;
+          //  grdOverlay.IsVisible = true;
 			pulseViewModel = ServiceContainer.Resolve<PulseViewModel>();
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             BindingContext = eventViewModel;

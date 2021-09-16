@@ -8,8 +8,8 @@
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 				<local:SettingsHeader Grid.Row="0" LogoutVisible="false" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" VerticalOptions="FillAndExpand" HeadingText="{x:Static local:Constant.PrivacyPolicyText}" />
-				<local:CustomWebView x:Name="PrivacyPolicyView" BackgroundColor="Red" Margin="0" Grid.Row="1" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" Navigated="WebOnEndNavigating">
-				</local:CustomWebView>
+				<WebView x:Name="PrivacyPolicyView" Margin="0" Grid.Row="1" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" Navigated="WebOnEndNavigating">
+				</WebView>
 			</Grid>
              <Grid x:Name="grdOverlay" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsLoading}" BackgroundColor="Transparent">
                 <Frame x:Name="frmOverLay" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" HasShadow="false" CornerRadius="12" Opacity="0.7">
