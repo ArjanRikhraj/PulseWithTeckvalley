@@ -49,7 +49,7 @@ namespace Pulse
 		bool isNoMediaVisible = false;
 		
 		List<MyEventResponse> HostedEventsList;
-		Friend selectedFriend;
+	
 		#endregion
 		#region Public Properties
 		public int pageNoUser;
@@ -77,6 +77,8 @@ namespace Pulse
 		public ObservableCollection<Friend> tempPendingList;
 		public ObservableCollection<MyEvents> tempFriendEventList;
 		ObservableCollection<EventGallery> friendsMediaList;
+		ObservableCollection<MyEventResponse> friendsPageEvents;
+		
 
 		public string searchvalue;
 
@@ -116,6 +118,18 @@ namespace Pulse
 				OnPropertyChanged("ListPendingRequest");
 			}
 		}
+		public ObservableCollection<MyEventResponse> FriendsPageEvents
+		{
+			get { return friendsPageEvents; }
+			set
+			{
+				friendsPageEvents = value;
+				OnPropertyChanged("FriendsPageEvents");
+			}
+		}
+
+		
+
 		public ObservableCollection<Friend> ListUsers
 		{
 			get { return listUsers; }
@@ -297,16 +311,7 @@ namespace Pulse
                 OnPropertyChanged("BlockUnBlockText");
             }
         }
-		public Friend SelectedFriend
-		{
-			get { return selectedFriend; }
-			set
-			{
-				selectedFriend = value;
-				OnPropertyChanged("SelectedFriend");
-				CollectionViewSelectedFriend(selectedFriend);
-			}
-		}
+		
 		private EventGallery mediaSelectedItem;
 		public EventGallery MediaSelectedItem
 		{
@@ -458,7 +463,7 @@ namespace Pulse
 		{
 			LoadMoreContacts = new Command(OnLoadMoreContacts);
 			LoadMoreUsers = new Command(GetUsers);
-			LoadMoreMyFriends = new Command(GetMyFriendsList);
+			LoadMoreMyFriends = new Command(async () =>  await GetMyFriendsList());
 			LoadMorePending = new Command(GetPendingFriendsList);
 			LoadMoreFriendEvents = new Command(GetFriendsHostedEventList);
 			AddFriendPageCommand = new Command(GetFriendPage);
@@ -471,6 +476,7 @@ namespace Pulse
 			friendsMediaList = new ObservableCollection<EventGallery>();
 			contactList = new ObservableCollection<ContactsModel>();
 			mainService = new MainServices();
+			FriendsPageEvents = new ObservableCollection<MyEventResponse>();
 			GetAllReportComments();
 		}
 		#endregion
@@ -756,11 +762,11 @@ namespace Pulse
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
-		private async void CollectionViewSelectedFriend(Friend SelectedFriend)
+		internal async Task CollectionViewSelectedFriend(Friend SelectedFriend)
 		{
 			try
 			{
-				IsLoading = true;
+			
 				if (!CrossConnectivity.Current.IsConnected)
 				{
 					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
@@ -769,14 +775,10 @@ namespace Pulse
                 else
                 {
 					await Navigation.PushModalAsync(new FriendsProfilePage("My Friends", SelectedFriend.friendId.ToString()));
-					SelectedFriend = null;
-					App.HideMainPageLoader();
 				}
-				IsLoading = false;
 			}
 			catch (Exception ex)
 			{
-				IsLoading = false;
 				TapCount = 0;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
@@ -1210,12 +1212,36 @@ namespace Pulse
 			}
 		}
 
-		public async void GetMyFriendsList()
+
+		internal async Task GetEventList()
 		{
 			try
 			{
-				IsLoading = true;
-				App.ShowMainPageLoader();
+				if (SessionManager.AccessToken != null)
+				{
+					FriendsPageEvents = new ObservableCollection<MyEventResponse>();
+					var response = await mainService.Get<ResultWrapper<MyEventResponse>>(Constant.NextSevenDaysEventUrl + "1" + "&datetime=" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+					if (response != null && response.status == Constant.Status200 && response.response != null)
+					{
+						FriendsPageEvents = new ObservableCollection<MyEventResponse>(response.response);
+					}
+					else
+                    {
+						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
+
+			}
+		}
+
+		public async Task GetMyFriendsList()
+		{
+			try
+			{
 				if (!CrossConnectivity.Current.IsConnected)
 				{
 					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
@@ -1225,15 +1251,12 @@ namespace Pulse
 					bool isList = await GetMyFriends();
 					SetFriendsList(isList, FriendsList);
 				}
-				App.HideMainPageLoader();
+		
 				IsLoading = false;
 			}
 
 			catch (Exception)
 			{
-				IsLoading = false;
-				App.HideMainPageLoader();
-				TapCount = 0;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}

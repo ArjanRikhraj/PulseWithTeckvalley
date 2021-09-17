@@ -101,5 +101,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.FFImageLoading.Transformations" />
+    <None Remove="Helpers\Converters\" />
+    <None Remove="Helpers\Converters\Friends\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\Converters\" />
+    <Folder Include="Helpers\Converters\Friends\" />
   </ItemGroup>
 </Project>
