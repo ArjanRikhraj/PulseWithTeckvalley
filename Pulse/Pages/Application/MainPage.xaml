@@ -25,10 +25,12 @@
                         </BoxView>
                         <BoxView Grid.Column="1" x:Name="Notificationbox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
                         </BoxView>
-                        <BoxView Grid.Column="2" x:Name="PulseBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        <BoxView Grid.Column="2" x:Name="NewEventsBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
                         </BoxView>
-                        <BoxView Grid.Column="3" x:Name="FriendsBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        <BoxView Grid.Column="3" x:Name="PulseBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
                         </BoxView>
+                        <!--<BoxView Grid.Column="3" x:Name="FriendsBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
+                        </BoxView>-->
                         <BoxView Grid.Column="4" x:Name="ProfileBox" HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="Transparent">
                         </BoxView>
                     </Grid>
@@ -58,14 +60,17 @@
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
                             </local:ExtendedStackLayout.GestureRecognizers>
                         </local:ExtendedStackLayout>
-                        <!--    <local:ExtendedStackLayout  x:Name="" ActivePage="Notification" BackgroundColor="Transparent" Grid.Column="1" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label FontFamily="London1960" x:Name="lblUnreadNotification" Text="{x:Static local:Constant.NotificationTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
-                                <local:ExtendedStackLayout.GestureRecognizers>
+
+                        <local:ExtendedStackLayout x:Name="stacknewEvent" Margin="0,-25,0,0"  Padding="8,7,8,8" ActivePage="AddNewEvent" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            <Image x:Name="neweventInActiveImage" Source="{x:Static local:Constant.AddEventIcon}" Aspect="AspectFit" IsVisible="true" />
+                            <Image x:Name="neweventActiveImage" Source="{x:Static local:Constant.AddEventIcon}" Aspect="AspectFit" IsVisible="false" />
+                            <Label FontFamily="London1960" x:Name="lblnewEvent" Text="{x:Static local:Constant.AddEventText}" TextColor="{x:Static local:Constant.PinkButtonColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
+                            <local:ExtendedStackLayout.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
-                                </local:ExtendedStackLayout.GestureRecognizers>
-                            </local:ExtendedStackLayout>
-                        -->
-                        <local:ExtendedStackLayout x:Name="stackPulse"  Padding="8,7,8,8" ActivePage="Pulse" BackgroundColor="Transparent" Grid.Column="2" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                            </local:ExtendedStackLayout.GestureRecognizers>
+                        </local:ExtendedStackLayout>
+
+                        <local:ExtendedStackLayout x:Name="stackPulse"  Padding="8,7,8,8" ActivePage="Pulse" BackgroundColor="Transparent" Grid.Column="3" Spacing="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                             <Image x:Name="pulseInActiveImage" Source="{x:Static local:Constant.PulseInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
                             <Image x:Name="pulseActiveImage" Source="{x:Static local:Constant.PulseActiveIcon}" Aspect="AspectFit" IsVisible="false" />
                             <Label FontFamily="London1960" x:Name="lblPulse" Text="{x:Static local:Constant.PulseTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
@@ -73,14 +78,19 @@
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
                             </local:ExtendedStackLayout.GestureRecognizers>
                         </local:ExtendedStackLayout>
-                        <local:ExtendedStackLayout x:Name="stackFriends"  Padding="8,7,8,8" ActivePage="Friends" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                     
+
+
+
+
+                        <!--<local:ExtendedStackLayout x:Name="stackFriends"  Padding="8,7,8,8" ActivePage="Friends" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                             <Image x:Name="friendInActiveImage" Source="{x:Static local:Constant.FriendInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
                             <Image x:Name="friendActiveImage" Source="{x:Static local:Constant.FriendActiveIcon}" Aspect="AspectFit" IsVisible="false" />
                             <Label FontFamily="London1960" x:Name="lblFriends" Text="{x:Static local:Constant.FriendsTabText}" TextColor="{x:Static local:Constant.InActiveMenuTextColor}" FontSize="9" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" />
                             <local:ExtendedStackLayout.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MenuItemTapped" />
                             </local:ExtendedStackLayout.GestureRecognizers>
-                        </local:ExtendedStackLayout>
+                        </local:ExtendedStackLayout>-->
                         <local:ExtendedStackLayout Grid.Row="0"  Padding="8,7,8,8" x:Name="stackProfile" ActivePage="Profile" BackgroundColor="Transparent" Spacing="3" InputTransparent="false" Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                             <Image x:Name="profileInActiveImage" Source="{x:Static local:Constant.ProfileInActiveIcon}" Aspect="AspectFit" IsVisible="true" />
                             <Image x:Name="profileActiveImage" Source="{x:Static local:Constant.ProfileActiveIcon}" Aspect="AspectFit" IsVisible="false" />

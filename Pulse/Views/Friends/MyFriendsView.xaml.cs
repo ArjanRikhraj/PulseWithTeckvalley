@@ -9,7 +9,7 @@ using Xamarin.Forms.PancakeView;
 
 namespace Pulse
 {
-	public partial class MyFriendsView : ContentView
+	public partial class MyFriendsView : ContentPage
 	{
 		readonly EventViewModel eventViewModel;
 		List<MyEventResponse> list = new List<MyEventResponse>();
@@ -27,11 +27,18 @@ namespace Pulse
 			friendsViewModel.pageNoFriend = 1;
 			friendsViewModel.totalPagesMyFriends = 1;
 			SetInitialValues();
-			friendsViewModel.GetEventList();
+			//friendsViewModel.GetEventList();
 			friendsViewModel.PendingRequestCount();
 			friendsViewModel.GetMyFriendsList();
 		}
-	
+
+		async void Back_Tapped(object sender, System.EventArgs e)
+		{
+			await Navigation.PopModalAsync();
+			
+		}
+
+
 		async void SeeAllTapped(object sender, System.EventArgs e)
 		{
 			await Navigation.PushAsync(new MyEventsPage());
@@ -61,9 +68,9 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					App.ShowMainPageLoader();
+					//App.ShowMainPageLoader();
 					await Navigation.PushModalAsync(new PendingFriendRequestPage());
-					App.HideMainPageLoader();
+					//App.HideMainPageLoader();
 					_tapCount = 0;
 				}
 			}
@@ -107,6 +114,36 @@ namespace Pulse
 			await friendsViewModel.CollectionViewSelectedFriend(selecteditem);
 			((CollectionView)sender).SelectedItem = null;
 		}
-		
-	}
+
+         async  void CreateEvent_Tapped(System.Object sender, System.EventArgs e)
+        {
+			try
+			{
+				if (CrossConnectivity.Current.IsConnected)
+				{
+					if (_tapCount < 1)
+					{
+						_tapCount = 1;
+						//App.ShowMainPageLoader();
+						//await Task.Delay(500);
+						eventViewModel.IsBoostEvent = false;
+						eventViewModel.BoostEventConfirmation = true;
+						await Navigation.PushModalAsync(new AddEventPage());
+						_tapCount = 0;
+					}
+				}
+				else
+				{
+					await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
+					_tapCount = 0;
+				}
+			}
+			catch (Exception ex)
+			{
+				App.HideMainPageLoader();
+				await App.Instance.Alert("Can not create event right now", Constant.AlertTitle, Constant.Ok);
+			}
+
+		}
+    }
 }

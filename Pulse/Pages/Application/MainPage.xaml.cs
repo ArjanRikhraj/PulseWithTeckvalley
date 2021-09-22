@@ -69,12 +69,12 @@ namespace Pulse
 				CurrentActivePage = App.CurrentActivePageName = ActivePage.Profile;
                 TabPageGesture(profileView, profileActiveImage, profileInActiveImage, lblProfile, ProfileBox,stackProfile);
 			}
-			else if (page == ActivePage.Friends)
-			{
-				myFriendsView = new MyFriendsView();
-				CurrentActivePage = App.CurrentActivePageName = ActivePage.Friends;
-                TabPageGesture(myFriendsView, friendActiveImage, friendInActiveImage, lblFriends, FriendsBox,stackFriends);
-			}
+			//else if (page == ActivePage.Friends)
+			//{
+			//	myFriendsView = new MyFriendsView();
+			//	CurrentActivePage = App.CurrentActivePageName = ActivePage.Friends;
+			 // TabPageGesture(myFriendsView, friendActiveImage, friendInActiveImage, lblFriends, FriendsBox,stackFriends);
+			//}
 			else
 			{
 				pulseViewModel.IsLoading = false;
@@ -127,7 +127,7 @@ namespace Pulse
 
 		async void GetPulseView()
 		{
-			grdOverlay.IsVisible = true;
+			//grdOverlay.IsVisible = true;
 			pulseViewModel.pageNoPulse = 1;
 			pulseViewModel.totalGroupsPage = 1;
 			bool isList = await pulseViewModel.GetPulseList(false, "");
@@ -146,8 +146,12 @@ namespace Pulse
 			grdInnerView.Children.Add(tabName, 0, 0);
 			eventActiveImage.IsVisible = false;
 			eventInActiveImage.IsVisible = true;
-			friendActiveImage.IsVisible = false;
-			friendInActiveImage.IsVisible = true;
+			//friendActiveImage.IsVisible = false;
+			//friendInActiveImage.IsVisible = true;
+			
+			neweventActiveImage.IsVisible = false;
+			neweventInActiveImage.IsVisible = true;
+
 			pulseActiveImage.IsVisible = false;
 			pulseInActiveImage.IsVisible = true;
 			profileActiveImage.IsVisible = false;
@@ -158,7 +162,8 @@ namespace Pulse
 			InActiveImage.IsVisible = false;
 			lblEvent.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
 			lblPulse.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
-			lblFriends.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
+			//lblFriends.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
+			//lblnewEvent.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
 			lblProfile.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
 			lblProfile.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
             lblNotification.TextColor = Color.FromHex(Constant.InActiveMenuTextColor);
@@ -166,11 +171,17 @@ namespace Pulse
 			EventsBox.BackgroundColor = Color.Transparent;
 			PulseBox.BackgroundColor = Color.Transparent;
 			ProfileBox.BackgroundColor = Color.Transparent;
-			FriendsBox.BackgroundColor = Color.Transparent;
-            stackEvents.BackgroundColor = Color.Transparent;
+			//FriendsBox.BackgroundColor = Color.Transparent;
+			NewEventsBox.BackgroundColor = Color.Transparent;
+			
+
+			stackEvents.BackgroundColor = Color.Transparent;
             stackPulse.BackgroundColor = Color.Transparent;
-            stackFriends.BackgroundColor = Color.Transparent;
-            stackNotifications.BackgroundColor = Color.Transparent;;
+			stacknewEvent.BackgroundColor = Color.Transparent;
+			//stackFriends.BackgroundColor = Color.Transparent;
+			stackPulse.BackgroundColor = Color.Transparent;
+
+			stackNotifications.BackgroundColor = Color.Transparent;;
             stackProfile.BackgroundColor = Color.Transparent;
             stack.BackgroundColor = Color.FromHex(Constant.BoostListBackColor);
             Notificationbox.BackgroundColor = Color.Transparent;
@@ -191,52 +202,57 @@ namespace Pulse
 				{
 					switch (button.ActivePage)
 					{
-
-						case ActivePage.Pulse:
+						    case ActivePage.Pulse:
 							if (button.ActivePage != CurrentActivePage)
 							{
 								GetPulseView();
 							}
-                            eventViewModel.GetUnreadNotificationCount();
+                             //eventViewModel.GetUnreadNotificationCount();
 							CurrentActivePage = App.CurrentActivePageName = button.ActivePage;
 
 							break;
                         case ActivePage.Notification:
                             if (button.ActivePage != CurrentActivePage)
                             {
-                                grdOverlay.IsVisible = true;
-                                await Task.Delay(1000);
-
+                                //grdOverlay.IsVisible = true;
+                                //await Task.Delay(1000);
                                 notificationView = new NotificationView();
                                 TabPageGesture(notificationView, notificationActiveImage, notificationInActiveImage, lblNotification, Notificationbox,stackNotifications);
                             }
                             await eventViewModel.MarkReadNotification();
                             CurrentActivePage = App.CurrentActivePageName = button.ActivePage;
                             break;
-						case ActivePage.Friends:
+
+					 	  case ActivePage.Friends:
 							if (button.ActivePage != CurrentActivePage)
 							{
-								grdOverlay.IsVisible = true;
-								await Task.Delay(1000);
-                                eventViewModel.GetUnreadNotificationCount();
-								myFriendsView = new MyFriendsView();
-                                TabPageGesture(myFriendsView, friendActiveImage, friendInActiveImage, lblFriends, FriendsBox,stackFriends);
+								//grdOverlay.IsVisible = true;
+								//await Task.Delay(1000);
+                               // eventViewModel.GetUnreadNotificationCount();
+								//myFriendsView = new MyFriendsView();
+								//  TabPageGesture(myFriendsView, friendActiveImage, friendInActiveImage, lblFriends, FriendsBox,stackFriends);
 							}
-                           
-							CurrentActivePage = App.CurrentActivePageName = button.ActivePage;
 							break;
+
+						    case ActivePage.AddNewEvent:
+								//eventActiveImage.IsVisible = false;
+								//eventInActiveImage.IsVisible = true;
+								NewEventsBox.BackgroundColor = Color.Transparent;
+								stacknewEvent.BackgroundColor = Color.Transparent;
+								await Navigation.PushModalAsync(new AddEventPage());
+							break;
+
 						case ActivePage.Profile:
 							if (button.ActivePage != CurrentActivePage)
 							{
-								grdOverlay.IsVisible = true;
-								await Task.Delay(1000);
-                                eventViewModel.GetUnreadNotificationCount();
+							
 								profileView = new ProfileView();
                                 TabPageGesture(profileView, profileActiveImage, profileInActiveImage, lblProfile, ProfileBox,stackProfile);
 							}
 
 							CurrentActivePage = App.CurrentActivePageName = button.ActivePage;
 							break;
+
 						default:
 							if (button.ActivePage != CurrentActivePage)
 							{

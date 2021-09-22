@@ -184,9 +184,9 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					pulseViewModel.IsLoading = true;
+					//pulseViewModel.IsLoading = true;
 					await Navigation.PopModalAsync();
-					pulseViewModel.IsLoading = false;
+					//pulseViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
 			}

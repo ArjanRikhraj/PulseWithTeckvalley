@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" x:Name="UserMediaPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls1="clr-namespace:Pulse.Controls" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" x:Class="Pulse.PhotoAlbumPage">
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" BackgroundColor="White" x:Name="UserMediaPage" xmlns:local="clr-namespace:Pulse;assembly=Pulse" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:controls1="clr-namespace:Pulse.Controls" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" x:Class="Pulse.PhotoAlbumPage">
     <local:BaseContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" Margin="0" Padding="0">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="0" Padding="0">
             <Grid x:Name="grdMain" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand" BackgroundColor="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

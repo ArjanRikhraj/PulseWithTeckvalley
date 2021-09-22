@@ -113,7 +113,7 @@ namespace Pulse.ViewModels
         {
             if (SessionManager.AccessToken != null)
             {
-                App.ShowMainPageLoader();
+               // App.ShowMainPageLoader();
                 FriendModel = new AddFriendModel();
                 var url = string.Format(Constant.GetAllUsersUrl, loc.Longitude, loc.Latitude);
                 var result = await mainService.Get<ResultWrapper<AddfriendListResponse>>(url);
@@ -221,7 +221,7 @@ namespace Pulse.ViewModels
         {
             try
             {
-                IsLoading = true;
+                //IsLoading = true;
                 var currentLocation=  await Utils.GetCurrentLocation();
                 if (currentLocation.Latitude != 0)
                 {
@@ -261,13 +261,13 @@ namespace Pulse.ViewModels
                 FriendModel.FifthFriendIsVisible = false;
                 FriendModel.SixthFriendIsVisible = false;
                 FriendsCount = "No";
-                App.HideMainPageLoader();
-                IsLoading = false;
+               // App.HideMainPageLoader();
+               // IsLoading = false;
                 await App.Instance.Alert("Problem in fetching location!", Constant.AlertTitle, Constant.Ok);
             }
             finally
             {
-                IsLoading = false;
+               // IsLoading = false;
             }
         }
     }

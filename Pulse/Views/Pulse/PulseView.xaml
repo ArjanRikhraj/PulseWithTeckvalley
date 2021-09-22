@@ -52,7 +52,7 @@
 								</DataTemplate>
 							</local:ExtendedListView.ItemTemplate>
 						</local:ExtendedListView>-->
-						<local:ExtendedListView Margin="0" x:Name="lst" SeparatorVisibility="None" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasUnevenRows="false" ItemsSource="{Binding ListPulse}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshCommand}"
+						<local:ExtendedListView Margin="0" x:Name="lst" SeparatorVisibility="None" VerticalScrollBarVisibility="Never" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasUnevenRows="false" ItemsSource="{Binding ListPulse}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshCommand}"
 							IsRefreshing="{Binding IsRefreshing}" LoadMoreCommand="{Binding LoadMorePulses}" RowHeight="65" ItemTapped="Handle_ItemTapped">
 							<local:ExtendedListView.ItemTemplate>
 								<DataTemplate>

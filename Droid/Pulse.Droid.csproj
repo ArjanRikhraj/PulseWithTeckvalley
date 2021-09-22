@@ -150,24 +150,6 @@
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.68.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=18.4451.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.Core.18.4.0.43\lib\MonoAndroid90\Syncfusion.Core.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Core.XForms.Android, Version=18.4451.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.Core.18.4.0.43\lib\MonoAndroid90\Syncfusion.Core.XForms.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=18.4.0.43, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.18.4.0.43\lib\MonoAndroid90\Syncfusion.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPicker.Android, Version=18.2451.0.47, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfPicker.18.2.0.47\lib\MonoAndroid10\Syncfusion.SfPicker.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPicker.XForms, Version=18.2451.0.47, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfPicker.18.2.0.47\lib\MonoAndroid10\Syncfusion.SfPicker.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPicker.XForms.Android, Version=18.2451.0.47, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfPicker.18.2.0.47\lib\MonoAndroid10\Syncfusion.SfPicker.XForms.Android.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
@@ -606,6 +588,18 @@
     </Reference>
     <Reference Include="Plugin.Media">
       <HintPath>..\packages\Xam.Plugin.Media.4.0.1.5\lib\monoandroid71\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Glide.DiskLruCache">
+      <HintPath>..\packages\Xamarin.Android.Glide.DiskLruCache.4.11.0\lib\monoandroid10.0\Xamarin.Android.Glide.DiskLruCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Glide.GifDecoder">
+      <HintPath>..\packages\Xamarin.Android.Glide.GifDecoder.4.11.0\lib\monoandroid10.0\Xamarin.Android.Glide.GifDecoder.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.AndroidX.ExifInterface">
+      <HintPath>..\packages\Xamarin.AndroidX.ExifInterface.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.ExifInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Glide">
+      <HintPath>..\packages\Xamarin.Android.Glide.4.11.0\lib\monoandroid10.0\Xamarin.Android.Glide.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1494,4 +1488,5 @@
   <Import Project="..\packages\Xamarin.AndroidX.SavedState.1.0.0.3\build\monoandroid90\Xamarin.AndroidX.SavedState.targets" Condition="Exists('..\packages\Xamarin.AndroidX.SavedState.1.0.0.3\build\monoandroid90\Xamarin.AndroidX.SavedState.targets')" />
   <Import Project="..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" />
   <Import Project="..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets" Condition="Exists('..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets')" />
+  <Import Project="..\packages\Xamarin.AndroidX.ExifInterface.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.ExifInterface.targets" Condition="Exists('..\packages\Xamarin.AndroidX.ExifInterface.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.ExifInterface.targets')" />
 </Project>

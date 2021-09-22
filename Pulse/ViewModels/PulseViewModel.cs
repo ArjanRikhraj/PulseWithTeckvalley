@@ -265,7 +265,7 @@ namespace Pulse
 			tempPulseList = new ObservableCollection<PulseModel>();
 			SelectedEventList = new ObservableCollection<MyEvents>();
 			MessageList = new List<PulseMessageResponse>();
-			LoadMorePulses = new Command(GetPulses);
+			LoadMorePulses = new Command(async () => await GetPulses());
 		}
 
 		#endregion
@@ -489,11 +489,11 @@ namespace Pulse
 			return pulseData;
 		}
 
-		public async void GetPulses()
+		public async Task GetPulses()
 		{
 			try
 			{
-				App.ShowMainPageLoader();
+				//App.ShowMainPageLoader();
 				IsLoading = true;
 				if (!CrossConnectivity.Current.IsConnected)
 				{
@@ -507,7 +507,7 @@ namespace Pulse
 					SetPulseList(isList, PulseList);
 
 				}
-				App.HideMainPageLoader();
+				//App.HideMainPageLoader();
 				IsLoading = false;
 			}
 

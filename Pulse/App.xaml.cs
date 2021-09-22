@@ -46,7 +46,6 @@ namespace Pulse
             Device.SetFlags(new[] { "MediaElement_Experimental" });
             InitializeComponent();
             SetCultureToUSEnglish();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk0NDM2QDMxMzgyZTMyMmUzMGpHRjhicm1GVS8zUEJMdkNLak1pM1pTMi84eWZSTHZuZVYwcU91dno3cjQ9");
             eventViewModel = ServiceContainer.Resolve<EventViewModel>();
             MainPage = Settings.IsOnBoardingShown ? new NavigationPage(new LoginPage()) : new NavigationPage(new OnBoardPage());
         }
@@ -60,7 +59,7 @@ namespace Pulse
             //Register Periodic Tasks
             BackgroundAggregatorService.Add(() => new EventViewModel());
             //Start the background service
-            BackgroundAggregatorService.StartBackgroundService();
+           // BackgroundAggregatorService.StartBackgroundService();
         }
 
         protected override void OnSleep()

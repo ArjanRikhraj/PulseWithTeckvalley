@@ -79,8 +79,6 @@
                             </StackLayout>
                         </Grid>
                     </StackLayout>
-                    <!--</ScrollView>
--->
                 </Grid>
             </Grid>
             <Grid x:Name="grdOverlayDialog" Grid.Row="0" IsVisible="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Opacity="0.7">
