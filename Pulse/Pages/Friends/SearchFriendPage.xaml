@@ -36,7 +36,7 @@
 					</StackLayout>
 				</local:GradientColorStack>
 				<StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-					<local:ExtendedListView x:Name="listViewfriends" ItemsSource="{Binding ListUsers}"  IsVisible="{Binding IsListUserVisible}" ItemSelected="lstSearchFriendTapped" LoadMoreCommand="{Binding LoadMoreUsers}" BackgroundColor="Transparent" RowHeight="80" HasUnevenRows="false" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+					<local:ExtendedListView VerticalScrollBarVisibility="Never" x:Name="listViewfriends" ItemsSource="{Binding ListUsers}"  IsVisible="{Binding IsListUserVisible}" ItemSelected="lstSearchFriendTapped" LoadMoreCommand="{Binding LoadMoreUsers}" BackgroundColor="Transparent" RowHeight="80" HasUnevenRows="false" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
 						<local:ExtendedListView.ItemTemplate>
 							<DataTemplate>
 								<ViewCell>

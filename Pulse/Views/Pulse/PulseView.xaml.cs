@@ -46,7 +46,7 @@ namespace Pulse
 			pulseViewModel.pageNoPulse = 1;
 			pulseViewModel.totalGroupsPage = 1;
 			while (pulseViewModel.tempPulseList.Count > 0)
-				pulseViewModel.tempPulseList.RemoveAt(0);
+		    pulseViewModel.tempPulseList.RemoveAt(0);
 			pulseViewModel.GetPulses();
 		}
 
@@ -80,7 +80,7 @@ namespace Pulse
 					if (_tapCount < 1)
 					{
 						_tapCount = 1;
-						App.ShowMainPageLoader();
+						//App.ShowMainPageLoader();
 						var item = (PulseModel)e.Item;
 						int pulseOnwerId = item.PulseownerId;
 						pulseViewModel.TappedPulseId = Convert.ToInt32(item.PulseId);
@@ -110,7 +110,7 @@ namespace Pulse
 						}
 						///
 						await Navigation.PushModalAsync(new MessageChatPage(pulseOnwerId, isPulseMember, false));
-						App.HideMainPageLoader();
+						//App.HideMainPageLoader();
 						_tapCount = 0;
 					}
 				}
@@ -134,9 +134,9 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					App.ShowMainPageLoader();
+					//App.ShowMainPageLoader();
 					await Navigation.PushModalAsync(new AddPulsePage());
-					App.HideMainPageLoader();
+					//App.HideMainPageLoader();
 					_tapCount = 0;
 				}
 			}

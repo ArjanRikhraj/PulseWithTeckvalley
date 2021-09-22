@@ -186,6 +186,7 @@ namespace Pulse
         public const string CloseButtonText = "Close";
         public const string GroupText = "Group";
         public const string EventText = "Event";
+        public const string AddEventText = "Add Event";
         public const string ShareText = "Share";
         public const string ReportEventText = "Report Event";
         public const string ReportMediaText = "Report Media";

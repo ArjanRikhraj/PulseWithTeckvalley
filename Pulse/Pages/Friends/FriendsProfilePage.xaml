@@ -189,9 +189,8 @@
                     </StackLayout>
                 </StackLayout>
 
-
                 <StackLayout Grid.Row="1" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" IsVisible="{Binding IsFriendEventListVisible}" Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                    <local:ExtendedListView x:Name="listViewfriendsEvents" ItemsSource="{Binding ListMyFriendsEvents}"  BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" LoadMoreCommand="{Binding LoadMoreFriendEvents}" ItemTapped="FriendEventsList_ItemTapped"   HasUnevenRows="true"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+                    <local:ExtendedListView VerticalScrollBarVisibility="Never" x:Name="listViewfriendsEvents" ItemsSource="{Binding ListMyFriendsEvents}"  BackgroundColor="{x:Static local:Constant.LightBackGroungColor}" LoadMoreCommand="{Binding LoadMoreFriendEvents}" ItemTapped="FriendEventsList_ItemTapped"   HasUnevenRows="true"  VerticalOptions="FillAndExpand" SeparatorVisibility="None">
                         <local:ExtendedListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

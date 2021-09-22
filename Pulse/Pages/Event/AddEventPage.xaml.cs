@@ -114,10 +114,10 @@ namespace Pulse
 				if (_tapCount < 1)
 				{
 					_tapCount = 1;
-					eventViewModel.IsLoading = true;
+					//eventViewModel.IsLoading = true;
 					eventViewModel.ClearFields();
 					await Navigation.PopModalAsync();
-					eventViewModel.IsLoading = false;
+				//	eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}
 			}

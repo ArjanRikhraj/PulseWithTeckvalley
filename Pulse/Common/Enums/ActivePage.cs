@@ -6,7 +6,8 @@
         Notification,
 		Profile,
 		Pulse,
-		Friends
+		Friends,
+		AddNewEvent
 	}
     public enum PaymentType
     {

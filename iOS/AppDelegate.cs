@@ -32,7 +32,7 @@ namespace Pulse.iOS
             CarouselViewRenderer.Init();
             BackgroundAggregator.Init(this);
             CachedImageRenderer.Init();
-           // CachedImageRenderer.InitImageSourceHandler();
+            // CachedImageRenderer.InitImageSourceHandler();
             CrossMediaManager.Current.Init();
             CrossMedia.Current.Initialize();
             ImageCircleRenderer.Init();

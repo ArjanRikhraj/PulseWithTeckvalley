@@ -82,22 +82,18 @@ namespace Pulse
 		{
 			if (CrossConnectivity.Current.IsConnected)
 			{
-				if (_tapCount < 1)
-				{
-					_tapCount = 1;
-					friendsViewModel.IsLoading = true;
-					var selected = (Friend)e.SelectedItem;
-					friendsViewModel.TappedFriendid = Convert.ToString(selected.friendId);
-					listViewfriends.SelectedItem = null;
-					await Navigation.PushModalAsync(new FriendsProfilePage("Search Friends", friendsViewModel.TappedFriendid));
-					friendsViewModel.IsLoading = false;
-					_tapCount = 0;
-				}
+				   var selected = ((ExtendedListView)sender).SelectedItem as Friend;
+
+					if(selected==null)
+					{
+					   return;
+					}
+				    await Navigation.PushModalAsync(new FriendsProfilePage("Search Friends", friendsViewModel.TappedFriendid));
+				    ((ExtendedListView)sender).SelectedItem = null;
 			}
 			else
 			{
 				await App.Instance.Alert(Constant.NetworkDisabled, Constant.AlertTitle, Constant.Ok);
-				_tapCount = 0;
 			}
 		}
 

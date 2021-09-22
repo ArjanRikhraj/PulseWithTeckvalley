@@ -9,7 +9,6 @@
 	  <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
 	  <PackageReference Include="libphonenumber-csharp" Version="8.12.28" />
 	  <PackageReference Include="Matcha.BackgroundService" Version="1.0.5478" />
-	  <PackageReference Include="Microsoft.AppCenter" Version="4.2.0" />
 	  <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.2.0" />
 	  <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
 	  <PackageReference Include="Microsoft.Bcl.Build" Version="1.0.21" />
@@ -19,14 +18,10 @@
 	  <PackageReference Include="modernhttpclient" Version="2.4.2" />
 	  <PackageReference Include="NETStandard.Library" Version="2.0.3" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	  <PackageReference Include="PCLCrypto" Version="1.0.2.15130" />
 	  <PackageReference Include="PCLStorage" Version="1.0.2" />
 	  <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.8" />
 	  <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
 	  <PackageReference Include="runtime.native.System" Version="4.3.0" />
-	  <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.43" />
-	  <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.43" />
-	  <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.2.0.47" />
 	  <PackageReference Include="System.Collections" Version="4.3.0" />
 	  <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
 	  <PackageReference Include="System.ComponentModel" Version="4.3.0" />
@@ -103,6 +98,7 @@
     <None Remove="Xamarin.FFImageLoading.Transformations" />
     <None Remove="Helpers\Converters\" />
     <None Remove="Helpers\Converters\Friends\" />
+    <None Remove="Xamarin.Forms.Skeleton" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\Converters\" />

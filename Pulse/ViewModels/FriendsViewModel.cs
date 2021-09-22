@@ -58,7 +58,7 @@ namespace Pulse
 		public int pageNoPending;
 		public bool isSearchedValue;
         public bool isAdmin;
-
+		public bool EventListNotVisible { get; set; }
 		public string TappedFriendid;
 		public int totalPagesFriends;
 		public int totalPagesMyFriends;
@@ -442,10 +442,22 @@ namespace Pulse
 				OnSearchCommand(searchText);
 			}
 		}
+		bool skeletonIsBusy;
+		public bool SkeletonIsBusy
+		{
+			get
+			{
+				return skeletonIsBusy;
+			}
 
-       
+			set
+			{
+				skeletonIsBusy = value;
+				OnPropertyChanged("SkeletonIsBusy");
+			}
+		}
 
-        public ICommand LoadMoreContacts
+		public ICommand LoadMoreContacts
 		{
 			get;
 			set;
@@ -464,7 +476,7 @@ namespace Pulse
 			LoadMoreContacts = new Command(OnLoadMoreContacts);
 			LoadMoreUsers = new Command(GetUsers);
 			LoadMoreMyFriends = new Command(async () =>  await GetMyFriendsList());
-			LoadMorePending = new Command(GetPendingFriendsList);
+			LoadMorePending = new Command(async () => await GetPendingFriendsList());
 			LoadMoreFriendEvents = new Command(GetFriendsHostedEventList);
 			AddFriendPageCommand = new Command(GetFriendPage);
 			CloseReportPopupCommand = new Command(OnCloseReportPopupCommand);
@@ -482,7 +494,7 @@ namespace Pulse
 		#endregion
 
 		#region Methods
-		public async void GetAllUser()
+		public async Task GetAllUser()
 		{
 			try
 			{
@@ -513,7 +525,7 @@ namespace Pulse
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
-		public async void GetAllContacts()
+		public async Task GetAllContacts()
 		{
 			try
 			{
@@ -757,8 +769,8 @@ namespace Pulse
 			}
 			catch (Exception ex)
 			{
-				IsLoading = false;
-				TapCount = 0;
+				//IsLoading = false;
+				//TapCount = 0;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
 		}
@@ -1213,26 +1225,48 @@ namespace Pulse
 		}
 
 
+	
+
+
 		internal async Task GetEventList()
 		{
 			try
 			{
 				if (SessionManager.AccessToken != null)
 				{
-					FriendsPageEvents = new ObservableCollection<MyEventResponse>();
+					SkeletonIsBusy = true;
+				    FriendsPageEvents = new ObservableCollection<MyEventResponse>();
 					var response = await mainService.Get<ResultWrapper<MyEventResponse>>(Constant.NextSevenDaysEventUrl + "1" + "&datetime=" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
 					if (response != null && response.status == Constant.Status200 && response.response != null)
 					{
+						SkeletonIsBusy = false;
 						FriendsPageEvents = new ObservableCollection<MyEventResponse>(response.response);
+						if(FriendsPageEvents.Count>0)
+                        {
+							
+							 EventListNotVisible = false;
+						}
+						else
+                        {
+							
+							EventListNotVisible = true;
+						}
+						
 					}
 					else
-                    {
+					{
+						
+						SkeletonIsBusy = false;
+						EventListNotVisible = true;
 						await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 					}
 				}
 			}
 			catch(Exception ex)
 			{
+				SkeletonIsBusy = false;
+				EventListNotVisible = true;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 
 			}
@@ -1399,7 +1433,7 @@ namespace Pulse
 		}
 
 
-		public async void GetPendingFriendsList()
+		public async Task GetPendingFriendsList()
 		{
 			try
 			{

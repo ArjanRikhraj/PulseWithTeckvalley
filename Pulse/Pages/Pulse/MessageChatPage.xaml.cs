@@ -108,10 +108,11 @@ namespace Pulse
 			}
 		}
 
-		async void GetMessages()
+	  async Task GetMessages()
 		{
 			try
 			{
+			
 				pulseViewModel.IsLoading = true;
 				if (!CrossConnectivity.Current.IsConnected)
 				{

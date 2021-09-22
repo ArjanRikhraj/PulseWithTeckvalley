@@ -51,11 +51,6 @@ namespace Pulse
 			}
 
 		}
-
-
-	
-
-
 		
        async  void profileCollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
@@ -69,11 +64,15 @@ namespace Pulse
 				Common.Constants.AppConstants.PopNavigationFromProfileEnabled = true;
 				await Navigation.PushModalAsync(new MyEventsPage());
 			}
-			else if(selecteditem.ID ==2)
+			else if (selecteditem.ID == 2)
+			{
+				await Navigation.PushModalAsync(new MyFriendsView());
+			}
+			else if(selecteditem.ID ==3)
             {
 				await Navigation.PushModalAsync(new PhotoAlbumPage());
 			}
-			else if(selecteditem.ID ==3)
+			else if(selecteditem.ID ==4)
             {
 				await Navigation.PushModalAsync(new SettingsPage(profileViewModel.isChangePasswordShown));
 

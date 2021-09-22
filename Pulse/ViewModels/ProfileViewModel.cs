@@ -188,6 +188,19 @@ namespace Pulse
 		}
 
 
+		private bool shimmerIsActive;
+		public bool ShimmerIsActive
+		{
+			get { return shimmerIsActive; }
+			set
+			{
+				shimmerIsActive = value;
+				OnPropertyChanged("ShimmerIsActive");
+			}
+		}
+		
+		
+
 
 		#endregion
 		#region constructor
@@ -197,8 +210,9 @@ namespace Pulse
 			ProfileMenuList = new ObservableCollection<MenuList>
 			{
 				new MenuList{ ID =1 , MenuTitle ="My Events",MenuImage=Constant.EventTitleImage},
-				new MenuList{ ID =2 , MenuTitle ="Photo Album",MenuImage="photo_album.png"},
-				new MenuList{ ID =3 , MenuTitle ="Settings",MenuImage=Constant.SettingsIcon},
+				new MenuList{ ID =2 , MenuTitle ="Friends",MenuImage=Constant.FriendActiveIcon},
+				new MenuList{ ID =3 , MenuTitle ="Photo Album",MenuImage="photo_album.png"},
+				new MenuList{ ID =4 , MenuTitle ="Settings",MenuImage=Constant.SettingsIcon},
 			};
 			
 
@@ -213,8 +227,9 @@ namespace Pulse
 				{
 					if (!string.IsNullOrEmpty(SessionManager.AccessToken))
 					{
-						App.ShowMainPageLoader();
-						IsLoading = true;
+						//App.ShowMainPageLoader();
+						//IsLoading = true;
+						ShimmerIsActive = true;
 						var result = await new MainServices().Get<ResultWrapperSingle<FriendProfileResponse>>(Constant.MyProfileDetailUrl);
 						if (result != null && result.status == Constant.Status200)
 						{
@@ -246,19 +261,19 @@ namespace Pulse
 								Mobile = string.Empty;
 								CountryCode = "1";
 							}
-							App.HideMainPageLoader();
+							//App.HideMainPageLoader();
 							IsLoading = false;
 						}
 						else if (result != null && result.status == Constant.Status401)
 						{
 							SignOut();
-							App.HideMainPageLoader();
+							//App.HideMainPageLoader();
 							IsLoading = false;
 						}
 						else
 						{
 							await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
-							App.HideMainPageLoader();
+							//App.HideMainPageLoader();
 							IsLoading = false;
 						}
 					}
@@ -272,10 +287,15 @@ namespace Pulse
 			}
 			catch (Exception e)
 			{
+				ShimmerIsActive = false;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 				TapCount = 0;
 				App.HideMainPageLoader();
 				IsLoading = false;
+			}
+			finally
+            {
+				ShimmerIsActive = false;
 			}
 		}
 
