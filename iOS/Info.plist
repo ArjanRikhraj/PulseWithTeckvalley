@@ -9,7 +9,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>14.4</string>
+	<string>14.5</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -23,6 +23,9 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -41,8 +44,6 @@
 		<string>Fonts/Poppins-ExtraLight.ttf</string>
 		<string>Fonts/materialdesignicons.ttf</string>
 	</array>
-	<key>XSLaunchImageAssets</key>
-	<string>Assets.xcassets/LaunchImage.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleURLTypes</key>
@@ -91,9 +92,13 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>26</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.0.4</string>
+	<string>4.0.8</string>
+	<key>XSLaunchImageAssets</key>
+	<string>Assets.xcassets/LaunchImage.launchimage</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>CFBundleVersion</key>
+	<string>30</string>
 </dict>
 </plist>
