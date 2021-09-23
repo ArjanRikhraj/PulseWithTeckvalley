@@ -1025,7 +1025,7 @@ namespace Pulse
 				{
 					_tapCount = 1;
 					eventViewModel.IsLoading = true;
-					await Navigation.PushModalAsync(new EventGalleryPage());
+					await Navigation.PushModalAsync(new EventMediaPage());
 					eventViewModel.IsLoading = false;
 					_tapCount = 0;
 				}

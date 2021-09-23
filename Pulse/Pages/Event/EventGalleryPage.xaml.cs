@@ -72,7 +72,6 @@ namespace Pulse
 
 		async void GetMedia()
 		{
-
 			try
 			{
 				eventViewModel.IsLoading = true;
@@ -83,10 +82,8 @@ namespace Pulse
 				}
 				else
 				{
-
 					bool isList = await eventViewModel.GetMediaList(false);
 					SetMediaList(isList, eventViewModel.MediaList);
-
 				}
 				eventViewModel.IsLoading = false;
 			}
@@ -97,7 +94,6 @@ namespace Pulse
 				_tapCount = 0;
 				await App.Instance.Alert(Constant.ServerNotRunningMessage, Constant.AlertTitle, Constant.Ok);
 			}
-
 		}
 
 		void SetMediaList(bool isList, List<EventMedia> list)

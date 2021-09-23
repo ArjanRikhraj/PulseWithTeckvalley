@@ -12,7 +12,8 @@
                 </StackLayout>
                 <StackLayout x:Name="stackListNew" Padding="5" HorizontalOptions="FillAndExpand" Grid.Row="1" VerticalOptions="FillAndExpand" BackgroundColor="{x:Static local:Constant.LightBackGroungColor}">
                     <StackLayout x:Name="stackFilter" Margin="5,2,5,2" HorizontalOptions="FillAndExpand" Spacing="10" Orientation="Horizontal" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                        <yummy:PancakeView CornerRadius="10" x:Name="searchFrame" BackgroundColor="White" Padding="7,3,3,3" HorizontalOptions="FillAndExpand">
+                        <yummy:PancakeView CornerRadius="10" x:Name="searchFrame" BackgroundColor="White" Padding="7,3,3,3"
+                                           HorizontalOptions="FillAndExpand">
                             <yummy:PancakeView.Border>
                                 <yummy:Border Color="WhiteSmoke" x:Name="borderGradient" Thickness="1"/>
                             </yummy:PancakeView.Border>

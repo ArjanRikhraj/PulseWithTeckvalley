@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse.Helpers" xmlns:local1="clr-namespace:Pulse"
+             x:Class="Pulse.EventMediaPage">
+    <ContentPage.Resources>
+            <ResourceDictionary>
+                <local:ChatTemplateSelector x:Key="MessageTemplateSelector"/>
+            </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#404040">
+            <local1:GradientColorStack stackOrientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <local1:GradientColorStack.Effects>
+                    <local1:NotchEffect />
+                </local1:GradientColorStack.Effects>
+                <Grid VerticalOptions="FillAndExpand" x:Name="topStack" Margin="10,20,10,8" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <local1:ExtendedButton x:Name="btnBack" Grid.Row="0" ImageSource="icon_backArrow.png" Clicked="Cross_Clicked"
+                                           BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="StartAndExpand"
+                                           BorderColor="Transparent" BorderRadius="0" WidthRequest="30" HeightRequest="40" Margin="-10,0,0,0"/>
+                    <StackLayout Grid.Row="1" Spacing="0">
+                        <local1:ExtendedLabel x:Name="lblEvent" FontFace="PoppinsMedium"
+                                          VerticalOptions="Center" TextColor="White" FontSize="25" />
+                        <local1:ExtendedLabel x:Name="lblDescription" FontFace="PoppinsRegular"
+                                          VerticalOptions="Center" TextColor="White" FontSize="18" />
+                    </StackLayout>
+                    
+                </Grid>
+            </local1:GradientColorStack>
+            <CollectionView BackgroundColor="Transparent" x:Name="mediaList" ItemTemplate="{StaticResource MessageTemplateSelector }" Margin="10,0,10,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

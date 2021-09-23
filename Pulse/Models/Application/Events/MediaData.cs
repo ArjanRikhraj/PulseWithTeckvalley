@@ -80,6 +80,8 @@ namespace Pulse
 		bool isPrivate;
 		string pinIcon;
 		public int MediaId { get; set; }
+		public int TotalMedia { get; set; }
+		public int FileType { get; set; }
 		public int EventId { get; set; }
 		public int UserId { get; set; }
 		public bool IsPlayIconVisible
