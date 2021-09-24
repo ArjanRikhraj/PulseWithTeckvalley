@@ -10,6 +10,7 @@ using Pulse.Models.Application.Events;
 using Pulse.Models.Friends;
 using Pulse.Pages.Event;
 using Pulse.Pages.User;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -750,7 +751,7 @@ namespace Pulse
 					{
 						
 						IsReportPopupVisible = false;
-							await Navigation.PushModalAsync(new ReportConfirmationPage("User"));
+						await PopupNavigation.PushAsync(new ReportConfirmationPage("User"));
 					}
 					reason = null;
 				}

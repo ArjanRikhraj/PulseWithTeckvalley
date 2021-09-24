@@ -1,6 +1,7 @@
 ﻿using Pulse.Models.Application.Events;
 using Pulse.Pages.Event;
 using Pulse.Pages.User;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -345,7 +346,7 @@ namespace Pulse.ViewModels
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventStories, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await Navigation.PushModalAsync(new ReportConfirmationPage("Story"));
+                        await PopupNavigation.PushAsync(new ReportConfirmationPage("Story"));
                         IsReportPopupVisible = false;
                         IsOverlayPopupVisible = false;
                     }

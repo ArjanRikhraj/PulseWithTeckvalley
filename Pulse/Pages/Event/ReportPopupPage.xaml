@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage  xmlns:rg="http://rotorgames.com" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:Pulse.Controls" xmlns:local="clr-namespace:Pulse" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+               x:Class="Pulse.Pages.Event.ReportPopupPage">
+    <rg:PopupPage.Animation>
+        <rg:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1.2"
+            ScaleOut="0.8"/>
+    </rg:PopupPage.Animation>
+    <Grid RowDefinitions="100,*">
+        <controls:CustomFrame Grid.Row="1" x:Name="reportPopup"
+                                   VerticalOptions="FillAndExpand" 
+                                   Padding="0,10,0,0" CornerRadius="20,20,0,0">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Report" TextColor="Black" FontSize="Large" 
+                                HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="20,0,0,0"/>
+                    <local:ExtendedButton Image="cross_thumbnails.png" WidthRequest="50" 
+                                            Clicked="ExtendedButton_Clicked" BackgroundColor="Transparent" VerticalOptions="Center"/>
+                </StackLayout>
+                <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
+                <Label Text="Why are you reporting this Media?" TextColor="Black" FontAttributes="Bold"
+                           FontSize="Small" Margin="10,0,10,0"/>
+                <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
+                <local:ExtendedListView x:Name="reportListview" ItemTapped="ReportListview_ItemTapped"
+                                            SeparatorVisibility="Default" SeparatorColor="Gray">
+                    <local:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="White">
+                                    <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small" TextColor="#303030"/>
+                                    <Image Source="arrow_right.png" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </local:ExtendedListView.ItemTemplate>
+                    <local:ExtendedListView.Footer>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                            <Label Margin="0,30,0,0" Text="Please breifly describe why you find this inapropriate" HorizontalTextAlignment="Center" FontSize="12" TextColor="#303030"/>
+                            <pancakeview:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="20" HeightRequest="150" Padding="0" 
+                                                       Margin="20,0,20,0">
+                                <pancakeview:PancakeView.Border>
+                                    <pancakeview:Border Color="LightGray" Thickness="1"/>
+                                </pancakeview:PancakeView.Border>
+                                <local:ExtendedEditor x:Name="descEditor" MaxLength="200"/>
+                            </pancakeview:PancakeView>
+                        </StackLayout>
+                    </local:ExtendedListView.Footer>
+                </local:ExtendedListView>
+            </StackLayout>
+        </controls:CustomFrame>
+    </Grid>
+   
+</rg:PopupPage>

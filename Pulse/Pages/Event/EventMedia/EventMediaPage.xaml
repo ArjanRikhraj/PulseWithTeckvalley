@@ -30,7 +30,8 @@
                     
                 </Grid>
             </local1:GradientColorStack>
-            <CollectionView BackgroundColor="Transparent" x:Name="mediaList" ItemTemplate="{StaticResource MessageTemplateSelector }" Margin="10,0,10,0">
+            <CollectionView BackgroundColor="Transparent" x:Name="mediaList" SelectedItem="{Binding SeletedEventMediaItem}" SelectionChanged="mediaList_SelectionChanged"
+                            ItemTemplate="{StaticResource MessageTemplateSelector }" Margin="10,0,10,0" SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2"/>
                 </CollectionView.ItemsLayout>

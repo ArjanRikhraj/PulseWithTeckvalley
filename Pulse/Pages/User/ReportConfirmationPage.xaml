@@ -1,9 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<rg:PopupPage  xmlns:rg="http://rotorgames.com" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse"
              x:Class="Pulse.Pages.User.ReportConfirmationPage">
-    <ContentPage.Content>
-        <StackLayout>
+    <rg:PopupPage.Animation>
+        <rg:ScaleAnimation
+            DurationIn="100"
+            DurationOut="100"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"/>
+    </rg:PopupPage.Animation>
+        <StackLayout Margin="40">
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20">
                 <Image Source="imgSuccess.png" Aspect="AspectFit"/>
                 <local:ExtendedLabel  x:Name="lblReport" HorizontalTextAlignment="Center" FontFace="PoppinsMedium" TextColor="#303030" FontSize="Medium"/>
@@ -12,5 +23,4 @@
             </StackLayout>
             <local:ExtendedButton Text="Done" BackgroundColor="#d576a5" TextColor="White" Margin="10,0,10,20" CornerRadius="10" Clicked="ExtendedButton_Clicked"/>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+</rg:PopupPage>

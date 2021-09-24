@@ -46,6 +46,7 @@ namespace Pulse.Droid
 			BackgroundAggregator.Init(this);
 			base.OnCreate(bundle);
 			Xamarin.Essentials.Platform.Init(this, bundle);
+			Rg.Plugins.Popup.Popup.Init(this);
 			APPLICATION_CONTEXT = this;
 			App.NotificationID = Intent.GetStringExtra("data") ?? string.Empty;
 			ServiceRegistrar.Startup();

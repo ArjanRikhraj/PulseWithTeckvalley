@@ -12,7 +12,9 @@ using Plugin.Connectivity;
 using Plugin.Messaging;
 using Pulse.Models.Application.Events;
 using Pulse.Models.Friends;
+using Pulse.Pages.Event.EventMedia;
 using Pulse.Pages.User;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -228,6 +230,20 @@ namespace Pulse
         public ICommand LoadMoreGuests { get; private set; }
         public double TotalAmount;
         public ICommand LoadMoreLocBasedEvents { get; private set; }
+        private EventGallery seletedEventMediaItem;
+        public EventGallery SeletedEventMediaItem
+        {
+            get { return seletedEventMediaItem; }
+            set
+            {
+                seletedEventMediaItem = value;
+                OnPropertyChanged("SeletedEventMediaItem");
+                OnSeletedEventMediaItem();
+            }
+        }
+
+      
+
         public ObservableCollection<MyEvents> ListLocBasedEvents
         {
             get { return listLocBasedEvents; }
@@ -1660,7 +1676,7 @@ namespace Pulse
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportEventUrl, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await Navigation.PushModalAsync(new ReportConfirmationPage("Event"));
+                        await PopupNavigation.PushAsync(new ReportConfirmationPage("Event"));
                         IsReportPopupVisible = false;
                     }
                 }
@@ -2141,6 +2157,20 @@ namespace Pulse
                 }
                 else
                     return true;
+            }
+        }
+        private async void OnSeletedEventMediaItem()
+        {
+            try
+            {
+                if(SeletedEventMediaItem!=null)
+                {
+                    await Navigation.PushModalAsync(new FullSize_Image(SeletedEventMediaItem));
+                }
+            }
+            catch (Exception)
+            {
+                return;
             }
         }
         bool CheckDecimal(string data)

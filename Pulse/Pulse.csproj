@@ -21,6 +21,7 @@
 	  <PackageReference Include="PCLStorage" Version="1.0.2" />
 	  <PackageReference Include="Plugin.MediaManager.Forms" Version="1.0.8" />
 	  <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+	  <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
 	  <PackageReference Include="runtime.native.System" Version="4.3.0" />
 	  <PackageReference Include="System.Collections" Version="4.3.0" />
 	  <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
@@ -87,10 +88,16 @@
     <EmbeddedResource Update="Pages\Event\EventMedia\EventMediaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Event\EventMedia\FullSizeImage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Event\EventMedia\ImageViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Event\EventMedia\VideoViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Event\ReportPopupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Friends\ContactsPage.xaml">
@@ -112,5 +119,10 @@
   <ItemGroup>
     <Folder Include="Helpers\Converters\" />
     <Folder Include="Helpers\Converters\Friends\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Pages\Event\EventMedia\FullSizeImage.xaml.cs">
+      <DependentUpon>FullSizeImage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

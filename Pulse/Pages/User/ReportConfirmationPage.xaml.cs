@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace Pulse.Pages.User
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReportConfirmationPage : ContentPage
+    public partial class ReportConfirmationPage : PopupPage
     {
         public ReportConfirmationPage(string message)
         {
@@ -30,9 +32,9 @@ namespace Pulse.Pages.User
             }
         }
 
-        private void ExtendedButton_Clicked(object sender, EventArgs e)
+        private async void ExtendedButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopModalAsync();
+           await PopupNavigation.Instance.PopAllAsync();
         }
     }
 }

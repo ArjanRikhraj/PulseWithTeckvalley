@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Pulse"
+             x:Class="Pulse.Pages.Event.EventMedia.FullSize_Image">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#404040" RowDefinitions="50,*">
+            <Grid ColumnDefinitions="30,*,30,30,30" Grid.Row="0" Padding="10,0,10,0">
+                <local:ExtendedButton Grid.Column="0" BackgroundColor="Transparent"
+                                      HorizontalOptions="Start" Clicked="Cross_Clicked" VerticalOptions="Center" 
+                                      BorderColor="Transparent" Image="{x:Static local:Constant.CrossWhiteImage}" />
+                <local:ExtendedButton x:Name="btnDelete" Grid.Column="2" Image="delete_icon.png" 
+                                      Clicked="btnDeleteTapped" BackgroundColor="Transparent" HorizontalOptions="Fill" 
+                                      VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                <local:ExtendedButton x:Name="btnShare" Grid.Column="3" Image="{x:Static local:Constant.ShareImage}" 
+                                      Clicked="btnShareTapped" BackgroundColor="Transparent" HorizontalOptions="Fill" 
+                                      VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+                <local:ExtendedButton x:Name="btnReport" Grid.Column="4" Image="{x:Static local:Constant.ReportImage}" 
+                                      Clicked="btnReportTapped" BackgroundColor="Transparent" HorizontalOptions="Fill" 
+                                      VerticalOptions="Center" BorderColor="Transparent" BorderRadius="0" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Image x:Name="image" Aspect="AspectFill"/>
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

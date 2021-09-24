@@ -23,11 +23,8 @@ namespace Pulse.Helpers
             var messageVm = item as EventGallery;
             if (messageVm == null)
                 return null;
-            if (messageVm.TotalMedia % 2 == 0)
-                return videoDataTemplate;
-            else
-                return imageDataTemplate;
-            //return (messageVm.TotalMedia % 2==0) ? videoDataTemplate : imageDataTemplate;
+
+            return (messageVm.Count % 2 == 0) ? videoDataTemplate : imageDataTemplate;
         }
     }
 }

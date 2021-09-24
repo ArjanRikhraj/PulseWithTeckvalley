@@ -80,11 +80,13 @@ namespace Pulse
 
 		void SetMedia(List<EventMedia> list)
 		{
+			int count = 1;
 			foreach (var item in list)
 			{
 				tempMediaList.Add(new EventGallery
 				{
 					MediaId = item.id,
+					Count= count,
 					ImageWidth = App.ScreenWidth,
 					ImageHeight = App.ScreenHeight / 1.2,
 					TotalMedia= item.total_media,
@@ -97,6 +99,7 @@ namespace Pulse
 					VideoThumbnailFileName = item.file_type == 1 ? PageHelper.GetEventVideoThumbnail(item.file_thumbnail) : string.Empty
 
 				});
+				count++;
 			}
 			eventViewModel.MediaList.Clear();
 			mediaList.ItemsSource = tempMediaList;
@@ -108,5 +111,10 @@ namespace Pulse
         {
 			await Navigation.PopModalAsync();
 		}
+
+        private void mediaList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			((CollectionView)sender).SelectedItem = null;
+        }
     }
 }

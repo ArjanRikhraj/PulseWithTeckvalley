@@ -2,11 +2,13 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="Pulse.Pages.Event.EventMedia.VideoViewCell">
-
-    <pancakeview:PancakeView HeightRequest="100" WidthRequest="80" CornerRadius="10">
-        <pancakeview:PancakeView.Border>
-            <pancakeview:Border Color="WhiteSmoke" x:Name="borderGradient" Thickness="1"/>
-        </pancakeview:PancakeView.Border>
-        <Image Source="{Binding FileName}" Aspect="AspectFit"/>
+    <Grid RowDefinitions="25,*,25" ColumnDefinitions="Auto">
+        <pancakeview:PancakeView Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="10" Padding="0" Margin="20,0,10,0">
+            <pancakeview:PancakeView.Border>
+                <pancakeview:Border Color="#404040" x:Name="borderGradient" Thickness="1"/>
+            </pancakeview:PancakeView.Border>
+            <Image Source="{Binding FileName}" Aspect="AspectFill"/>
         </pancakeview:PancakeView>
+    </Grid>
+    
 </ContentView>

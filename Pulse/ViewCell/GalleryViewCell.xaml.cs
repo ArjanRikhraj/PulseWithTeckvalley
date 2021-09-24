@@ -4,6 +4,7 @@ using Plugin.Connectivity;
 using Plugin.Toasts;
 using Pulse.Models.Application.Events;
 using Pulse.Pages.User;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Pulse
@@ -199,7 +200,7 @@ namespace Pulse
                     var response = await mainService.Post<ResultWrapperSingle<Stories>>(Constant.ReportMedia, request);
                     if (response != null && response.status == Constant.Status200 && response.response != null)
                     {
-                        await eventViewModel.Navigation.PushModalAsync(new ReportConfirmationPage("Media"));
+                        await PopupNavigation.PushAsync(new ReportConfirmationPage("Media"));
                         reportPopup.IsVisible = false;
                         stackPopUp.IsVisible = false;
                     }

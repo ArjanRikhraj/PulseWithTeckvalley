@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pulse.Helpers
 {
-   public static class Utils
+    public static class Utils
     {
         public static async Task<Position> GetCurrentLocation()
         {
@@ -19,7 +19,7 @@ namespace Pulse.Helpers
                 {
                     if (CrossGeolocator.Current != null)
                     {
-                         locator = CrossGeolocator.Current;
+                        locator = CrossGeolocator.Current;
                         locator.DesiredAccuracy = 500;
                         return await locator.GetPositionAsync(TimeSpan.FromMilliseconds(30000));
                     }
@@ -30,6 +30,17 @@ namespace Pulse.Helpers
             {
                 return await locator.GetPositionAsync(TimeSpan.FromMilliseconds(30000));
             }
+        }
+        public static List<string> ReportList()
+        {
+            List<string> reportCommentList = new List<string>();
+            reportCommentList.Add("Bullying/Harassment");
+            reportCommentList.Add("False information");
+            reportCommentList.Add("Violence or dangerous organizations");
+            reportCommentList.Add("Scam or fraud");
+            reportCommentList.Add("Intellectual property violation");
+            reportCommentList.Add("Sale of illegal or regulated goods");
+            return reportCommentList;
         }
     }
 }
